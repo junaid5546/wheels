@@ -1,0 +1,7 @@
+{
+  "name": "dm-mobile-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
