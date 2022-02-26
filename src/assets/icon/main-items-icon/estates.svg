@@ -1,0 +1,109 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="90" height="90">
+	<title>New Project</title>
+	<defs>
+		<linearGradient id="g1" x1="42.2" y1="70.4" x2="87.6" y2="70.4" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#c4cae9"/>
+			<stop offset=".5" stop-color="#d9ddf1"/>
+			<stop offset="1" stop-color="#e8ecf7"/>
+		</linearGradient>
+		<linearGradient id="g2" x1="60.4" y1="77.1" x2="82" y2="77.1" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#c4cae9"/>
+			<stop offset=".3" stop-color="#ced2eb"/>
+			<stop offset=".9" stop-color="#e8e9f1"/>
+			<stop offset="1" stop-color="#efeff3"/>
+		</linearGradient>
+		<linearGradient id="g3" x1="41.8" y1="64.5" x2="77.4" y2="64.5" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#dae0f5"/>
+			<stop offset=".6" stop-color="#e4e7f4"/>
+			<stop offset="1" stop-color="#efeff3"/>
+		</linearGradient>
+		<linearGradient id="g4" x1="30.6" y1="25.3" x2="50.3" y2="25.3" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#c4cae9"/>
+			<stop offset=".3" stop-color="#c9ceeb"/>
+			<stop offset=".5" stop-color="#d6daf0"/>
+			<stop offset=".8" stop-color="#eceef8"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+		<linearGradient id="g5" x1="57.9" y1="74.1" x2="77.2" y2="74.1" gradientUnits="userSpaceOnUse">
+			<stop offset="0" stop-color="#dae0f5"/>
+			<stop offset=".4" stop-color="#e4e8f8"/>
+			<stop offset="1" stop-color="#fefeff"/>
+			<stop offset="1" stop-color="#ffffff"/>
+		</linearGradient>
+	</defs>
+	<style>
+		.s0 { mix-blend-mode: multiply;fill: url(#g1) } 
+		.s1 { fill: #bbc0e6 } 
+		.s2 { fill: #f6f6fb } 
+		.s3 { fill: #ced3f8 } 
+		.s4 { mix-blend-mode: multiply;fill: url(#g2) } 
+		.s5 { mix-blend-mode: multiply;fill: url(#g3) } 
+		.s6 { mix-blend-mode: multiply;fill: #f6f6fb } 
+		.s7 { fill: #e1e6ff } 
+		.s8 { fill: #ffffff } 
+		.s9 { fill: #5652cc } 
+		.s10 { fill: #807dfb } 
+		.s11 { mix-blend-mode: multiply;fill: url(#g4) } 
+		.s12 { fill: #fcba06 } 
+		.s13 { fill: #dc8b00 } 
+		.s14 { fill: #ffd03e } 
+		.s15 { mix-blend-mode: multiply;fill: url(#g5) } 
+		.s16 { mix-blend-mode: multiply;fill: #efeff3 } 
+		.s17 { fill: #a1a9d6 } 
+		.s18 { fill: #efeff4 } 
+		.s19 { fill: #c5cbea } 
+	</style>
+	<g id="Folder 1">
+		<path id="Layer" class="s0" d="m52.4 83.5h-10.2l35.2-26.2l10.2 5.9z" />
+		<path id="Layer" class="s1" d="m77.4 57.3v5.9l-9.2 5.3v-5.9z" />
+		<path id="Layer" class="s2" d="m42.2 77.6l-40.9-23.6l35.2-20.3l40.9 23.6z" />
+		<path id="Layer" class="s1" d="m51.4 72.3v5.9l-9.2 5.3v-5.9z" />
+		<path id="Layer" class="s3" d="m42.2 77.6v5.9l-40.9-23.6v-5.9z" />
+		<path id="Layer" class="s4" d="m77.2 70.7l4.8 3.1l-16.6 9.6h-5z" />
+		<path id="Layer" class="s2" d="m68.2 62.6l6.5 3.8l-16.8 9.7l-6.5-3.8z" />
+		<path id="Layer" class="s1" d="m74.7 66.4v2.9l-16.8 9.7v-2.9z" />
+		<path id="Layer" class="s1" d="m77.2 70.7v3l-16.8 9.7v-2.9z" />
+		<path id="Layer" class="s2" d="m74.7 69.3l2.5 1.4l-16.8 9.8l-2.5-1.5z" />
+		<path id="Layer" class="s3" d="m60.4 80.5v2.9l-9-5.2v-5.9l6.5 3.8v2.9z" />
+		<path id="Layer" class="s5" d="m60.3 74.7h-4.9l-4-2.4l-4.1 2.4h-5.5l30.5-20.3l5.1 2.9l-9.2 5.3l6.5 3.8z" />
+		<path id="Layer" class="s3" d="m41.8 56.4v18.3l-35.4-20.4v-18.3z" />
+		<path id="Layer" class="s1" d="m41.8 74.7v-18.3l15.2-26.3l15.3 8.7v18.3z" />
+		<g id="Layer">
+			<path id="Layer" class="s6" d="m35.9 66.1l-8.2-4.7v-9.5l7.6 3.5l0.6 1.2z" />
+		</g>
+		<path id="Layer" class="s7" d="m34.8 65.2l-8.3-4.8v-9.4l8.3 4.7z" />
+		<path id="Layer" class="s1" d="m34.8 55.7l0.5-0.3v9.5l-0.5 0.3z" />
+		<path id="Layer" class="s8" d="m26.5 51l0.6-0.3l8.2 4.7l-0.5 0.3z" />
+		<path id="Layer" class="s9" d="m33.8 63.6l-6.3-3.7v-7.4l6.3 3.7z" />
+		<path id="Layer" class="s8" d="m27.5 59.9l0.5-0.3l5.8 3.3v0.7z" />
+		<path id="Layer" class="s1" d="m27.5 52.5l0.5 0.4v6.7l-0.5 0.3z" />
+		<path id="Layer" class="s1" d="m31.3 61.4l-0.6-0.3v-6.7l0.6 0.3z" />
+		<g id="Layer">
+			<path id="Layer" class="s6" d="m21.5 57.8l-8.2-4.8v-9.5l7.5 3.6l0.7 1.2z" />
+		</g>
+		<path id="Layer" class="s7" d="m20.3 56.8l-8.2-4.7v-9.5l8.2 4.8z" />
+		<path id="Layer" class="s1" d="m20.3 47.4l0.5-0.3v9.4l-0.5 0.3z" />
+		<path id="Layer" class="s8" d="m12.1 42.6l0.5-0.3l8.2 4.8l-0.5 0.3z" />
+		<path id="Layer" class="s9" d="m19.4 55.3l-6.4-3.7v-7.4l6.4 3.7z" />
+		<path id="Layer" class="s8" d="m13 51.6l0.6-0.4l5.8 3.4v0.7z" />
+		<path id="Layer" class="s1" d="m13 44.2l0.6 0.3v6.7l-0.6 0.4z" />
+		<path id="Layer" class="s1" d="m16.9 53.1l-0.7-0.4v-6.7l0.7 0.4z" />
+		<path id="Layer" class="s10" d="m58.8 29l-18 31.3l-37.2-21.5l18.1-31.2z" />
+		<path id="Layer" class="s9" d="m76.9 39.4l-0.9 1.6l-17.2-9.9l-17.1 29.7l-0.9-0.5l18-31.3z" />
+		<path id="Layer" class="s11" d="m50.3 24.1l-19.7 10v-14.7l6.6-2.9z" />
+		<path id="Layer" class="s1" d="m30.6 17.4l6.6-3.9v9.1l-6.6 11.5z" />
+		<path id="Layer" class="s3" d="m30.6 34.1l-2.8-1.7v-16.7l2.8 1.7z" />
+		<path id="Layer" class="s12" d="m30.6 17.4l-2.8-1.7v-3.4l2.8 1.7z" />
+		<path id="Layer" class="s13" d="m37.2 13.5l-6.6 3.9v-3.4l6.6-3.8z" />
+		<path id="Layer" class="s14" d="m37.2 10.2l-6.6 3.8l-2.8-1.7l6.6-3.8z" />
+		<path id="Layer" class="s15" d="m74.7 69.3l2.5 1.4l-14.3 8.3h-5z" />
+		<g id="Layer">
+			<path id="Layer" class="s16" d="m55.4 74.7l1.1 6.4l-5.1-2.9v-5.9z" />
+		</g>
+		<path id="Layer" class="s17" d="m53.3 68.8l-0.6-0.4v-18.6l0.6 0.4z" />
+		<path id="Layer" class="s18" d="m53.3 50.2l-0.6-0.4l9.8-5.7l0.6 0.4z" />
+		<path id="Layer" class="s19" d="m63.1 44.5v18.7l-1.1 0.6v-17.4l-7.6 4.4v17.3l-1.1 0.7v-18.6z" />
+		<path id="Layer" class="s17" d="m62 63.8l-0.7-0.4v-16.6l0.7-0.4z" />
+		<path id="Layer" class="s3" d="m54.4 67.4v-16.6l6.9-4v16.6z" />
+	</g>
+</svg>

@@ -1,0 +1,21 @@
+<ion-grid>
+    <ion-row >
+        <ion-col size="4" *ngFor="let item of items">
+            <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
+                
+                <div class="clock" >
+                    <ng-container *ngIf="item.hasClock">
+                        <ion-icon  [src]='item.clock'></ion-icon>
+                    </ng-container>
+                </div>
+                <div class="item-picture-container">
+                   <ion-img [src]="item.img"></ion-img> 
+                  </div>
+                <div class="item-name-container">
+                    <ion-label>{{item.name}}</ion-label>
+                </div>
+                <ion-ripple-effect></ion-ripple-effect>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-grid>

@@ -1,0 +1,74 @@
+
+.ad-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+
+.add-banner-height{
+    background: linear-gradient(225deg, #00B5DD 6.77%, #0091E2 51.04%, #0084E4 90.62%);
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    position: relative;
+
+    .title-text-container{
+        padding-left: 10px;
+        .title-container{
+            padding-left: 5px;
+            ion-label{
+                font-size: 4vw;
+                font-weight: bold;
+                color: white;
+            }
+        }
+        .subtitle-container{
+            padding-top: 3px;
+            ion-label{
+                font-weight: normal;
+                font-size: 3vw;
+                line-height: 19px;
+                text-align: center;
+                color: #FFFFFF;
+            }
+            
+        }
+    }
+    .icon-container{
+        overflow-x: hidden;
+        overflow-y: hidden;
+        ion-icon{
+            font-size: 7em;
+            transform: translate(10px, 10px);
+            overflow-x: hidden;
+        }
+    }
+}
+
+.slide-bars{
+
+    height: 15px;
+    width: 30%;
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    .items{ 
+        height: 5px;
+        width: 25px;
+        margin-right: 3px;
+    }
+        .not-selected{
+            background: #C4C4C4;
+        }
+        .selected{
+            background: linear-gradient(225deg, #00DDC2 6.77%, #00D5E2 51.04%, #00BBE4 90.62%);
+        }
+}
+
+}

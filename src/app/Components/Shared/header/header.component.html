@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+      <div class="main-container">
+          <div class="header-ad-wraper">
+           <div class="header-container">
+              <div id="main-page-header" class="header-home-section">
+                  <div class="main-header-container">
+                      <div class="header-settings-container ion-activatable ripple-parent" (click)="navigate()">
+                         
+                          <div class="header-icon" >
+                              <ion-icon *ngIf="icons.has_left_icon" [src]="icons.left_icon"></ion-icon>
+                          </div>
+                          <div class="header-settings-label" >
+                              <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+                          </div>
+                      
+                      </div>
+                      <div class="header-title-container" *ngIf="heading.has_main_heading">
+                          <div class="header-title-main">
+                              <ion-label>{{ heading.main_heading_name }}</ion-label>
+                             
+                          </div>
+                          <div class="header-title-name-label"  >
+                              <ion-label *ngIf="heading.has_sub_heading"> {{heading.sub_heading_name | translate}} </ion-label>
+                          </div>
+                      </div>
+                      <div class="header-settings-container ion-activatable ripple-parent">
+                          <div class="header-notification-icon header-icon" >
+                              <ion-icon *ngIf="icons.has_right_icon" [src]="icons.right_icon"></ion-icon>
+                          </div>
+                          <div class="header-notification-label header-settings-label">
+                              </div>
+                              <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+                      </div>
+                  </div>
+                  
+               </div>
+           </div>
+      
+          </div>
+      
+          <div id="item-container" class="item-container" >
+          </div>
+      
+       </div>
+  </ion-toolbar>
+</ion-header>

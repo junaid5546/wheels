@@ -4,17 +4,21 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-
+import { SettingsComponent } from '../Components/settings/settings.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppSharedModule } from '../Components/Shared/shared.module';
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab1PageRoutingModule
+    Tab1PageRoutingModule,
+    TranslateModule,
+    AppSharedModule
+    
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page,SettingsComponent]
 })
 export class Tab1PageModule {}

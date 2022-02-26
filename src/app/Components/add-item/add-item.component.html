@@ -1,0 +1,9 @@
+<ion-grid>
+  <ion-row>
+    <ion-col  *ngFor="let item of items"> 
+      <ion-card button="true" class="main-item-container">
+        <ion-label>{{item.name | translate}}</ion-label>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

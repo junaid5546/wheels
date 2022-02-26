@@ -1,0 +1,57 @@
+
+
+<ion-content>
+    <app-header [icons]="icons" [heading]="heading"  goBack="true"></app-header>
+    <div class="settings-list-item-container">
+    
+    <div class="language-setup spacing-between">
+      <ion-segment (ionChange)="changeLanguage($event)"  [value]="language">
+        <ion-segment-button value="en">
+          <ion-label>{{"English" | translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="ar">
+          <ion-label>{{"Arabic" | translate}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+      
+    
+    <div class="theme spacing-between">
+      <ion-segment (ionChange)="changeTheme($event)" [value]="themeColor"> 
+        <ion-segment-button value="0">
+          <ion-label>{{"Light"|translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="1">
+          <ion-label>{{"Dark"|translate}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+      
+    
+    <div class="font-size spacing-between">
+      <ion-segment (ionChange)="textChange($event)" [value]="fontValue">
+        <ion-segment-button value="big">
+          <ion-label>{{"A+"|translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="medium">
+          <ion-label>{{"A"|translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="small">
+          <ion-label>{{"A-"|translate}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+      
+    
+    
+    <div class="font-size spacing-between">
+      <ion-segment routerLink="contact-us" color="primary">
+        <ion-segment-button value="standard">
+          <ion-label>{{"Contact Us"|translate}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    </div>
+    
+    </ion-content>
+    
