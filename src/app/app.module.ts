@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader, TranslatePipe } from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 Injectable()
 export function setTranslateLoader(http: HttpClient) {
@@ -26,7 +27,8 @@ export function setTranslateLoader(http: HttpClient) {
       useFactory: (setTranslateLoader),
       deps: [HttpClient]
     }
-  })],
+  }),
+    BrowserAnimationsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

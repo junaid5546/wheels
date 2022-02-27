@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ChildrenOutletContexts } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  styleUrls: ['app.component.scss']
 })
 export class AppComponent  implements OnInit  {
 
   lang: string = 'ar'; // ar, en
   theme: string = 'light'; // light, dark
 
-  constructor( private platform: Platform, private deviceInfo:DeviceInfoService,
+  constructor( private platform: Platform, private deviceInfo:DeviceInfoService,private contexts: ChildrenOutletContexts,
     public translate: TranslateService) {
       
       this.translate.setDefaultLang('ar');
@@ -59,5 +60,6 @@ export class AppComponent  implements OnInit  {
     
     
   }
+
 
 }

@@ -1,8 +1,18 @@
 <ion-grid>
   <ion-row>
     <ion-col  *ngFor="let item of items"> 
-      <ion-card button="true" class="main-item-container">
-        <ion-label>{{item.name | translate}}</ion-label>
+      <ion-card button="true" class="main-item-container" [routerLink]="['/take-car-images']">
+        <div class="main-item-inner-container">
+        <div class="icon-style">
+          <ion-icon name="time-outline"></ion-icon>
+        </div>
+        <div class="ion-img-container">
+          <ion-img src="../../../assets/images/iphone13promax.png"></ion-img>
+        </div>
+        <div class="item-name-container">
+          <ion-label>{{item.name | translate}}</ion-label>
+        </div>
+      </div>
       </ion-card>
     </ion-col>
   </ion-row>

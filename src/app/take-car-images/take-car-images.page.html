@@ -1,0 +1,68 @@
+<app-header [heading]="heading" [icons]="icons" goBack="true"></app-header>
+
+
+<ion-content>
+  <div class="select-images-button">
+    <ion-button>
+      <div class="logo-and-label-container">
+  
+        <div class="logo">
+          <ion-icon src="../../assets/icon/select-images/Phone/Phone/Search.svg"></ion-icon>
+        </div>
+  
+        <div class="label-container">
+      <ion-label>{{"Select Images"}}</ion-label>
+  
+    </div>
+    </div>
+    </ion-button>
+  </div>
+ 
+  
+    <ion-grid cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+      <ion-row>
+        <ion-col size="6" *ngFor="let movie of movies" cdkDrag>
+         <ion-card>
+           <div class="inner-item">
+             <div class="edition">
+               <div class="edit h-v-centered">
+                <ion-icon name="create-outline"></ion-icon>
+               </div>
+               <div class="edit delete h-v-centered">
+                <ion-icon name="trash-outline"></ion-icon>
+               </div>
+             </div>
+             <div class="car-image">
+              <ion-thumbnail>
+                <img src="../../assets/images/test.png"/>
+              </ion-thumbnail>
+             </div>
+           </div>
+         </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>
+<div class="text-label-and-icon">
+  <div class="h-v-centered icon-size"> 
+    <ion-icon src="../../assets/icon/select-images/Phone/Drag.svg"></ion-icon>
+  </div>
+  <ion-label>
+    Drag images to arrange them.
+  </ion-label>
+</div>
+
+<div class="select-images-button no-padding">
+  <ion-button>
+    <div class="logo-and-label-container">
+
+      <div class="label-container change-size">
+    <ion-label>{{"NEXT"}}</ion-label>
+</div>
+    <div class="logo no-borders no-padding">
+      <ion-icon src="../../assets/icon/select-images/Phone/Phone/Phone/arrow right.svg"></ion-icon>
+   
+  </div>
+  </div>
+  </ion-button>
+</div>

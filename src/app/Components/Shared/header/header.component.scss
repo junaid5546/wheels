@@ -15,6 +15,11 @@
         .header-settings-container{
             display: flex;
             flex-direction: column;
+            //background: orange;
+            flex: 1;
+            align-items: flex-start;
+            padding-left: 15px;
+            
             .header-icon{
                 display: flex;
                 justify-content: center;
@@ -36,6 +41,12 @@
             }
            
             
+        }
+        .header-notification-container{
+            align-items: flex-end !important;
+            .header-notification-icon {
+                padding-right: 15px;
+            }
         }
             .header-title-container{
                 display: flex;
