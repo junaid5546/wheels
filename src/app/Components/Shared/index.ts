@@ -1,2 +1,3 @@
-import { expressionType } from "@angular/compiler/src/output/output_ast";
+
+export * from './ask-permission/ask-permission.component';
 export * from './header/header.component';

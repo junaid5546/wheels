@@ -24,10 +24,13 @@ import * as COMPONENT from ".";
       FormsModule,
     ],
 
-    declarations: [COMPONENT.HeaderComponent],
-    entryComponents: [COMPONENT.HeaderComponent],
-    exports: [COMPONENT.HeaderComponent],
-    
+    declarations: [COMPONENT.HeaderComponent,
+                    COMPONENT.AskPermissionComponent]
+                    ,
+    entryComponents: [COMPONENT.HeaderComponent,
+                      COMPONENT.AskPermissionComponent],
+    exports: [COMPONENT.HeaderComponent, COMPONENT.AskPermissionComponent]
+
   })
   export class AppSharedModule {
     static forRoot() {

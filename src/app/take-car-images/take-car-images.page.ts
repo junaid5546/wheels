@@ -1,6 +1,8 @@
 import { Component,Input, OnInit } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CameraServiceService } from '../Services/camera-service.service';
+import { PermissionsService } from '../Services/permissions.service';
 @Component({
   selector: 'app-take-car-images',
   templateUrl: './take-car-images.page.html',
@@ -17,26 +19,16 @@ export class TakeCarImagesPage implements OnInit {
  @Input() heading = {has_main_heading:true, main_heading_name:'Images', has_sub_heading:false, sub_heading_name:''};
 
  
- movies = [
-  'A',
-  'B',
-  'C',
-  'D',
-  'E',
-  'F',
-  'G',
-  'H',
-  'I',
-];
+ carImages:any[] = [];
 
 drop(event: CdkDragDrop<string[]>) {
-  moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+  moveItemInArray(this.carImages, event.previousIndex, event.currentIndex);
 }
 
 
-  private blackLists: string[] = ['/upload-doc-first-time', '/event-list', '/tutorial', '/offline-message'];
 
   constructor(
+    private cam:CameraServiceService, private permission:PermissionsService,
     public  actionSheetController: ActionSheetController) {
      }
 
@@ -44,6 +36,18 @@ drop(event: CdkDragDrop<string[]>) {
          
      }
 
-  
+      selectImages(){
+       this.permission.checkCameraPermission()
+       .then((res:any)=>{
+         console.log("Permission: ", res);
+       })
+     }
 
+     pickImages() {
+      this.cam.pickImages()
+      .then((res:any)=>{
+        this.carImages = res;
+        console.log("Selected Images: ", this.carImages);
+      });
+     }
 }

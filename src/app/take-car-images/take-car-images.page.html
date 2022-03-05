@@ -1,8 +1,8 @@
 <app-header [heading]="heading" [icons]="icons" goBack="true"></app-header>
 
 
-<ion-content>
-  <div class="select-images-button">
+<ion-content fullscreen="true">
+  <div class="select-images-button" (click)="pickImages()">
     <ion-button>
       <div class="logo-and-label-container">
   
@@ -21,7 +21,7 @@
   
     <ion-grid cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
       <ion-row>
-        <ion-col size="6" *ngFor="let movie of movies" cdkDrag>
+        <ion-col size="6" *ngFor="let car of carImages" cdkDrag >
          <ion-card>
            <div class="inner-item">
              <div class="edition">
@@ -34,7 +34,7 @@
              </div>
              <div class="car-image">
               <ion-thumbnail>
-                <img src="../../assets/images/test.png"/>
+                <img [src]="car.webPath"/>
               </ion-thumbnail>
              </div>
            </div>
@@ -43,14 +43,6 @@
       </ion-row>
     </ion-grid>
 </ion-content>
-<div class="text-label-and-icon">
-  <div class="h-v-centered icon-size"> 
-    <ion-icon src="../../assets/icon/select-images/Phone/Drag.svg"></ion-icon>
-  </div>
-  <ion-label>
-    Drag images to arrange them.
-  </ion-label>
-</div>
 
 <div class="select-images-button no-padding">
   <ion-button>
@@ -61,7 +53,6 @@
 </div>
     <div class="logo no-borders no-padding">
       <ion-icon src="../../assets/icon/select-images/Phone/Phone/Phone/arrow right.svg"></ion-icon>
-   
   </div>
   </div>
   </ion-button>

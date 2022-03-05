@@ -33,11 +33,13 @@
         }
 }
 
+ion-content{
+ background :white !important;
+}
 
 .example-list {
     width: 500px;
     max-width: 100%;
-    border: solid 1px #ccc;
     min-height: 60px;
     display: block;
     background: white;
@@ -47,8 +49,6 @@
   
   .example-box {
     padding: 20px 10px;
-    border-bottom: solid 1px #ccc;
-    color: rgba(0, 0, 0, 0.87);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -56,10 +56,12 @@
     box-sizing: border-box;
     cursor: move;
     background: white;
-    font-size: 14px;
   }
   
   .cdk-drag-preview {
+    height: 50px;
+    min-height: 60px;
+    width: 500px;
     //box-sizing: border-box;
     //border-radius: 4px;
   }
@@ -141,6 +143,7 @@
   }
 
   .text-label-and-icon{
+    background: white;
     display: flex;
     margin-left: 11px;
     padding-top: 10px;

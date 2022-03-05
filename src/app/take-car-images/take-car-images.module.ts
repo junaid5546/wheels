@@ -14,7 +14,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     IonicModule,
     TakeCarImagesPageRoutingModule,
     AppSharedModule,
-    DragDropModule
+    DragDropModule,
   ],
   declarations: [TakeCarImagesPage]
 })

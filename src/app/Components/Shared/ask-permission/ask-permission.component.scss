@@ -1,0 +1,51 @@
+.camera-icon{
+   // background: orange;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ion-icon{
+        font-size: 10em;
+        background: #00b5dd47;
+        border-radius: 100px;
+        padding: 10px;
+        color: #00b1d8;
+    }
+}
+
+ion-card-title{
+    font-size: 20px;
+    color: #00b1d8;
+    padding-top: 20px;
+}
+
+ion-card-content{
+    ion-label{
+    color: #686868;
+    font-size: 14px;
+    letter-spacing: 1px;
+    }
+}
+
+.buttons{
+    padding-bottom: 20px;
+    .light{
+        --background: #009bbda1;
+        --background-activated:#00B5DD;
+        text-transform: capitalize;
+    }
+    .dark{
+        --background: #00B5DD;
+        --background-activated:#009bbda1;
+        text-transform: capitalize;
+    }
+}
+
+ion-card{
+    margin-top: 20px;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
