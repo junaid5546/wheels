@@ -2,8 +2,8 @@
 
 
 <ion-content fullscreen="true">
-  <div class="select-images-button" (click)="pickImages()">
-    <ion-button>
+  <div class="select-images-button" >
+    <ion-button (click)="pickImages()">
       <div class="logo-and-label-container">
   
         <div class="logo">
@@ -16,12 +16,24 @@
     </div>
     </div>
     </ion-button>
+
+    <div class="re-arrange" >
+      <ion-chip [color]="chip_color">
+        
+        <ion-icon [color]="chip_color" [name]="arrange_icon"></ion-icon>
+
+  <ion-label *ngIf="reOrder">Done</ion-label>
+  <ion-label *ngIf="!reOrder">Arrange</ion-label>
+</ion-chip>
+    </div>
+
   </div>
- 
+ <!----
   
-    <ion-grid cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-      <ion-row>
-        <ion-col size="6" *ngFor="let car of carImages" cdkDrag >
+    <ion-grid *ngIf="!this.reOrder">
+   
+      <ion-row class='wrapper'>
+        <ion-col class='container' size="12" *ngFor="let car of carImages" >
          <ion-card>
            <div class="inner-item">
              <div class="edition">
@@ -39,9 +51,43 @@
              </div>
            </div>
          </ion-card>
+
         </ion-col>
+
+  
       </ion-row>
     </ion-grid>
+-->
+
+
+<ion-list [scrollTop]="true">
+  <ion-reorder-group disabled="false" id="reorder" (ionItemReorder)="reorderItems($event)">
+    <ion-item *ngFor="let item of ['1','2','3','4','5','6','7','8','9',1,2,3,4,5,6,6,7,7,7,7,7,7,7,7,7,7,7]; let i=index">
+      <ion-thumbnail class="small-items">
+      </ion-thumbnail>
+      <ion-reorder slot="end"></ion-reorder>
+    </ion-item>
+  </ion-reorder-group>
+</ion-list>
+
+    <ion-list *ngIf="this.reOrder">
+      <ion-list-header>Reorder Icon</ion-list-header>
+      <ion-reorder-group disabled="false" id="reorder" (ionItemReorder)="reorderItems($event)">
+        <ion-item *ngFor="let item of carImages; let i=index">
+          <ion-thumbnail class="small-items">
+            <img [src]="item.webPath"/>
+          </ion-thumbnail>
+
+          <ion-chip *ngFor="let item of carImages let index=index" (click)="makeItThatIndex(i,index)">
+            <ion-label>{{index +1}}</ion-label>
+          </ion-chip>
+
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+      </ion-reorder-group>
+    </ion-list>
+
+
 </ion-content>
 
 <div class="select-images-button no-padding">
