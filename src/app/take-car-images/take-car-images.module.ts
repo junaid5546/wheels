@@ -6,7 +6,7 @@ import { TakeCarImagesPageRoutingModule } from './take-car-images-routing.module
 import { AppSharedModule } from '../Components/Shared/shared.module';
 import { TakeCarImagesPage } from './take-car-images.page';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { CarInfoModalComponent } from '../Models/car-info-modal/car-info-modal.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -15,7 +15,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TakeCarImagesPageRoutingModule,
     AppSharedModule,
     DragDropModule,
+    
   ],
-  declarations: [TakeCarImagesPage]
+  declarations: [TakeCarImagesPage,CarInfoModalComponent]
 })
 export class TakeCarImagesPageModule {}

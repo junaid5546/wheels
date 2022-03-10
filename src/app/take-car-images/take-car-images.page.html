@@ -1,7 +1,10 @@
-<app-header [heading]="heading" [icons]="icons" goBack="true"></app-header>
+<app-header [heading]="heading"
+             [icons]="icons"
+            goBack="true"
+            ></app-header>
 
 
-<ion-content fullscreen="true">
+<ion-content fullscreen="true" >
   <div class="select-images-button" >
     <ion-button (click)="pickImages()">
       <div class="logo-and-label-container">
@@ -16,19 +19,19 @@
     </div>
     </div>
     </ion-button>
-
+  
     <div class="re-arrange" >
       <ion-chip [color]="chip_color">
         
         <ion-icon [color]="chip_color" [name]="arrange_icon"></ion-icon>
-
+  
   <ion-label *ngIf="reOrder">Done</ion-label>
   <ion-label *ngIf="!reOrder">Arrange</ion-label>
-</ion-chip>
+  </ion-chip>
     </div>
-
+  
   </div>
- <!----
+ 
   
     <ion-grid *ngIf="!this.reOrder">
    
@@ -57,23 +60,12 @@
   
       </ion-row>
     </ion-grid>
--->
 
 
-<ion-list [scrollTop]="true">
-  <ion-reorder-group disabled="false" id="reorder" (ionItemReorder)="reorderItems($event)">
-    <ion-item *ngFor="let item of ['1','2','3','4','5','6','7','8','9',1,2,3,4,5,6,6,7,7,7,7,7,7,7,7,7,7,7]; let i=index">
-      <ion-thumbnail class="small-items">
-      </ion-thumbnail>
-      <ion-reorder slot="end"></ion-reorder>
-    </ion-item>
-  </ion-reorder-group>
-</ion-list>
 
     <ion-list *ngIf="this.reOrder">
-      <ion-list-header>Reorder Icon</ion-list-header>
       <ion-reorder-group disabled="false" id="reorder" (ionItemReorder)="reorderItems($event)">
-        <ion-item *ngFor="let item of carImages; let i=index">
+        <ion-item #element *ngFor="let item of carImages; let i=index">
           <ion-thumbnail class="small-items">
             <img [src]="item.webPath"/>
           </ion-thumbnail>
@@ -91,7 +83,7 @@
 </ion-content>
 
 <div class="select-images-button no-padding">
-  <ion-button>
+  <ion-button (click)="presentModal()">
     <div class="logo-and-label-container">
 
       <div class="label-container change-size">

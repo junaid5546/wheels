@@ -1,0 +1,24 @@
+<app-header 
+            [heading]="heading"
+            [icons]="icons"
+            goBack="false"
+            [isModal]="true"
+            ></app-header>
+
+<ion-content>
+    <ion-list>
+       
+            <ion-card *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
+                <div class="container" [ngClass]="{selected: item.selected}" >
+                <div class="name-of-item">
+                    <ion-label>{{item.name}}</ion-label>
+                </div>
+                <div class="icon-of-item">
+                    <ion-thumbnail>
+                        <ion-img src="../../../assets/icon/cars-icon/toyota تويوتا.png"></ion-img>
+                    </ion-thumbnail>
+                </div>
+            </div>
+            </ion-card>
+    </ion-list>
+</ion-content>

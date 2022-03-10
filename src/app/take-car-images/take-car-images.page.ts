@@ -1,18 +1,23 @@
-import { Component,Input, OnInit,ViewChild } from '@angular/core';
-import { ActionSheetController, IonReorderGroup } from '@ionic/angular';
+import { Component,ElementRef,Input, NgZone, OnInit,QueryList,ViewChild } from '@angular/core';
+import { ActionSheetController, IonContent, IonItem, IonList, IonReorderGroup } from '@ionic/angular';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { CameraServiceService } from '../Services/camera-service.service';
 import { PermissionsService } from '../Services/permissions.service';
-import { ItemReorderEventDetail } from '@ionic/core';
+import { ModalControllerService } from '../Services/modal-controller.service';
+
 @Component({
   selector: 'app-take-car-images',
   templateUrl: './take-car-images.page.html',
   styleUrls: ['./take-car-images.page.scss'],
 })
 export class TakeCarImagesPage implements OnInit {
+  
+  @ViewChild(IonItem, {read:ElementRef}) items: ElementRef;
+  @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
+  items_array:any[] = ['1','2','3','4','5','6','7','8','9',1,2,3,4,5,6,6,7,7,7,7,7,7,7,7,7,7,7];
+  @ViewChild(IonContent, {static:true}) content:IonContent;
   chip_color = 'primary';
   arrange_icon = "hand-right-outline";
-  @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
   reOrder:boolean = false;
  // ROUTE NAME HERE.
  @Input() forwardTo:string = null;
@@ -28,6 +33,7 @@ export class TakeCarImagesPage implements OnInit {
 
  
  carImages:any[] = [];
+ modalStartingPoint;
 
 drop(event: CdkDragDrop<string[]>) {
 
@@ -39,13 +45,24 @@ drop(event: CdkDragDrop<string[]>) {
 
   constructor(
     private cam:CameraServiceService, private permission:PermissionsService,
+    private modalService:ModalControllerService,
     public  actionSheetController: ActionSheetController) {
+     
      }
 
      ngOnInit(): void {
-         
+         this.checkModalCurrentState();
      }
 
+     ngAfterViewInit() {
+       console.log("Called");
+      
+      
+     }
+     
+
+    
+    
       selectImages(){
        this.permission.checkCameraPermission()
        .then((res:any)=>{
@@ -62,6 +79,7 @@ drop(event: CdkDragDrop<string[]>) {
      }
 
      reorderItems(ev) {
+       
       const itemMove = this.carImages.splice(ev.detail.from, 1)[0];
       this.carImages.splice(ev.detail.to, 0, itemMove);
       ev.detail.complete();
@@ -102,5 +120,18 @@ drop(event: CdkDragDrop<string[]>) {
     const itemMove = this.carImages.splice(from, 1)[0];
       this.carImages.splice(to, 0, itemMove);
   }
+  
+
+  presentModal(){
+    console.log("Starting Point: ", this.modalStartingPoint);
+    this.modalService.presentModal(this.modalStartingPoint);
+  }
+
+  checkModalCurrentState(){
+   this.modalStartingPoint =  this.modalService.getCurrentState();
+  
+  }
+
+ 
      
 }
