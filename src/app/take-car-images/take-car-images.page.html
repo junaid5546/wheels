@@ -20,7 +20,7 @@
     </div>
     </ion-button>
   
-    <div class="re-arrange" >
+    <div class="re-arrange"  (click)="reorder()">
       <ion-chip [color]="chip_color">
         
         <ion-icon [color]="chip_color" [name]="arrange_icon"></ion-icon>
@@ -36,7 +36,7 @@
     <ion-grid *ngIf="!this.reOrder">
    
       <ion-row class='wrapper'>
-        <ion-col class='container' size="12" *ngFor="let car of carImages" >
+        <ion-col class='container'size="6" *ngFor="let car of carImages" >
          <ion-card>
            <div class="inner-item">
              <div class="edition">
@@ -70,10 +70,6 @@
             <img [src]="item.webPath"/>
           </ion-thumbnail>
 
-          <ion-chip *ngFor="let item of carImages let index=index" (click)="makeItThatIndex(i,index)">
-            <ion-label>{{index +1}}</ion-label>
-          </ion-chip>
-
           <ion-reorder slot="end"></ion-reorder>
         </ion-item>
       </ion-reorder-group>
@@ -94,4 +90,6 @@
   </div>
   </div>
   </ion-button>
+
+  
 </div>

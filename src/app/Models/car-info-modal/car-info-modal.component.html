@@ -6,12 +6,12 @@
             ></app-header>
 
 <ion-content>
-    <ion-list>
+    <ion-list  #items *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 24">
        
             <ion-card *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
                 <div class="container" [ngClass]="{selected: item.selected}" >
                 <div class="name-of-item">
-                    <ion-label>{{item.name}}</ion-label>
+                    <ion-label>{{item.name}} {{item.key}}</ion-label>
                 </div>
                 <div class="icon-of-item">
                     <ion-thumbnail>
@@ -19,6 +19,129 @@
                     </ion-thumbnail>
                 </div>
             </div>
+
             </ion-card>
     </ion-list>
+
+    <ion-list *ngIf="currentStep == 5 || currentStep==6" >
+        <ion-grid *ngIf="currentStep == 5">
+            <ion-row >
+                <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem;let i=index">
+                    <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
+                        <div class="item-picture-container">
+                           <ion-img src="https://images.netdirector.co.uk/gforces-auto/image/upload/w_343,h_257,dpr_2.0,q_auto,c_fill,f_auto,fl_lossy/auto-client/4f3a94f309517d480173272c101fe224/thumbnail_mobile.jpg"></ion-img> 
+                          </div>
+                        <div class="item-name-container">
+                            <ion-label>{{item.name}}</ion-label>
+                        </div>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <ion-grid *ngIf="currentStep == 6">
+            <ion-row >
+                <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem;let i=index">
+                    <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
+                        <div class="item-picture-container">
+                           <ion-card></ion-card>
+                          </div>
+                        <div class="item-name-container">
+                            <ion-label>{{item.name}}</ion-label>
+                        </div>
+                        <ion-ripple-effect></ion-ripple-effect>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        
+        
+    </ion-list>
+
+ 
+    <ion-list *ngIf="currentStep == 24"  >
+          <ion-grid>
+              <ion-row>
+                  <ion-col>
+                      <div class="price item-default-design">
+                          <ion-label>Price</ion-label>
+                      </div>
+                  </ion-col>
+
+                  <ion-col>
+                    <div class="item-default-design price-input" >
+                        <ion-input></ion-input>
+                    </div>
+                </ion-col>
+
+
+              </ion-row>
+
+              <ion-row>
+                <ion-col>
+                    <div class="distance-traveled item-default-design">
+                        <ion-label>Distance Travelled</ion-label>
+                    </div>
+                </ion-col>
+
+                <ion-col>
+                  <div class="distance-input item-default-design">
+                      <ion-input></ion-input>
+                  </div>
+              </ion-col>
+
+
+            </ion-row>
+
+
+            <ion-row>
+                <ion-col>
+                    <div class="Phone item-default-design">
+                        <div class="icon"></div>
+                        <div class="label">
+                            <ion-label>Phone</ion-label>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col>
+                  <div class="phone-input item-default-design">
+                      <div class="phone-input-inner">
+                          <ion-input></ion-input>
+                      </div>
+                  </div>
+              </ion-col>
+
+
+            </ion-row>
+
+
+            <ion-row>
+                <ion-col>
+                    <div class="Phone item-default-design">
+                        <div class="icon"></div>
+                        <div class="label">
+                            <ion-label>Notes</ion-label>
+                        </div>
+                    </div>
+                </ion-col>
+
+                <ion-col>
+                  <div class="phone-input item-default-design">
+                      <div class="phone-input-inner">
+                        <ion-textarea (ionChange)="inputOccured($event)"></ion-textarea>
+                        <ion-label>{{inputCharacter}}/200</ion-label>
+                      </div>
+                  </div>
+              </ion-col>
+
+
+            </ion-row>
+            
+          </ion-grid>
+    </ion-list>
+
+
 </ion-content>

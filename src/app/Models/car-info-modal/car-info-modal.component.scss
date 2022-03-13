@@ -43,3 +43,91 @@ ion-content {
   .selected{
     background: linear-gradient(225deg, #00DDDD 6.77%, #00ACE2 51.04%, #0092E4 90.62%) !important;
   }
+
+
+
+  .main-item-container{
+    height: 100px;
+    background: conic-gradient(from 138deg at 0% 0%, #E8E7E7 0deg, #F4F4F4 360deg);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .item-picture-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        ion-img{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img{
+                height: auto !important;
+                width: auto !important;
+            }
+        }
+    }
+    .item-name-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 5px;
+
+        ion-label{
+            font-size: 15px;
+            font-size: 3.5vw;
+            color: linear-gradient(225deg, #00B5DD 6.77%, #0091E2 51.04%, #0084E4 90.62%);
+            background: -webkit-linear-gradient(225deg, #00B5DD 6.77%, #0091E2 51.04%, #0084E4 90.62%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+    .clock{
+        padding-top: 3px;
+        display: flex;
+        height: 15%;
+        justify-content: flex-end;
+        align-items: flex-start;
+    }
+}
+
+.ripple-parent {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .item-default-design{
+      ion-input{
+        --padding-top: 0px !important; 
+        --padding-end: 0px !important; 
+        --padding-bottom: 0px !important;
+      }
+    background: orange;
+    padding: 10px;
+    border-radius: 5px;
+    ion-label{
+        font-size: 15px;
+    font-weight: 400;
+    color: 494949;
+    color: #494949;
+    }
+  }
+
+  .phone-input-inner{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+      ion-textarea{
+    --padding-top: 0px !important; 
+     --padding-end: 0px !important; 
+     --padding-bottom: 0px !important;
+    }
+    ion-label{
+        font-size: 12px;
+    }
+  }
+
+  

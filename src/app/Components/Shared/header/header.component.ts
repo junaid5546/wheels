@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit {
     if(this.goBack=='true'){
       this.nav.back();
     } else if(this.isModal) {
+      
       this.modalCtrl.dismissModal()
     }
      else {
