@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild,ElementRef, AfterViewInit } from '@angular/core';
 import { ModalControllerService } from '../../Services/modal-controller.service';
-import { AnimationController,Animation, IonList } from '@ionic/angular';
+import { AnimationController,Animation } from '@ionic/angular';
 
 @Component({
   selector: 'app-car-info-modal',
@@ -8,9 +8,10 @@ import { AnimationController,Animation, IonList } from '@ionic/angular';
   styleUrls: ['./car-info-modal.component.scss'],
 })
 export class CarInfoModalComponent implements OnInit,AfterViewInit  {
+  data:boolean= false;
   inputCharacter:number = 0;
   anim:Animation;
-  @ViewChild('items', {static:false}) items:ElementRef;
+  @ViewChild('card_items', {static:false}) card_items:ElementRef;
   currentStep:number = 0;
   currentItem:any[] = [];
   ItemService;
@@ -31,25 +32,29 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
    }
 
    ngAfterViewInit() {
-     console.log("Claaed ngAfterViewInit");
-     console.log(this.items);
-     this.anim = this.amimationCtrl.create('swipe');
-     
-     this.anim.addElement(this.items.nativeElement)
-     .duration(1500)
-     .easing('ease-out')
-     .iterations(Infinity)
-     .fromTo('transform','translateX(0px)','translateX(300px)')
-     .fromTo('opacity',1,0.2);
-     console.log("ANIMATION: ", this.anim);
+    this.animation();
    }
 
+   
 
-   playAnimation(){
-    console.log(this.items);
-     this.anim.play();
-     console.log("PLAY");
+
+   animation(){
+    if(this.card_items != undefined){
+      console.log("Claaed ngAfterViewInit");
+      console.log("Claaed ngAfterViewInit",this.card_items);
+      this.anim = this.amimationCtrl.create('swipe');
+      
+      this.anim.addElement(this.card_items.nativeElement)
+      .duration(300)
+      .easing('ease-out')
+      .iterations(1)
+      .fromTo('transform','translateX(300px)','translateX(0px)')
+      .fromTo('opacity',0.1,1);
+      console.log("ANIMATION: ", this.anim);
+      this.anim.play();
+     }
    }
+
 
    ngOnDestroy() {
      
@@ -58,7 +63,9 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
    }
 
   ngOnInit() {
-
+    setTimeout(() => {
+      this.data = true;
+     }, 500);
   this.ItemService =   this.modelCtrl.getCurrentObject()
     .subscribe((currentState:any)=>{
       console.log("Current Object Observable: ", currentState)
@@ -80,7 +87,11 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     })
     this.currentItem[i].selected = true;
     this.modelCtrl.selectItem(item);
-    this.playAnimation();
+    this.data = false;
+    setTimeout(() => {
+      this.data = true;
+     }, 500);
+    //this.animation();
   }
 
   inputOccured(e) {

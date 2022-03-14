@@ -25,11 +25,15 @@ import * as COMPONENT from ".";
     ],
 
     declarations: [COMPONENT.HeaderComponent,
+                   COMPONENT.VerticalListComponent,
                     COMPONENT.AskPermissionComponent]
                     ,
     entryComponents: [COMPONENT.HeaderComponent,
+                      COMPONENT.VerticalListComponent,
                       COMPONENT.AskPermissionComponent],
-    exports: [COMPONENT.HeaderComponent, COMPONENT.AskPermissionComponent]
+
+    exports: [COMPONENT.HeaderComponent, COMPONENT.AskPermissionComponent,
+              COMPONENT.VerticalListComponent]
 
   })
   export class AppSharedModule {

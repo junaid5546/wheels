@@ -1,16 +1,22 @@
-import { Component,ElementRef,Input, NgZone, OnInit,QueryList,ViewChild } from '@angular/core';
+import { Component,ElementRef,Input, OnInit,ViewChild } from '@angular/core';
 import { ActionSheetController, IonContent, IonItem, IonList, IonReorderGroup } from '@ionic/angular';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { CameraServiceService } from '../Services/camera-service.service';
 import { PermissionsService } from '../Services/permissions.service';
 import { ModalControllerService } from '../Services/modal-controller.service';
-
+import { AnimationController,Animation } from '@ionic/angular';
+import { DeviceInfoService } from '../Services/device-info.service';
 @Component({
   selector: 'app-take-car-images',
   templateUrl: './take-car-images.page.html',
   styleUrls: ['./take-car-images.page.scss'],
 })
 export class TakeCarImagesPage implements OnInit {
+  anim:Animation;
+  bottomUp:Animation;
+
+  @ViewChild('bottomButton', {static:false}) bottomButton:ElementRef;
+  @ViewChild('item', {static:false}) item:ElementRef;
   
   @ViewChild(IonItem, {read:ElementRef}) items: ElementRef;
   @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
@@ -46,7 +52,9 @@ drop(event: CdkDragDrop<string[]>) {
   constructor(
     private cam:CameraServiceService, private permission:PermissionsService,
     private modalService:ModalControllerService,
-    public  actionSheetController: ActionSheetController) {
+    private amimationCtrl:AnimationController,
+    public  actionSheetController: ActionSheetController,
+    private deviceInfo:DeviceInfoService) {
      
      }
 
@@ -60,16 +68,7 @@ drop(event: CdkDragDrop<string[]>) {
        //console.log("Model Initialization: ", IsModelInitialized);
          //this.checkModalCurrentState();
      }
-
-     ngAfterViewInit() {
-       console.log("Called");
-      
-      
-     }
-     
-
-    
-    
+ 
       selectImages(){
        this.permission.checkCameraPermission()
        .then((res:any)=>{
@@ -82,6 +81,7 @@ drop(event: CdkDragDrop<string[]>) {
       .then((res:any)=>{
         this.carImages = this.carImages.concat(res)
         console.log("Selected Images: ", this.carImages);
+       this.checkImagesLength();
       });
      }
 
@@ -139,6 +139,53 @@ drop(event: CdkDragDrop<string[]>) {
   
   }
 
- 
+  ngAfterViewInit() {
+    console.log("Claaed ngAfterViewInit");
+    console.log(this.item);
+    this.anim = this.amimationCtrl.create('swipe');
+    
+    this.anim.addElement(this.item.nativeElement)
+    .duration(300)
+    .easing('ease-out')
+    .iterations(1)
+    .fromTo('transform','translateX(300px)','translateX(0px)')
+    .fromTo('opacity',0.1,1);
+    this.anim.play();
+    this.toggleNext(false);
+  }
+
+  toggleNext(next){
+   let translateYfrom;
+   let translateYto; 
+    if(next){
+      translateYfrom = `translateY(${this.deviceInfo.getDeviceHeight()+'px'})`;
+      translateYto = 'translateY(0px)';
+    } else{
+      translateYfrom = `translateY(${this.deviceInfo.getDeviceHeight()+'px'})`;
+      translateYto = 'translateY(100px)';
+    }
+    this.bottomUp = this.amimationCtrl.create('bottom_up');
+    this.bottomUp.addElement(this.bottomButton.nativeElement)
+    .duration(500)
+    .easing('ease-out')
+    .iterations(1)
+    .fromTo('transform',translateYfrom,translateYto)
+    .fromTo('opacity',0.1,1);
+    this.bottomUp.play();
+  }
+
+
+  checkImagesLength(){
+    if(this.carImages.length > 0){
+      this.toggleNext(true);
+    } else if(this.carImages.length == 0) {
+      this.toggleNext(false);
+    }
+  }
+
+  popImages(){
+    this.carImages.pop();
+    this.checkImagesLength();
+  }
      
 }

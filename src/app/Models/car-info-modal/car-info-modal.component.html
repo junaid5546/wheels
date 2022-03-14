@@ -6,9 +6,10 @@
             ></app-header>
 
 <ion-content>
-    <ion-list  #items *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 24">
-       
-            <ion-card *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
+    <div *ngIf="data">
+    <ion-list *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 24">
+        <div #card_items  class="wraper">
+            <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
                 <div class="container" [ngClass]="{selected: item.selected}" >
                 <div class="name-of-item">
                     <ion-label>{{item.name}} {{item.key}}</ion-label>
@@ -21,6 +22,7 @@
             </div>
 
             </ion-card>
+        </div>
     </ion-list>
 
     <ion-list *ngIf="currentStep == 5 || currentStep==6" >
@@ -64,13 +66,16 @@
     <ion-list *ngIf="currentStep == 24"  >
           <ion-grid>
               <ion-row>
-                  <ion-col>
+                  <ion-col size="6">
                       <div class="price item-default-design">
+                          <div class="icon">
+                              <ion-icon src="../../../assets/icon/additional_details/Phone/Vector.svg"></ion-icon>
+                          </div>
                           <ion-label>Price</ion-label>
                       </div>
                   </ion-col>
 
-                  <ion-col>
+                  <ion-col size="6">
                     <div class="item-default-design price-input" >
                         <ion-input></ion-input>
                     </div>
@@ -82,13 +87,34 @@
               <ion-row>
                 <ion-col>
                     <div class="distance-traveled item-default-design">
+                        <div class="icon">
+                            <ion-icon src="../../../assets/icon/additional_details/Distance.svg"></ion-icon>
+                        </div>
                         <ion-label>Distance Travelled</ion-label>
                     </div>
                 </ion-col>
 
                 <ion-col>
                   <div class="distance-input item-default-design">
-                      <ion-input></ion-input>
+                      <div class="distance-traveled-input">
+                        <ion-input></ion-input>
+                      </div>
+                      <div class="km-mile">
+                        <ion-list class="no-padding">
+                            <ion-radio-group value="biff">
+                          
+                              <div class="radio-button">
+                                <ion-label>KM</ion-label>
+                                <ion-radio slot="start" value="km"></ion-radio>
+                              </div>
+                          
+                              <div class="radio-button">
+                                <ion-label>Mile</ion-label>
+                                <ion-radio slot="start" value="mile"></ion-radio>
+                              </div>
+                            </ion-radio-group>
+                          </ion-list>
+                      </div>
                   </div>
               </ion-col>
 
@@ -142,6 +168,10 @@
             
           </ion-grid>
     </ion-list>
+</div>
 
+<div *ngIf="!data">
+<app-vertical-list></app-vertical-list>
+</div>
 
 </ion-content>

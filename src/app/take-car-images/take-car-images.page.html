@@ -5,7 +5,7 @@
 
 
 <ion-content fullscreen="true" >
-  <div class="select-images-button" >
+  <div #item class="select-images-button" >
     <ion-button (click)="pickImages()">
       <div class="logo-and-label-container">
   
@@ -37,7 +37,7 @@
    
       <ion-row class='wrapper'>
         <ion-col class='container'size="6" *ngFor="let car of carImages" >
-         <ion-card>
+         <ion-card (click)="popImages()">
            <div class="inner-item">
              <div class="edition">
                <div class="edit h-v-centered">
@@ -78,8 +78,9 @@
 
 </ion-content>
 
-<div class="select-images-button no-padding">
-  <ion-button (click)="presentModal()">
+<div  class="select-images-button no-padding">
+  <div #bottomButton class="wraper">
+  <ion-button  (click)="presentModal()">
     <div class="logo-and-label-container">
 
       <div class="label-container change-size">
@@ -90,6 +91,6 @@
   </div>
   </div>
   </ion-button>
-
+</div>
   
 </div>
