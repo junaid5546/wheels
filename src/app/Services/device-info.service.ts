@@ -99,6 +99,8 @@ export class DeviceInfoService {
     localStorage.setItem('theme',theme);
   }
 
-  
+  isArray(input:any) {
+   return  Array.isArray(input);
+  }
   
 }

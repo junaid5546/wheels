@@ -3,6 +3,7 @@ import { Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChildrenOutletContexts } from '@angular/router';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,6 +15,7 @@ export class AppComponent  implements OnInit  {
   theme: string = 'light'; // light, dark
 
   constructor( private platform: Platform, private deviceInfo:DeviceInfoService,private contexts: ChildrenOutletContexts,
+    private router:Router,
     public translate: TranslateService) {
       
       this.translate.setDefaultLang('ar');
@@ -21,6 +23,7 @@ export class AppComponent  implements OnInit  {
   }
 
   initializeApp() {
+    this.router.navigate(['tabs/posts'])
     this.platform.ready().then(() => {
       
       // SETTING DEVICE HEIGHT AND WIDTH

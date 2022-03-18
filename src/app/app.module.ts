@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
 import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
+import { SwiperModule } from "swiper/angular";
 Injectable()
 export function setTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -23,6 +24,7 @@ export function setTranslateLoader(http: HttpClient) {
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     HttpClientModule,
     HttpClientJsonpModule,
+    SwiperModule,
     TranslateModule.forRoot({
     loader: {
       provide: TranslateLoader,

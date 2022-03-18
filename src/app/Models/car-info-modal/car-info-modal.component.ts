@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild,ElementRef, AfterViewInit } from '@angular/core';
 import { ModalControllerService } from '../../Services/modal-controller.service';
 import { AnimationController,Animation } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-car-info-modal',
   templateUrl: './car-info-modal.component.html',
@@ -27,7 +27,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Images', has_sub_heading:false, sub_heading_name:''};
-  constructor(public modelCtrl: ModalControllerService, private amimationCtrl:AnimationController) {
+  constructor(public modelCtrl: ModalControllerService, private amimationCtrl:AnimationController, private route:Router) {
 
    }
 
@@ -96,5 +96,10 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
 
   inputOccured(e) {
     console.log(e.detail.value );
+  }
+
+  navigateToPosts() {
+      this.modelCtrl.postFinished();
+      this.route.navigate(['tabs/posts']);
   }
 }

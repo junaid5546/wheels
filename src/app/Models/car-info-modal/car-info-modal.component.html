@@ -6,6 +6,7 @@
             ></app-header>
 
 <ion-content>
+
     <div *ngIf="data">
     <ion-list *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 24">
         <div #card_items  class="wraper">
@@ -166,8 +167,9 @@
 
             </ion-row>
             
-          </ion-grid>
+          </ion-grid>  
     </ion-list>
+    
 </div>
 
 <div *ngIf="!data">
@@ -175,3 +177,20 @@
 </div>
 
 </ion-content>
+
+<div *ngIf="currentStep == 24" class="select-images-button no-padding">
+    <div #bottomButton class="wraper">
+    <ion-button (click)="navigateToPosts()">
+      <div class="logo-and-label-container">
+  
+        <div class="label-container change-size">
+      <ion-label>{{"NEXT"}}</ion-label>
+  </div>
+      <div class="logo no-borders no-padding">
+        <ion-icon src="../../assets/icon/select-images/Phone/Phone/Phone/arrow right.svg"></ion-icon>
+    </div>
+    </div>
+    </ion-button>
+  </div>
+    
+  </div>

@@ -1,0 +1,183 @@
+.button-name-and-logo-container{
+    display: flex;
+    .button-logo{
+        font-size: 1.5em;
+        padding-right: 5px;
+    }
+}
+ion-buttons{
+    display: flex;
+    justify-content: space-around;
+    ion-button{
+    text-transform: capitalize !important;
+}
+}
+
+.bordered{
+    border-left: 1px solid #0000001f;
+    border-right: 1px solid #0000001f;
+}
+
+.buttons-default{
+    flex: 1;
+    ion-label{
+    color: #0091E2 !important;
+}
+ion-icon{
+    color: #0091E2 !important;
+}
+}
+
+ion-card{
+    flex-direction: column;
+    display: flex;
+    background: conic-gradient(from 125deg at 0% 0%, #E8E7E7 0deg, #F4F4F4 360deg);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    .top{
+        height: 65%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .image-and-logos{
+            z-index: 1000;
+            .price{
+                
+                position: absolute;
+                padding: 5px;
+                padding-left: 13px;
+                padding-right: 13px;
+                bottom: 5px;
+                left: 5px;
+                background: linear-gradient(225deg, rgba(0, 181, 221, 0.4) 6.77%, rgba(0, 145, 226, 0.4) 51.04%, rgba(0, 132, 228, 0.4) 90.62%);
+                border-radius: 50px;
+                ion-label{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-weight: 700;
+                    font-weight: 500;
+                    color: white;
+                }
+            }
+            .gold-diamond{
+                border: 2px solid white;
+                height: 40px;
+    width: 40px;
+    position: absolute;
+    background: #cac0ff;
+    top: 10px;
+    right: 20;
+    right: 10px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 8px rgb(0 0 0 / 38%);
+            }
+            .dm-logo{
+
+                height: 40px;
+                width: 40px;
+                position: absolute;
+                background: #8a83ae;
+                top: 10px;
+                left: 10px;
+                border-radius: 100px;
+                box-shadow: 0px 0px 8px rgb(0 0 0 / 38%);
+            }
+        }
+    }
+    .bottom{
+        height: 35%;
+        display: flex;
+    flex-direction: column;
+     justify-content: space-around;;
+    //background: white;
+    .item-name{
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 400;
+        color: #494949;
+        padding-top: 5px;
+        ion-label{
+            font-weight: 300;
+    letter-spacing: 1px;
+        }
+    }
+    .chips{
+        padding-bottom: 6px;
+    border-bottom: 1px solid;
+    padding-top: 5px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 12px;
+        border-color: #cdcdcd;
+        .chip{
+            display: flex;
+            flex: 1;
+        }
+        ion-label{
+            padding-left: 3px;
+        }
+    }
+    }
+}
+
+.price-chip{
+    ion-label{
+        font-weight: 500;
+        color: white;
+    }
+    background: linear-gradient(225deg, rgba(0, 181, 221, 0.4) 6.77%, rgba(0, 145, 226, 0.4) 51.04%, rgba(0, 132, 228, 0.4) 90.62%);
+}
+
+.share-like-fav{
+    display: flex;
+    /* padding: 15px; */
+    padding-right: 10px;
+.dot{
+    height: 5px;
+    width: 5px;
+    background: #3f3f3fd4;
+    border-radius: 100px;
+    margin: 2px;
+}
+}
+
+.price{
+    display: flex;
+    //justify-content: space-between;
+    align-items: center;
+    letter-spacing: 1px;
+}
+
+.ripple-parent {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bottom-nav{
+      //margin-top: 10px;
+  }
+
+  .no-border{
+      border-bottom: 0px !important;
+  }
+
+  .price {
+    font-weight: 600;
+  }
+
+  ion-list{
+      padding-top: 55px;
+  }
+
+  .top-heading{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+  }

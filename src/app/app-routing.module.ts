@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'take-car-images',
     loadChildren: () => import('./take-car-images/take-car-images.module').then( m => m.TakeCarImagesPageModule)
+  },
+  {
+    path: 'posts',
+    loadChildren: () => import('./posts/posts.module').then( m => m.PostsPageModule)
   }
 ];
 @NgModule({
