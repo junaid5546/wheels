@@ -99,11 +99,10 @@ ion-card{
         justify-content: center;
         align-items: center;
         font-size: 18px;
-        font-weight: 400;
         color: #494949;
         padding-top: 5px;
         ion-label{
-            font-weight: 300;
+            font-weight: 400;
     letter-spacing: 1px;
         }
     }
@@ -114,11 +113,28 @@ ion-card{
         display: flex;
         justify-content: space-around;
         align-items: center;
-        font-size: 12px;
+        font-size: 14px;
         border-color: #cdcdcd;
+        flex: 1;
+        width: 100%;
         .chip{
             display: flex;
             flex: 1;
+            //width: 32%;
+            ion-icon{
+                font-size: 1.3em;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+            
+            ion-text {    
+                
+                padding-left: 3px;
+                width: 80%;
+                overflow: hidden;
+                white-space: nowrap;
+                overflow: scroll;
+            }
         }
         ion-label{
             padding-left: 3px;
@@ -169,15 +185,21 @@ ion-card{
   }
 
   .price {
+    font-size: 17px !important;
     font-weight: 600;
   }
 
   ion-list{
-      padding-top: 55px;
+      padding-top: 50px;
   }
 
   .top-heading{
     position: fixed;
     width: 100%;
     z-index: 1000;
+  }
+
+  .ripple-parent {
+    position: relative;
+    overflow: hidden;
   }

@@ -1,12 +1,40 @@
 <!-- Skeleton screen -->
 <div>
   <ion-list>
-    <ion-item lines="none" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]">
-      <div class="post-main-item">
-            <ion-skeleton-text animated class="top">
+    <ion-item lines="none" *ngFor="let item of [1,1,1]">
+      <div  class="post-main-item">
+        <div class="top h-v-centered">
+          <ion-icon name="image-sharp"></ion-icon>
+
+          <div class="app-icon">
+            <ion-skeleton-text animated class="full-radius">
               
             </ion-skeleton-text>
-            <ion-skeleton-text animated class="bottom"></ion-skeleton-text>
+          </div>
+
+          <ion-skeleton-text animated >
+              
+          </ion-skeleton-text>
+        </div>
+
+        <div class="bottom">
+
+          <div class="main-name">
+            <ion-skeleton-text animated ></ion-skeleton-text>
+          </div>
+
+          <div class="first-row">
+            <ion-skeleton-text animated ></ion-skeleton-text>
+            <ion-skeleton-text animated ></ion-skeleton-text>
+            <ion-skeleton-text animated ></ion-skeleton-text>
+          </div>
+
+          <div class="sec-row">
+            <ion-skeleton-text animated ></ion-skeleton-text>
+            <ion-skeleton-text animated ></ion-skeleton-text>
+            <ion-skeleton-text animated ></ion-skeleton-text>
+          </div>
+        </div>
       </div>
     </ion-item>
   </ion-list>
