@@ -47,8 +47,6 @@ drop(event: CdkDragDrop<string[]>) {
 
 }
 
-
-
   constructor(
     private cam:CameraServiceService, private permission:PermissionsService,
     private modalService:ModalControllerService,

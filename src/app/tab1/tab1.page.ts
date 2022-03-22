@@ -55,6 +55,10 @@ setMainPageDimensions() {
   ele.style.height = this.header_height + 'px';
 }
 
+getCars(){
+  
+}
+
 
 
 }
