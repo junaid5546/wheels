@@ -4,6 +4,7 @@ import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -63,6 +64,12 @@ export class AppComponent  implements OnInit  {
     
     
   }
+
+  getPosts(){
+
+
+  }
+
 
 
 }

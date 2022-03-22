@@ -1,3 +1,31 @@
 ion-content{
     --background:white;
+    .main-container-post-details{
+        background: white;
+        overflow: scroll;
+    }
+    ion-list{
+        padding-top: 0px !important;
+        ion-row{
+            ion-col{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                
+                ion-text{
+                font-size: 12px;
+            }
+            .f-s-n{
+                background: rgba(233, 232, 232, 0.4);
+                padding: 0px 10px;
+                border-radius: 5px;
+                img{
+                    padding-right: 4px;
+                    font-size: 1em;
+                }
+            }
+            }
+        }
+    }
 }

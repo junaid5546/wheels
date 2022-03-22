@@ -1,7 +1,6 @@
 import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +22,7 @@ export function setTranslateLoader(http: HttpClient) {
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     HttpClientJsonpModule,
     SwiperModule,
     TranslateModule.forRoot({

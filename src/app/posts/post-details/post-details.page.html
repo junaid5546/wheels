@@ -1,8 +1,67 @@
-<app-header [heading]="heading"
-             [icons]="icons"
-            goBack="false"
-            ></app-header>
 
-<ion-content>
 
+<ion-content #content scrollY="false">  
+
+    <app-header [heading]="heading"
+    [icons]="icons"
+    goBack="true"
+   ></app-header>
+
+   <div class="main-container-post-details">
+
+    <ion-list>
+       <div class="item-container">
+           <div class="container-image">
+          <ion-img src="assets/images/New-Car-Launches-In-January-2021-1000x600.jpeg"></ion-img>
+        </div>
+
+        <!--
+            nav bar for 
+            favorite
+            share
+            notes
+            notify
+        -->
+        <div class="fsnn-container">
+
+        <ion-row>
+            <ion-col (click)="fav()">
+                <div class="h-v-centered f-s-n">
+                    <img src="assets/icon/posts/post-details/fav.svg"/>
+                    <ion-text>Favorite</ion-text>
+                </div>
+            </ion-col>
+
+            <ion-col (click)="share()">
+                <div class="h-v-centered f-s-n">
+                    <img src="assets/icon/posts/post-details/share.svg"/>
+                    <ion-text>Share</ion-text>
+                </div>
+            </ion-col>
+
+            <ion-col (click)="notes()">
+                <div class="h-v-centered f-s-n">
+                    <img src="assets/icon/posts/post-details/notify.svg"/>
+                    <ion-text>Notes</ion-text>
+                </div>
+            </ion-col>
+
+            <ion-col (click)="notify()">
+                <div class="h-v-centered f-s-n">
+                    <img src="assets/icon/posts/post-details/notify.svg"/>
+                    <ion-text>Notify</ion-text>
+                </div>
+            </ion-col>
+        </ion-row>
+        
+    </div>
+
+
+
+
+        </div>
+    </ion-list>
+
+
+   </div>
 </ion-content>

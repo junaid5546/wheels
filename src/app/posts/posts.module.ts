@@ -4,18 +4,17 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { AppSharedModule } from '../Components/Shared/shared.module';
 import { PostsPageRoutingModule } from './posts-routing.module';
-import { SwiperModule } from "swiper/angular";
 import { PostsPage } from './posts.page';
 import { FiltersComponent } from '../Models/filters/filters.component';
-
+import { SwiperModule } from "swiper/angular";
 @NgModule({
   imports: [
     AppSharedModule,
     CommonModule,
     FormsModule,
     IonicModule,
-    SwiperModule,
-    PostsPageRoutingModule
+    PostsPageRoutingModule,
+    SwiperModule
   ],
   declarations: [PostsPage,FiltersComponent]
   

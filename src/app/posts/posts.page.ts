@@ -1,18 +1,15 @@
 import { Component, Input, OnInit, AfterViewInit,ViewChild,ElementRef } from '@angular/core';
-import { DeviceInfoService  } from '../Services/device-info.service'; 
-import SwiperCore, { Pagination } from "swiper";
+import { DeviceInfoService  } from '../Services/device-info.service';
 import {  ModalControllerService } from '../Services/modal-controller.service';
 import { FiltersComponent } from '../Models/filters/filters.component';
 import { Router } from '@angular/router';
-
-
-SwiperCore.use([Pagination]);
+import { NavController } from '@ionic/angular'; 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.page.html',
   styleUrls: ['./posts.page.scss'],
 })
-export class PostsPage implements OnInit,AfterViewInit {
+export class PostsPage implements OnInit {
 
   items:any[] = [];
   sortBy:any[] = [
@@ -38,7 +35,7 @@ export class PostsPage implements OnInit,AfterViewInit {
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Vehicles for Sale Inventory', has_sub_heading:false, sub_heading_name:''};
-  constructor(private deviceInfo:DeviceInfoService, private modelCtrl:ModalControllerService, private router:Router) { }
+  constructor(private deviceInfo:DeviceInfoService, private modelCtrl:ModalControllerService, private router:Router, private nav:NavController) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -99,7 +96,7 @@ export class PostsPage implements OnInit,AfterViewInit {
 
 
   navigatePostDetails(item:any) {
-    this.router.navigate(['posts/post-details'])
+    this.router.navigate(['tabs/posts/post-details']);
   }
 
 

@@ -9,10 +9,12 @@ const routes: Routes = [
     children: [
       {
         path: 'tab1',
+        data: { animation: 'posts' } ,
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
         path: 'tab2',
+        data: { animation: 'post-details' } ,
         loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
       },
       {
@@ -21,7 +23,11 @@ const routes: Routes = [
       },
       {
         path: 'posts',
-        loadChildren:() => import('../posts/posts.module').then(m => m.PostsPageModule)
+        loadChildren: () => import('../posts/posts.module').then(m => m.PostsPageModule)
+      },
+      {
+        path: 'post-details',
+        loadChildren: () => import('../posts/post-details/post-details.module').then( m => m.PostDetailsPageModule)
       },
       {
         path: '',
@@ -40,4 +46,4 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
 })
-export class TabsPageRoutingModule {}
+export class TabsPageRoutingModule { }

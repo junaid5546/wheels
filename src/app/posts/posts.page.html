@@ -1,10 +1,9 @@
-<app-header [heading]="heading"
-             [icons]="icons"
-            goBack="false"
-            ></app-header>
 
+ <app-header [heading]="heading"
+ [icons]="icons"
+goBack="false"
+></app-header>
 <ion-content>
- 
 
   <!--top heading-->
   <div class="top-heading">
@@ -59,8 +58,7 @@
 
   <!--Car item-->
     
-      <ion-card   class="item-container-posts"  *ngFor="let item of items">
-        
+      <ion-card   class="item-container-posts"    *ngFor="let item of items">
         <!--top-->
         <div (click)="navigatePostDetails(item)" class="top">
            <swiper
@@ -97,38 +95,38 @@
           
           <div class="chips">
             <div class="chip h-v-centered">
-                <ion-icon src="../../assets/icon/posts/Phone/km.svg" ></ion-icon>
+                <ion-icon src="assets/icon/posts/km.svg" ></ion-icon>
                <ion-text>{{item.distance}}</ion-text>
               </div>
   
   
               <div class="chip h-v-centered">
-                <ion-icon src="../../assets/icon/posts/Odometer.svg"></ion-icon>
+                <ion-icon src="assets/icon/posts/Odometer.svg"></ion-icon>
                 <ion-text>
                   {{item.location}}
                 </ion-text>
               </div>
   
               <div class="chip  price">
-                <ion-icon src="../../assets/icon/posts/Phone/omr.svg"></ion-icon>
+                <ion-icon src="assets/icon/posts/omr.svg"></ion-icon>
                 <ion-text> {{item.price}}</ion-text>
               </div>
             </div>
 
             <div class="chips no-border">
               <div class="chip" (click)="share()">
-                  <ion-icon src="../../assets/icon/posts/Phone/share.svg" ></ion-icon>
+                  <ion-icon src="assets/icon/posts/share.svg" ></ion-icon>
                   <ion-label>Share</ion-label>
                 </div>
     
     
                 <div class="chip" (click)="notify()">
-                  <ion-icon src="../../assets/icon/posts/Phone/notify.svg"></ion-icon>
+                  <ion-icon src="assets/icon/posts/notify.svg"></ion-icon>
                   <ion-label>Notify</ion-label>
                 </div>
     
                 <div class="chip" (click)="fav()">
-                  <ion-icon src="../../assets/icon/posts/Phone/fav.svg"></ion-icon>
+                  <ion-icon src="assets/icon/posts/fav.svg"></ion-icon>
                   <ion-label>Favorite</ion-label>
                 </div>
               </div>
