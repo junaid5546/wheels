@@ -78,3 +78,11 @@ ion-input .native-input[disabled].sc-ion-input-ios {
   height: 90% !important;
   margin-bottom: calc(4px + env(safe-area-inset-top));
 }
+
+.register-content{
+  padding-bottom: calc(20px + env(safe-area-inset-top));
+}
+
+.login-content{
+  padding-bottom: calc(20px + env(safe-area-inset-top));
+}
