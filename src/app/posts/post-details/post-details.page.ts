@@ -10,13 +10,28 @@ import { DeviceInfoService } from 'src/app/Services/device-info.service';
 })
 export class PostDetailsPage implements OnInit,AfterViewInit {
 
-  private animation?: Animation;
-private gesture?: Gesture;
 
-private started: boolean = false;
-private initialStep: number = 0;
-private MAX_TRANSLATE: number = 400;
 
+  items:any[] = [
+    {key:'Condition',value:'New'},
+    {key:'Exterior Color', value:'Red'},
+    {key:'Cylinder Count', value:'6'},
+    {key:'Fuel',value:'Patrol'},
+    {key:'Transmission', value:'Automatic'},
+    {key:'Drivetrain', value:'Front Wheel Drive'},
+    {key:'Interior Color', value:'Black'},
+    {key:'Seats', value:'Leather'},
+    {key:'Origin', value:'Imported'},
+    {key:'Governorate', value:'Muscat'},
+    {key:'State', value:'Bosher'},
+    {key:'Warranty Duration', value:'4 Years & 06 Months'},
+    {key:'Warranty Kilometers', value:'100,000KM'},
+    {key:'Insurance', value:'Full coverage'},
+    {key:'Plate Type', value:'Personal'},
+    {key:'Driving Readliness', value:'Ready for Driving'},
+    {key:'Sale Type', value:'For sale only'},
+    {key:'Distance Travelled', value:"0 KM"}
+  ];
 
   @ViewChild(IonContent,{read:ElementRef}) content: ElementRef;
   @Input() forwardTo:string = null;

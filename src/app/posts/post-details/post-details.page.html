@@ -66,7 +66,7 @@
     <ion-list>
         <ion-grid>
             <ion-row>
-            <ion-col size="12" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1]; let i=index">
+            <ion-col size="12" *ngFor="let item of items; let i=index">
                 <div class="list-item" [ngClass]="{'list-item': true, 'color': i%2==0 }">
                 <ion-col size="6" class="left-col">
                 <div class="icon-label-container">
@@ -76,13 +76,13 @@
                 </div>
 
                 <div class="label">
-                    <ion-label>Condition</ion-label>
+                    <ion-label class="dm-value">{{item.key}}</ion-label>
                 </div>
 
                 </div>
                 </ion-col>
                 <ion-col class="item-value" size="6">
-                    <ion-label>New</ion-label>
+                    <ion-label class="dm-value">{{item.value}}</ion-label>
                 </ion-col>
             </div>
             </ion-col>
@@ -94,7 +94,7 @@
     <ion-list>
         <ion-list-header>
             <div class="list-header-container">
-            <ion-label>Vehicle Features</ion-label>
+            <ion-label class="dm-heading">Vehicle Features</ion-label>
         </div>
             </ion-list-header>
         <ion-grid>
@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="label">
-                    <ion-label>Blind spot monitor</ion-label>
+                    <ion-label class="dm-value">Blind spot monitor</ion-label>
                 </div>
 
                 </div>
@@ -124,18 +124,36 @@
     <ion-list>
         <ion-list-header>
             <div class="list-header-container">
-            <ion-label>Seller Notes</ion-label>
+            <ion-label class="dm-heading" >Seller Notes</ion-label>
         </div>
             </ion-list-header>
 
             <ion-row>
                 <ion-col>
                     <div class="seller-notes">
-                        <ion-label>Great condition, dealership smell, 
+                        <ion-label class="dm-value">Great condition, dealership smell, 
                             new tires.</ion-label>
                     </div>
                 </ion-col>
             </ion-row>
     </ion-list>
+
+    <ion-list>
+        <ion-grid>
+            <ion-row class="person-info-row">
+                <ion-col size="4" class="person-col">
+                    <div class="person-icon"></div>
+                </ion-col>
+                <ion-col class="contact-info" size="8">
+                    <div class="contact-info-inner">
+                    <ion-label class="dm-heading">AA Dealership</ion-label>
+                    <ion-label class="dm-sub-heading">Alkhuwair, Bousher, Muscat</ion-label>
+                    <ion-label class="dm-sub-heading">45 Ads</ion-label>
+                </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
+
    </div>
 </ion-content>

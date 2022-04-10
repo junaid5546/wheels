@@ -47,9 +47,10 @@ ion-content{
         justify-content: space-between;
         .icon{
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            flex: .3;
+            //flex: .3;
+            padding-right: 4%;
         }
         .label{
             flex: 1.1;
@@ -73,7 +74,7 @@ ion-list-header{
         flex: 1;
         ion-label{
             padding: 3px 8px 3px 8px;
-    border-bottom: 1px solid #00000042;
+    border-bottom: 1px solid #0000000f;
     color: #0091E2;
         }
     }
@@ -111,4 +112,41 @@ ion-list-header{
 
 .no-border{
     border: 0px !important;
+}
+
+.dm-value{
+    font-size: var(--dm-value);
+    letter-spacing: var(--dm-letter-spacing);
+}
+.dm-heading{
+    font-size: var(--dm-heading);
+    letter-spacing: var(--dm-letter-spacing);
+    font-weight: var(--dm-heading-weight);
+}
+
+.person-info-row{
+    background: rgba(233, 232, 232, 0.4);
+    border-radius: 5px;
+    .person-col{
+        justify-content: flex-start !important;
+        padding: 15px;
+    }
+    .contact-info{
+        justify-content: flex-start !important;
+        
+        .contact-info-inner{
+            flex-direction: column;
+            display: flex;
+            
+        }
+    }
+    .person-icon{
+        height: 80px;
+        width: 80px;
+        background: rgba(132, 132, 132, 0.4);
+        border-radius: 100px;
+        border: 2px solid;
+        border-color: var(--dm-image-border-color);
+      
+    }
 }

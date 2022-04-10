@@ -3,6 +3,15 @@
 
 /** Ionic CSS Variables **/
 :root {
+
+  /** font-size **/
+  --dm-value:clamp(.8rem,1.4vw,5rem);
+  --dm-letter-spacing:1px;
+  --dm-heading:clamp(1rem,1.4vw,5rem);
+  --dm-heading-weight:500;
+  --dm-sub-heading-weight:300;
+  --dm-image-border-color:#01A7B5;
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;

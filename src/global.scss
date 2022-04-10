@@ -100,3 +100,15 @@ ion-content {
    display: none;
  }
  }
+
+ .dm-heading{
+   font-size: var(--dm-value);
+   font-weight: var(--dm-heading);
+   letter-spacing: var(--dm-letter-spacing);
+ }
+
+ .dm-sub-heading{
+   font-size: var(--dm-value);
+   font-weight: var(--dm-sub-heading-weight);
+   letter-spacing: var(--dm-letter-spacing);
+ }

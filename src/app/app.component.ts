@@ -25,7 +25,7 @@ export class AppComponent  implements OnInit  {
 
   initializeApp() {
     
-  this.router.navigate(['posts'])
+  this.router.navigate(['tabs/posts/post-details'])
     this.platform.ready().then(() => {
       
       // SETTING DEVICE HEIGHT AND WIDTH
