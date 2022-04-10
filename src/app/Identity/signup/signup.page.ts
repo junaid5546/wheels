@@ -1,4 +1,4 @@
-import { Component, OnInit ,ViewChild} from '@angular/core';
+import { Component, OnInit ,ViewChild,AfterViewInit} from '@angular/core';
 import { IonSlides } from '@ionic/angular';
 
 @Component({
@@ -6,7 +6,7 @@ import { IonSlides } from '@ionic/angular';
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
 })
-export class SignupPage implements OnInit {
+export class SignupPage implements OnInit,AfterViewInit {
 
   
 slidesIndex:number = 0;
@@ -24,9 +24,22 @@ heading = {has_main_heading:true, main_heading_name:'Register', has_sub_heading:
 @ViewChild('slides', {static: true}) slides: IonSlides;
  constructor() { }
 
-  ngOnInit() {
-    this.slides.lockSwipes(true);
+
+  ngAfterViewInit() {
+    const canvas = <HTMLCanvasElement> document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    for (var i = 0; i < 180; i++) {
+      ctx.fillRect(i * 10, i * 10, 10, 10);
+    }
   }
+
+  ngOnInit() {
+    //this.slides.lockSwipes(true);
+
+   
+  }
+
+
 
   slideChanged(ev) {
 

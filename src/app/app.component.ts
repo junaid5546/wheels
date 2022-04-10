@@ -24,7 +24,8 @@ export class AppComponent  implements OnInit  {
   }
 
   initializeApp() {
-    this.router.navigate(['signup'])
+    
+  this.router.navigate(['posts'])
     this.platform.ready().then(() => {
       
       // SETTING DEVICE HEIGHT AND WIDTH

@@ -63,5 +63,79 @@
     </ion-list>
 
 
+    <ion-list>
+        <ion-grid>
+            <ion-row>
+            <ion-col size="12" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1]; let i=index">
+                <div class="list-item" [ngClass]="{'list-item': true, 'color': i%2==0 }">
+                <ion-col size="6" class="left-col">
+                <div class="icon-label-container">
+
+                    <div class="icon">
+                    <ion-icon name="flower-outline"></ion-icon>
+                </div>
+
+                <div class="label">
+                    <ion-label>Condition</ion-label>
+                </div>
+
+                </div>
+                </ion-col>
+                <ion-col class="item-value" size="6">
+                    <ion-label>New</ion-label>
+                </ion-col>
+            </div>
+            </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
+
+
+    <ion-list>
+        <ion-list-header>
+            <div class="list-header-container">
+            <ion-label>Vehicle Features</ion-label>
+        </div>
+            </ion-list-header>
+        <ion-grid>
+            <ion-row>
+            <ion-col  size="6" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
+                <div class="list-item" [ngClass]="{'list-item': true,'no-color':true}">
+                <ion-col size="12" class="left-col no-border">
+                <div class="icon-label-container">
+
+                    <div class="icon">
+                    <ion-icon name="flower-outline"></ion-icon>
+                </div>
+
+                <div class="label">
+                    <ion-label>Blind spot monitor</ion-label>
+                </div>
+
+                </div>
+                </ion-col>
+            </div>
+            </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
+
+
+    <ion-list>
+        <ion-list-header>
+            <div class="list-header-container">
+            <ion-label>Seller Notes</ion-label>
+        </div>
+            </ion-list-header>
+
+            <ion-row>
+                <ion-col>
+                    <div class="seller-notes">
+                        <ion-label>Great condition, dealership smell, 
+                            new tires.</ion-label>
+                    </div>
+                </ion-col>
+            </ion-row>
+    </ion-list>
    </div>
 </ion-content>

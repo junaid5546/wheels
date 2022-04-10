@@ -86,3 +86,17 @@ ion-input .native-input[disabled].sc-ion-input-ios {
 .login-content{
   padding-bottom: calc(20px + env(safe-area-inset-top));
 }
+
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+display: none;
+}
+
+ion-content {
+ --offset-bottom: auto!important;
+ --overflow: hidden;
+ overflow: auto;
+ &::-webkit-scrollbar {
+   display: none;
+ }
+ }

@@ -29,3 +29,86 @@ ion-content{
         }
     }
 }
+
+.list-item{
+    display: flex;
+    flex: 1;
+    background: rgba(233, 232, 232, 0.4);
+    border-radius: 5px;
+    padding: 5px 0 5px 0;
+    .left-col{
+        border-right: 1px solid #0000000a;
+        color: #494949;
+    }
+    .icon-label-container{
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: space-between;
+        .icon{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: .3;
+        }
+        .label{
+            flex: 1.1;
+            justify-content: flex-start;
+            align-items: center;
+            display: flex;
+        }
+    }
+}
+
+ion-list-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    .list-header-container{
+        //background: pink;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+        ion-label{
+            padding: 3px 8px 3px 8px;
+    border-bottom: 1px solid #00000042;
+    color: #0091E2;
+        }
+    }
+}
+
+.seller-notes{
+    display: flex;
+    flex: 1;
+    padding: 5px;
+    background: rgba(233, 232, 232, 0.4);
+    border-radius: 5px;
+    ion-label{
+        padding: 3px;
+        color: #494949;
+    }
+}
+
+.item-value{
+    display: flex !important;
+    justify-content: flex-start !important;
+    ion-label{
+        padding-left: 5px;
+        color: #494949 !important;
+        font-weight: 600;
+    }
+}
+
+.color{
+    background: #DEDEDE !important;
+}
+
+.no-color{
+    background: transparent !important;
+}
+
+.no-border{
+    border: 0px !important;
+}
