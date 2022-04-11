@@ -45,7 +45,7 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
   // MAIN HEADING/SUBHEADING.
   @Input() heading = {has_main_heading:true, main_heading_name:'Toyota Avalon XLS 2021 New', has_sub_heading:false, sub_heading_name:''};
 
-  constructor(private gestureCtrl: GestureController, private router:Router, private deviceInfo:DeviceInfoService, private nav:NavController) {
+  constructor(private gestureCtrl: GestureController, private router:Router, public deviceInfo:DeviceInfoService, private nav:NavController) {
 
     
    }

@@ -1,6 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
+import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +16,7 @@ export class DeviceInfoService {
  
  private borderHeightPercentage = 12; // PERCENTAGE
   render:Renderer2;
-  constructor(private renderFactory:RendererFactory2, @Inject(DOCUMENT) private document:Document, private translate: TranslateService) {
+  constructor(private renderFactory:RendererFactory2, @Inject(DOCUMENT) private document:Document, private translate: TranslateService, private socialSharing: SocialSharing,private callNumber: CallNumber) {
     this.render = this.renderFactory.createRenderer(null,null);
    }
 
@@ -102,5 +104,38 @@ export class DeviceInfoService {
   isArray(input:any) {
    return  Array.isArray(input);
   }
+
+  socialShare(){
+    let options = {
+      message: '', // not supported on some apps (Facebook, Instagram)
+      subject: '', // fi. for email
+      files: ['', ''], // an array of filenames either locally or remotely
+      url: '',
+      chooserTitle: 'Pick an app', // Android only, you can override the default share sheet title
+      appPackageName: '', // Android only, you can provide id of the App you want to share with
+      iPadCoordinates: '0,0,0,0' // IOS only iPadCoordinates for where the popover should be point.  Format with x,y,width,height
+    };
+    this.socialSharing.shareWithOptions(options)
+  }
+
+  shareSms(){
+    this.socialSharing.shareViaSMS('Hello World','21')
+    .then((res=>{
+      console.log(res);
+    }))
+  }
+
+  shareWhatsapp(){
+    this.socialSharing.shareViaWhatsApp('Hello')
+    .then((res=>{
+      console.log("Hello");
+    }))
+  }
+
+
+  callTheNumber(){
+    this.callNumber.callNumber('9702222222',true);
+  }
+
   
 }

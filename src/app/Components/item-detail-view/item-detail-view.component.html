@@ -1,0 +1,56 @@
+
+  <div class="item-container" slot="fixed">
+    <div class="container-image">
+      <ion-slides>
+        <ion-slide>
+          <ion-img src="assets/images/New-Car-Launches-In-January-2021-1000x600.jpeg"></ion-img>
+        </ion-slide>
+  
+        <ion-slide>
+          <ion-img src="assets/images/New-Car-Launches-In-January-2021-1000x600.jpeg"></ion-img>
+        </ion-slide>
+  
+        <ion-slide>
+          <ion-img src="assets/images/New-Car-Launches-In-January-2021-1000x600.jpeg"></ion-img>
+        </ion-slide>
+  
+      </ion-slides>
+    </div>
+  
+    <div class="fsnn-container">
+      <ion-row>
+  <!---
+     
+        <ion-col>
+          <div class="h-v-centered f-s-n">
+            <img src="assets/icon/posts/post-details/fav.svg" />
+            <ion-text>Favorite</ion-text>
+          </div>
+        </ion-col>
+  -->
+        <ion-col>
+          <div class="h-v-centered f-s-n" (click)="this.deviceInfo.socialShare()">
+            <img src="assets/icon/posts/post-details/share.svg" />
+            <ion-text>Share</ion-text>
+          </div>
+        </ion-col>
+  <!---
+        <ion-col>
+          <div class="h-v-centered f-s-n">
+            <img src="assets/icon/posts/post-details/notify.svg" />
+            <ion-text>Notes</ion-text>
+          </div>
+        </ion-col>
+  
+        <ion-col>
+          <div class="h-v-centered f-s-n">
+            <img src="assets/icon/posts/post-details/notify.svg" />
+            <ion-text>Notify</ion-text>
+          </div>
+        </ion-col>
+  -->
+      </ion-row>
+  
+    </div>
+  
+  </div>

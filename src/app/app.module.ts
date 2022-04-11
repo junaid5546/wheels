@@ -13,6 +13,9 @@ import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
 import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
 import { SwiperModule } from "swiper/angular";
+import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
+import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
+
 Injectable()
 export function setTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +36,13 @@ export function setTranslateLoader(http: HttpClient) {
     }
   }),
     BrowserAnimationsModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },Diagnostic,OpenNativeSettings,FilePath,WebView],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Diagnostic,
+    OpenNativeSettings,
+    FilePath,
+    WebView,
+    CallNumber,
+    SocialSharing],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

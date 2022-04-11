@@ -1,67 +1,11 @@
 
+  <app-header [heading]="heading"
+  [icons]="icons"
+  goBack="true"></app-header>
+ 
+<ion-content>  
 
-<ion-content #content scrollY="false">  
-
-    <app-header [heading]="heading"
-    [icons]="icons"
-    goBack="true"
-   ></app-header>
-
-   <div class="main-container-post-details">
-
-    <ion-list>
-       <div class="item-container">
-           <div class="container-image">
-          <ion-img src="assets/images/New-Car-Launches-In-January-2021-1000x600.jpeg"></ion-img>
-        </div>
-
-        <!--
-            nav bar for 
-            favorite
-            share
-            notes
-            notify
-        -->
-        <div class="fsnn-container">
-
-        <ion-row>
-            <ion-col (click)="fav()">
-                <div class="h-v-centered f-s-n">
-                    <img src="assets/icon/posts/post-details/fav.svg"/>
-                    <ion-text>Favorite</ion-text>
-                </div>
-            </ion-col>
-
-            <ion-col (click)="share()">
-                <div class="h-v-centered f-s-n">
-                    <img src="assets/icon/posts/post-details/share.svg"/>
-                    <ion-text>Share</ion-text>
-                </div>
-            </ion-col>
-
-            <ion-col (click)="notes()">
-                <div class="h-v-centered f-s-n">
-                    <img src="assets/icon/posts/post-details/notify.svg"/>
-                    <ion-text>Notes</ion-text>
-                </div>
-            </ion-col>
-
-            <ion-col (click)="notify()">
-                <div class="h-v-centered f-s-n">
-                    <img src="assets/icon/posts/post-details/notify.svg"/>
-                    <ion-text>Notify</ion-text>
-                </div>
-            </ion-col>
-        </ion-row>
-        
-    </div>
-
-
-
-
-        </div>
-    </ion-list>
-
+       <app-item-detail-view></app-item-detail-view>
 
     <ion-list>
         <ion-grid>
@@ -141,9 +85,8 @@
     <ion-list>
         <ion-grid>
             <ion-row class="person-info-row">
-                <ion-col size="4" class="person-col">
                     <div class="person-icon"></div>
-                </ion-col>
+              
                 <ion-col class="contact-info" size="8">
                     <div class="contact-info-inner">
                     <ion-label class="dm-heading">AA Dealership</ion-label>
@@ -155,5 +98,28 @@
         </ion-grid>
     </ion-list>
 
-   </div>
+
+    <ion-list class="bottom-buttons-list" >
+        <div class="whatsapp bottom-buttons-container" (click)="this.deviceInfo.shareWhatsapp()">
+            <div class="item-icon">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+            </div>
+            <div class="whatsapp-label">
+                <ion-label>WhatsApp</ion-label>
+            </div>
+        </div>
+        <div class="message bottom-buttons-container" (click)="this.deviceInfo.shareSms()">
+            <div class="item-icon"><ion-icon name="chatbubble-outline"></ion-icon></div>
+            <div class="message-label">
+                <ion-label>Message</ion-label>
+            </div>
+        </div>
+        <div class="call bottom-buttons-container" (click)="this.deviceInfo.callTheNumber()">
+            <div class="item-icon"><ion-icon name="call-outline"></ion-icon></div>
+            <div class="call-label">
+                <ion-label>Call</ion-label>
+            </div>
+        </div>
+    </ion-list>
+
 </ion-content>
