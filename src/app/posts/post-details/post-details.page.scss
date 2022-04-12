@@ -1,4 +1,5 @@
 ion-content{
+    //overflow-y: hidden;
     --background:white;
     .main-container-post-details{
         background: white;
@@ -174,4 +175,8 @@ ion-list-header{
 
 .bottom-buttons-list{
     display: flex;
+}
+
+.mySwiperVertical{
+    flex-direction: column;
 }

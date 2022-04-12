@@ -8,9 +8,10 @@ import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
 import { HttpClient } from "@angular/common/http";
 import { setTranslateLoader } from "../../app.module";
 import * as COMPONENT from ".";
-
+import { SwiperModule } from 'swiper/angular';
 @NgModule({
     imports: [
+      SwiperModule,
       CommonModule,
       RouterModule,
       IonicModule,
@@ -27,14 +28,18 @@ import * as COMPONENT from ".";
     declarations: [COMPONENT.HeaderComponent,
                    COMPONENT.VerticalListComponent,
                     COMPONENT.AskPermissionComponent,
+                    COMPONENT.ImagePreviewComponent,
                     COMPONENT.PostItemSkeletonComponent]
                     ,
     entryComponents: [COMPONENT.HeaderComponent,
                       COMPONENT.VerticalListComponent,
                       COMPONENT.AskPermissionComponent,
+                      COMPONENT.ImagePreviewComponent,
                       COMPONENT.PostItemSkeletonComponent],
 
-    exports: [COMPONENT.HeaderComponent, COMPONENT.AskPermissionComponent,
+    exports: [COMPONENT.HeaderComponent,
+              COMPONENT.ImagePreviewComponent,
+              COMPONENT.AskPermissionComponent,
               COMPONENT.VerticalListComponent,
               COMPONENT.PostItemSkeletonComponent]
 

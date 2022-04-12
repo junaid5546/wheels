@@ -111,4 +111,8 @@ export class PostsPage implements OnInit {
   fav(){
     console.log("FAV");
   }
+
+  showFilters() {
+    this.router.navigate(['filter'])
+  }
 }

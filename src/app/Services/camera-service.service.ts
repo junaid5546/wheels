@@ -4,6 +4,7 @@ import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
 import { PermissionsService } from './permissions.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -69,8 +70,6 @@ export class CameraServiceService {
       }
       
   }
-  
-  
 
 
 

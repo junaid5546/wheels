@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
+import { SwiperModule } from "swiper/angular";
 import { PostDetailsPageRoutingModule } from './post-details-routing.module';
 
 import { PostDetailsPage } from './post-details.page';
@@ -12,6 +12,7 @@ import { ItemDetailViewComponent } from 'src/app/Components/item-detail-view/ite
 
 @NgModule({
   imports: [
+    SwiperModule,
     CommonModule,
     AppSharedModule,
     FormsModule,

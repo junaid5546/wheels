@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="backPress()">
+      <ion-back-button defaultHref="tabs/posts/post-details" text="Back" ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+        <ion-content>
+          
+          
+
+          <div class="swiper">
+          <swiper #Swiper style="--swiper-navigation-color: rgb(32, 129, 21);--swiper-pagination-color: #fff"
+          [config]="config"
+          (swiper)="onSwiper($event)"
+          (slideChange)="onSlideChange()"
+        >
+          <ng-template *ngFor="let item of dataArray" swiperSlide >
+            <img [src]="item.name"/>
+          </ng-template>
+        </swiper>
+      </div>
+      </ion-content>
+
+     

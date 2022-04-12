@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { BehaviorSubject } from "rxjs";
 import { CarInfoModalComponent } from '../Models/car-info-modal/car-info-modal.component';
 import { FiltersComponent } from '../Models/filters/filters.component';
+import { ImagePreviewComponent } from '../Models/image-preview/image-preview.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -221,6 +222,14 @@ export class ModalControllerService {
     return this.currentObject.asObservable();
   }
 
+async presentImagePreviewModal(imagesArray){
+const modal = await this.modalController.create({
+  component:ImagePreviewComponent,
+  cssClass: 'image-preview',
+  componentProps:{"dataArray":imagesArray},
+});
+return await modal.present();
+}
 
 
   async presentSheetModal(component,arr) {
@@ -277,4 +286,8 @@ export class ModalControllerService {
     }
   }
 
+
+  dismissImagePreviewModal(){
+    this.modalController.dismiss();
+  }
 }

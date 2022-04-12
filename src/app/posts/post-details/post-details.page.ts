@@ -3,13 +3,18 @@ import { Gesture, GestureController, IonContent } from '@ionic/angular';
 import { Router } from "@angular/router";
 import { NavController  } from '@ionic/angular';
 import { DeviceInfoService } from 'src/app/Services/device-info.service'; 
+import { SwiperComponent } from "swiper/angular";
+
+// import Swiper core and required modules
+import SwiperCore, { FreeMode, Scrollbar, Mousewheel } from "swiper";
+SwiperCore.use([FreeMode, Scrollbar, Mousewheel]);
 @Component({
   selector: 'app-post-details',
   templateUrl: './post-details.page.html',
   styleUrls: ['./post-details.page.scss'],
 })
 export class PostDetailsPage implements OnInit,AfterViewInit {
-
+  
 
 
   items:any[] = [
@@ -110,4 +115,6 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
 
    share(){}
    notes(){}
+
+   
 }

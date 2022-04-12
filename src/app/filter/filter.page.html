@@ -1,0 +1,17 @@
+<app-header [heading]="heading"
+[icons]="icons"
+goBack="false"
+></app-header>
+
+<ion-content>
+
+  <div class="left-right-container">
+  <div class="left">
+    <ion-list class="left">
+      <ion-label *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]; let i=index">Test001{{i}}</ion-label>
+    </ion-list>
+  </div>
+
+  <div class="right"></div>
+</div>
+</ion-content>

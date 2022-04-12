@@ -1,0 +1,30 @@
+.left-right-container{
+    display: flex;
+    flex-direction: row;
+    background: orange;
+    flex: 1;
+    height: 100%;
+
+    .left{
+        height: 100%;
+    display: flex;
+    flex: .3;
+    flex-direction: column;
+    background: purple;
+    position: fixed;
+    width: 30%;
+    overflow-y: scroll;
+    ion-label{
+        padding-top: 10px;
+        padding-bottom: 10px;
+        background: orange;
+        margin: 5px;
+    }
+    }
+
+    .right{
+        display: flex;
+        flex: 1;
+        background: pink;
+    }
+}
