@@ -3,15 +3,122 @@
 goBack="false"
 ></app-header>
 
-<ion-content>
+<ion-content scrollEvents="false" scrollY="false">
 
   <div class="left-right-container">
   <div class="left">
     <ion-list class="left">
-      <ion-label *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]; let i=index">Test001{{i}}</ion-label>
+      <div (click)="selectedItem(i)" [ngClass]="{'selected-filter-left-label': item.selected==true, 'filter-left-label':item.selected==false}"  class="item-container" *ngFor="let item of filters; let i=index">
+      <div class="inner-item-container">
+        <ion-label>{{item.name}}</ion-label>
+        <div class="count" *ngIf="item.result.count != 0">
+        <ion-label>{{item.result.count}}</ion-label>
+      </div>
+      </div>
+    </div>
     </ion-list>
   </div>
 
-  <div class="right"></div>
+  <div class="right">
+    <ion-searchbar placeholder="make model or trim" showCancelButton="focus"></ion-searchbar>
+     <ion-list>
+      <!-- Basic -->
+<ion-accordion-group>
+  <ion-accordion value="colors">
+    <ion-item slot="header">
+      <mat-checkbox class="example-margin"
+                        [checked]="allComplete"
+                        [color]="task.color"
+                        [indeterminate]="someComplete()"
+                        (change)="setAll($event.checked)">
+          </mat-checkbox>
+      <ion-label>Nissan</ion-label>
+    </ion-item>
+
+    <ion-list slot="content">
+      
+      
+      <section class="example-section">
+        <span class="example-list-section">
+          
+        </span>
+        <span class="example-list-section">
+          
+            <ion-item *ngFor="let subtask of task.subtasks" >
+              <mat-checkbox [(ngModel)]="subtask.completed"
+                            [color]="subtask.color"
+                            (ngModelChange)="updateAllComplete()">
+                {{subtask.name}}
+              </mat-checkbox>
+            </ion-item>
+        </span>
+      </section>
+
+    </ion-list>
+  </ion-accordion>
+  <ion-accordion value="shapes">
+    <ion-item slot="header">
+      <mat-checkbox class="example-margin"
+      [checked]="allComplete"
+      [color]="task.color"
+      [indeterminate]="someComplete()"
+      (change)="setAll($event.checked)">
+</mat-checkbox>
+      <ion-label>Toyota</ion-label>
+    </ion-item>
+
+    <ion-list slot="content">
+      <ion-item>
+        <ion-label>Circle</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Triangle</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Square</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-accordion>
+  <ion-accordion value="numbers">
+    <ion-item slot="header">
+      <mat-checkbox class="example-margin"
+      [checked]="allComplete"
+      [color]="task.color"
+      [indeterminate]="someComplete()"
+      (change)="setAll($event.checked)">
+</mat-checkbox>
+      <ion-label>Range Rover</ion-label>
+    </ion-item>
+
+    <ion-list slot="content">
+      <ion-item>
+        <ion-label>1</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>2</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>3</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-accordion>
+</ion-accordion-group>
+     </ion-list>
+    
+  </div>
 </div>
+
 </ion-content>
+
+<div class="bottom-button-container select-images-button">
+  <div class="bottom-button-inner">
+<div class="left-button-clear">
+  <ion-label>CLear All</ion-label>
+</div>
+<div class="right-button-apply-filters">
+  <div class="show-vehicle-button">
+    <ion-label>Show 1,100 Vehicle</ion-label>
+  </div>
+</div>
+</div>
+</div>
