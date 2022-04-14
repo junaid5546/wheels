@@ -28,7 +28,7 @@ goBack="false"
     <ion-item slot="header">
 <!----------------------------------------------MAKE ITEM STARTS---------------------------------------------------->
       <mat-checkbox class="example-margin make-class"
-                        [checked]="item.completed"
+                        [checked]="allMakeComplete"
                         [indeterminate]="allMakeComplete"
                         (change)="selectAllFromMake($event.checked)">
                         <ion-label>{{item.make.name}}</ion-label>
@@ -56,6 +56,7 @@ goBack="false"
     
         <ion-list slot="content">
           <section class="example-section">
+
             <span class="example-list-section">
               
             </span>
@@ -81,7 +82,6 @@ goBack="false"
 
 
 </ion-accordion-group>
-
 
 
 <section class="example-section">
