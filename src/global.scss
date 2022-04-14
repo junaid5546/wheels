@@ -119,3 +119,20 @@ ion-content {
  ion-toolbar{
    padding-top: 0px !important;
  }
+
+ .mat-checkbox-layout{
+  //background: pink; 
+  height: 100% !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+
+}
+
+.mat-checkbox-inner-container{
+  margin: 0 !important;
+}
+.mat-checkbox-label{
+  padding-left: 10px;
+}
