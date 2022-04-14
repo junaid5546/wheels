@@ -23,88 +23,89 @@ goBack="false"
     <ion-searchbar placeholder="make model or trim" showCancelButton="focus"></ion-searchbar>
 
    
-      <ion-accordion-group value="colors">
-  <ion-accordion  *ngFor="let item of items;let i=index">
-    <ion-item slot="header">
-<!----------------------------------------------MAKE ITEM STARTS---------------------------------------------------->
-      <mat-checkbox class="example-margin make-class"
-                        [checked]="allMakeComplete"
-                        [indeterminate]="allMakeComplete"
-                        (change)="selectAllFromMake($event.checked)">
-                        <ion-label>{{item.make.name}}</ion-label>
-          </mat-checkbox>
-          
-<!----------------------------------------------MAKE ITEM ENDS---------------------------------------------------->
-    </ion-item>
-    <ion-list slot="content">
-      
-      <ion-accordion-group multiple="true" value="models">
-
-      <ion-accordion *ngFor="let model of item.make.model; let modelIndex=index">
+    <ion-accordion-group value="colors">
+      <ion-accordion  *ngFor="let item of items;let i=index">
         <ion-item slot="header">
-<!----------------------------------------------MODELS ITEM STARTS---------------------------------------------------->
-          <mat-checkbox class="example-margin make-class model-class"
-                            [checked]="model.completed"
-                            
-                            [indeterminate]="ModelsomeComplete(i,modelIndex,model)"
-                            (change)="setModelAllTrims($event.checked,i,modelIndex,model)"
-                            >
-                            <ion-label class="model-label">{{model.name}}</ion-label>
+    <!----------------------------------------------MAKE ITEM STARTS---------------------------------------------------->
+          <mat-checkbox class="example-margin make-class"
+                            [checked]="item.completed"
+                            [indeterminate]="someComplete()"
+                            (change)="setAll($event.checked)">
+                            <ion-label>{{item.make.name}}</ion-label>
               </mat-checkbox>
-<!----------------------------------------------MODELS ITEM ENDS---------------------------------------------------->
-        </ion-item>
-    
-        <ion-list slot="content">
-          <section class="example-section">
-
-            <span class="example-list-section">
               
-            </span>
-            <span class="example-list-section">
-<!----------------------------------------------TRIMS ITEM STARTS---------------------------------------------------->              
-                <ion-item *ngFor="let trims of model.trim; let trimIndex=index" >
-                  <mat-checkbox 
-                                [(ngModel)]="trims.completed"
-                                [checked]="trims.completed"
-                                (ngModelChange)="updateAllModelComplete(i,modelIndex,trimIndex)">
-                    <ion-label class="trims-label">{{trims.name}}</ion-label>
-                  </mat-checkbox>
-                </ion-item>
-<!----------------------------------------------TRIMS ITEM ENDS---------------------------------------------------->
-            </span>
-          </section>
+    <!----------------------------------------------MAKE ITEM ENDS---------------------------------------------------->
+        </ion-item>
+        <ion-list slot="content">
+          
+          <ion-accordion-group multiple="true" value="models">
     
+          <ion-accordion *ngFor="let model of item.make.model; let modelIndex=index">
+            <ion-item slot="header">
+    <!----------------------------------------------MODELS ITEM STARTS---------------------------------------------------->
+              <mat-checkbox class="example-margin make-class model-class"
+                                [checked]="model.completed"
+                                [indeterminate]="ModelsomeComplete(i,modelIndex,model)"
+                                (ngModelChange)="updateAllComplete()"
+                                (change)="setModelAllTrims($event.checked,i,modelIndex,model)"
+                                >
+                                <ion-label class="model-label">{{model.name}}</ion-label>
+                  </mat-checkbox>
+    <!----------------------------------------------MODELS ITEM ENDS---------------------------------------------------->
+            </ion-item>
+        
+            <ion-list slot="content">
+              <section class="example-section">
+    
+                <span class="example-list-section">
+                  
+                </span>
+                <span class="example-list-section">
+    <!----------------------------------------------TRIMS ITEM STARTS---------------------------------------------------->              
+                    <ion-item *ngFor="let trims of model.trim; let trimIndex=index" >
+                      <mat-checkbox 
+                                    [(ngModel)]="trims.completed"
+                                    [checked]="trims.completed"
+                                    (ngModelChange)="updateAllModelComplete(i,modelIndex,trimIndex)">
+                        <ion-label class="trims-label">{{trims.name}}</ion-label>
+                      </mat-checkbox>
+                    </ion-item>
+    <!----------------------------------------------TRIMS ITEM ENDS---------------------------------------------------->
+                </span>
+              </section>
+        
+            </ion-list>
+          </ion-accordion>
+        </ion-accordion-group>
         </ion-list>
       </ion-accordion>
+    
+    
     </ion-accordion-group>
-    </ion-list>
-  </ion-accordion>
+    
+    
 
-
-</ion-accordion-group>
-
-
-<section class="example-section">
+<!-- <section class="example-section">
   <span class="example-list-section">
     <mat-checkbox class="example-margin"
                   [checked]="allComplete"
-                  [color]="task.color"
+                  [indeterminate]="someComplete()"
                   (change)="setAll($event.checked)">
       {{task.name}}
     </mat-checkbox>
   </span>
   <span class="example-list-section">
     <ul>
-      <li *ngFor="let subtask of task.subtasks">
-        <mat-checkbox [(ngModel)]="subtask.completed"
-                      [color]="subtask.color"
+      <li *ngFor="let subtask of items[0].make.model">
+        <mat-checkbox 
+                      [(ngModel)]="subtask.completed"
                       (ngModelChange)="updateAllComplete()">
           {{subtask.name}}
         </mat-checkbox>
       </li>
     </ul>
   </span>
-</section>
+</section> -->
 
   </div>
 </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { zip } from 'rxjs';
 export interface Task {
   name: string;
   completed: boolean;
@@ -174,12 +175,10 @@ export class FilterPage implements OnInit {
   }
 
   ModelsomeComplete(i,modelIndex,model):boolean{
-    this.counter++;
-    console.log('called model some complete times.' ,this.counter  );
-    let result = this.items[0].make.model[modelIndex].trim.filter(x=>x.completed).length;
-    console.log('Length of total completed trims:', result);
-    return false;
-    //return this.items[0].make.model[modelIndex].trim.filter(x=>x.completed).length < 0 && !this.allModelComplete;
+    //let result = this.items[0].make.model[modelIndex].trim.filter(x=>x.completed).length;
+    //console.log('Length of total completed trims:', result);
+    //return false;
+    return this.items[0].make.model[modelIndex].trim.filter(x=>x.completed).length < 0 && !this.allModelComplete;
   }
 
   setModelAllTrims(completed: boolean,i,modeli, model) {
@@ -215,37 +214,31 @@ export class FilterPage implements OnInit {
     console.log("Update all complete called--: ", this.allMakeComplete);
   }
 
-  updateAllModelComplete(makeIndex,modelIndex,trimIndex){
+  updateAllModelComplete(makeIndex,modelIndex,trimIndex) {
     this.items[makeIndex].make.model[modelIndex].trim[trimIndex].completed = true;
     this.allModelComplete = this.items[makeIndex].make.model[modelIndex].trim.every(x=>x.completed);
     console.log("All Model Complete: ", this.allModelComplete);
   }
 
 
-  //**     test   */
+  //**     test   */ 
 
   updateAllComplete() {
-    console.log("Update all complete called: ");
-    this.allComplete = this.task.subtasks != null && this.task.subtasks.every(t => t.completed == true);
-    console.log("Update all complete called: ", this.allComplete);
+    this.items[0].completed =  this.items[0].make.model.every(t => t.completed);
+    console.log("Every: ", this.allComplete);
   }
 
-  
+  someComplete(): boolean {
+    let result = this.items[0].make.model.filter(t=>t.completed).length > 0 && !this.items[0].completed;
+    console.log("Result",result);
+    return this.items[0].make.model.filter(t => t.completed).length > 0 && !this.items[0].completed;
+  }
 
   setAll(completed: boolean) {
-    console.log("setAll called: ");
-    this.allComplete = completed;
-    if (this.task.subtasks == null) {
-      return;
-    }
-    this.task.subtasks.forEach(t => (t.completed = completed));
-  }
-
-  selectAllFromMake(complete:boolean) {
-    console.log('Selecting all from Make');
-    this.allMakeComplete = complete;
-    this.items[0].make.model.forEach(t=>(t.completed = complete));
-    this.items[0].make.model.forEach(t=>t.trim.forEach(x=>x.completed = complete));
+    this.items[0].completed = true;
+    this.items[0].make.model.forEach(t => {t.completed = completed 
+      t.trim.forEach(x=>x.completed = completed)});
+    console.log("Checked All", this.items[0].make.model);
   }
 
  //*****     test   ****/
