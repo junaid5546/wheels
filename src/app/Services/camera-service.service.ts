@@ -48,13 +48,10 @@ export class CameraServiceService {
         console.log(e.message);
         switch (e.message) {
           case "Error loading image":
-            
+            break;
+            case "User cancelled photos app":
             break;
 
-            case "User cancelled photos app":
-            
-            break;
-        
           case "User denied access to photos":
             this.permission.askforPermission({
               'title:':'Gallery Access',

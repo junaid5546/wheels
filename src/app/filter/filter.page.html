@@ -54,7 +54,7 @@ goBack="false"
                                 [(ngModel)]="model.completed"
                                 [indeterminate]="ModelsomeComplete(i,modelIndex,model)"
                                 (ngModelChange)="updateAllComplete(i)"
-                                (change)="setModelAllTrims($event.checked,i,modelIndex,model)"
+                                (change)="setModelAllTrims($event.checked,i,modelIndex,model)" 
                                 >
                                 <ion-label class="model-label">{{model.name}}</ion-label>
                   </mat-checkbox>
@@ -74,6 +74,7 @@ goBack="false"
                                     [color]="trimCheckboxColor"
                                     [(ngModel)]="trims.completed"
                                     [checked]="trims.completed"
+                                    (change)="updateMake(i,modelIndex,trimIndex)"
                                     (ngModelChange)="updateAllModelComplete(i,modelIndex,trimIndex)">
                         <ion-label class="trims-label">{{trims.name}}</ion-label>
                       </mat-checkbox>

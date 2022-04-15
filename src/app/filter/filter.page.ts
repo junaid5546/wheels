@@ -198,7 +198,7 @@ export class FilterPage implements OnInit {
     //let result = this.items[0].make.model[modelIndex].trim.filter(x=>x.completed).length;
     //console.log('Length of total completed trims:', result);
     //return false;
-    return this.items[0].make.model[modelIndex].trim.filter(x=>x.completed).length < 0 && !this.allModelComplete;
+    return this.items[i].make.model[modelIndex].trim.filter(x=>x.completed).length > 0 && !this.items[i].make.model[modelIndex].completed;
   }
 
   setModelAllTrims(completed: boolean,i,modeli, model) {
@@ -234,12 +234,19 @@ export class FilterPage implements OnInit {
     console.log("Update all complete called--: ", this.allMakeComplete);
   }
 
-  updateAllModelComplete(makeIndex,modelIndex,trimIndex) {
-    this.items[makeIndex].make.model[modelIndex].trim[trimIndex].completed = true;
-    this.allModelComplete = this.items[makeIndex].make.model[modelIndex].trim.every(x=>x.completed);
+
+
+  updateAllModelComplete(makeIndex,modelIndex,trim) {
+   
+    this.items[makeIndex].make.model[modelIndex].completed = this.items[makeIndex].make.model[modelIndex].trim.every(x=>x.completed);
     console.log("All Model Complete: ", this.allModelComplete);
   }
 
+
+  someModelComplete(makeIndex:number,modelIndex:number){
+    let result = this.items[makeIndex].make.model.filter(x=>x.completed).length > 0 && !this.items[makeIndex].make.model[modelIndex].completed;
+    return result;
+  }
 
   //**     test   */ 
 
@@ -248,6 +255,7 @@ export class FilterPage implements OnInit {
     this.items[makeIndex].completed =  this.items[makeIndex].make.model.every(t => t.completed);
     console.log("Every: ", this.allComplete);
   }
+
 // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
   someComplete(makeIndex): boolean {
     let result = this.items[makeIndex].make.model.filter(t=>t.completed).length > 0 && !this.items[makeIndex].completed;
@@ -263,6 +271,9 @@ export class FilterPage implements OnInit {
     console.log("Checked All", this.items[makeIndex].make.model);
   }
 
+  updateMake(makeIndex,modelIndex,trimIndex){
+    this.items[makeIndex].completed = this.items[makeIndex].make.model.every(x=>x.completed) && this.items[makeIndex].make.model[modelIndex].trim.every(x=>x.completed);
+  }
  //*****     test   ****/
 
 
