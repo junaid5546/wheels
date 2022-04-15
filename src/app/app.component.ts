@@ -25,7 +25,7 @@ export class AppComponent  implements OnInit  {
 
   initializeApp() {
     
-  this.router.navigate(['filter'])
+  //this.router.navigate(['filter'])
     this.platform.ready().then(() => {
       
       // SETTING DEVICE HEIGHT AND WIDTH

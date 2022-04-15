@@ -27,12 +27,6 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Gallery access</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Allow DM to access gallery.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
