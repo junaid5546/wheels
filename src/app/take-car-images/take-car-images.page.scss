@@ -98,11 +98,12 @@ ion-content{
       display: none;
     }
     .inner-item{
-        position: relative;
-        display: flex;
-        flex-direction: row;
+      position: relative;
+      display: flex;
+      flex-direction: row-reverse;
+      height: 110px;
+      width: 100%;
    // background: pink;
-    height: 110px;
 
     .edition{
     //background: orange;
@@ -110,6 +111,7 @@ ion-content{
     flex-direction: column;
     justify-content: space-around;
     position: relative;
+    width: 25%;
     .edit{
         height: 25px;
         width: 25px;

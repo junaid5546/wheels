@@ -34,7 +34,9 @@ export interface Item {
 })
 export class FilterPage implements OnInit {
   counter =0;
-
+  makeCheckboxColor = "primary";
+  modelCheckboxColor = "primary";
+  trimCheckboxColor = "warn";
   task: Task = {
     name: 'Indeterminate',
     completed: false,
@@ -74,7 +76,7 @@ export class FilterPage implements OnInit {
           ],
         },
       },
-/*
+
       {
         completed: false,
         make: {
@@ -106,7 +108,25 @@ export class FilterPage implements OnInit {
             },
           ],
         },
-      }*/
+      },
+      {
+        completed: false,
+        make: {
+          name: 'Honda',
+          model: [
+            {
+              completed:false,
+              name: 'Civic',
+              trim: [{completed:false, name: 'GLI', body: ['j2ls2s2arerdd2', '21knwrtaasfbrasf23'] }],
+            },
+            {
+              completed:false,
+              name: 'City',
+              trim: [{completed:false, name: 'GLI', body: ['j2xl324b2regtxs2d2', '21kn2sdfasxc3'] }],
+            },
+          ],
+        },
+      },
     ];
 
   filters = [
@@ -223,22 +243,24 @@ export class FilterPage implements OnInit {
 
   //**     test   */ 
 
-  updateAllComplete() {
-    this.items[0].completed =  this.items[0].make.model.every(t => t.completed);
+  // THIS FUNCTION CALL WHENEVER CHANGE IN MODEL SELECTION OCCURS AND IT CHNAGE FLAG OF MAKE COMPLETED TO TRUE IF ALL MODELS ARE SELECTED AND FALSE IF SOME OF THEM ARE LEFT.
+  updateAllComplete(makeIndex:number) {
+    this.items[makeIndex].completed =  this.items[makeIndex].make.model.every(t => t.completed);
     console.log("Every: ", this.allComplete);
   }
-
-  someComplete(): boolean {
-    let result = this.items[0].make.model.filter(t=>t.completed).length > 0 && !this.items[0].completed;
+// THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
+  someComplete(makeIndex): boolean {
+    let result = this.items[makeIndex].make.model.filter(t=>t.completed).length > 0 && !this.items[makeIndex].completed;
     console.log("Result",result);
-    return this.items[0].make.model.filter(t => t.completed).length > 0 && !this.items[0].completed;
+    return this.items[makeIndex].make.model.filter(t => t.completed).length > 0 && !this.items[makeIndex].completed;
   }
 
-  setAll(completed: boolean) {
-    this.items[0].completed = true;
-    this.items[0].make.model.forEach(t => {t.completed = completed 
+  // THIS FUNCTION CHECKES ALL THE MODELS AND TRIMS OF MAKE.
+  setAll(completed: boolean,makeIndex:number) {
+    this.items[makeIndex].completed = true;
+    this.items[makeIndex].make.model.forEach(t => {t.completed = completed 
       t.trim.forEach(x=>x.completed = completed)});
-    console.log("Checked All", this.items[0].make.model);
+    console.log("Checked All", this.items[makeIndex].make.model);
   }
 
  //*****     test   ****/
