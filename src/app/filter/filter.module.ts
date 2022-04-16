@@ -8,6 +8,7 @@ import { FilterPageRoutingModule } from './filter-routing.module';
 
 import { FilterPage } from './filter.page';
 import { AppSharedModule } from '../Components/Shared/shared.module';
+import { MakeModelComponent } from '../Components/filter-components/make-model/make-model.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { AppSharedModule } from '../Components/Shared/shared.module';
     MatCheckboxModule,
     FilterPageRoutingModule
   ],
-  declarations: [FilterPage]
+  declarations: [FilterPage,MakeModelComponent]
 })
 export class FilterPageModule {}

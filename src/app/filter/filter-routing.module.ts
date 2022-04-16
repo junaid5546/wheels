@@ -14,6 +14,7 @@ import { MakeModelComponent } from '../Components/filter-components/make-model/m
 import { OriginComponent } from '../Components/filter-components/origin/origin.component';
 import { PlateComponent } from '../Components/filter-components/plate/plate.component';
 import { PriceComponent } from '../Components/filter-components/price/price.component';
+import { ReadlinessComponent } from '../Components/filter-components/readliness/readliness.component';
 import { SaleTypeComponent } from '../Components/filter-components/sale-type/sale-type.component';
 import { SeatsComponent } from '../Components/filter-components/seats/seats.component';
 import { TransmissionComponent } from '../Components/filter-components/transmission/transmission.component';
@@ -55,7 +56,7 @@ const routes: Routes = [
       },
       {
         component:DoorsComponent,         //8
-        path:'car-door'
+        path:'car-doors'
       },
       {
         component:CylindersComponent,     //9
@@ -63,7 +64,7 @@ const routes: Routes = [
       },
       {
         component:EngineSizeComponent,    //10
-        path:'car-engine'
+        path:'car-engine-size'
       },
       {
         component:FuelComponent,          //11
@@ -94,12 +95,12 @@ const routes: Routes = [
         path:'car-plate'
       },
       {
-        component:DrivetrainComponent,    //18
-        path:'car-drivetrain'
+        component:ReadlinessComponent,    //18
+        path:'car-readliness'
       },
       {
         component:SaleTypeComponent,      //19
-        path:'sale-type'
+        path:'car-sale-type'
       }
     ]
   }

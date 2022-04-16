@@ -6,117 +6,28 @@ goBack="false"
 <ion-content scrollEvents="false" scrollY="false">
 
   <div class="left-right-container">
-  <div class="left">
-    <ion-list class="left">
-      <div (click)="selectedItem(i)" [ngClass]="{'selected-filter-left-label': item.selected==true, 'filter-left-label':item.selected==false}"  class="item-container" *ngFor="let item of filters; let i=index">
-      <div class="inner-item-container">
-        <ion-label>{{item.name}}</ion-label>
-        <div class="count" *ngIf="item.result.count != 0">
-        <ion-label>{{item.result.count}}</ion-label>
+    <div class="left">
+      <ion-list class="left">
+        <div (click)="selectedItem(i,item.url)" [ngClass]="{'selected-filter-left-label': item.selected==true, 'filter-left-label':item.selected==false}"  class="item-container" *ngFor="let item of filters; let i=index">
+        <div class="inner-item-container">
+          <ion-label>{{item.name}}</ion-label>
+          <div class="count" *ngIf="item.result.count != 0">
+          <ion-label>{{item.result.count}}</ion-label>
+        </div>
+        </div>
       </div>
-      </div>
+      </ion-list>
     </div>
-    </ion-list>
-  </div>
 
-  <div class="right">
+    <div class="right">
 
   
 
-    
-    <ion-toolbar>
-    <ion-searchbar placeholder="make model trim" showCancelButton="focus"></ion-searchbar>
-  </ion-toolbar>
-   
-    <ion-accordion-group multiple="true" value="colors">
-      <ion-accordion  *ngFor="let item of items;let i=index">
-        <ion-item slot="header">
-    <!----------------------------------------------MAKE ITEM STARTS---------------------------------------------------->
-          <mat-checkbox class="example-margin make-class"
-                            [checked]="item.completed"
-                            [color]="makeCheckboxColor"
-                            [indeterminate]="someComplete(i)"
-                            (change)="setAll($event.checked,i)">
-                            <ion-label>{{item.make.name}}</ion-label>
-              </mat-checkbox>
-              
-    <!----------------------------------------------MAKE ITEM ENDS---------------------------------------------------->
-        </ion-item>
-        <ion-list slot="content">
-          
-          <ion-accordion-group multiple="true" value="models">
-          <ion-accordion *ngFor="let model of item.make.model; let modelIndex=index">
-            <ion-item slot="header">
-    <!----------------------------------------------MODELS ITEM STARTS---------------------------------------------------->
-              <mat-checkbox class="example-margin make-class model-class"
-                                [color]="modelCheckboxColor"
-                                [checked]="model.completed"
-                                [(ngModel)]="model.completed"
-                                [indeterminate]="ModelsomeComplete(i,modelIndex,model)"
-                                (ngModelChange)="updateAllComplete(i)"
-                                (change)="setModelAllTrims($event.checked,i,modelIndex,model)" 
-                                >
-                                <ion-label class="model-label">{{model.name}}</ion-label>
-                  </mat-checkbox>
-    <!----------------------------------------------MODELS ITEM ENDS---------------------------------------------------->
-            </ion-item>
-        
-            <ion-list slot="content">
-              <section class="example-section">
-    
-                <span class="example-list-section">
-                  
-                </span>
-                <span class="example-list-section">
-    <!----------------------------------------------TRIMS ITEM STARTS---------------------------------------------------->              
-                    <ion-item *ngFor="let trims of model.trim; let trimIndex=index" >
-                      <mat-checkbox class="example-margin make-class trim-class"
-                                    [color]="trimCheckboxColor"
-                                    [(ngModel)]="trims.completed"
-                                    [checked]="trims.completed"
-                                    (change)="updateMake(i,modelIndex,trimIndex)"
-                                    (ngModelChange)="updateAllModelComplete(i,modelIndex,trimIndex)">
-                        <ion-label class="trims-label">{{trims.name}}</ion-label>
-                      </mat-checkbox>
-                    </ion-item>
-    <!----------------------------------------------TRIMS ITEM ENDS---------------------------------------------------->
-                </span>
-              </section>
-        
-            </ion-list>
-          </ion-accordion>
-        </ion-accordion-group>
-        </ion-list>
-      </ion-accordion>
-    
-    
-    </ion-accordion-group>
-    
-    
 
-<!-- <section class="example-section">
-  <span class="example-list-section">
-    <mat-checkbox class="example-margin"
-                  [checked]="allComplete"
-                  [indeterminate]="someComplete()"
-                  (change)="setAll($event.checked)">
-      {{task.name}}
-    </mat-checkbox>
-  </span>
-  <span class="example-list-section">
-    <ul>
-      <li *ngFor="let subtask of items[0].make.model">
-        <mat-checkbox 
-                      [(ngModel)]="subtask.completed"
-                      (ngModelChange)="updateAllComplete()">
-          {{subtask.name}}
-        </mat-checkbox>
-      </li>
-    </ul>
-  </span>
-</section> -->
+    
+    <router-outlet></router-outlet>
+    </div>
 
-  </div>
 </div>
 
 </ion-content>
