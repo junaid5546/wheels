@@ -1,3 +1,16 @@
-<p>
-  body works!
-</p>
+<div class="item-body">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]">
+        <ion-card class="item-body-inner">
+          <div class="body-image">
+            <img src="../../../../assets/images/iphone13.png"/>
+          </div>
+          <div class="body-name">
+            <ion-label>Hatchback</ion-label>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

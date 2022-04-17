@@ -57,6 +57,7 @@ drop(event: CdkDragDrop<string[]>) {
      }
 
      ngOnInit(): void {
+      this.presentModal()
        let IsModelInitialized =  this.modalService.startIndexing();
        if(IsModelInitialized.status){
          this.modalService.updatecurrentObject();

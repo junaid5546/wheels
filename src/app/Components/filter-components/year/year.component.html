@@ -1,3 +1,32 @@
-<p>
-  year works!
-</p>
+<div class="condition-main-container">
+  <div class="inner-container">
+    
+    
+  
+    
+    <section class="example-section">
+      <span class="example-list-section">
+  <ion-item>       
+        <mat-checkbox class="example-margin"
+                      [checked]="allComplete"
+                      [color]="task.color"
+                      [indeterminate]="someComplete()"
+                      (change)="setAll($event.checked)">
+          {{task.name}}
+        </mat-checkbox>
+      </ion-item> 
+      </span>
+      <span class="example-list-section">
+   <ion-item  *ngFor="let subtask of task.subtasks">
+         
+            <mat-checkbox [(ngModel)]="subtask.completed"
+                          [color]="subtask.color"
+                          (ngModelChange)="updateAllComplete()">
+              {{subtask.name}}
+            </mat-checkbox>
+      
+          </ion-item>
+      </span>
+    </section>
+  </div>
+</div>

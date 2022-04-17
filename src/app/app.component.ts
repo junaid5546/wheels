@@ -18,18 +18,18 @@ export class AppComponent  implements OnInit  {
   constructor( private platform: Platform, private deviceInfo:DeviceInfoService,private contexts: ChildrenOutletContexts,
     private router:Router,
     public translate: TranslateService) {
-      
       this.translate.setDefaultLang('ar');
       this.initializeApp();
   }
 
   initializeApp() {
     
-  this.router.navigate(['filter'])
+  this.router.navigate(['take-car-images']);
     this.platform.ready().then(() => {
       
       // SETTING DEVICE HEIGHT AND WIDTH
       this.deviceInfo.setDeviceHeight(this.platform.height());
+     
       // CHECK DEFAULT LANGUAGE OF THE APP.
       this.deviceInfo.getDefaultLanguage()
       .then((res)=>{
@@ -38,6 +38,7 @@ export class AppComponent  implements OnInit  {
           this.deviceInfo.setDefaultLanguage(this.lang);
         }
       });
+     
       //CHECK DEFAULT THEME OF THE APP
       this.deviceInfo.getDefaultTheme()
       .then((res:string)=>{

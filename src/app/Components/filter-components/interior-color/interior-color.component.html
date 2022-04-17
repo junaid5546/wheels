@@ -1,3 +1,11 @@
-<p>
-  interior-color works!
-</p>
+<div class="item-body">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let item of colors">
+        <ion-card class="item-body-inner">
+         <ion-card [ngClass]="item.class"></ion-card>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

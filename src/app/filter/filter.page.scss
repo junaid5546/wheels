@@ -34,8 +34,9 @@
     }
 
     .right{
-        flex-direction: column;
+        
         display: flex;
+        flex-direction: column;
         flex: 1;
         position: relative;
         overflow-y: scroll;
@@ -125,3 +126,5 @@
     }
     }
 }
+
+

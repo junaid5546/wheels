@@ -1,0 +1,107 @@
+.item-body-inner{
+    //background: conic-gradient(from 127deg at 0% 0%, #E8E7E7 0deg, #F4F4F4 360deg);
+    border-radius: 5px;
+    margin: 0;
+    height: 100px;
+}
+
+ion-card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #E8E7E7;
+    //background: conic-gradient(from 131deg at 0% 0%, #E8E7E7 0deg, #F4F4F4 360deg);
+    .body-image{
+        height: 70%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img{
+            height: 100%;
+        }
+    }
+    .body-name{
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    }
+    ion-card{
+        margin: 0;
+        height: 80px;
+        width: 80px;
+        //@at-root: conic-gradient(from 135deg at 0% 3.16%, #E3E300 0deg, #EEEE00 139.8deg, #FFFF00 360deg);
+    }
+}
+
+.white{
+    background: conic-gradient(from 137.27deg at 4.17% 13.16%, #F8F8F8 0deg, #FFFFFF 360deg);
+}
+
+.yellow{
+    background: conic-gradient(from 135deg at 0% 3.16%, #E3E300 0deg, #EEEE00 139.8deg, #FFFF00 360deg);
+}
+
+.beign{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #ECEBC9 0deg, #F0EFD1 143.5deg, #F5F5DC 360deg);
+}
+
+.gold{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #EFCA00 0deg, #FFD700 360deg);
+}
+
+.orange{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #EC9900 0deg, #FFA500 360deg);
+}
+
+.saffron{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #E2B322 0deg, #F4C430 360deg);
+}
+
+.brown{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #824101 0deg, #964B00 360deg);
+}
+
+.maroon{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #6A0101 0deg, #800000 360deg);
+}
+
+.red{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #C00101 0deg, #FF0000 360deg);
+}
+
+.pink{
+    background: conic-gradient(from 137.12deg at 0.69% 4.89%, #EEA8B4 0deg, #FFC0CB 360deg);
+}
+
+.purple{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #630063 0deg, #800080 360deg);
+}
+
+.blue{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #0000C7 0deg, #0000FF 360deg);
+}
+
+.cyan{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #00CECE 0deg, #00FFFF 360deg);
+}
+
+.green{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #01A301 0deg, #00C400 360deg);
+}
+
+.silver{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #D6D6D6 0deg, #DFDFDF 360deg);
+}
+
+.gray{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #808080 0deg, #989898 360deg);
+}
+
+.black{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #000000 0deg, #0E0E0E 360deg);
+}
+
+.tan{
+    background: conic-gradient(from 137.12deg at 4.17% 13.16%, #B79364 0deg, #D2B48C 360deg);
+}
