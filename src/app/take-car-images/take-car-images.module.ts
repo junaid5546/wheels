@@ -10,6 +10,7 @@ import { CarInfoModalComponent } from '../Models/car-info-modal/car-info-modal.c
 import { ItemBodyComponent } from '../Components/item-body/item-body.component';
 import { ItemColorComponent } from '../Components/item-color/item-color.component';
 import { MainItemComponent } from '../Components/main-item/main-item.component';
+import { SpecialPlansComponent } from '../Components/special-plans/special-plans.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -20,6 +21,6 @@ import { MainItemComponent } from '../Components/main-item/main-item.component';
     DragDropModule,
     
   ],
-  declarations: [TakeCarImagesPage,CarInfoModalComponent,ItemBodyComponent,ItemColorComponent,MainItemComponent]
+  declarations: [TakeCarImagesPage,CarInfoModalComponent,ItemBodyComponent,ItemColorComponent,MainItemComponent,SpecialPlansComponent]
 })
 export class TakeCarImagesPageModule {}

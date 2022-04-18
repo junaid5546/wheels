@@ -8,7 +8,7 @@
 <ion-content>
 
     <div *ngIf="data">
-    <ion-list *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 24">
+    <ion-list *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 24 && currentStep != 25">
         <div #card_items  class="wraper">
             <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
                 <div class="container" [ngClass]="{selected: item.selected}" >
@@ -66,17 +66,83 @@
  
     <ion-list *ngIf="currentStep == 24"  >
       <div class="item-main-container">
-          <div class="inner-container" *ngFor="let item of [1,1,1,1,1,1]">
+          <div class="inner-container" *ngFor="let item of [1,1]">
               <div class="price-icon">
                   <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
                   <div class="price-label">Price</div>
               </div>
               <div class="input-and-label-container">
-                  <div class="input"></div>
-                  <div class="label"></div>
+                  <div class="input">
+                      <ion-input maxlength="3" dir="rtl">000,</ion-input>
+                  </div>
+                  <div class="label">OMR</div>
               </div>
           </div>
+
+
+          <div class="inner-container">
+            <div class="price-icon">
+                <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
+                <div class="price-label">Price</div>
+            </div>
+            <div class="input-and-label-container">
+                <div class="input">
+                    <ion-input maxlength="3" dir="rtl">000,</ion-input>
+                </div>
+                <div class="label">
+                    <ion-list>
+                        <ion-radio-group value="biff">
+                      
+                          <ion-item>
+                            <ion-label>Kilometer</ion-label>
+                            <ion-radio slot="start" value="biff"></ion-radio>
+                          </ion-item>
+                      
+                          <ion-item>
+                            <ion-label>Mile</ion-label>
+                            <ion-radio slot="start" value="griff"></ion-radio>
+                          </ion-item>
+                      
+                        </ion-radio-group>
+                      </ion-list>
+                </div>
+            </div>
+        </div>
+
+        <div class="inner-container">
+            <div class="price-icon">
+                <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
+                <div class="price-label">Phone Number</div>
+            </div>
+            <div class="input-and-label-container">
+                <div class="input input-more-width">
+                    <ion-input class="phone-number-input" maxlength="9" dir="ltr"></ion-input>
+                </div>
+                <div class="label">
+                    <ion-icon name="information-circle-outline"></ion-icon>
+                </div>
+            </div>
+        </div>
+
+        <div class="inner-container">
+            <div class="price-icon">
+                <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
+                <div class="price-label">Seller Notes <span class="optional-text">(Optional)</span></div>
+            </div>
+            <div class="input-and-label-container">
+                <div class="input input-more-width">
+                   <ion-textarea>
+
+                   </ion-textarea>
+                </div>
+            </div>
+        </div>
+
       </div>
+    </ion-list>
+
+    <ion-list *ngIf="currentStep == 25">
+        <app-special-plans></app-special-plans>
     </ion-list>
     
 </div>
@@ -89,7 +155,7 @@
 
 <div *ngIf="currentStep == 24" class="select-images-button no-padding">
     <div #bottomButton class="wraper">
-    <ion-button (click)="navigateToPosts()">
+    <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex()">
       <div class="logo-and-label-container">
   
         <div class="label-container change-size">

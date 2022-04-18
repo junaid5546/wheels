@@ -40,12 +40,13 @@ export class ModalControllerService {
       { key: 16, name: 'Governorate', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
       { key: 17, name: 'State', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
       { key: 18, name: 'Warranty Duration', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 9, name: 'Warranty Distance', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 19, name: 'Warranty Distance', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
       { key: 20, name: 'Insurance type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
       { key: 21, name: 'Driving Readlines', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
       { key: 22, name: 'Sale Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
       { key: 23, name: 'Features', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 24, name: 'Additional Details', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} }
+      { key: 24, name: 'Additional Details', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 25, name: 'Special Plans', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} }
     ],
     current: { index: 0, value: null },
     next: { index: 0, value: null },
@@ -131,7 +132,7 @@ export class ModalControllerService {
   }
 
   initializeIndexes() {
-    this.modelData.current.index = 24;
+    this.modelData.current.index = 25;
     this.modelData.current.value = this.modelData.items[24];
 
     this.modelData.next.index = 1;
