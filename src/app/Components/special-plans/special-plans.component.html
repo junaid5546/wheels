@@ -1,4 +1,5 @@
-<ion-segment (ionChange)="segmentChanged($event)">
+<div class="special-plans">
+<ion-segment [value]="days" (ionChange)="segmentChanged($event)">
 
   <ion-segment-button value="7">
     <ion-label>7 Days</ion-label>
@@ -15,5 +16,7 @@
   <ion-segment-button value="30">
     <ion-label>30 Days</ion-label>
   </ion-segment-button>
-
 </ion-segment>
+
+<app-special-plan-item [days]="days" [adOrder]="adOrder" [adDuration]="adDuration" [price]="price" [name]="name" [color]="color"></app-special-plan-item>
+</div>

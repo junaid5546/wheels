@@ -29,18 +29,21 @@ import { SwiperModule } from 'swiper/angular';
                    COMPONENT.VerticalListComponent,
                     COMPONENT.AskPermissionComponent,
                     COMPONENT.ImagePreviewComponent,
+                    COMPONENT.SpecialPlanItemComponent,
                     COMPONENT.PostItemSkeletonComponent]
                     ,
     entryComponents: [COMPONENT.HeaderComponent,
                       COMPONENT.VerticalListComponent,
                       COMPONENT.AskPermissionComponent,
                       COMPONENT.ImagePreviewComponent,
+                      COMPONENT.SpecialPlanItemComponent,
                       COMPONENT.PostItemSkeletonComponent],
 
     exports: [COMPONENT.HeaderComponent,
               COMPONENT.ImagePreviewComponent,
               COMPONENT.AskPermissionComponent,
               COMPONENT.VerticalListComponent,
+              COMPONENT.SpecialPlanItemComponent,
               COMPONENT.PostItemSkeletonComponent]
 
   })
