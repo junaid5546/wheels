@@ -37,7 +37,8 @@ export class RegisterPage implements OnInit,AfterViewInit {
     console.log(doc);
   }
 
-  gotoNextField(nextElement) {
+  gotoNextField(nextElement, key) {
+    console.log("Key", key);
     nextElement.setFocus();
   }
 
