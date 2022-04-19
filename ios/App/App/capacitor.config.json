@@ -2,8 +2,5 @@
 	"appId": "io.ionic.starter",
 	"appName": "dm-mobile-app",
 	"webDir": "www",
-	"bundledWebRuntime": false,
-	"server": {
-		"url": "http://192.168.0.113:8101"
-	}
+	"bundledWebRuntime": false
 }
