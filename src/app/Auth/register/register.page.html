@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+  <ion-row class="item-container">
+ 
+    <ion-col class="select-opt-container" size="3">
+      <div class="select-container">
+      <ion-select>
+        <ion-select-option>+968</ion-select-option>
+        <ion-select-option>+964</ion-select-option>
+        <ion-select-option>+965</ion-select-option>
+      </ion-select>
+    </div>
+    </ion-col>
+    <ion-col class="text-input-container" size="9">
+      <div class="input-container">
+        <ion-item class="item-inner" *ngFor="let item of [1,1,1,1,1,1,1,1] let i=index">
+          <ion-input [id]="i" type="tel" maxlength="1"></ion-input>
+        </ion-item>
+      </div>
+    </ion-col>
+  
+  </ion-row>
+</ion-grid>
+</ion-content>

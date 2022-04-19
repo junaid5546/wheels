@@ -14,10 +14,10 @@ export class SpecialPlansComponent implements OnInit {
   color:string = 'gold';
 
    plans = [ 
-     {name:'Gold', order:'First', duration:60, special_duration:7, price:2},
-     {name:'Silver', order:'First', duration:60, special_duration:7, price:1.5},
-     {name:'Bronze', order:'First', duration:60, special_duration:7, price:1},
-     {name:'Regular', order:'Last', duration:60, special_duration:7, price:0}
+     {name:'Gold', color:'yellow', order:'First', duration:60, special_duration:7, price:2},
+     {name:'Silver', color:'silver', order:'First', duration:60, special_duration:7, price:1.5},
+     {name:'Bronze', color:'bronze', order:'First', duration:60, special_duration:7, price:1},
+     {name:'Regular', color:'white', order:'Last', duration:60, special_duration:7, price:0}
    ] 
   constructor() { }
 
@@ -25,6 +25,4 @@ export class SpecialPlansComponent implements OnInit {
 
   segmentChanged(ev: any) {
     console.log('Segment changed', ev);
-    this.days = Number(ev.detail.value);
-    console.log('changed Days', this.days);
   }}

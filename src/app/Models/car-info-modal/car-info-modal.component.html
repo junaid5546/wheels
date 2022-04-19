@@ -66,7 +66,7 @@
  
     <ion-list *ngIf="currentStep == 24"  >
       <div class="item-main-container">
-          <div class="inner-container" *ngFor="let item of [1,1]">
+          <div class="inner-container">
               <div class="price-icon">
                   <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
                   <div class="price-label">Price</div>
@@ -79,11 +79,24 @@
               </div>
           </div>
 
+          <div class="inner-container">
+            <div class="price-icon">
+                <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
+                <div class="price-label">Warranty Kilometers</div>
+            </div>
+            <div class="input-and-label-container">
+                <div class="input">
+                    <ion-input maxlength="3" dir="rtl">000,</ion-input>
+                </div>
+                <div class="label">Kilometer</div>
+            </div>
+        </div>
+
 
           <div class="inner-container">
             <div class="price-icon">
                 <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
-                <div class="price-label">Price</div>
+                <div class="price-label">Distance Travelled</div>
             </div>
             <div class="input-and-label-container">
                 <div class="input">
@@ -131,7 +144,7 @@
             </div>
             <div class="input-and-label-container">
                 <div class="input input-more-width">
-                   <ion-textarea>
+                   <ion-textarea rows="6" cols="20" placeholder="Enter about this vehicle here...">
 
                    </ion-textarea>
                 </div>

@@ -1,19 +1,19 @@
-<div class="special-plan">
+<div class="special-plan" *ngFor="let item of plans">
 <ion-card>
   <ion-card-content>
-    <div class="left-icon">
-      <div class="icon-label">
-        <ion-label>Gold</ion-label>
+    <div class="left-icon" >
+      <div class="icon-label" [ngClass]="item.color">
+        <ion-label class="item-label-color">{{item.name}}</ion-label>
       </div>
     </div>
     <div class="mid-content-details">
-      <ion-label class="label-mid">Special Duration: <span class="special-duration">{{days}}</span>  <span class="days"> Days</span> </ion-label>
-      <ion-label class="label-mid">Add order:<span class="special-duration"> First</span></ion-label>
-      <ion-label class="label-mid">Ad duration:<span class="ad-duration special-duration"> 60</span> <span class="days"> Days </span></ion-label>
+      <ion-label class="label-mid">Special Duration: <span class="special-duration">{{item.special_duration}}</span>  <span class="days"> Days</span> </ion-label>
+      <ion-label class="label-mid">Add order:<span class="special-duration"> {{item.order}}</span></ion-label>
+      <ion-label class="label-mid">Ad duration:<span class="ad-duration special-duration"> {{item.duration}}</span> <span class="days"> Days </span></ion-label>
     </div>
     <div class="right-price-tag h-v-centered">
       <div class="wraper">
-      <ion-label>2 <span class="price-omr">OMR</span></ion-label>
+      <ion-label>{{item.price}}<span class="price-omr"> OMR</span></ion-label>
     </div>
     </div>
   </ion-card-content>

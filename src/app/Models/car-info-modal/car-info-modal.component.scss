@@ -263,7 +263,7 @@ ion-content {
 
     .label{
       display: flex;
-      flex: 1.5;
+      flex: 1;
       justify-content: center;
       align-items: center;
       letter-spacing: 4px;
@@ -287,4 +287,10 @@ ion-content {
   }
   .optional-text{
     font-size: 9px;
+  }
+
+  ion-textarea{
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 2;
   }

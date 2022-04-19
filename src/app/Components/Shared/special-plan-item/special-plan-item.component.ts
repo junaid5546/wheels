@@ -12,6 +12,7 @@ export class SpecialPlanItemComponent implements OnInit {
  @Input() price:number = null;
  @Input() name:string = null;
  @Input() color:string = null;
+ @Input() plans:any[] = null;
   constructor() { }
 
   ngOnInit() {}
