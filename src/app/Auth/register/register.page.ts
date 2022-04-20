@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, QueryList, ViewChildren,AfterContentInit } from '@angular/core';
 import { IonInput } from '@ionic/angular';
 
 @Component({
@@ -6,13 +6,23 @@ import { IonInput } from '@ionic/angular';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit,AfterViewInit {
-  @ViewChildren(IonInput, {read:ElementRef}) input: IonInput;
+export class RegisterPage implements OnInit, AfterViewInit {
+
+  @ViewChild(IonInput, {static:false}) input: IonInput;
+
   constructor() { }
-  
+
+
   ngAfterViewInit() {
-    
+    console.log("Input ele",this.input);
+    this.input.setFocus();
+    //this.input.autofocus = true;
+
   }
+
+  
+
+
 
   ngOnInit() {
     
@@ -23,13 +33,7 @@ export class RegisterPage implements OnInit,AfterViewInit {
   // ONCE USER ENTER THE DIGITS MOVE FOCUS TO NEXT __
   // IF BACKSPACE THEN CHECK IF __ HAS NUMBER CLEAR IT IF NOT THEN FOCUS ON PREVIOUS SECTION AND CLEAR THAT
 
-  ionInput(ev) {
-    console.log('ionInput',ev);
-    ev.srcElement.id
-    console.log("id: ", ev.srcElement.id);
-    this.input.disabled = true;
-    
-  }
+  
 
   ionChange(ev,i){
     console.log('IonChange: ', ev, " index: ", i);
@@ -37,10 +41,26 @@ export class RegisterPage implements OnInit,AfterViewInit {
     console.log(doc);
   }
 
-  gotoNextField(nextElement, key) {
-    console.log("Key", key);
-    nextElement.setFocus();
+  gotoNextField(current,nextElement,prev, key) {
+    console.log("Element: ", current);
+    if(key.keyCode != 8) {
+
+      console.log(current.value, typeof(current.value));
+      console.log("Key", key);
+      nextElement.setFocus();
+    } else {
+      prev.setFocus();  
+    }
+   
   }
 
+  selectCountryCode(code,input){
+    console.log('Input', this.input);
+    input.setFocus()
+  }
 
+  validate(ev) {
+    console.log('')
+  }
+ 
 }

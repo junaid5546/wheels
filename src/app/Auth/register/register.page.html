@@ -9,8 +9,16 @@
   <ion-row class="item-container">
  
     <ion-col class="select-opt-container" size="3">
+
+      
+     <div class="inner-container">
+      <ion-icon name="call-outline"></ion-icon>
+      <ion-label>Phone</ion-label>
+     </div>
+
       <div class="select-container">
-      <ion-select>
+        <ion-icon name="contrast-outline"></ion-icon>
+      <ion-select (ionChange)="selectCountryCode($event,first)">
         <ion-select-option>+968</ion-select-option>
         <ion-select-option>+964</ion-select-option>
         <ion-select-option>+965</ion-select-option>
@@ -22,45 +30,121 @@
       <div class="input-container">
         
         <ion-item class="item-inner">
-          <ion-input   #first (keyup)="gotoNextField(secnd,$event)" type="tel" maxlength="1" minlength="1">
+          <ion-input autofocus="true"  inputmode="decimal" clearOnEdit="true"  #first (keyup)="gotoNextField(first, secnd, first, $event)" type="tel" maxlength="1" minlength="1">
           </ion-input>
 
       </ion-item>
 
       <ion-item  class="item-inner"> 
-          <ion-input #secnd (keyup)="gotoNextField(third,$event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input inputmode="decimal" clearOnEdit="true"  #secnd (keyup)="gotoNextField(secnd,third,first, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input #third (keyup)="gotoNextField(fourth,$event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input inputmode="decimal" clearOnEdit="true"  #third (keyup)="gotoNextField(third,fourth,secnd, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item class="item-inner">
-          <ion-input #fourth (keyup)="gotoNextField(fifth,$event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input inputmode="decimal" clearOnEdit="true"  #fourth (keyup)="gotoNextField(fourth,fifth,third, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input (keyup)="gotoNextField(sixth,$event)" #fifth required type="tel" max="1" maxlength="1" minlength="1">
+          <ion-input inputmode="decimal" clearOnEdit="true"  (keyup)="gotoNextField(fifth,sixth,fourth,$event)" #fifth required type="tel" max="1" maxlength="1" minlength="1">
           </ion-input>
       </ion-item>
 
         <ion-item class="item-inner">
-          <ion-input   #sixth (keyup)="gotoNextField(seven,$event)" type="tel" maxlength="1" minlength="1">
+          <ion-input inputmode="decimal" clearOnEdit="true"    #sixth (keyup)="gotoNextField(sixth,seven,fifth,$event)" type="tel" maxlength="1" minlength="1">
           </ion-input>
 
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input #seven (keyup)="gotoNextField(eight,$event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input inputmode="decimal" clearOnEdit="true"  #seven (keyup)="gotoNextField(seven,eight,sixth,$event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input #eight  required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input (ionChange)="validate($event)"  inputmode="decimal" clearOnEdit="true"  #eight (keyup)="gotoNextField(eight,eight, seven,$event)"  required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       </div>
     </ion-col>
   
   </ion-row>
+
+
+
+  <ion-row class="item-container">
+ 
+    <ion-col class="name-input-container"  size="12">
+
+      <div class="inner-container">
+        <ion-icon name="call-outline"></ion-icon>
+        <ion-label>First Name</ion-label>
+       </div>
+
+       <div class="first-name-input">
+         <div class="input-container first-name-container">
+          <ion-input></ion-input>
+         </div>
+       </div>
+     </ion-col>
+  
+  </ion-row>
+
+
+
+
+  <ion-row class="item-container">
+ 
+    <ion-col class="name-input-container"  size="12">
+
+      <div class="inner-container">
+        <ion-icon name="call-outline"></ion-icon>
+        <ion-label>Last Name</ion-label>
+       </div>
+
+       <div class="first-name-input">
+         <div class="input-container first-name-container">
+          <ion-input></ion-input>
+         </div>
+       </div>
+     </ion-col>
+  
+  </ion-row>
+
+
+
+  <ion-row class="item-container">
+ 
+    <ion-col class="name-input-container"  size="12">
+
+      <div class="inner-container">
+        <ion-icon name="call-outline"></ion-icon>
+        <ion-label>Date of Birth</ion-label>
+       </div>
+
+       <div class="day-month-year">
+     
+          <div class="day-month-year-container">
+            <div class="day">
+              <ion-label>Day</ion-label>
+              <span>/</span>
+            </div>
+            <div class="month day">
+              <ion-label>Month</ion-label>
+              <span>/</span>
+            </div>
+            <div class="year day">
+              <ion-label>Year</ion-label>
+           
+            </div>
+          </div>
+         </div>
+ 
+     </ion-col>
+  
+  </ion-row>
+
+
 </ion-grid>
 </ion-content>

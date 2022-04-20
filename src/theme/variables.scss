@@ -5,8 +5,12 @@
 :root {
 
   /** font-size **/
+  --dm-color:#00B5DD;
+  --dm-border-color:#27AF8E;
+  --dm-text-color:#0063F8;
   --dm-value:clamp(.8rem,2vw,5rem);
   --dm-letter-spacing:1px;
+  --dm-letter-spacing-2x:5px;
   --dm-heading:clamp(1rem,1.4vw,5rem);
   --dm-heading-weight:500;
   --dm-sub-heading-weight:300;
