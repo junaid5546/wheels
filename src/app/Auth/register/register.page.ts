@@ -1,16 +1,18 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, QueryList, ViewChildren,AfterContentInit } from '@angular/core';
 import { IonInput } from '@ionic/angular';
-
+import { PickerController } from '@ionic/angular';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit, AfterViewInit {
-
+  isOtpDisabled:boolean = false;
+  buttonText:string = "Send OTP";
+  countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
+  private selectedAnimal: string;
+  constructor(private pickerController: PickerController) { }
   @ViewChild(IonInput, {static:false}) input: IonInput;
-
-  constructor() { }
 
 
   ngAfterViewInit() {
@@ -19,9 +21,6 @@ export class RegisterPage implements OnInit, AfterViewInit {
     //this.input.autofocus = true;
 
   }
-
-  
-
 
 
   ngOnInit() {
@@ -63,4 +62,97 @@ export class RegisterPage implements OnInit, AfterViewInit {
     console.log('')
   }
  
+
+  // DATE TIME PICKER
+  async presentPicker() {
+    const picker = await this.pickerController.create({
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => {
+            //nothing
+          },
+        },
+        {
+          text: 'Confirm',
+          handler: (selected) => {
+            console.log(selected);
+            //this.selectedAnimal = selected.day.value;
+          },
+        }
+      ],
+      columns: [
+        {
+          name: 'day',
+          options: [
+            { text: '1', value: 'Sunday' },
+            { text: '2', value: 'Monday' },
+            { text: '3', value: 'Tuesday' },
+          ]
+        },
+        {
+          name:'month',
+          options:[{text:'Jan', value:'1'},{text:'Feb',value:"2"},{text:"Mar",value:'3'}]
+        },
+        {
+          name:'Year',
+          options:[{text:'2001', value:'2001'},{text:'2002',value:"2002"},{text:"2003",value:'2003'}]
+        },
+      ],
+      animated:true,
+      
+    });
+    await picker.present();
+  }
+
+  sendOTP() {
+    let x = setInterval(()=> {
+
+      // Get today's date and time
+      let now = new Date().getTime();
+      this.isOtpDisabled = true;
+      // Find the distance between now and the count down date
+      let distance = this.countDownDate - now;
+    
+      // Time calculations for days, hours, minutes and seconds
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      // Display the result in the element with id="demo"
+      document.getElementById("timer").innerHTML =  minutes + "m " + seconds + "s ";
+    
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        console.log('Clearing distn');
+        clearInterval(x);
+        document.getElementById("timer").innerHTML = "EXPIRED";
+        this.isOtpDisabled = false;
+      }
+    }, 1000);
+  }
+
+
+   countdown() {
+    let seconds = 2;
+    this.isOtpDisabled = true;
+    function tick() {
+      var counter = document.getElementById("timer");
+      seconds--;
+      counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
+      if (seconds > 0) {
+        setTimeout(tick, 1000);
+      } else {
+        
+        console.log('In else', this.isOtpDisabled);
+        document.getElementById("timer").innerHTML = `
+            <div class="Btn" id="ResendBtn">
+                <ion-label>Resend</button>
+            </div>
+        `;
+      }
+    }
+    tick();
+  }
+
+
 }
