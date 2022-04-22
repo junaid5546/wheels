@@ -7,6 +7,7 @@ import { PickerController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit, AfterViewInit {
+   seconds = 60;
   isOtpDisabled:boolean = false;
   buttonText:string = "Send OTP";
   countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
@@ -131,27 +132,30 @@ export class RegisterPage implements OnInit, AfterViewInit {
     }, 1000);
   }
 
+  tick(counterRef) {
+    console.log('In tick');
+    var counter = document.getElementById("timer");
+    if(this.seconds>0){
+    this.seconds--;
+    this.isOtpDisabled = true;
+    counter.innerHTML = "0:" + (this.seconds < 10 ? "0" : "") + String(this.seconds);
+    }  else {
+    
+      clearInterval(counterRef);
+      this.isOtpDisabled = false;
+      this.seconds = 60;
+      console.log('In else', this.isOtpDisabled);
+      document.getElementById("timer").innerText = `Resend`;
+    }
+    
+  }
+
+
 
    countdown() {
-    let seconds = 2;
-    this.isOtpDisabled = true;
-    function tick() {
-      var counter = document.getElementById("timer");
-      seconds--;
-      counter.innerHTML = "0:" + (seconds < 10 ? "0" : "") + String(seconds);
-      if (seconds > 0) {
-        setTimeout(tick, 1000);
-      } else {
-        
-        console.log('In else', this.isOtpDisabled);
-        document.getElementById("timer").innerHTML = `
-            <div class="Btn" id="ResendBtn">
-                <ion-label>Resend</button>
-            </div>
-        `;
-      }
-    }
-    tick();
+    let counter =  setInterval(() => {
+        this.tick(counter);
+      }, 1000);
   }
 
 

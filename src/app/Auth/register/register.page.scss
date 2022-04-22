@@ -85,6 +85,7 @@ color: var(--dm-color);
 
 .name-input-container{
     //background: pink;
+    
     border: 1px solid;
     border-radius: 10px;
     border-color: var(--dm-border-color);
@@ -159,4 +160,14 @@ color: var(--dm-color);
 }
 ion-select{
     color: #00B0D7;
+}
+
+ion-button{
+    margin: 0;
+    width: 100%;
+    text-transform: none;
+    --background: linear-gradient(225deg, #00B5DD 6.77%, #0091E2 51.04%, #0084E4 90.62%);
+    --border-radius: 13px;
+    height: 35px;
+    letter-spacing: var(--dm-letter-spacing);
 }

@@ -149,10 +149,12 @@
 
   <ion-row class="item-container">
  
-    <ion-col class="name-input-container"  size="12">
-      <ion-button>
-        <ion-label>Send OTP</ion-label>
+    <ion-col class="name-input-container h-v-centered no-border"  size="12" >
+      <div class="day-month-year no-padding half-width">
+      <ion-button (click)="countdown()" [disabled]="isOtpDisabled">
+        <ion-label id="timer">Send OTP</ion-label>
       </ion-button>
+    </div>
      </ion-col>
   
   </ion-row>
