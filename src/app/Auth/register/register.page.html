@@ -18,7 +18,7 @@
 
       <div class="select-container">
         <ion-icon name="contrast-outline"></ion-icon>
-      <ion-select (ionChange)="selectCountryCode($event,first)">
+      <ion-select [disabled]="isOtpDisabled" (ionChange)="selectCountryCode($event,first)">
         <ion-select-option class="select-option" value="+968">+968</ion-select-option>
         <ion-select-option class="select-option" value="+964">+964</ion-select-option>
         <ion-select-option class="select-option" value="+965">+965</ion-select-option>
@@ -30,40 +30,40 @@
       <div class="input-container">
         
         <ion-item class="item-inner">
-          <ion-input autofocus="true"  inputmode="decimal" clearOnEdit="true"  #first (keyup)="gotoNextField(first, secnd, first, $event)" type="tel" maxlength="1" minlength="1">
+          <ion-input [disabled]="isOtpDisabled" autofocus="true"  inputmode="decimal" clearOnEdit="true"  #first (keyup)="gotoNextField(first, secnd, first, $event)" type="tel" maxlength="1" minlength="1">
           </ion-input>
 
       </ion-item>
 
       <ion-item  class="item-inner"> 
-          <ion-input inputmode="decimal" clearOnEdit="true"  #secnd (keyup)="gotoNextField(secnd,third,first, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  #secnd (keyup)="gotoNextField(secnd,third,first, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input inputmode="decimal" clearOnEdit="true"  #third (keyup)="gotoNextField(third,fourth,secnd, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  #third (keyup)="gotoNextField(third,fourth,secnd, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item class="item-inner">
-          <ion-input inputmode="decimal" clearOnEdit="true"  #fourth (keyup)="gotoNextField(fourth,fifth,third, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  #fourth (keyup)="gotoNextField(fourth,fifth,third, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input inputmode="decimal" clearOnEdit="true"  (keyup)="gotoNextField(fifth,sixth,fourth,$event)" #fifth required type="tel" max="1" maxlength="1" minlength="1">
+          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  (keyup)="gotoNextField(fifth,sixth,fourth,$event)" #fifth required type="tel" max="1" maxlength="1" minlength="1">
           </ion-input>
       </ion-item>
 
         <ion-item class="item-inner">
-          <ion-input inputmode="decimal" clearOnEdit="true"    #sixth (keyup)="gotoNextField(sixth,seven,fifth,$event)" type="tel" maxlength="1" minlength="1">
+          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"    #sixth (keyup)="gotoNextField(sixth,seven,fifth,$event)" type="tel" maxlength="1" minlength="1">
           </ion-input>
 
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input inputmode="decimal" clearOnEdit="true"  #seven (keyup)="gotoNextField(seven,eight,sixth,$event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  #seven (keyup)="gotoNextField(seven,eight,sixth,$event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input (ionChange)="validate($event)"  inputmode="decimal" clearOnEdit="true"  #eight (keyup)="gotoNextField(eight,eight, seven,$event)"  type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" (ionChange)="validate($event)"  inputmode="decimal" clearOnEdit="true"  #eight (keyup)="gotoNextField(eight,eight, seven,$event)"  type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       </div>
@@ -84,7 +84,7 @@
 
        <div class="first-name-input">
          <div class="input-container first-name-container">
-          <ion-input id="firstname" class="first-name-input-field"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" minlength="4" maxlength="10" id="firstname" class="first-name-input-field"></ion-input>
          </div>
        </div>
      </ion-col>
@@ -105,7 +105,7 @@
 
        <div class="first-name-input">
          <div class="input-container first-name-container">
-          <ion-input id="lastname" class="last-name-input-field"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" minlength="4" maxlength="10" type="text" id="lastname" class="last-name-input-field"></ion-input>
          </div>
        </div>
      </ion-col>
@@ -127,16 +127,15 @@
      
           <div class="day-month-year-container">
             <div class="day">
-              <ion-label>Day</ion-label>
+              <ion-label>{{Dob.day == null ? 'Day': Dob.day}}</ion-label>
               <span>/</span>
             </div>
             <div class="month day">
-              <ion-label>Month</ion-label>
+              <ion-label>{{Dob.month == null ? 'Month' : Dob.month}}</ion-label>
               <span>/</span>
             </div>
             <div class="year day">
-              <ion-label>Year</ion-label>
-           
+              <ion-label>{{Dob.year == null ? 'Year' : Dob.year}}</ion-label>
             </div>
           </div>
          </div>

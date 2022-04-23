@@ -1,19 +1,33 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef, QueryList, ViewChildren,AfterContentInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IonInput } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
+
+export interface Register{
+  code:string;
+  number:number,
+  firstName:string,
+  lastName:string,
+  dateOfBirth:string,
+  otpCode:string
+}
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit, AfterViewInit {
-   seconds = 60;
+  @ViewChild(IonInput, {static:false}) input: IonInput;
+  registrationObj:Register;
+  seconds = 60;
   isOtpDisabled:boolean = false;
   buttonText:string = "Send OTP";
   countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
-  private selectedAnimal: string;
+  Dob  = {day:null, month:null, year:null};
+
+
   constructor(private pickerController: PickerController) { }
-  @ViewChild(IonInput, {static:false}) input: IonInput;
+  
 
 
   ngAfterViewInit() {
@@ -43,13 +57,14 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
   gotoNextField(current,nextElement,prev, key) {
     console.log("Element: ", current);
-    if(key.keyCode != 8) {
-
+    if(key.keyCode != 8 && key.keyCode >=48 && key.keyCode <=57) {
       console.log(current.value, typeof(current.value));
       console.log("Key", key);
       nextElement.setFocus();
+    } else if(key.keyCode == 8) {
+      prev.setFocus();   
     } else {
-      prev.setFocus();  
+      current.value = '';
     }
    
   }
@@ -66,6 +81,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
   // DATE TIME PICKER
   async presentPicker() {
+    if(!this.isOtpDisabled) {
     const picker = await this.pickerController.create({
       buttons: [
         {
@@ -78,6 +94,9 @@ export class RegisterPage implements OnInit, AfterViewInit {
           text: 'Confirm',
           handler: (selected) => {
             console.log(selected);
+            this.Dob.day = selected.day.text;
+            this.Dob.month = selected.month.text
+            this.Dob.year = selected.Year.text
             //this.selectedAnimal = selected.day.value;
           },
         }
@@ -86,24 +105,34 @@ export class RegisterPage implements OnInit, AfterViewInit {
         {
           name: 'day',
           options: [
-            { text: '1', value: 'Sunday' },
-            { text: '2', value: 'Monday' },
-            { text: '3', value: 'Tuesday' },
+            { text: '1', value: '1' },
+            { text: '2', value: '2' },
+            { text: '3', value: '3' },
+            { text: '4', value: '4' },
+            { text: '5', value: '5' },
+            { text: '6', value: '6' },
+            { text: '7', value: '7' }
           ]
         },
         {
           name:'month',
-          options:[{text:'Jan', value:'1'},{text:'Feb',value:"2"},{text:"Mar",value:'3'}]
+          options:[{text:'Jan', value:'1'},{text:'Feb',value:"2"},{text:"Mar",value:'3'},{text:'April',value:4},
+                  {text:'May', value:5}, {text:'June', value:6}, {text:'July', value:7}, {text:'August', value:8},
+                {text:'September', value:9}, {text:'October', value:10},{text:'November', value:11}, {text:'December', value:12}]
+
         },
         {
           name:'Year',
-          options:[{text:'2001', value:'2001'},{text:'2002',value:"2002"},{text:"2003",value:'2003'}]
+          options:[{text:'1970', value:'1970'},{text:'2002',value:"2002"},{text:"2003",value:'2003'}]
         },
       ],
       animated:true,
       
     });
     await picker.present();
+  } else {
+    return false;
+  }
   }
 
   sendOTP() {
