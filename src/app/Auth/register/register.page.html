@@ -63,7 +63,7 @@
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input (ionChange)="validate($event)"  inputmode="decimal" clearOnEdit="true"  #eight (keyup)="gotoNextField(eight,eight, seven,$event)"  required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input (ionChange)="validate($event)"  inputmode="decimal" clearOnEdit="true"  #eight (keyup)="gotoNextField(eight,eight, seven,$event)"  type="tel" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       </div>
@@ -84,7 +84,7 @@
 
        <div class="first-name-input">
          <div class="input-container first-name-container">
-          <ion-input></ion-input>
+          <ion-input id="firstname" class="first-name-input-field"></ion-input>
          </div>
        </div>
      </ion-col>
@@ -105,7 +105,7 @@
 
        <div class="first-name-input">
          <div class="input-container first-name-container">
-          <ion-input></ion-input>
+          <ion-input id="lastname" class="last-name-input-field"></ion-input>
          </div>
        </div>
      </ion-col>
@@ -114,7 +114,7 @@
 
 
 
-  <ion-row class="item-container" (click)="presentPicker()">
+  <ion-row id="dob-item" class="item-container" (click)="presentPicker()">
  
     <ion-col class="name-input-container"  size="12">
 
