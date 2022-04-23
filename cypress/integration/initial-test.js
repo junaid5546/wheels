@@ -53,11 +53,13 @@ describe('web App testing', () =>{
         cy.contains('1').click();
         cy.contains('Jan').click();
         cy.contains('2002').click();
+        cy.wait();
         cy.contains('Confirm').click();
     })
 
     // SEND OTP 
     it('Send OTP',()=>{
         cy.contains('Send OTP').click();
+        cy.wait();
     })
 })
