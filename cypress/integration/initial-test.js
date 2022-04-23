@@ -1,12 +1,15 @@
 /// <reference types="cypress" />
 describe('web App testing', () =>{
+    // VISIT MAIN PAGE
     before(()=>{
         cy.visit('http://localhost:8100');
     })
+    // IPHONE VIEW
     beforeEach(()=>{
         cy.viewport('iphone-8');
     })
 
+    // SELECTING COUNTRY CODE.
     it('Landing Page works', ()=>{
 
         cy.log('Loaded successfully');
@@ -16,6 +19,7 @@ describe('web App testing', () =>{
         
     })
 
+    // PHONE NUMBER
     it('Typing phonen number', ()=>{
         
         cy.log('Putting Phone Numnber')
@@ -32,14 +36,18 @@ describe('web App testing', () =>{
           })*/
     })
 
+
+    // TYPING FIRST NAME
     it('Typing First Name', ()=>{
        cy.get("#firstname").click({force:true}).type('Muhammad')
     })
 
+    // TYPING LAST NAME
     it('Typing Last name', ()=>{
         cy.get('#lastname').click({force:true}).type('Gul')
     })
 
+    //  SELECTING DOB
     it('Selecting DOB', ()=> {
         cy.get('#dob-item').click();
         cy.contains('1').click();
@@ -47,8 +55,4 @@ describe('web App testing', () =>{
         cy.contains('2002').click();
         cy.contains('Confirm').click();
     })
-    
-
-    
-
 })
