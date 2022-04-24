@@ -17,7 +17,9 @@ export interface Register{
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit, AfterViewInit {
+
   @ViewChild(IonInput, {static:false}) input: IonInput;
+  phoneNumber:number[] = [];
   registrationObj:Register;
   seconds = 60;
   isOtpDisabled:boolean = false;
@@ -56,22 +58,27 @@ export class RegisterPage implements OnInit, AfterViewInit {
   }
 
   gotoNextField(current,nextElement,prev, key) {
-    console.log("Element: ", current);
     if(key.keyCode != 8 && key.keyCode >=48 && key.keyCode <=57) {
+      this.phoneNumber.push(key.key)
       console.log(current.value, typeof(current.value));
       console.log("Key", key);
       nextElement.setFocus();
+      if(this.phoneNumber.length == 8){
+        console.log('Phone Number: ', this.phoneNumber);
+        
+      }
     } else if(key.keyCode == 8) {
-      prev.setFocus();   
+      prev.setFocus();  
+      this.phoneNumber.pop();
     } else {
       current.value = '';
     }
    
   }
 
-  selectCountryCode(code,input){
+  selectCountryCode(code,first){
     console.log('Input', this.input);
-    input.setFocus()
+    first.setFocus()
   }
 
   validate(ev) {
