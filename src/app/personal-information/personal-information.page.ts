@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Component({
   selector: 'app-personal-information',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonalInformationPage implements OnInit {
 
-  constructor() { }
+  constructor(private iab: InAppBrowser) { }
 
   ngOnInit() {
+    const browser = this.iab.create('https://ionicframework.com/','_blank');
+    browser.show();
   }
 
 }

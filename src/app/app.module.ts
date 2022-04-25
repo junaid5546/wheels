@@ -15,7 +15,7 @@ import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
 import { SwiperModule } from "swiper/angular";
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
-
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 Injectable()
 export function setTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -42,6 +42,7 @@ export function setTranslateLoader(http: HttpClient) {
     FilePath,
     WebView,
     CallNumber,
+    InAppBrowser,
     SocialSharing],
   bootstrap: [AppComponent],
 })

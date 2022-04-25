@@ -78,7 +78,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
   selectCountryCode(code,first){
     console.log('Input', this.input);
-    first.setFocus()
+    first.setFocus();
   }
 
   validate(ev) {
