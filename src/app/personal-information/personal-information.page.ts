@@ -8,11 +8,13 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 })
 export class PersonalInformationPage implements OnInit {
 
-  constructor(private iab: InAppBrowser) { }
+  constructor(private iab: InAppBrowser) {}
 
   ngOnInit() {
-    const browser = this.iab.create('https://ionicframework.com/','_blank');
+
+    const browser = this.iab.create('https://checkout.thawani.om/pay/checkout_l0aWWYfyOzvoUqyhZpfVj2ERs6aS1tR5keiazri4B6vX4ox4jV?key=rRQ26GcsZzoEhbrP2HZvLYDbn9C9et','_blank',{location:"no",zoom:'no'})
     browser.show();
+  
   }
 
 }

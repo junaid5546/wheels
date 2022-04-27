@@ -29,11 +29,15 @@ const routes: Routes = [
   {
     path: 'personal-information',
     loadChildren: () => import('./personal-information/personal-information.module').then( m => m.PersonalInformationPageModule)
+  },
+  {
+    path: 'changedetection',
+    loadChildren: () => import('./changedetection/changedetection.module').then( m => m.ChangedetectionPageModule)
   }
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules,enableTracing: true })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

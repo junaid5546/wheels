@@ -24,8 +24,9 @@ export class AppComponent  implements OnInit  {
 
   initializeApp() {
     
-  this.router.navigate(['register']);
-    this.platform.ready().then(() => {
+  this.router.navigate(['changedetection']);
+  
+  this.platform.ready().then(() => {
       
       // SETTING DEVICE HEIGHT AND WIDTH
       this.deviceInfo.setDeviceHeight(this.platform.height());
@@ -67,8 +68,7 @@ export class AppComponent  implements OnInit  {
     
   }
 
-  getPosts(){
-
+  getPosts() {
 
   }
 
