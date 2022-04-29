@@ -31,8 +31,8 @@ const routes: Routes = [
     loadChildren: () => import('./personal-information/personal-information.module').then( m => m.PersonalInformationPageModule)
   },
   {
-    path: 'changedetection',
-    loadChildren: () => import('./changedetection/changedetection.module').then( m => m.ChangedetectionPageModule)
+    path: 'change-detect',
+    loadChildren: () => import('./change-detect/change-detect.module').then( m => m.ChangeDetectPageModule)
   }
 ];
 @NgModule({

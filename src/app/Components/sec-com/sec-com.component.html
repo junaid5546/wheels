@@ -1,0 +1,5 @@
+<app-first-com *ngFor="let todo of todos" [todo]="todo"></app-first-com>
+
+<div><ion-input type="text" (ionChange)="changeText($event)"> </ion-input></div>
+
+<div><button (click)="changeArray()">Change array</button></div>

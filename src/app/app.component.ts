@@ -24,7 +24,7 @@ export class AppComponent  implements OnInit  {
 
   initializeApp() {
     
-  this.router.navigate(['changedetection']);
+  this.router.navigate(['change-detect']);
   
   this.platform.ready().then(() => {
       

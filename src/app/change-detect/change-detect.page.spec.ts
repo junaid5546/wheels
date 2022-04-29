@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ChangedetectionPage } from './changedetection.page';
+import { ChangeDetectPage } from './change-detect.page';
 
-describe('ChangedetectionPage', () => {
-  let component: ChangedetectionPage;
-  let fixture: ComponentFixture<ChangedetectionPage>;
+describe('ChangeDetectPage', () => {
+  let component: ChangeDetectPage;
+  let fixture: ComponentFixture<ChangeDetectPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChangedetectionPage ],
+      declarations: [ ChangeDetectPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ChangedetectionPage);
+    fixture = TestBed.createComponent(ChangeDetectPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
