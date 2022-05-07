@@ -132,8 +132,8 @@ export class ModalControllerService {
   }
 
   initializeIndexes() {
-    this.modelData.current.index = 25;
-    this.modelData.current.value = this.modelData.items[25];
+    this.modelData.current.index = 24;
+    this.modelData.current.value = this.modelData.items[24];
 
     this.modelData.next.index = 1;
     this.modelData.next.value = this.modelData.items[1];
@@ -205,13 +205,13 @@ export class ModalControllerService {
       // NEXT ONE INCREASES
       this.modelData.pervious.index--;
       this.modelData.pervious.value = this.modelData.items[this.modelData.pervious.index];
-      //return {status:true, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
+      // return {status:true, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
       this.updatecurrentObject();
     } else {
       console.log("ERROR");
       console.log("ITEM LENGTH: ", this.getItemsLenght());
       console.log("ITEM Index Length: ", this.getCurrentItemIndex());
-      //return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
+      // return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
   }
 
