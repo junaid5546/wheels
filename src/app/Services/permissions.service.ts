@@ -4,9 +4,12 @@ import { ModalController } from '@ionic/angular';
 import { AskPermissionComponent } from '../Components/Shared/ask-permission/ask-permission.component';
 import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { Camera } from '@capacitor/camera';
+
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class PermissionsService {
 
   public gallery:string = null;

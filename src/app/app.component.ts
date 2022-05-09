@@ -16,15 +16,15 @@ export class AppComponent  implements OnInit  {
   theme: string = 'light'; // light, dark
 
   constructor( private platform: Platform, private deviceInfo:DeviceInfoService,private contexts: ChildrenOutletContexts,
-    private router:Router,
-    public translate: TranslateService) {
+      private router:Router,
+      public translate: TranslateService) {
       this.translate.setDefaultLang('ar');
       this.initializeApp();
   }
 
   initializeApp() {
     
-  this.router.navigate(['filter']);
+  //this.router.navigate(['filter']);
   
   this.platform.ready().then(() => {
       
@@ -69,7 +69,7 @@ export class AppComponent  implements OnInit  {
   }
 
   getPosts() {
-
+  
   }
 
 }
