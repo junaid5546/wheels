@@ -4,27 +4,50 @@ import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthService } from 'dm-apis';
+import { UserRegistration } from './user-model/user';
+import { ApiService } from './api.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
+
 export class AppComponent  implements OnInit  {
+
+  authUrl = 'register';
+  apiRoute: any = {};
+  getTokenAccess: any = {};
+  refreshToken: any = {};
+
 
   lang: string = 'ar'; // ar, en
   theme: string = 'light'; // light, dark
-
-  constructor( private platform: Platform, private deviceInfo:DeviceInfoService,private contexts: ChildrenOutletContexts,
+  
+  constructor( private authService:AuthService,
+     private platform: Platform,
+      private deviceInfo:DeviceInfoService,
+      private contexts: ChildrenOutletContexts,
+      private apiService:ApiService,
       private router:Router,
       public translate: TranslateService) {
+
       this.translate.setDefaultLang('ar');
       this.initializeApp();
   }
 
   initializeApp() {
-    
-  //this.router.navigate(['filter']);
+
+  let obj = new UserRegistration();
+  obj.firstName = "Muhammad";
+  obj.lastName  = "Gul";
+  obj.phoneOman.areacode = 11;
+  obj.phoneOman.phoneNumber = 1212122;
+
+  obj.getDateOfBirth("19/02/1995");
+  this.createUser(obj);
+  this.router.navigate(['register']);
   
   this.platform.ready().then(() => {
       
@@ -40,7 +63,7 @@ export class AppComponent  implements OnInit  {
         }
       });
      
-      //CHECK DEFAULT THEME OF THE APP
+      // CHECK DEFAULT THEME OF THE APP
       this.deviceInfo.getDefaultTheme()
       .then((res:string)=>{
         if(res == null) {
@@ -50,8 +73,8 @@ export class AppComponent  implements OnInit  {
         }
       });
 
-      //getDefaultTheme();
-      //getDefaultFontsize();
+      // getDefaultTheme();
+      // getDefaultFontsize();
       if(localStorage.getItem("Language")){
         this.lang = localStorage.getItem("Language")
         this.translate.use(this.lang);
@@ -65,11 +88,27 @@ export class AppComponent  implements OnInit  {
 
   ngOnInit(): void {
     
-    
   }
+    
 
   getPosts() {
   
   }
 
+
+  createUser(userObj:UserRegistration) {
+    const apiRoute: any = {};
+    return new Promise((resolve, reject) => {
+    apiRoute.apiroute = this.authUrl;
+    apiRoute.data = userObj;
+    this.apiService.post(apiRoute, 'h3')
+        .then((data: any) => {
+            resolve(data);
+        })
+        .catch((error) => {
+            reject(error);
+        });
+    });
+}
+    
 }
