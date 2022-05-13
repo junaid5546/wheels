@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, of, Subject, Observer, Observable } from 'rxjs';
-
-
 @Injectable({
     providedIn: 'root'
 })
@@ -30,6 +28,7 @@ export class ApiService {
                             .set('Content-Type', 'application/json')
                             .set('Accept-Language', 'en-US');
                     } else if (headerValue == 'h2') {
+
                         this.headersConfig = new HttpHeaders()
                             .set('Content-Type', 'application/x-www-form-urlencoded')
                             .set('Authorization', 'Bearer ' + this.getTokenAccess.access_token)
@@ -64,11 +63,11 @@ export class ApiService {
                             .set('Access-Control-Allow-Origin', '*')
                     }
         } else {
-            
             this.headersConfig = new HttpHeaders().set('Content-Type', 'application/json');
         }
         return of([]);
     }
+        
 
     get = (route:any, headerValue:any) => {
         return new Promise((resolve, reject) => {

@@ -16,6 +16,9 @@ import { SwiperModule } from "swiper/angular";
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+// FIREBASE
+import { AngularFireModule } from "@angular/fire/compat";
+import { environment } from 'src/environments/environment';
 Injectable()
 export function setTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -24,6 +27,7 @@ export function setTranslateLoader(http: HttpClient) {
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     BrowserAnimationsModule,
     HttpClientJsonpModule,
