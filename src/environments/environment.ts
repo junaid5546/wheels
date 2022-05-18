@@ -5,15 +5,15 @@
 export const environment = {
   production: false,
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  firebaseConfig : {
-  apiKey: "AIzaSyC6qLMZb2KI-PG_7HLpItY6Zo_Ud6ngs54",
-  authDomain: "dmall-361b7.firebaseapp.com",
-  projectId: "dmall-361b7",
-  storageBucket: "dmall-361b7.appspot.com",
-  messagingSenderId: "344369739141",
-  appId: "1:344369739141:web:87ce57ef806b405851c0ec",
-  measurementId: "G-4979M06DLP"
-}
+   firebaseConfig : {
+    apiKey: "AIzaSyBwkj9Jlk4oroOxJDhufpn-Qg15VlS8C7Q",
+    authDomain: "dmall-7b89f.firebaseapp.com",
+    projectId: "dmall-7b89f",
+    storageBucket: "dmall-7b89f.appspot.com",
+    messagingSenderId: "669414548208",
+    appId: "1:669414548208:web:a75d8566dc163819455835",
+    measurementId: "G-6PVD8HK31R"
+  }
 };
 
 /*

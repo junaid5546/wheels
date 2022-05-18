@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { forkJoin, of, Subject, Observer, Observable } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import {  of, Subject } from 'rxjs';
+
 @Injectable({
     providedIn: 'root'
 })
@@ -11,16 +13,16 @@ export class ApiService {
     getTokenAccess: any = {};
     headersConfig: any = {};
     apiRoute: any = {};
-    userId: string = '';
+    userId: string;
     loadingSubscriber = new Subject();
     refreshTokenSubscriber = new Subject();
     errorSubscriber = new Subject();
-
     constructor(public http: HttpClient) { }
 
-    loadConfig(headerValue:any,res:any) {
+
+    loadConfig(headerValue,res) {
         if (localStorage.getItem('LoginResponceToken')) {
-                this.getTokenAccess = JSON.parse(localStorage.getItem('LoginResponceToken')!);
+                this.getTokenAccess = JSON.parse(localStorage.getItem('LoginResponceToken'));
                     if(res == true){this.getTokenAccess.access_token = this.getTokenAccess.access_token}
                     else{this.getTokenAccess.access_token = res}
                     if (headerValue == 'h1') {
@@ -28,7 +30,6 @@ export class ApiService {
                             .set('Content-Type', 'application/json')
                             .set('Accept-Language', 'en-US');
                     } else if (headerValue == 'h2') {
-
                         this.headersConfig = new HttpHeaders()
                             .set('Content-Type', 'application/x-www-form-urlencoded')
                             .set('Authorization', 'Bearer ' + this.getTokenAccess.access_token)
@@ -37,9 +38,9 @@ export class ApiService {
                     } else if (headerValue == 'h3') {
                         this.headersConfig = new HttpHeaders()
                             .set('Content-Type', 'application/json')
-                            //.set('Authorization', 'Bearer ' + this.getTokenAccess.access_token)
+                            .set('Authorization', 'Bearer ' + this.getTokenAccess.access_token)
                             .set('Accept-Language', 'en-US')
-                            //.set('userId', this.getTokenAccess.userId.toString());
+                            .set('userId', this.getTokenAccess.userId.toString());
                     } else if (headerValue == 'h4') {
                         this.headersConfig = new HttpHeaders()
                             .set('Content-Type', 'application/json')
@@ -67,9 +68,8 @@ export class ApiService {
         }
         return of([]);
     }
-        
 
-    get = (route:any, headerValue:any) => {
+    get = (route, headerValue) => {
         return new Promise((resolve, reject) => {
             this.checkIsTokenValidOrNot()
             .then((res: any) => {
@@ -94,15 +94,26 @@ export class ApiService {
             });
         });
     }
+    google = (route, headerValue) => {
+        return new Promise((resolve, reject) => {
+                    this.http.get(route.apiroute)
+                    .subscribe(res => {
+                        resolve(res);
+                    }, (err) => {
+                      this.errorSubscriber.next(err)
+                        reject();
+                    });
+                })
+    }
 
-    post = (route:any, headerValue:any) => {
+    post = (route, headerValue) => {
         return new Promise((resolve, reject) => {
             this.checkIsTokenValidOrNot()
             .then(res => {
-                 console.log('res POST toke res token or boolean',res);
+                // console.log('res POST toke res token or boolean',res);
                 this.loadConfig(headerValue,res)
                 .subscribe(config => {
-                     console.log('POST method called !!!', config);
+                    // console.log('POST method called !!!');
                     this.http.post(this.appBaseUrl + route.apiroute, route.data, {
                         headers: this.headersConfig
                     })
@@ -122,7 +133,7 @@ export class ApiService {
         });
     }
 
-    put = (route:any, headerValue:any) => {
+    put = (route, headerValue) => {
         return new Promise((resolve, reject) => {
             this.checkIsTokenValidOrNot()
             .then(res => {
@@ -147,7 +158,7 @@ export class ApiService {
         });
     }
 
-    delete = (route:any, headerValue:any) => {
+    delete = (route, headerValue) => {
         return new Promise((resolve, reject) => {
             this.checkIsTokenValidOrNot()
             .then(res => {
@@ -174,14 +185,12 @@ export class ApiService {
 
     checkIsTokenValidOrNot() {
         return new Promise((resolve, reject) => {
-            
-            if (1==1) {
-               resolve(true)
-            } else {
-                reject();
-            }
+           resolve(true);
         });
-        
     }
+
+    getRefreshToken(refreshToken) {
+    }
+
 
 }

@@ -5,9 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from 'dm-apis';
-import { UserRegistration } from './user-model/user';
-import { ApiService } from './api.service'
-
+import { ApiService } from './api.service';
+import { FirebaseService } from './firebase.service';
+import { UserRegistration } from './Interface/user';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -31,6 +31,7 @@ export class AppComponent  implements OnInit  {
       private contexts: ChildrenOutletContexts,
       private apiService:ApiService,
       private router:Router,
+      private firebase:FirebaseService,
       public translate: TranslateService) {
 
       this.translate.setDefaultLang('ar');
@@ -42,12 +43,12 @@ export class AppComponent  implements OnInit  {
   let obj = new UserRegistration();
   obj.firstName = "Muhammad";
   obj.lastName  = "Gul";
-  obj.phoneOman.areacode = 11;
-  obj.phoneOman.phoneNumber = 1212122;
-
-  obj.getDateOfBirth("19/02/1995");
+  obj.primaryPhone.areacode = 11;
+  obj.primaryPhone.phoneNumber = 12121212121;
+  obj.getDateOfBirth("19/02/1991");
   this.createUser(obj);
-  this.router.navigate(['register']);
+
+  //this.router.navigate(['register']);
   
   this.platform.ready().then(() => {
       
@@ -87,7 +88,7 @@ export class AppComponent  implements OnInit  {
 
 
   ngOnInit(): void {
-    
+ 
   }
     
 
@@ -97,6 +98,7 @@ export class AppComponent  implements OnInit  {
 
 
   createUser(userObj:UserRegistration) {
+    console.log("Creating user");
     const apiRoute: any = {};
     return new Promise((resolve, reject) => {
     apiRoute.apiroute = this.authUrl;
@@ -110,5 +112,5 @@ export class AppComponent  implements OnInit  {
         });
     });
 }
-    
-}
+
+} 
