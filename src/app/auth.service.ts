@@ -6,7 +6,7 @@ import { Auth,RecaptchaVerifier,signInWithPhoneNumber } from "@angular/fire/auth
   providedIn: 'root'
 })
 export class AuthService {
-   
+  widgidId = null;
   recaptchaVerify;
   confirmationResult;
   otpSent:boolean = false;
@@ -23,16 +23,19 @@ export class AuthService {
    
    recaptcha(){
      console.log("called");
-     let widgidId = null;
-     this.recaptchaVerify  =new RecaptchaVerifier('sign-in-button', {
-      'size': 'invisible',
+    
+     this.recaptchaVerify  =new RecaptchaVerifier('recaptcha-container', {
+      'size': 'normal',
       'callback': (response) => {
         // reCAPTCHA solved, allow signInWithPhoneNumber.
         console.log("Recaptcha: ",response);
         this.signInwithPhoneNumber();
       }
     }, this.auth);
-     
+
+    this.recaptchaVerify.render().then((widgetId) => {
+      this.widgidId = widgetId;
+    });
     
    }
 
@@ -45,11 +48,13 @@ export class AuthService {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
       this.confirmationResult = confirmationResult;
+      console.log("confirmationResult", this.confirmationResult);
       // ...
     }).catch((error) => {
       // Error; SMS not sent
       // ...
       console.log("SignIn error: ",error);
+      this.recaptchaVerify.reset(this.widgidId);
     });
    }
 

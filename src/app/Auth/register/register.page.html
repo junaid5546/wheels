@@ -1,10 +1,10 @@
 <app-header [heading]=heading></app-header>
-<div
-id="recaptcha-container"
-class="justify-center flex"
-></div>   
+   
 <ion-content>
- 
+  <div
+  id="recaptcha-container"
+  class="justify-center flex"
+  ></div> 
 <ion-grid>
   <ion-row class="item-container">
  
@@ -147,7 +147,7 @@ class="justify-center flex"
   <ion-row *ngIf="step != 0" class="item-container">
     <ion-col class="name-input-container h-v-centered no-border"  size="12" >
       <div class="day-month-year no-padding half-width">
-      <ion-button id="sign-in-button" (click)="countdown()" [disabled]="isOtpDisabled">
+      <ion-button (click)="countdown()" [disabled]="isOtpDisabled">
         <ion-label id="timer">Send OTP</ion-label>
       </ion-button>
     </div>
