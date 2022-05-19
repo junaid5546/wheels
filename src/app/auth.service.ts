@@ -10,9 +10,8 @@ export class AuthService {
   recaptchaVerify;
   confirmationResult;
   otpSent:boolean = false;
-  authUrl = 'register';
+  authUrl = 'register/';
   existingUser = 'user';
-  appBaseUrl = 'http://45.79.249.189/dm/api/';
 
   constructor(private apiService:ApiService, private auth:Auth) {
     
@@ -78,27 +77,23 @@ checkExistingUser(obj:UserRegistration) {
   
 }
 
-isUserExist(userObj:UserRegistration){
+isUserExist(countryCode:string,phoneNumber:string){
 
-  const apiRoute:any = {};
-  return new Promise((resolve,reject)=>{
-
-    let object = {phone:{areaCode:0,phoneNumber:0}};
-    object.phone.areaCode  = userObj.primaryPhone.areacode;
-    object.phone.phoneNumber  = userObj.primaryPhone.phoneNumber;
-
-    apiRoute.apiroute = `${this.authUrl}/${this.existingUser}`;
-    apiRoute.data = object;
-    this.apiService.post(apiRoute,'h3')
-
-      .then((data:any)=>{
-          resolve(data);
+  const apiRoute: any = {};
+  return new Promise((resolve, reject) => {
+    apiRoute.apiroute = `${this.existingUser}?areaCode=${countryCode}&phoneNumber=${phoneNumber}`;
+    this.apiService
+      .get(apiRoute, 'h3')
+      .then((data: any) => {
+        resolve(data);
       })
-      .catch((error)=>{
-
-          reject(error);
+      .catch((error) => {
+        console.log('Error getting service', error);
+        reject(error);
       });
   });
 }
+
+
 
 }

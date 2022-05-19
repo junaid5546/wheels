@@ -2,14 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IonInput } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
 import { AuthService } from '../../auth.service'
-export interface Register{
-  code:string;
-  number:number,
-  firstName:string,
-  lastName:string,
-  dateOfBirth:string,
-  otpCode:string
-}
+import { UserRegistration } from '../../Interface/user';
 
 @Component({
   selector: 'app-register',
@@ -21,11 +14,13 @@ export class RegisterPage implements OnInit, AfterViewInit {
   // 0 MEANS PHONE
   // 1 MEANS DATE OF BIRTH IT MEANS THAT USER WILL LOGIN
   // 2 MEANS FIRST NAME AND LAST NAME 
+
+  user:UserRegistration = new UserRegistration();
+
   step = 0;
   heading =  {has_main_heading:true, main_heading_name:'Register/Login', has_sub_heading:false, sub_heading_name:''};
   @ViewChild(IonInput, {static:false}) input: IonInput;
   phoneNumber:number[] = [];
-  registrationObj:Register;
   seconds = 60;
   isOtpDisabled:boolean = false;
   buttonText:string = "Send OTP";
@@ -33,7 +28,9 @@ export class RegisterPage implements OnInit, AfterViewInit {
   Dob  = {day:null, month:null, year:null};
 
 
-  constructor(private pickerController: PickerController, private auth:AuthService) { }
+  constructor(private pickerController: PickerController, private auth:AuthService) {
+
+   }
   
 
 
@@ -46,7 +43,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    
+    this.checkIsexist();
   }
 
   // ONCE THEY SELECT COUNTRY CODE MAKE LIST OF INPUT __ __ __ __
@@ -62,14 +59,21 @@ export class RegisterPage implements OnInit, AfterViewInit {
     console.log(doc);
   }
 
-  gotoNextField(current,nextElement,prev, key) {
+  gotoNextField(current,nextElement,prev, key,index) {
     if(key.keyCode != 8 && key.keyCode >=48 && key.keyCode <=57) {
-      this.phoneNumber.push(key.key)
+      this.phoneNumber[index] = key.key;
       console.log(current.value, typeof(current.value));
-      console.log("Key", key);
+      console.log("Key", key, "Phone: ", this.phoneNumber.length);
       nextElement.setFocus();
       if(this.phoneNumber.length == 8){
-        console.log('Phone Number: ', this.phoneNumber);
+          let phone = '';
+        this.phoneNumber.forEach(x=>{
+          console.log(x);
+            phone += x.toString();
+        });
+        console.log("Phone", phone);
+        this.user.primaryPhone.phoneNumber = Number(phone);
+        console.log('User : ',  this.user);
         this.checkIsexist();
       }
     } else if(key.keyCode == 8) {
@@ -82,6 +86,9 @@ export class RegisterPage implements OnInit, AfterViewInit {
   }
 
   selectCountryCode(code,first){
+    console.log(code);
+    this.user.primaryPhone.areacode = Number(code.detail.value.split('+')[1]);
+    console.log("User:", this.user);
     console.log('Input', this.input);
     first.setFocus();
   }
@@ -203,8 +210,14 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
 
   async checkIsexist(){
-    console.log("Checking exist");
-    this.step = 1
+    
+    this.auth.isUserExist(this.user.primaryPhone.areacode.toString(), this.user.primaryPhone.phoneNumber.toString())
+    .then((res)=>{
+      console.log("Check api response: ", res);
+    })
+    .catch((error)=>{
+      console.log("APi error checking existing user: ", error);
+    })
   }
 
 
