@@ -2,7 +2,6 @@ import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader, TranslatePipe } from '@ngx-translate/core';
@@ -16,12 +15,12 @@ import { SwiperModule } from "swiper/angular";
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
-import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 
 // FIREBASE
 import { environment } from 'src/environments/environment';
 import { provideFirebaseApp, initializeApp} from '@angular/fire/app';
 import { getFirestore, provideFirestore} from '@angular/fire/firestore';
+import { provideAuth,getAuth } from '@angular/fire/auth';  
 
 Injectable()
 
@@ -32,7 +31,8 @@ export function setTranslateLoader(http: HttpClient) {
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-    provideFirebaseApp(()=>initializeApp(environment.firebaseConfig)),
+    provideFirebaseApp(()=>initializeApp(environment.firebase)),
+    provideAuth(()=> getAuth()),
     provideFirestore(()=> getFirestore()),
     HttpClientModule,
     BrowserAnimationsModule,
@@ -48,9 +48,7 @@ export function setTranslateLoader(http: HttpClient) {
     BrowserAnimationsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Diagnostic,
-    HTTP,
     OpenNativeSettings,
-    FilePath,
     WebView,
     CallNumber,
     InAppBrowser,

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IonInput } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
-
+import { AuthService } from '../../auth.service'
 export interface Register{
   code:string;
   number:number,
@@ -17,7 +17,12 @@ export interface Register{
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit, AfterViewInit {
-
+  // THREE STEPS LOGIN/REGISTER
+  // 0 MEANS PHONE
+  // 1 MEANS DATE OF BIRTH IT MEANS THAT USER WILL LOGIN
+  // 2 MEANS FIRST NAME AND LAST NAME 
+  step = 0;
+  heading =  {has_main_heading:true, main_heading_name:'Register/Login', has_sub_heading:false, sub_heading_name:''};
   @ViewChild(IonInput, {static:false}) input: IonInput;
   phoneNumber:number[] = [];
   registrationObj:Register;
@@ -28,7 +33,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
   Dob  = {day:null, month:null, year:null};
 
 
-  constructor(private pickerController: PickerController) { }
+  constructor(private pickerController: PickerController, private auth:AuthService) { }
   
 
 
@@ -65,7 +70,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
       nextElement.setFocus();
       if(this.phoneNumber.length == 8){
         console.log('Phone Number: ', this.phoneNumber);
-        
+        this.checkIsexist();
       }
     } else if(key.keyCode == 8) {
       prev.setFocus();  
@@ -143,6 +148,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
   }
 
   sendOTP() {
+    this.auth.recaptcha();
     let x = setInterval(()=> {
 
       // Get today's date and time
@@ -189,9 +195,16 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
 
    countdown() {
-    let counter =  setInterval(() => {
+     this.auth.recaptcha();
+    /*let counter =  setInterval(() => {
         this.tick(counter);
-      }, 1000);
+      }, 1000);*/
+  }
+
+
+  async checkIsexist(){
+    console.log("Checking exist");
+    this.step = 1
   }
 
 

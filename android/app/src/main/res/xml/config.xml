@@ -10,27 +10,8 @@
     <param name="android-package" value="com.phonegap.plugins.nativesettings.NativeSettings"/>
   </feature>
 
-  <feature name="CordovaHttpPlugin">
-    <param name="android-package" value="com.silkimen.cordovahttp.CordovaHttpPlugin"/>
-  </feature>
-
   <feature name="Permissions">
     <param name="android-package" value="com.android.plugins.Permissions"/>
-  </feature>
-
-  <feature name="FilePath">
-    <param name="android-package" value="com.hiddentao.cordova.filepath.FilePath"/>
-    <param name="onload" value="true"/>
-  </feature>
-
-  <feature name="FirebasePlugin">
-    <param name="android-package" value="org.apache.cordova.firebase.FirebasePlugin"/>
-    <param name="onload" value="true"/>
-  </feature>
-
-  <feature name="FirebaseAuthentication">
-    <param name="android-package" value="by.chemerisuk.cordova.firebase.FirebaseAuthenticationPlugin"/>
-    <param name="onload" value="false"/>
   </feature>
 
   <feature name="InAppBrowser">

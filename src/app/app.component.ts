@@ -4,7 +4,6 @@ import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { Router } from '@angular/router';
-import { AuthService } from 'dm-apis';
 import { ApiService } from './api.service';
 import { FirebaseService } from './firebase.service';
 import { UserRegistration } from './Interface/user';
@@ -25,7 +24,7 @@ export class AppComponent  implements OnInit  {
   lang: string = 'ar'; // ar, en
   theme: string = 'light'; // light, dark
   
-  constructor( private authService:AuthService,
+  constructor( 
      private platform: Platform,
       private deviceInfo:DeviceInfoService,
       private contexts: ChildrenOutletContexts,
@@ -48,7 +47,7 @@ export class AppComponent  implements OnInit  {
   obj.getDateOfBirth("19/02/1991");
   this.createUser(obj);
 
-  //this.router.navigate(['register']);
+  this.router.navigate(['register']);
   
   this.platform.ready().then(() => {
       
