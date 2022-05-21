@@ -74,7 +74,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
         console.log("Phone", phone);
         this.user.primaryPhone.phoneNumber = Number(phone);
         console.log('User : ',  this.user);
-        this.checkIsexist();
+        this.countdown();
       }
     } else if(key.keyCode == 8) {
       prev.setFocus();  
@@ -156,29 +156,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
   sendOTP() {
     this.auth.recaptcha();
-    let x = setInterval(()=> {
-
-      // Get today's date and time
-      let now = new Date().getTime();
-      this.isOtpDisabled = true;
-      // Find the distance between now and the count down date
-      let distance = this.countDownDate - now;
-    
-      // Time calculations for days, hours, minutes and seconds
-      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      // Display the result in the element with id="demo"
-      document.getElementById("timer").innerHTML =  minutes + "m " + seconds + "s ";
-    
-      // If the count down is finished, write some text
-      if (distance < 0) {
-        console.log('Clearing distn');
-        clearInterval(x);
-        document.getElementById("timer").innerHTML = "EXPIRED";
-        this.isOtpDisabled = false;
-      }
-    }, 1000);
+  
   }
 
   tick(counterRef) {
@@ -202,10 +180,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
 
    countdown() {
-     this.auth.recaptcha();
-    /*let counter =  setInterval(() => {
-        this.tick(counter);
-      }, 1000);*/
+    this.auth.signInwithPhoneNumber()
   }
 
 
@@ -221,4 +196,10 @@ export class RegisterPage implements OnInit, AfterViewInit {
   }
 
 
+ async ionViewDidEnter() {
+   this.auth.recaptcha();
+ }
+  ionViewDidLoad() {
+    this.auth.recaptcha();
+  }
 }

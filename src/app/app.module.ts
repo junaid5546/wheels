@@ -8,7 +8,6 @@ import { TranslateModule, TranslateLoader, TranslatePipe } from '@ngx-translate/
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
 import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
 import { SwiperModule } from "swiper/angular";
@@ -47,7 +46,7 @@ export function setTranslateLoader(http: HttpClient) {
   }),
     BrowserAnimationsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Diagnostic,
+  
     OpenNativeSettings,
     WebView,
     CallNumber,

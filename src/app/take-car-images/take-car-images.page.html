@@ -5,8 +5,15 @@
 
 
 <ion-content fullscreen="true" >
-  <div #item class="select-images-button" >
-    <ion-button (click)="pickImages()">
+  <div #item class="select-images-button">
+    <input 
+    type="file"
+    #fileInput
+    (change)="uploadFile($event)"
+    hidden="true"
+    accept="image/*"
+    />
+    <ion-button  (click)="takeImageFromGallery()">
       <div class="logo-and-label-container">
   
         <div class="logo">

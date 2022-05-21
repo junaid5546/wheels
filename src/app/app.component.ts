@@ -47,7 +47,7 @@ export class AppComponent  implements OnInit  {
   obj.getDateOfBirth("19/02/1991");
   this.createUser(obj);
 
-  this.router.navigate(['register']);
+  this.router.navigate(['take-car-images']);
   
   this.platform.ready().then(() => {
       

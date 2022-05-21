@@ -11,6 +11,7 @@ export class AuthService {
   confirmationResult;
   otpSent:boolean = false;
   authUrl = 'register/';
+  postUrl = 'vehicleForSale/post';
   existingUser = 'user';
 
   constructor(private apiService:ApiService, private auth:Auth) {
@@ -28,32 +29,39 @@ export class AuthService {
       'callback': (response) => {
         // reCAPTCHA solved, allow signInWithPhoneNumber.
         console.log("Recaptcha: ",response);
-        this.signInwithPhoneNumber();
+        //this.signInwithPhoneNumber();
       }
     }, this.auth);
 
     this.recaptchaVerify.render().then((widgetId) => {
       this.widgidId = widgetId;
+      console.log("ID:", this.widgidId);
     });
     
    }
 
-
-
    async signInwithPhoneNumber() {
-     console.log("Method called");
+     console.log("Method called" , this.recaptchaVerify);
+
     signInWithPhoneNumber(this.auth, "+96897022005", this.recaptchaVerify)
     .then((confirmationResult) => {
       // SMS sent. Prompt user to type the code from the message, then sign the
       // user in with confirmationResult.confirm(code).
       this.confirmationResult = confirmationResult;
       console.log("confirmationResult", this.confirmationResult);
+      confirmationResult.confirm('111222')
+      .then((resp)=>{
+        console.log("Response: ", resp);
+      })
+      .catch((error=>{
+        console.log("error while confirming", error);
+      }))
       // ...
     }).catch((error) => {
       // Error; SMS not sent
       // ...
       console.log("SignIn error: ",error);
-      this.recaptchaVerify.reset(this.widgidId);
+      //this.recaptchaVerify.reset(this.widgidId);
     });
    }
 
@@ -93,6 +101,9 @@ isUserExist(countryCode:string,phoneNumber:string){
       });
   });
 }
+
+
+
 
 
 

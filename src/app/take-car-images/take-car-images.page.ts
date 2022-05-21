@@ -6,6 +6,7 @@ import { PermissionsService } from '../Services/permissions.service';
 import { ModalControllerService } from '../Services/modal-controller.service';
 import { AnimationController,Animation } from '@ionic/angular';
 import { DeviceInfoService } from '../Services/device-info.service';
+import { CamGalService } from '../Services/cam-gal.service';
 @Component({
   selector: 'app-take-car-images',
   templateUrl: './take-car-images.page.html',
@@ -48,6 +49,7 @@ drop(event: CdkDragDrop<string[]>) {
 }
 
   constructor(
+    private camGal:CamGalService,
     private cam:CameraServiceService, private permission:PermissionsService,
     private modalService:ModalControllerService,
     private amimationCtrl:AnimationController,
@@ -57,7 +59,7 @@ drop(event: CdkDragDrop<string[]>) {
      }
 
      ngOnInit(): void {
-      this.presentModal();
+     // this.presentModal();
        let IsModelInitialized =  this.modalService.startIndexing();
        if(IsModelInitialized.status){
          this.modalService.updatecurrentObject();
@@ -185,6 +187,18 @@ drop(event: CdkDragDrop<string[]>) {
   popImages(){
     this.carImages.pop();
     this.checkImagesLength();
+  }
+
+  uploadFile(file){
+
+  }
+
+  captureImage(){
+    this.camGal.captureImage();
+  }
+
+  takeImageFromGallery() {
+    this.camGal.getLibraryImages();
   }
      
 }

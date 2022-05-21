@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">dm-mobile-app</string>
     <string name="title_activity_main">dm-mobile-app</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">d.mall</string>
+    <string name="custom_url_scheme">d.mall</string>
 </resources>
