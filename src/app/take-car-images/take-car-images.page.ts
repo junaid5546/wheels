@@ -137,7 +137,6 @@ drop(event: CdkDragDrop<string[]>) {
 
   checkModalCurrentState(){
    this.modalStartingPoint =  this.modalService.getCurrentState();
-  
   }
 
   ngAfterViewInit() {
@@ -184,6 +183,14 @@ drop(event: CdkDragDrop<string[]>) {
     }
   }
 
+  canTakeImages (){
+    if(this.carImages.length < 20){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   popImages(){
     this.carImages.pop();
     this.checkImagesLength();
@@ -197,8 +204,17 @@ drop(event: CdkDragDrop<string[]>) {
     this.camGal.captureImage();
   }
 
-  takeImageFromGallery() {
-    this.camGal.getLibraryImages();
-  }
+ async takeImageFromGallery() {
+   if(this.canTakeImages()){
+  this.checkImagesLength();
+   let images = await this.camGal.getLibraryImages();
+   console.log("Gallery Images Fresh",images);
+  this.carImages =  this.carImages.concat(images);
+  console.log("Gallery Images all",this.carImages);
+      } else {
+            return;
+        }
+  
+}
      
 }

@@ -20,6 +20,8 @@ import { environment } from 'src/environments/environment';
 import { provideFirebaseApp, initializeApp} from '@angular/fire/app';
 import { getFirestore, provideFirestore} from '@angular/fire/firestore';
 import { provideAuth,getAuth } from '@angular/fire/auth';  
+import { provideStorage } from '@angular/fire/storage';
+import { getStorage } from 'firebase/storage';
 Injectable()
 
 export function setTranslateLoader(http: HttpClient) {
@@ -31,6 +33,7 @@ export function setTranslateLoader(http: HttpClient) {
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     provideFirebaseApp(()=>initializeApp(environment.firebase)),
     provideAuth(()=> getAuth()),
+    provideStorage(()=> getStorage()),
     provideFirestore(()=> getFirestore()),
     HttpClientModule,
     BrowserAnimationsModule,

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { collectionData, doc, docData, Firestore, addDoc } from '@angular/fire/firestore';
+import { collectionData, doc, docData, Firestore, addDoc, setDoc, getDoc, } from '@angular/fire/firestore';
+import { getStorage, ref, uploadBytes, uploadString } from '@angular/fire/storage';
 import { collection } from 'firebase/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { UserRegistration } from './Interface/user';
 
 
@@ -10,6 +11,8 @@ import { UserRegistration } from './Interface/user';
 })
 
 export class FirebaseService {
+
+  userId = new Subject<string>();
 
  constructor(private firestore:Firestore){}
 
@@ -31,8 +34,8 @@ async addNewUser(user:UserRegistration){
   let obj = Object.assign({},user);
   console.log(obj);
   try {
-        const docRef = await addDoc(collection(this.firestore,'users'), obj);
-        console.log("Document written with ID: ", docRef.id);
+        const docRef = await setDoc(doc(this.firestore,'users',''), obj);
+          
 
   } catch (error) {
         console.error("Error adding document: ", error); 
@@ -41,8 +44,26 @@ async addNewUser(user:UserRegistration){
 
  }
 
+ 
+
+async uploadImage(blob,imageName){
+  const storage = getStorage();
+  console.log("STORAGE: ", storage);
+  const storageRef = ref(storage, `images/${imageName}`);
+  console.log("REF: ", storageRef);
+  uploadBytes(storageRef, blob).then((snapshot) => {
+  console.log('Uploaded a blob or file!',snapshot);
+});
+ 
+
+}
 
 
+async getDoc(id:string) {
+
+  const docRef = doc(this.firestore, "users", id);
+  
+}
 
 
 }
