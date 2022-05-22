@@ -4,7 +4,7 @@ import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
   providedIn: 'root'
 })
 export class FileSystemService {
-
+ 
   constructor() { }
 /**
  * @param object
@@ -20,8 +20,7 @@ export class FileSystemService {
      });
   };
 
-  uploadImages(images){
-    
-  }
+  
+
  
 }

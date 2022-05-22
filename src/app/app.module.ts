@@ -20,7 +20,6 @@ import { environment } from 'src/environments/environment';
 import { provideFirebaseApp, initializeApp} from '@angular/fire/app';
 import { getFirestore, provideFirestore} from '@angular/fire/firestore';
 import { provideAuth,getAuth } from '@angular/fire/auth';  
-
 Injectable()
 
 export function setTranslateLoader(http: HttpClient) {
@@ -46,7 +45,7 @@ export function setTranslateLoader(http: HttpClient) {
   }),
     BrowserAnimationsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-  
+
     OpenNativeSettings,
     WebView,
     CallNumber,

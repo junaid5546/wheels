@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ChildrenOutletContexts } from '@angular/router';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
-import { FirebaseService } from './firebase.service';
 import { UserRegistration } from './Interface/user';
 @Component({
   selector: 'app-root',
@@ -30,7 +29,6 @@ export class AppComponent  implements OnInit  {
       private contexts: ChildrenOutletContexts,
       private apiService:ApiService,
       private router:Router,
-      private firebase:FirebaseService,
       public translate: TranslateService) {
 
       this.translate.setDefaultLang('ar');
@@ -39,18 +37,18 @@ export class AppComponent  implements OnInit  {
 
   initializeApp() {
 
-  let obj = new UserRegistration();
+     /*let obj = new UserRegistration();
   obj.firstName = "Muhammad";
   obj.lastName  = "Gul";
   obj.primaryPhone.areacode = 11;
   obj.primaryPhone.phoneNumber = 12121212121;
   obj.getDateOfBirth("19/02/1991");
   this.createUser(obj);
-
+*/
   this.router.navigate(['take-car-images']);
   
-  this.platform.ready().then(() => {
-      
+  this.platform.ready().then((plt) => {
+
       // SETTING DEVICE HEIGHT AND WIDTH
       this.deviceInfo.setDeviceHeight(this.platform.height());
      
@@ -85,6 +83,8 @@ export class AppComponent  implements OnInit  {
     });
   }
 
+
+  
 
   ngOnInit(): void {
  

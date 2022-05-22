@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Camera, CameraDirection, CameraResultType,ImageOptions,GalleryImageOptions } from '@capacitor/camera';
 import { Image } from '../Interface/image';
+import { FileSystemService } from './file-system.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +22,7 @@ export class CamGalService {
     limit:20
   }
 
-  constructor() { }
+  constructor(private fileSystem:FileSystemService) { }
 
   /***
    * THIS FUNCTION TAKES IMAGE FROM CAM AND SENDS YOU DataUrl
@@ -41,8 +42,10 @@ export class CamGalService {
     console.log("Gallery Images", images.photos);
     let files: File[] = [];
         for (var i = 0; i < images.photos.length; i++) {
-        console.log('Image URI: ' + images.photos[i]);
-        
+          //name.substring(name.lastIndexOf('/')+1)
+        let file_Name = images.photos[i].path.substring(images.photos[i].path.lastIndexOf("/") + 1);
+        console.log("File Name: ", file_Name);
+        console.log('Image URI: ' + images.photos[i].path);
        }
   }
 
