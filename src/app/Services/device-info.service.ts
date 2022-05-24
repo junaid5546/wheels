@@ -8,7 +8,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class DeviceInfoService {
-  filter$ = new BehaviorSubject('all');
+
+  private platform = null;
+
+ filter$ = new BehaviorSubject('all');
  private height:number = null;
  private width:number = null;
 
@@ -140,5 +143,12 @@ export class DeviceInfoService {
     .catch(err => console.log('Error launching dialer', err));
   }
 
+   setPlatform(_name) {
+    this.platform = _name;
+  }
+
+  getPlatform() {
+    return this.platform;
+  }
   
 }

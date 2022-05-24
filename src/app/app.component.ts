@@ -6,6 +6,8 @@ import { ChildrenOutletContexts } from '@angular/router';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
 import { UserRegistration } from './Interface/user';
+import { Capacitor } from '@capacitor/core';
+export type platform_name = 'ios' | 'android' | 'web' ;
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -13,7 +15,7 @@ import { UserRegistration } from './Interface/user';
 })
 
 export class AppComponent  implements OnInit  {
-
+  platform_name:platform_name;
   authUrl = 'register';
   apiRoute: any = {};
   getTokenAccess: any = {};
@@ -36,7 +38,13 @@ export class AppComponent  implements OnInit  {
   }
 
   initializeApp() {
-
+    if (Capacitor.getPlatform() === (this.platform_name = 'ios')) {
+      console.log("Platform:", "IOS");
+    } else if(Capacitor.getPlatform() === (this.platform_name = 'android' )){
+      console.log("Platform:", "Android");
+    } else if(Capacitor.getPlatform() == (this.platform_name = 'web')){
+      console.log('Platform:', "Web");
+    }
      /*let obj = new UserRegistration();
   obj.firstName = "Muhammad";
   obj.lastName  = "Gul";

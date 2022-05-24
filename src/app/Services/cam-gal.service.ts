@@ -11,11 +11,13 @@ export class CamGalService {
   imagesCount:number = 0;
 
   private cameraOptions:ImageOptions = {
+    
     quality: 100,
     resultType:CameraResultType.Uri,
     direction:CameraDirection.Rear,
     presentationStyle:'popover',
     webUseInput:true
+
   };
 
   private galleryOptions:GalleryImageOptions = {
