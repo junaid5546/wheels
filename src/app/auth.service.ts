@@ -6,12 +6,16 @@ import { Auth,RecaptchaVerifier,signInWithPhoneNumber } from "@angular/fire/auth
   providedIn: 'root'
 })
 export class AuthService {
+
+
+
   widgidId = null;
   recaptchaVerify;
   confirmationResult;
   otpSent:boolean = false;
   authUrl = 'register/';
   postUrl = 'vehicleForSale/post';
+  vehicleMaster = 'master/vehicles/makes';
   existingUser = 'user';
 
   constructor(private apiService:ApiService, private auth:Auth) {
@@ -102,9 +106,24 @@ isUserExist(countryCode:string,phoneNumber:string){
   });
 }
 
+getAllMakes(){
 
+  const apiRoute: any = {};
+  return new Promise((resolve, reject) => {
+    apiRoute.apiroute = `${this.vehicleMaster}`;
+    this.apiService
+      .get(apiRoute, 'h3')
+      .then((data: any) => {
+        console.log("All Makes: ", data);
+        resolve(data);
+      })
+      .catch((error) => {
+        console.log('Error getting service makes', error);
+        reject(error);
+      });
+  });
 
-
+}
 
 
 }

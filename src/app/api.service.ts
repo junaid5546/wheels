@@ -38,9 +38,8 @@ export class ApiService {
                     } else if (headerValue == 'h3') {
                         this.headersConfig = new HttpHeaders()
                             .set('Content-Type', 'application/json')
-                            .set('Authorization', 'Bearer ' + this.getTokenAccess.access_token)
+                            .set('Authorization', this.getTokenAccess.access_token)
                             .set('Accept-Language', 'en-US')
-                            .set('userId', this.getTokenAccess.userId.toString());
                     } else if (headerValue == 'h4') {
                         this.headersConfig = new HttpHeaders()
                             .set('Content-Type', 'application/json')

@@ -37,6 +37,9 @@ export class AppComponent  implements OnInit  {
       this.translate.setDefaultLang('ar');
       this.initializeApp();
   }
+  ngOnInit(): void {
+    this.initializeApp();
+  }
 
   initializeApp() {
     if (Capacitor.getPlatform() === (this.platform_name = 'ios')) {
@@ -46,14 +49,15 @@ export class AppComponent  implements OnInit  {
     } else if(Capacitor.getPlatform() == (this.platform_name = 'web')){
       console.log('Platform:', "Web");
     }
-     /*let obj = new UserRegistration();
-  obj.firstName = "Muhammad";
-  obj.lastName  = "Gul";
-  obj.primaryPhone.areacode = 11;
-  obj.primaryPhone.phoneNumber = 12121212121;
+  let obj = new UserRegistration();
+  obj.first_name = "Muhammad";
+  obj.last_name  = "Gul";
+  obj.primary_phone.areaCode = 11;
+  obj.primary_phone.phoneNumber = 12121212121;
   obj.getDateOfBirth("19/02/1991");
-  this.createUser(obj);
-*/
+  console.log("OBJ ", obj);
+
+
   this.router.navigate(['take-car-images']);
   
   this.platform.ready().then((plt) => {
@@ -95,30 +99,6 @@ export class AppComponent  implements OnInit  {
 
   
 
-  ngOnInit(): void {
- 
-  }
     
-
-  getPosts() {
-  
-  }
-
-
-  createUser(userObj:UserRegistration) {
-    console.log("Creating user");
-    const apiRoute: any = {};
-    return new Promise((resolve, reject) => {
-    apiRoute.apiroute = this.authUrl;
-    apiRoute.data = userObj;
-    this.apiService.post(apiRoute, 'h3')
-        .then((data: any) => {
-            resolve(data);
-        })
-        .catch((error) => {
-            reject(error);
-        });
-    });
-}
 
 } 

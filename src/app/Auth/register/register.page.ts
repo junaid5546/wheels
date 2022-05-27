@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { IonInput } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
-import { AuthService } from '../../auth.service'
 import { UserRegistration } from '../../Interface/user';
+import { AuthenticationService } from '../../Services/authentication.service';
+// RxJS v6+
+import { timer } from 'rxjs';
+
 
 @Component({
   selector: 'app-register',
@@ -14,21 +17,24 @@ export class RegisterPage implements OnInit, AfterViewInit {
   // 0 MEANS PHONE
   // 1 MEANS DATE OF BIRTH IT MEANS THAT USER WILL LOGIN
   // 2 MEANS FIRST NAME AND LAST NAME 
+  // 3 OTP ENTER 
 
   user:UserRegistration = new UserRegistration();
-
+  timer = timer(1000,2000);
   step = 0;
   heading =  {has_main_heading:true, main_heading_name:'Register/Login', has_sub_heading:false, sub_heading_name:''};
   @ViewChild(IonInput, {static:false}) input: IonInput;
   phoneNumber:number[] = [];
+  otp:number[] = [];
   seconds = 60;
   isOtpDisabled:boolean = false;
   buttonText:string = "Send OTP";
+
   countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
   Dob  = {day:null, month:null, year:null};
 
 
-  constructor(private pickerController: PickerController, private auth:AuthService) {
+  constructor(private pickerController: PickerController, private auth:AuthenticationService) {
 
    }
   
@@ -43,7 +49,6 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    this.checkIsexist();
   }
 
   // ONCE THEY SELECT COUNTRY CODE MAKE LIST OF INPUT __ __ __ __
@@ -72,9 +77,45 @@ export class RegisterPage implements OnInit, AfterViewInit {
             phone += x.toString();
         });
         console.log("Phone", phone);
-        this.user.primaryPhone.phoneNumber = Number(phone);
+        this.user.primary_phone.phoneNumber = Number(phone);
         console.log('User : ',  this.user);
-        this.countdown();
+        this.checkIsexist();
+      }
+    } else if(key.keyCode == 8) {
+      prev.setFocus();  
+      this.phoneNumber.pop();
+    } else {
+      current.value = '';
+    }
+   
+  }
+
+  gotoNextFieldOTP(current,nextElement,prev, key,index) {
+    if(key.keyCode != 8 && key.keyCode >=48 && key.keyCode <=57) {
+      this.otp[index] = key.key;
+      console.log(current.value, typeof(current.value));
+      console.log("Key", key, "Phone: ", this.otp.length);
+      nextElement.setFocus();
+      if(this.otp.length == 6){
+          let otp = '';
+        this.otp.forEach(x=>{
+          console.log(x);
+          otp += x.toString();
+        });
+       // AUTH CONFIRM PIN.
+      this.auth.confirmPin(otp)
+      .then((result)=>{
+        console.log("Pin Confirmation Result: ", result);
+        if(this.auth.getIsExist()){
+          this.login();
+        } else {
+          this.auth.registerNewUser(this.user);
+        }
+      })
+      .catch(error=>{
+        console.log("Wrong pin",error);
+        // CLEAR CODE INPUT
+      })
       }
     } else if(key.keyCode == 8) {
       prev.setFocus();  
@@ -87,7 +128,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
   selectCountryCode(code,first){
     console.log(code);
-    this.user.primaryPhone.areacode = Number(code.detail.value.split('+')[1]);
+    this.user.primary_phone.areaCode = Number(code.detail.value.split('+')[1]);
     console.log("User:", this.user);
     console.log('Input', this.input);
     first.setFocus();
@@ -113,9 +154,10 @@ export class RegisterPage implements OnInit, AfterViewInit {
           text: 'Confirm',
           handler: (selected) => {
             console.log(selected);
-            this.Dob.day = selected.day.text;
-            this.Dob.month = selected.month.text
-            this.Dob.year = selected.Year.text
+            this.Dob.day = selected.day.value;
+            this.Dob.month = selected.month.value
+            this.Dob.year = selected.Year.value
+            this.user.getDateOfBirth(`${this.Dob.day}/${this.Dob.month}/${this.Dob.year}`);
             //this.selectedAnimal = selected.day.value;
           },
         }
@@ -124,20 +166,20 @@ export class RegisterPage implements OnInit, AfterViewInit {
         {
           name: 'day',
           options: [
-            { text: '1', value: '1' },
-            { text: '2', value: '2' },
-            { text: '3', value: '3' },
-            { text: '4', value: '4' },
-            { text: '5', value: '5' },
-            { text: '6', value: '6' },
-            { text: '7', value: '7' }
+            { text: '1', value: '01' },
+            { text: '2', value: '02' },
+            { text: '3', value: '03' },
+            { text: '4', value: '04' },
+            { text: '5', value: '05' },
+            { text: '6', value: '06' },
+            { text: '7', value: '07' }
           ]
         },
         {
           name:'month',
-          options:[{text:'Jan', value:'1'},{text:'Feb',value:"2"},{text:"Mar",value:'3'},{text:'April',value:4},
-                  {text:'May', value:5}, {text:'June', value:6}, {text:'July', value:7}, {text:'August', value:8},
-                {text:'September', value:9}, {text:'October', value:10},{text:'November', value:11}, {text:'December', value:12}]
+          options:[{text:'Jan', value:'01'},{text:'Feb',value:"02"},{text:"Mar",value:'03'},{text:'April',value:'04'},
+                  {text:'May', value:'05'}, {text:'June', value:'06'}, {text:'July', value:'07'}, {text:'August', value:'08'},
+                {text:'September', value:'09'}, {text:'October', value:'10'},{text:'November', value:'11'}, {text:'December', value:'12'}]
 
         },
         {
@@ -156,49 +198,69 @@ export class RegisterPage implements OnInit, AfterViewInit {
 
   sendOTP() {
     this.auth.recaptcha();
-  
   }
 
-  tick(counterRef) {
-    console.log('In tick');
-    var counter = document.getElementById("timer");
-    if(this.seconds>0){
-    this.seconds--;
-    this.isOtpDisabled = true;
-    counter.innerHTML = "0:" + (this.seconds < 10 ? "0" : "") + String(this.seconds);
-    }  else {
-    
-      clearInterval(counterRef);
-      this.isOtpDisabled = false;
-      this.seconds = 60;
-      console.log('In else', this.isOtpDisabled);
-      document.getElementById("timer").innerText = `Resend`;
-    }
-    
+  tick() {
+    const subscribe = this.timer.subscribe(val => {
+      console.log('In tick',val);
+      var counter = document.getElementById("timer");
+      if(this.seconds>0){
+      this.seconds--;
+      this.isOtpDisabled = true;
+      counter.innerHTML = "0:" + (this.seconds < 10 ? "0" : "") + String(this.seconds);
+}  else {
+
+  this.isOtpDisabled = false;
+  this.seconds = 60;
+  console.log('In else', this.isOtpDisabled);
+  document.getElementById("timer").innerText = `Resend`;
+}
+    }); 
   }
 
 
 
    countdown() {
-    this.auth.signInwithPhoneNumber()
+    this.auth.signInwithPhoneNumber(`+${this.user.primary_phone.areaCode}${this.user.primary_phone.phoneNumber}`)
+    .then((res)=>{
+      if(res){
+       //emit 0 after 1 second then complete, since no second argument is supplied
+       this.step = 3;
+         this.tick();
+      }
+    })
   }
 
 
   async checkIsexist(){
     
-    this.auth.isUserExist(this.user.primaryPhone.areacode.toString(), this.user.primaryPhone.phoneNumber.toString())
+   this.auth.isUserExist(this.user.primary_phone.areaCode, this.user.primary_phone.phoneNumber)
     .then((res)=>{
-      console.log("Check api response: ", res);
+      if(res['code'] === 3) {
+        // USER DOES NOT EXIST CREATE NEW USER 
+        this.step = 2;
+        this.auth.setIsExist(false);
+        console.log("DOES NOT EXIST");
+      } else {
+        this.auth.setIsExist(true);
+        console.log("EXIST");
+       this.step = 1;
+      }
     })
     .catch((error)=>{
       console.log("APi error checking existing user: ", error);
     })
   }
-
+  
+  login(){
+    let obj = {phone:this.user.primary_phone,dob:this.user.dob};
+    this.auth.login(obj);
+  }
 
  async ionViewDidEnter() {
    this.auth.recaptcha();
  }
+
   ionViewDidLoad() {
     this.auth.recaptcha();
   }
