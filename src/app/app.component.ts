@@ -8,11 +8,13 @@ import { ApiService } from './api.service';
 import { UserRegistration } from './Interface/user';
 import { Capacitor } from '@capacitor/core';
 export type platform_name = 'ios' | 'android' | 'web' ;
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
+
 
 export class AppComponent  implements OnInit  {
   platform_name:platform_name;
@@ -20,7 +22,6 @@ export class AppComponent  implements OnInit  {
   apiRoute: any = {};
   getTokenAccess: any = {};
   refreshToken: any = {};
-
 
   lang: string = 'ar'; // ar, en
   theme: string = 'light'; // light, dark
