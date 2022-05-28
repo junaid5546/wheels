@@ -18,6 +18,8 @@ export class UserRegistration {
       console.log('TimeStamp', timeStamp.getTime());
       this.dob = timeStamp.getTime();
   }
+
+  
 }
       
       

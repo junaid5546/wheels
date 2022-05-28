@@ -3,6 +3,7 @@ import { IonInput } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
 import { UserRegistration } from '../../Interface/user';
 import { AuthenticationService } from '../../Services/authentication.service';
+import { ModalControllerService } from '../../Services/modal-controller.service';
 // RxJS v6+
 import { timer } from 'rxjs';
 
@@ -34,7 +35,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
   Dob  = {day:null, month:null, year:null};
 
 
-  constructor(private pickerController: PickerController, private auth:AuthenticationService) {
+  constructor(private pickerController: PickerController, private auth:AuthenticationService, private popUp:ModalControllerService) {
 
    }
   
@@ -114,7 +115,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
       })
       .catch(error=>{
         console.log("Wrong pin",error);
-        // CLEAR CODE INPUT
+        this.popUp.presentToast('OTP','Entered Wrong PIN')
       })
       }
     } else if(key.keyCode == 8) {

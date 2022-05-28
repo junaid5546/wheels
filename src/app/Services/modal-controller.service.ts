@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { BehaviorSubject } from "rxjs";
 import { CarInfoModalComponent } from '../Models/car-info-modal/car-info-modal.component';
-import { FiltersComponent } from '../Models/filters/filters.component';
 import { ImagePreviewComponent } from '../Models/image-preview/image-preview.component';
+import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
@@ -54,7 +54,7 @@ export class ModalControllerService {
     length: -1
   };
 
-  constructor(private modalController: ModalController,
+  constructor(private modalController: ModalController,public toastController: ToastController
 
   ) { }
 
@@ -291,4 +291,23 @@ return await modal.present();
   dismissImagePreviewModal(){
     this.modalController.dismiss();
   }
+
+/**
+ * 
+ * @param header
+ * @param message
+ */
+  async presentToast(header:string, message:string) {
+    const toast = await this.toastController.create({
+      duration: 2000,
+      color:'warning',
+      cssClass:'toast-warning',
+      position: 'top',
+      icon: 'alert-outline',
+      header: header,
+      message: message,
+    });
+    toast.present();
+  }
+ 
 }

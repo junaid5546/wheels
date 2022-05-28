@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ChildrenOutletContexts } from '@angular/router';
 import { Router } from '@angular/router';
-import { ApiService } from './api.service';
-import { UserRegistration } from './Interface/user';
 import { Capacitor } from '@capacitor/core';
+import { UserDataService } from './Services/user-data.service';
+import { ModalControllerService } from './Services/modal-controller.service';
 export type platform_name = 'ios' | 'android' | 'web' ;
 
 @Component({
@@ -27,18 +26,18 @@ export class AppComponent  implements OnInit  {
   theme: string = 'light'; // light, dark
   
   constructor( 
-     private platform: Platform,
+      private popup:ModalControllerService,
+      private platform: Platform,
       private deviceInfo:DeviceInfoService,
-      private contexts: ChildrenOutletContexts,
-      private apiService:ApiService,
       private router:Router,
+      private userData:UserDataService,
       public translate: TranslateService) {
 
       this.translate.setDefaultLang('ar');
-      this.initializeApp();
   }
   ngOnInit(): void {
     this.initializeApp();
+    this.popup.presentToast('OTP','Entered Wrong PIN')
   }
 
   initializeApp() {
@@ -49,16 +48,21 @@ export class AppComponent  implements OnInit  {
     } else if(Capacitor.getPlatform() == (this.platform_name = 'web')){
       console.log('Platform:', "Web");
     }
-  let obj = new UserRegistration();
-  obj.first_name = "Muhammad";
-  obj.last_name  = "Gul";
-  obj.primary_phone.areaCode = 11;
-  obj.primary_phone.phoneNumber = 12121212121;
-  obj.getDateOfBirth("19/02/1991");
-  console.log("OBJ ", obj);
+
+    
+
+    this.userData.getUserObj()
+    .then((obj)=>{
+      console.log("User OBJ :", JSON.parse(obj.value));
+    })
+
+    this.userData.getUserId()
+    .then((id)=>{
+      console.log("User Id: ",id);
+    });
 
 
-  this.router.navigate(['take-car-images']);
+  this.router.navigate(['register']);
   
   this.platform.ready().then((plt) => {
 

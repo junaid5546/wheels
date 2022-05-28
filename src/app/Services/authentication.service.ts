@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserRegistration } from '../Interface/user';
-import { Storage } from '@capacitor/storage';
+import { UserDataService } from './user-data.service';
 import { ApiService } from '../api.service';
 import { Auth,RecaptchaVerifier,signInWithPhoneNumber,ConfirmationResult } from "@angular/fire/auth";
 @Injectable({
@@ -23,7 +23,7 @@ export class AuthenticationService {
   getTokenAccess: any = {};
   refreshToken: any = {};
 
-  constructor(private api:ApiService,private auth:Auth) { }
+  constructor(private api:ApiService,private auth:Auth,private userData:UserDataService) { }
   recaptcha(){
     console.log("called");
    
@@ -62,24 +62,22 @@ export class AuthenticationService {
       apiRoute.data = userObj;
       this.api.post(apiRoute, 'h3')
           .then((data: any) => {
+            
+            if(data['code'] === 0){
+            console.log("RESPONSE: ", data['result']);
+            console.log("Result Id: ", data['result']._id);
+             // SETTING USER ID
+             this.userData.setUserId(data['result']._id);
+            // SETTING USER OBJECT
+            this.userData.setUserObj(data['result']);
               resolve(data);
+            }
           })
           .catch((error) => {
               reject(error);
           });
       });
   }
-
-  /**
-   * 
-   * @param _userObj
-   */
-   setUserObj = async (_userObj) => {
-    await Storage.set({
-      key: '$user_object$',
-      value: JSON.stringify(_userObj),
-    });
-  };
 
   /**
    * 
@@ -91,7 +89,7 @@ export class AuthenticationService {
 
     const apiRoute: any = {};
     return new Promise((resolve, reject) => {
-      apiRoute.apiroute = `${this.existingUser}?areaCode=${_areaCode}&phoneNumber=${_phoneNumber}`;
+      apiRoute.apiroute = `${this.existingUser}?area-code=${_areaCode}&phone-number=${_phoneNumber}`;
       this.api
         .get(apiRoute, 'h3')
         .then((data: any) => {
@@ -116,6 +114,15 @@ export class AuthenticationService {
       apiRoute.data = object;
       this.api.post(apiRoute, 'h3')
           .then((data: any) => {
+            if(data['code'] === 0){
+              console.log("RESPONSE: ", data['result']);
+              console.log("Result Id: ", data['result']._id);
+               // SETTING USER ID
+               this.userData.setUserId(data['result']._id);
+              // SETTING USER OBJECT
+              this.userData.setUserObj(data['result']);
+                resolve(data);
+              }
               resolve(data);
           })
           .catch((error) => {
@@ -132,8 +139,6 @@ export class AuthenticationService {
 
   }
 
-
-
   setIsExist(booler){
     this.isExist = booler;
   }
@@ -146,4 +151,5 @@ export class AuthenticationService {
     let result = await this.confirmationResult.confirm(code);
     return result;
   }
+
 }
