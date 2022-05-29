@@ -1,13 +1,14 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import {  of, Subject } from 'rxjs';
-
+import { TokenService } from "./Services/token.service";
+export const BASICTOKEN = 'eXV6ZWVfY2xpZW50OjI5MDIzNmNmLTgxZDItNDg5MS1hYmNlLWYzZmUzYzA5NWMxMA==';
 @Injectable({
     providedIn: 'root'
 })
 
 export class ApiService {
+    getTokenUrl = 'sessions/token';
     authUrl = 'register';
     appBaseUrl = 'http://45.79.249.189/dm/api/';
     getTokenAccess: any = {};
@@ -17,102 +18,79 @@ export class ApiService {
     loadingSubscriber = new Subject();
     refreshTokenSubscriber = new Subject();
     errorSubscriber = new Subject();
-    constructor(public http: HttpClient) { }
+    constructor(public http: HttpClient, private token:TokenService) { }
 
 
-    loadConfig(headerValue,res) {
-        if (localStorage.getItem('LoginResponceToken')) {
-                this.getTokenAccess = JSON.parse(localStorage.getItem('LoginResponceToken'));
-                    if(res == true){this.getTokenAccess.access_token = this.getTokenAccess.access_token}
-                    else{this.getTokenAccess.access_token = res}
-                    if (headerValue == 'h1') {
-                        this.headersConfig = new HttpHeaders()
-                            .set('Content-Type', 'application/json')
-                            .set('Accept-Language', 'en-US');
-                    } else if (headerValue == 'h2') {
-                        this.headersConfig = new HttpHeaders()
-                            .set('Content-Type', 'application/x-www-form-urlencoded')
-                            .set('Authorization', 'Bearer ' + this.getTokenAccess.access_token)
-                            .set('Accept-Language', 'en-US')
-                            .set('userId', this.getTokenAccess.userId.toString());
-                    } else if (headerValue == 'h3') {
-                        this.headersConfig = new HttpHeaders()
-                            .set('Content-Type', 'application/json')
-                            .set('Authorization', this.getTokenAccess.access_token)
-                            .set('Accept-Language', 'en-US')
-                    } else if (headerValue == 'h4') {
-                        this.headersConfig = new HttpHeaders()
-                            .set('Content-Type', 'application/json')
-                            .set('Authorization', 'Bearer ' + this.getTokenAccess.access_token)
-                            .set('Accept-Language', 'en-US')
-                            .set('userId', this.getTokenAccess.userId.toString())
-                            .set('language', 'en');
-                    } else if (headerValue == 'h5') {
-                        this.headersConfig = new HttpHeaders()
-                            .set('Content-Type', 'application/json')
-                            .set('Accept-Language', 'en-US')
-                            .set('Authorization', 'Bearer ' + this.getTokenAccess.access_token);
-                    } else if (headerValue == 'h6') {
-                        this.headersConfig = new HttpHeaders()
-                            .set('Authorization', 'Bearer ' + this.getTokenAccess.access_token)
-                            .set('Accept-Language', 'en-US')
-                            .set('userId', this.getTokenAccess.userId.toString());
-                    }
-                    else if (headerValue == 'h7') {
-                        this.headersConfig = new HttpHeaders()
-                            .set('Access-Control-Allow-Origin', '*')
-                    }
-        } else {
-            this.headersConfig = new HttpHeaders().set('Content-Type', 'application/json');
-        }
-        return of([]);
+    loadConfig(headerValue) {
+        let token;
+                if (headerValue == 'h1') {
+                    this.headersConfig = new HttpHeaders()
+                        .set('Content-Type', 'application/json')
+                        .set('Accept-Language', 'en-US');
+                } else if (headerValue == 'h2') {
+                    this.headersConfig = new HttpHeaders()
+                        .set('Content-Type', 'application/x-www-form-urlencoded')
+                        .set('Authorization', 'token')
+                        .set('Accept-Language', 'en-US')
+                        .set('user-id', this.getTokenAccess.userId.toString());
+                } else if (headerValue == 'h3') {
+                    console.log("Header value",headerValue, token);
+                    this.headersConfig = new HttpHeaders()
+                        .set('Content-Type', 'application/json')
+                        .set('Authorization', token)
+                        .set('Accept-Language', 'en-US')
+                } else if (headerValue == 'h4') {
+                    this.headersConfig = new HttpHeaders()
+                        .set('Content-Type', 'application/json')
+                        .set('Authorization', token)
+                        .set('Accept-Language', 'en-US')
+                        .set('user-id', this.getTokenAccess.userId.toString())
+                        .set('language', 'en');
+                } else if (headerValue == 'h5') {
+                    this.headersConfig = new HttpHeaders()
+                        .set('Content-Type', 'application/json')
+                        .set('Accept-Language', 'en-US')
+                        .set('Authorization', token);
+                } else if (headerValue == 'h6') {
+                    this.headersConfig = new HttpHeaders()
+                        .set('Authorization', token)
+                        .set('Accept-Language', 'en-US')
+                        .set('user-id', this.getTokenAccess.userId.toString());
+                }
+                else if (headerValue == 'h7') {
+                    this.headersConfig = new HttpHeaders()
+                        .set('Access-Control-Allow-Origin', '*')
+                }
+                return of([]);
+
     }
 
     get = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-            this.checkIsTokenValidOrNot()
-            .then((res: any) => {
-                // console.log("subscribe res", res)
-                this.loadConfig(headerValue,res)
+            this.loadConfig(headerValue)
+            .subscribe(res => {
+                console.log("HEADER: ",res);
+                this.http.get(this.appBaseUrl + route.apiroute, {
+                    headers: this.headersConfig
+                })
                 .subscribe(res => {
-                    this.http.get(this.appBaseUrl + route.apiroute, {
-                        headers: this.headersConfig
-                    })
-                    .subscribe(res => {
-                      // this.errorSubscriber.next(res)
-                        resolve(res);
-                    }, (err) => {
-                      this.errorSubscriber.next(err)
-                        reject();
-                    });
+                   this.errorSubscriber.next(res)
+                    resolve(res);
                 }, (err) => {
-                    reject(err);
+                  this.errorSubscriber.next(err)
+                    reject();
                 });
             }, (err) => {
                 reject(err);
             });
         });
     }
-    google = (route, headerValue) => {
-        return new Promise((resolve, reject) => {
-                    this.http.get(route.apiroute)
-                    .subscribe(res => {
-                        resolve(res);
-                    }, (err) => {
-                      this.errorSubscriber.next(err)
-                        reject();
-                    });
-                })
-    }
-
+   
     post = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-            this.checkIsTokenValidOrNot()
-            .then(res => {
-                // console.log('res POST toke res token or boolean',res);
-                this.loadConfig(headerValue,res)
+            this.loadConfig(headerValue)
                 .subscribe(config => {
-                    // console.log('POST method called !!!');
+                     console.log('POST method called !!!',config);
                     this.http.post(this.appBaseUrl + route.apiroute, route.data, {
                         headers: this.headersConfig
                     })
@@ -125,29 +103,19 @@ export class ApiService {
                 }, (err) => {
                     reject(err);
                 });
-            }, (err) => {
-                console.log('<<< POST ERR >>>', err);
-                reject(err);
-            });
         });
     }
 
     put = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-            this.checkIsTokenValidOrNot()
-            .then(res => {
-                // console.log('res PUT toke res');
-                this.loadConfig(headerValue,res)
+            this.loadConfig(headerValue)
+            .subscribe(res => {
+                 console.log('res PUT config res');
+                this.http.put(this.appBaseUrl + route.apiroute, route.data, {
+                    headers: this.headersConfig
+                })
                 .subscribe(res => {
-                    // console.log('res PUT config res');
-                    this.http.put(this.appBaseUrl + route.apiroute, route.data, {
-                        headers: this.headersConfig
-                    })
-                    .subscribe(res => {
-                        resolve(res);
-                    }, (err) => {
-                        reject(err);
-                    });
+                    resolve(res);
                 }, (err) => {
                     reject(err);
                 });
@@ -159,20 +127,14 @@ export class ApiService {
 
     delete = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-            this.checkIsTokenValidOrNot()
-            .then(res => {
-                // console.log('res DELETE toke res');
-                this.loadConfig(headerValue,res)
+            this.loadConfig(headerValue)
+            .subscribe(res => {
+                 console.log('res DELETE config res ', res);
+                this.http.delete(this.appBaseUrl + route.apiroute, {
+                    headers: this.headersConfig
+                })
                 .subscribe(res => {
-                    // console.log('res DELETE config res');
-                    this.http.delete(this.appBaseUrl + route.apiroute, {
-                        headers: this.headersConfig
-                    })
-                    .subscribe(res => {
-                        resolve(res);
-                    }, (err) => {
-                        reject(err);
-                    });
+                    resolve(res);
                 }, (err) => {
                     reject(err);
                 });
@@ -182,16 +144,25 @@ export class ApiService {
         });
     }
 
-    checkIsTokenValidOrNot() {
+    getAuthToken = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-           resolve(true);
+            this.loadConfig(headerValue)
+            .subscribe(res => {
+                console.log("HEADER: ",res);
+                this.http.get(this.appBaseUrl + route.apiroute, {
+                    headers: this.headersConfig
+                })
+                .subscribe(res => {
+                   this.errorSubscriber.next(res)
+                    resolve(res);
+                }, (err) => {
+                  this.errorSubscriber.next(err)
+                    reject();
+                });
+            }, (err) => {
+                reject(err);
+            });
         });
     }
-
-    getRefreshToken(refreshToken) {
-    }
-
-
     
-
 }

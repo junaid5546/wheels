@@ -30,21 +30,24 @@ import { SwiperModule } from 'swiper/angular';
                     COMPONENT.AskPermissionComponent,
                     COMPONENT.ImagePreviewComponent,
                     COMPONENT.SpecialPlanItemComponent,
-                    COMPONENT.PostItemSkeletonComponent]
+                    COMPONENT.PostItemSkeletonComponent,
+                    COMPONENT.TextInputComponent]
                     ,
     entryComponents: [COMPONENT.HeaderComponent,
                       COMPONENT.VerticalListComponent,
                       COMPONENT.AskPermissionComponent,
                       COMPONENT.ImagePreviewComponent,
                       COMPONENT.SpecialPlanItemComponent,
-                      COMPONENT.PostItemSkeletonComponent],
+                      COMPONENT.PostItemSkeletonComponent,
+                      COMPONENT.TextInputComponent],
 
     exports: [COMPONENT.HeaderComponent,
               COMPONENT.ImagePreviewComponent,
               COMPONENT.AskPermissionComponent,
               COMPONENT.VerticalListComponent,
               COMPONENT.SpecialPlanItemComponent,
-              COMPONENT.PostItemSkeletonComponent]
+              COMPONENT.PostItemSkeletonComponent,
+              COMPONENT.TextInputComponent]
 
   })
   export class AppSharedModule {

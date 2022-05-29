@@ -4,3 +4,4 @@ export * from './skeleton-loader/vertical-list/vertical-list.component';
 export * from '../../Models/image-preview/image-preview.component';
 export * from './skeleton-loader/post-item-skeleton/post-item-skeleton.component';
 export * from './special-plan-item/special-plan-item.component';
+export * from '../Elements/text-input/text-input.component';

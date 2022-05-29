@@ -3,6 +3,7 @@ import { UserRegistration } from '../Interface/user';
 import { UserDataService } from './user-data.service';
 import { ApiService } from '../api.service';
 import { Auth,RecaptchaVerifier,signInWithPhoneNumber,ConfirmationResult } from "@angular/fire/auth";
+import { TokenService } from './token.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -23,7 +24,7 @@ export class AuthenticationService {
   getTokenAccess: any = {};
   refreshToken: any = {};
 
-  constructor(private api:ApiService,private auth:Auth,private userData:UserDataService) { }
+  constructor(private api:ApiService,private auth:Auth,private userData:UserDataService, private token:TokenService) { }
   recaptcha(){
     console.log("called");
    
@@ -60,14 +61,9 @@ export class AuthenticationService {
     return new Promise((resolve, reject) => {
       apiRoute.apiroute = this.authUrl;
       apiRoute.data = userObj;
-      this.api.post(apiRoute, 'h3')
+      this.api.post(apiRoute, 'h1')
           .then((data: any) => {
-            
             if(data['code'] === 0){
-            console.log("RESPONSE: ", data['result']);
-            console.log("Result Id: ", data['result']._id);
-             // SETTING USER ID
-             this.userData.setUserId(data['result']._id);
             // SETTING USER OBJECT
             this.userData.setUserObj(data['result']);
               resolve(data);
@@ -91,7 +87,7 @@ export class AuthenticationService {
     return new Promise((resolve, reject) => {
       apiRoute.apiroute = `${this.existingUser}?area-code=${_areaCode}&phone-number=${_phoneNumber}`;
       this.api
-        .get(apiRoute, 'h3')
+        .get(apiRoute, 'h1')
         .then((data: any) => {
           resolve(data);
         })
@@ -112,13 +108,12 @@ export class AuthenticationService {
     return new Promise((resolve, reject) => {
       apiRoute.apiroute = this.loginUrl;
       apiRoute.data = object;
-      this.api.post(apiRoute, 'h3')
+      this.api.post(apiRoute, 'h1')
           .then((data: any) => {
             if(data['code'] === 0){
-              console.log("RESPONSE: ", data['result']);
-              console.log("Result Id: ", data['result']._id);
                // SETTING USER ID
                this.userData.setUserId(data['result']._id);
+               this.token.setAccessToken(data['result'].accessToken);
               // SETTING USER OBJECT
               this.userData.setUserObj(data['result']);
                 resolve(data);
@@ -151,5 +146,6 @@ export class AuthenticationService {
     let result = await this.confirmationResult.confirm(code);
     return result;
   }
+
 
 }

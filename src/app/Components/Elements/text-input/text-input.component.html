@@ -1,0 +1,62 @@
+<ion-row class="item-container">
+ <!--Type 'ion-select', 'ion-text', 'date-picker'--->
+    <ion-col class="name-input-container"  size="12">
+
+      <div class="inner-container">
+        <ion-icon class="label-icon" [name]="iconName"></ion-icon>
+        <ion-label>{{labelName}}</ion-label>
+       </div>
+
+       <div class="first-name-input">
+         <div class="input-container first-name-container">
+
+          <!----DATE PICKER----->
+           <ng-container *ngIf="type === 'date-picker' " (click)="presentPicker()"> 
+            <div class="day-month-year">
+              <div class="day-month-year-container">
+                <div class="day">
+                  <ion-label>19</ion-label>
+                  <span> / </span>
+                </div>
+                <div class="month day">
+                  <ion-label> 02</ion-label>
+                  <span> / </span>
+                </div>
+                <div class="year day">
+                  <ion-label> 1995</ion-label>
+                </div>
+              </div>
+             </div>
+           </ng-container>
+          <!----DATE PICKER----->
+
+          <!----SELECT----->
+           <ng-container *ngIf="type === 'ion-select' "> 
+            <div class="selectable" *ngFor="let item of ['Country','State', 'City']">
+              <ion-select interface='popover' value="brown" okText="Okay" cancelText="Dismiss">
+                <ion-select-option value="brown">Brown</ion-select-option>
+                <ion-select-option value="blonde">Blonde</ion-select-option>
+                <ion-select-option value="black">Black</ion-select-option>
+                <ion-select-option value="red">Red</ion-select-option>
+              </ion-select>
+            </div>
+           </ng-container>
+          <!----SELECT----->
+
+           <!---TEXT INPUT-->
+           <ng-container *ngIf="type === 'ion-text' "> 
+            <ion-input [disabled]="isOtpDisabled"
+            [minlength]="minlength"
+            [maxlength]="maxlength"
+            [id]="id"
+           class="first-name-input-field">
+       {{value}}
+             </ion-input>
+           </ng-container>
+            <!---TEXT INPUT-->
+          
+         </div>
+       </div>
+     </ion-col>
+  
+  </ion-row>

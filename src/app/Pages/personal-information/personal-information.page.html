@@ -1,0 +1,58 @@
+<app-header [heading]="heading"
+[icons]="icons"
+goBack="false"
+></app-header>
+
+<ion-content>
+
+  <!----Header-->
+  <div id="secHalfOfScreen">
+    <div class="companyList">
+      <div class="companyheader" >
+        <img src="assets/Gust_Profile_CoverPhoto_Blank-21edf1e2890708d5a507204f49afc10b7dc58eb7baea100b68a1bc2c96948297.png"/>
+        <div class="cameraIcon">
+          <ion-icon name="camera"></ion-icon>
+        </div>
+        <div class="companyIcon">
+          <img src="../../../assets/Image from iOS (1).jpg"/>
+          </div>
+      </div>
+  
+      <div class="companyFooter">
+        <div  class="pencil">
+          <div class="editing-icon">
+            <ion-icon src="../../../../assets/edit icon.svg"></ion-icon>
+          </div>
+          <!--
+          <div (click)="editPostPopUp()"  class="three-dots">
+            <ion-icon src="../../../../assets/3 dots - big.svg"></ion-icon>
+          </div>
+          -->
+        </div>
+  
+        <div class="heading">
+          <ion-label>Ahmed Alazri</ion-label>
+          <ion-icon src="../../../../assets/verified.svg"></ion-icon>
+        </div>
+        <div class="status">
+          <ion-label>Ahmed Alazri Dealership</ion-label>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!----Header-->
+
+  <app-text-input *ngFor="let item of items" 
+                  [isOtpDisabled]="item.isOtpDisabled"
+                  [labelName]="item.labelName"
+                  [value]="item.value"
+                  [iconName]="item.iconName"
+                  [type]="item.type"
+                  ></app-text-input>
+
+            <ion-item>Business Location</ion-item>
+            <ion-item>Business Location Coodinates</ion-item>
+            <ion-item>Business Work Hours</ion-item>
+
+</ion-content>

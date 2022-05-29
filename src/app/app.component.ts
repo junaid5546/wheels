@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { UserDataService } from './Services/user-data.service';
 import { ModalControllerService } from './Services/modal-controller.service';
+import { TokenService } from './Services/token.service';
+import { ApiService } from './api.service';
 export type platform_name = 'ios' | 'android' | 'web' ;
 
 @Component({
@@ -26,6 +28,8 @@ export class AppComponent  implements OnInit  {
   theme: string = 'light'; // light, dark
   
   constructor( 
+      private api:ApiService,
+      private token:TokenService,
       private popup:ModalControllerService,
       private platform: Platform,
       private deviceInfo:DeviceInfoService,
@@ -36,11 +40,15 @@ export class AppComponent  implements OnInit  {
       this.translate.setDefaultLang('ar');
   }
   ngOnInit(): void {
+    this.userData.getUserPublicProfile('s')
+    .then((response)=>{
+      console.log("USER PUBLIC PROFILE: ",response);
+    })
     this.initializeApp();
-    this.popup.presentToast('OTP','Entered Wrong PIN')
   }
 
   initializeApp() {
+
     if (Capacitor.getPlatform() === (this.platform_name = 'ios')) {
       console.log("Platform:", "IOS");
     } else if(Capacitor.getPlatform() === (this.platform_name = 'android' )){
@@ -48,8 +56,6 @@ export class AppComponent  implements OnInit  {
     } else if(Capacitor.getPlatform() == (this.platform_name = 'web')){
       console.log('Platform:', "Web");
     }
-
-    
 
     this.userData.getUserObj()
     .then((obj)=>{
@@ -60,12 +66,10 @@ export class AppComponent  implements OnInit  {
     .then((id)=>{
       console.log("User Id: ",id);
     });
-
-
-  this.router.navigate(['register']);
   
-  this.platform.ready().then((plt) => {
+    this.router.navigate(['register']);
 
+    this.platform.ready().then((plt) => {
       // SETTING DEVICE HEIGHT AND WIDTH
       this.deviceInfo.setDeviceHeight(this.platform.height());
      

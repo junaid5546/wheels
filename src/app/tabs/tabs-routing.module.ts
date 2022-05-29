@@ -23,11 +23,11 @@ const routes: Routes = [
       },
       {
         path: 'posts',
-        loadChildren: () => import('../posts/posts.module').then(m => m.PostsPageModule)
+        loadChildren: () => import('../Pages/posts/posts.module').then(m => m.PostsPageModule)
       },
       {
         path: 'post-details',
-        loadChildren: () => import('../posts/post-details/post-details.module').then( m => m.PostDetailsPageModule)
+        loadChildren: () => import('../Pages/posts/post-details/post-details.module').then( m => m.PostDetailsPageModule)
       },
       {
         path: '',
