@@ -2,11 +2,9 @@
   <app-header [heading]="heading"
   [icons]="icons"
   goBack="true"></app-header>
-  <app-item-detail-view></app-item-detail-view>
-<ion-content>  
 
-       
-      
+<ion-content>  
+    <app-item-detail-view></app-item-detail-view>
         <ion-list>
             <ion-grid>
                 <ion-row>
@@ -20,13 +18,14 @@
                     </div>
     
                     <div class="label">
-                        <ion-label class="dm-value">{{item.key}}</ion-label>
+                        <ion-label class="dm-value">{{  item.key }}</ion-label>
                     </div>
     
                     </div>
+                    
                     </ion-col>
                     <ion-col class="item-value" size="6">
-                        <ion-label class="dm-value">{{item.value}}</ion-label>
+                        <ion-label class="dm-value">{{  item.value }}</ion-label>
                     </ion-col>
                 </div>
                 </ion-col>
@@ -43,7 +42,7 @@
                 </ion-list-header>
             <ion-grid>
                 <ion-row>
-                <ion-col  size="6" *ngFor="let item of [1,1,1,1,1,1,1,1,1,1]">
+                <ion-col  size="6" *ngFor="let feature of featureList">
                     <div class="list-item" [ngClass]="{'list-item': true,'no-color':true}">
                     <ion-col size="12" class="left-col no-border">
                     <div class="icon-label-container">
@@ -53,7 +52,7 @@
                     </div>
     
                     <div class="label">
-                        <ion-label class="dm-value">Blind spot monitor</ion-label>
+                        <ion-label class="dm-value">{{feature.featureAr}}</ion-label>
                     </div>
     
                     </div>
@@ -75,8 +74,7 @@
                 <ion-row>
                     <ion-col>
                         <div class="seller-notes">
-                            <ion-label class="dm-value">Great condition, dealership smell, 
-                                new tires.</ion-label>
+                            <ion-label class="dm-value">{{sellerNotes}}</ion-label>
                         </div>
                     </ion-col>
                 </ion-row>

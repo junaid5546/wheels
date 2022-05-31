@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 10px;
+    width: 95%;
 
 .add-banner-height{
     background: linear-gradient(225deg, #00B5DD 6.77%, #0091E2 51.04%, #0084E4 90.62%);
@@ -13,7 +14,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 95%;
+    width: 100%;
     position: relative;
 
     .title-text-container{
@@ -71,4 +72,43 @@
         }
 }
 
+}
+
+@import "~swiper/css";
+@import "~swiper/css/pagination";
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: none ;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide { 
+    background: none !important;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mySwiper{
+    background: none !important;
 }

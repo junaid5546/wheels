@@ -1,6 +1,6 @@
 import { Component, OnInit, Input,ViewChild,ElementRef,AfterViewInit } from '@angular/core';
 import { Gesture, GestureController, IonContent } from '@ionic/angular';
-import { Router } from "@angular/router";
+import { Router,ActivatedRoute } from "@angular/router";
 import { NavController  } from '@ionic/angular';
 import { DeviceInfoService } from 'src/app/Services/device-info.service'; 
 import { SwiperComponent } from "swiper/angular";
@@ -15,28 +15,9 @@ SwiperCore.use([FreeMode, Scrollbar, Mousewheel]);
 })
 export class PostDetailsPage implements OnInit,AfterViewInit {
   
-
-
-  items:any[] = [
-    {key:'Condition',value:'New'},
-    {key:'Exterior Color', value:'Red'},
-    {key:'Cylinder Count', value:'6'},
-    {key:'Fuel',value:'Patrol'},
-    {key:'Transmission', value:'Automatic'},
-    {key:'Drivetrain', value:'Front Wheel Drive'},
-    {key:'Interior Color', value:'Black'},
-    {key:'Seats', value:'Leather'},
-    {key:'Origin', value:'Imported'},
-    {key:'Governorate', value:'Muscat'},
-    {key:'State', value:'Bosher'},
-    {key:'Warranty Duration', value:'4 Years & 06 Months'},
-    {key:'Warranty Kilometers', value:'100,000KM'},
-    {key:'Insurance', value:'Full coverage'},
-    {key:'Plate Type', value:'Personal'},
-    {key:'Driving Readliness', value:'Ready for Driving'},
-    {key:'Sale Type', value:'For sale only'},
-    {key:'Distance Travelled', value:"0 KM"}
-  ];
+  sellerNotes;
+  featureList;
+  items:any[] = [];
 
   @ViewChild(IonContent,{read:ElementRef}) content: ElementRef;
   @Input() forwardTo:string = null;
@@ -50,7 +31,10 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
   // MAIN HEADING/SUBHEADING.
   @Input() heading = {has_main_heading:true, main_heading_name:'Toyota Avalon XLS 2021 New', has_sub_heading:false, sub_heading_name:''};
 
-  constructor(private gestureCtrl: GestureController, private router:Router, public deviceInfo:DeviceInfoService, private nav:NavController) {
+  constructor(private gestureCtrl: GestureController,
+              private router:Router,
+              private route: ActivatedRoute,
+              public deviceInfo:DeviceInfoService, private nav:NavController) {
 
     
    }
@@ -73,9 +57,22 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
 }
 
    ngOnInit() {
-   console.log(this.router.routerState);
-   console.log(this.router.onSameUrlNavigation);
-   console.log("Router",this.router);
+    const item = JSON.parse(this.route.snapshot.params.item);
+    console.log(item); 
+    this.sellerNotes = item.sellerNotes;
+     this.heading.main_heading_name =  `${item.make.makeEn} ${item.models.modelEn} ${item.trim.trimAr} ${item.year} ${item.condition.typeNameEn}`
+    for (const [key, value] of Object.entries(item)) {
+      console.log("KEY",key, "VALUE",value);  // first one, second two
+  if(key === 'featuersList'){
+    this.featureList = value;
+    
+  } else if(key != '_id' && key != 'postId' && key != 'userId' && key != 'mediaList' && key != 'sellerNotes' && key != 'levelId'  ) {
+    this.items.push({key:key,value:value})
+  }
+  
+    }
+
+    console.log("FEATUE: ", this.featureList);
    
   }
 

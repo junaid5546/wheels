@@ -31,7 +31,7 @@ goBack="false"
         </div>
   
         <div class="heading">
-          <ion-label>Ahmed Alazri</ion-label>
+          <ion-label>{{obj.first_name}} {{obj.last_name}}</ion-label>
           <ion-icon src="../../../../assets/verified.svg"></ion-icon>
         </div>
         <div class="status">
@@ -50,9 +50,5 @@ goBack="false"
                   [iconName]="item.iconName"
                   [type]="item.type"
                   ></app-text-input>
-
-            <ion-item>Business Location</ion-item>
-            <ion-item>Business Location Coodinates</ion-item>
-            <ion-item>Business Work Hours</ion-item>
 
 </ion-content>

@@ -21,6 +21,6 @@ import { SpecialPlansComponent } from '../../Components/special-plans/special-pl
     AppSharedModule,
     DragDropModule,
   ],
-  declarations: [TakeCarImagesPage,CarInfoModalComponent,ItemBodyComponent,ItemColorComponent,MainItemComponent,SpecialPlansComponent]
+  declarations: [TakeCarImagesPage,CarInfoModalComponent,ItemBodyComponent,ItemColorComponent,SpecialPlansComponent]
 })
 export class TakeCarImagesPageModule {}

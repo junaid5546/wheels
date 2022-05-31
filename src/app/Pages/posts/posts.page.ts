@@ -4,6 +4,7 @@ import {  ModalControllerService } from '../../Services/modal-controller.service
 import { FiltersComponent } from '../../Models/filters/filters.component';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular'; 
+import { PostsService } from '../../Services/posts.service';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.page.html',
@@ -35,7 +36,7 @@ export class PostsPage implements OnInit {
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Vehicles for Sale Inventory', has_sub_heading:false, sub_heading_name:''};
-  constructor(private deviceInfo:DeviceInfoService, private modelCtrl:ModalControllerService, private router:Router, private nav:NavController) { }
+  constructor(private deviceInfo:DeviceInfoService, private modelCtrl:ModalControllerService, private router:Router, private nav:NavController, private post:PostsService) { }
 
   ngOnInit() {
     setTimeout(() => {
@@ -96,7 +97,7 @@ export class PostsPage implements OnInit {
 
 
   navigatePostDetails(item:any) {
-    this.router.navigate(['tabs/posts/post-details']);
+    this.router.navigate(['tabs/posts/post-details',{'item':item}]);
   }
 
 
@@ -115,4 +116,19 @@ export class PostsPage implements OnInit {
   showFilters() {
     this.router.navigate(['filter'])
   }
+
+
+  getPosts(){
+    this.post.getAllPosts()
+    .then((post)=>{
+      console.log("POSTS: ", post);
+    })
+    .catch((error)=>{
+      console.log("ERROR: ", error);
+    })
+  }
+
+  
+
+
 }

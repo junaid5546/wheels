@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit,OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { IonInput } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
 import { UserRegistration } from '../../Interface/user';
 import { AuthenticationService } from '../../Services/authentication.service';
 import { ModalControllerService } from '../../Services/modal-controller.service';
+import { Router } from '@angular/router';
 // RxJS v6+
 import { timer } from 'rxjs';
 
@@ -11,15 +12,15 @@ import { timer } from 'rxjs';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  styleUrls: ['./register.page.scss']
 })
-export class RegisterPage implements OnInit, AfterViewInit {
+export class RegisterPage implements OnInit, AfterViewInit,OnDestroy {
   // THREE STEPS LOGIN/REGISTER
   // 0 MEANS PHONE
   // 1 MEANS DATE OF BIRTH IT MEANS THAT USER WILL LOGIN
   // 2 MEANS FIRST NAME AND LAST NAME 
   // 3 OTP ENTER 
-
+  subscribeTimer = null;
   user:UserRegistration = new UserRegistration();
   timer = timer(1000,2000);
   step = 0;
@@ -35,11 +36,24 @@ export class RegisterPage implements OnInit, AfterViewInit {
   Dob  = {day:null, month:null, year:null};
 
 
-  constructor(private pickerController: PickerController, private auth:AuthenticationService, private popUp:ModalControllerService) {
+  constructor(private pickerController: PickerController,
+              private router:Router,
+              private auth:AuthenticationService,
+              private popUp:ModalControllerService) {
 
    }
-  
 
+
+
+
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    console.log("Destroyed: ");
+    this.subscribeTimer.unsubscribe();
+  }
 
   ngAfterViewInit() {
     console.log("Input ele",this.input);
@@ -47,11 +61,6 @@ export class RegisterPage implements OnInit, AfterViewInit {
     //this.input.autofocus = true;
 
   }
-
-
-  ngOnInit() {
-  }
-
   // ONCE THEY SELECT COUNTRY CODE MAKE LIST OF INPUT __ __ __ __
   // FOCUS ON FIRST __
   // ONCE USER ENTER THE DIGITS MOVE FOCUS TO NEXT __
@@ -202,7 +211,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
   }
 
   tick() {
-    const subscribe = this.timer.subscribe(val => {
+    this.subscribeTimer = this.timer.subscribe(val => {
       console.log('In tick',val);
       var counter = document.getElementById("timer");
       if(this.seconds>0){
@@ -217,6 +226,7 @@ export class RegisterPage implements OnInit, AfterViewInit {
   document.getElementById("timer").innerText = `Resend`;
 }
     }); 
+    
   }
 
 
@@ -255,7 +265,15 @@ export class RegisterPage implements OnInit, AfterViewInit {
   
   login(){
     let obj = {phone:this.user.primary_phone,dob:this.user.dob};
-    this.auth.login(obj);
+    this.auth.login(obj)
+    .then((result)=>{
+      console.log("Login Result: ", result);
+      this.subscribeTimer.unsubscribe();
+      this.router.navigate([''])
+    })
+    .catch((error)=>{
+      console.log("Login Error: ", error);
+    })
   }
 
  async ionViewDidEnter() {
@@ -265,4 +283,6 @@ export class RegisterPage implements OnInit, AfterViewInit {
   ionViewDidLoad() {
     this.auth.recaptcha();
   }
+
+  
 }

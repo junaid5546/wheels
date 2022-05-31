@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 export type input_icon = 'calendar-outline'| 'call-outline' | 'business-outline';
-export type input_type = 'ion-text'| 'ion-select' | 'date-picker' | 'map';
+export type input_type = 'ion-text'| 'ion-select' | 'date-picker' | 'rich-text';
+import { UserAccountService } from '../../Services/user-account.service';
+import { UserDataService } from '../../Services/user-data.service';
+import { AuthenticationService } from '../../Services/authentication.service';
 @Component({
   selector: 'app-personal-information',
   templateUrl: './personal-information.page.html',
   styleUrls: ['./personal-information.page.scss'],
 })
 export class PersonalInformationPage implements OnInit {
+
+  obj = {first_name:null, last_name:null};
+  
   dobIcon:input_icon = 'calendar-outline';
-  inputType:input_type = 'date-picker';
+  inputType:input_type = 'date-picker'; 
+
   items = [
     {
       labelName:'Date of Birth',
@@ -47,11 +54,11 @@ export class PersonalInformationPage implements OnInit {
       type:this.inputType = 'ion-text'
     },
     {
-      labelName:'Business Location',
+      labelName:'Business Work Hours',
       isOtpDisabled:true,
       iconName: this.dobIcon = 'business-outline',
       value:'',
-      type:this.inputType = 'map'
+      type:this.inputType = 'rich-text'
     }
   ]
   heading = {
@@ -67,15 +74,37 @@ export class PersonalInformationPage implements OnInit {
     left_icon: 'assets/icon/settings/back.svg',
     right_icon: 'assets/icon/posts/post-details/Phone/Vector.svg',
   };
-  constructor(private iab: InAppBrowser) {}
-
-  ngOnInit() {
+  constructor(private auth: AuthenticationService, private userAccount:UserAccountService, private userData:UserDataService) {}
 
   
+
+  ngOnInit() {
+    console.log("USER ID IN ACCOUNT: ", this.userData.fetchUserId());
+    this.getPublicProfile()
   }
 
   segmentChanged(ev){
     console.log(ev);
+  }
+
+  getPublicProfile(){
+      
+      this.userAccount.getPrivateAccount(this.userData.fetchUserId())
+      .then((account:any)=>{
+        console.log("USER ACCOUNT", account);
+        if(account.code == 0) {
+          this.obj.first_name =  account.result.firstName;
+          this.obj.last_name =  account.result.lastName;
+        }
+      })
+      .catch((error)=>{
+        console.log("USER ACCOUNT ERROR: ", error);
+      })
+      
+  }
+
+  getPrivateProfile(){
+
   }
 
 }

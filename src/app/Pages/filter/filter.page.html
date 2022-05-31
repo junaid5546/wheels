@@ -1,6 +1,6 @@
 <app-header [heading]="heading"
 [icons]="icons"
-goBack="false"
+[filter]=true
 ></app-header>
 
 <ion-content scrollEvents="false" scrollY="false">
@@ -21,10 +21,6 @@ goBack="false"
 
     <div class="right">
 
-  
-
-
-    
     <router-outlet></router-outlet>
     </div>
 

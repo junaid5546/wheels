@@ -20,7 +20,7 @@ export class TokenService {
       let token = await Storage.get({key:'dm_token'});
       this.token = token.value;
       if(token.value != null){
-        resolve (true);
+        resolve (this.token);
       } else {
         reject(false);
       }

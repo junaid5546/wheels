@@ -6,6 +6,7 @@ import { ApiService } from '../api.service';
 })
 export class UserDataService {
 
+  private userId:string = null;
   profileUrl = 'user/public-profile/';
 
   constructor(private api:ApiService) { }
@@ -38,9 +39,10 @@ export class UserDataService {
  * @returns promise
  */
   setUserId = async (_id) => {
+    this.userId = _id;
     let id = String(_id);
     await Storage.set({
-      key: 'userid', 
+      key: 'user_id', 
       value: id,
     });
    
@@ -50,7 +52,8 @@ export class UserDataService {
  * @returns promise 
  */
   getUserId = async () => {
-  let userId = await Storage.get({key:'userid'});
+  let userId = await Storage.get({key:'user_id'});
+  this.userId = userId.value;
   return userId;
   }
 
@@ -73,6 +76,14 @@ export class UserDataService {
           reject(error);
         });
     });
+  }
+
+  /**
+   * USE THIS TO GET USER ID ANYWHERE
+   * @returns userid:string
+   */
+  fetchUserId(){
+    return this.userId;
   }
 
 

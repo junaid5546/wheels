@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { NavController, Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { UserDataService } from './Services/user-data.service';
-import { ModalControllerService } from './Services/modal-controller.service';
 import { TokenService } from './Services/token.service';
-import { ApiService } from './api.service';
+import { AuthenticationService } from './Services/authentication.service';
+import { StatusBar, Style } from '@capacitor/status-bar';
 export type platform_name = 'ios' | 'android' | 'web' ;
 
 @Component({
@@ -28,23 +28,27 @@ export class AppComponent  implements OnInit  {
   theme: string = 'light'; // light, dark
   
   constructor( 
-      private api:ApiService,
-      private token:TokenService,
-      private popup:ModalControllerService,
+      private auth:AuthenticationService,
       private platform: Platform,
       private deviceInfo:DeviceInfoService,
-      private router:Router,
+      private router:NavController,
       private userData:UserDataService,
+      private token:TokenService,
       public translate: TranslateService) {
 
       this.translate.setDefaultLang('ar');
+      window.addEventListener('statusTap', function () {
+        console.log('statusbar tapped');
+      });
+      
+        
   }
+
+
   ngOnInit(): void {
-    this.userData.getUserPublicProfile('s')
-    .then((response)=>{
-      console.log("USER PUBLIC PROFILE: ",response);
-    })
+      this.router.navigateBack(['tabs'])
     this.initializeApp();
+
   }
 
   initializeApp() {
@@ -57,17 +61,22 @@ export class AppComponent  implements OnInit  {
       console.log('Platform:', "Web");
     }
 
+    this.auth.getAuthToken()
+    .then((token:string)=>{
+      console.log("TOKEN GOT", token);
+    })
+    .catch((error)=>{
+      console.log("TOKEN ERROR: ", error);
+    });
+    
     this.userData.getUserObj()
     .then((obj)=>{
       console.log("User OBJ :", JSON.parse(obj.value));
     })
 
     this.userData.getUserId()
-    .then((id)=>{
-      console.log("User Id: ",id);
+    .then((id) => {
     });
-  
-    this.router.navigate(['register']);
 
     this.platform.ready().then((plt) => {
       // SETTING DEVICE HEIGHT AND WIDTH
@@ -102,11 +111,6 @@ export class AppComponent  implements OnInit  {
         localStorage.setItem("Language",'ar');
       }
     });
-  }
-
-
-  
-
-    
+  }   
 
 } 

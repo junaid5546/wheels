@@ -31,7 +31,9 @@ import { SwiperModule } from 'swiper/angular';
                     COMPONENT.ImagePreviewComponent,
                     COMPONENT.SpecialPlanItemComponent,
                     COMPONENT.PostItemSkeletonComponent,
-                    COMPONENT.TextInputComponent]
+                    COMPONENT.TextInputComponent,
+                    COMPONENT.MainItemComponent,
+                    COMPONENT.AddSliderComponent]
                     ,
     entryComponents: [COMPONENT.HeaderComponent,
                       COMPONENT.VerticalListComponent,
@@ -39,7 +41,9 @@ import { SwiperModule } from 'swiper/angular';
                       COMPONENT.ImagePreviewComponent,
                       COMPONENT.SpecialPlanItemComponent,
                       COMPONENT.PostItemSkeletonComponent,
-                      COMPONENT.TextInputComponent],
+                      COMPONENT.TextInputComponent,
+                      COMPONENT.MainItemComponent,
+                      COMPONENT.AddSliderComponent],
 
     exports: [COMPONENT.HeaderComponent,
               COMPONENT.ImagePreviewComponent,
@@ -47,7 +51,9 @@ import { SwiperModule } from 'swiper/angular';
               COMPONENT.VerticalListComponent,
               COMPONENT.SpecialPlanItemComponent,
               COMPONENT.PostItemSkeletonComponent,
-              COMPONENT.TextInputComponent]
+              COMPONENT.TextInputComponent,
+              COMPONENT.MainItemComponent,
+              COMPONENT.AddSliderComponent]
 
   })
   export class AppSharedModule {

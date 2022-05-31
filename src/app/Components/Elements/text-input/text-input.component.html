@@ -54,6 +54,12 @@
              </ion-input>
            </ng-container>
             <!---TEXT INPUT-->
+
+            <!---RICH-TEXT-->
+           <ng-container *ngIf="type === 'rich-text' "> 
+            <ion-textarea rows="3"  cols="20">  {{value}} </ion-textarea>
+           </ng-container>
+            <!---RICH-TEXT-->
           
          </div>
        </div>

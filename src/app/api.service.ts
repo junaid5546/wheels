@@ -21,8 +21,7 @@ export class ApiService {
     constructor(public http: HttpClient, private token:TokenService) { }
 
 
-    loadConfig(headerValue) {
-        let token;
+    loadConfig(headerValue,token) {
                 if (headerValue == 'h1') {
                     this.headersConfig = new HttpHeaders()
                         .set('Content-Type', 'application/json')
@@ -67,28 +66,38 @@ export class ApiService {
 
     get = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-            this.loadConfig(headerValue)
-            .subscribe(res => {
-                console.log("HEADER: ",res);
-                this.http.get(this.appBaseUrl + route.apiroute, {
-                    headers: this.headersConfig
-                })
+            this.token.getAccessToken()
+            .then((token)=>{
+                console.log("GOT TOKEN", token);
+                this.loadConfig(headerValue,token)
                 .subscribe(res => {
-                   this.errorSubscriber.next(res)
-                    resolve(res);
+                    console.log("HEADER: ",res);
+                    this.http.get(this.appBaseUrl + route.apiroute, {
+                        headers: this.headersConfig
+                    })
+                    .subscribe(res => {
+                       this.errorSubscriber.next(res)
+                        resolve(res);
+                    }, (err) => {
+                      this.errorSubscriber.next(err)
+                        reject();
+                    });
                 }, (err) => {
-                  this.errorSubscriber.next(err)
-                    reject();
+                    reject(err);
                 });
-            }, (err) => {
-                reject(err);
-            });
+            })
+            .catch((error)=>{
+                console.log("NO TOKEN FOUND", error);
+                
+            })
         });
     }
    
     post = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-            this.loadConfig(headerValue)
+            this.token.getAccessToken()
+            .then((token)=>{
+                this.loadConfig(headerValue,token)
                 .subscribe(config => {
                      console.log('POST method called !!!',config);
                     this.http.post(this.appBaseUrl + route.apiroute, route.data, {
@@ -103,12 +112,13 @@ export class ApiService {
                 }, (err) => {
                     reject(err);
                 });
+            });
         });
     }
 
     put = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-            this.loadConfig(headerValue)
+            this.loadConfig(headerValue,'')
             .subscribe(res => {
                  console.log('res PUT config res');
                 this.http.put(this.appBaseUrl + route.apiroute, route.data, {
@@ -127,7 +137,7 @@ export class ApiService {
 
     delete = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-            this.loadConfig(headerValue)
+            this.loadConfig(headerValue,'')
             .subscribe(res => {
                  console.log('res DELETE config res ', res);
                 this.http.delete(this.appBaseUrl + route.apiroute, {
@@ -144,25 +154,26 @@ export class ApiService {
         });
     }
 
-    getAuthToken = (route, headerValue) => {
+    getToken = (route, headerValue) => {
         return new Promise((resolve, reject) => {
-            this.loadConfig(headerValue)
-            .subscribe(res => {
-                console.log("HEADER: ",res);
-                this.http.get(this.appBaseUrl + route.apiroute, {
-                    headers: this.headersConfig
-                })
+            this.loadConfig(headerValue,'-')
                 .subscribe(res => {
-                   this.errorSubscriber.next(res)
-                    resolve(res);
+                    console.log("HEADER: ",res);
+                    this.http.get(this.appBaseUrl + route.apiroute, {
+                        headers: this.headersConfig
+                    })
+                    .subscribe(res => {
+                       this.errorSubscriber.next(res)
+                        resolve(res);
+                    }, (err) => {
+                      this.errorSubscriber.next(err)
+                        reject();
+                    });
                 }, (err) => {
-                  this.errorSubscriber.next(err)
-                    reject();
+                    reject(err);
                 });
-            }, (err) => {
-                reject(err);
-            });
         });
     }
+    
     
 }
