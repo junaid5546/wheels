@@ -46,7 +46,7 @@ export class AppComponent  implements OnInit  {
 
 
   ngOnInit(): void {
-      this.router.navigateBack(['tabs'])
+      this.router.navigateBack(['take-car-images'])
     this.initializeApp();
 
   }
