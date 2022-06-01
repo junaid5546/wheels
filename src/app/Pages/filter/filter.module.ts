@@ -25,6 +25,7 @@ import { InteriorColorComponent } from '../../Components/filter-components/inter
     MatCheckboxModule,
     FilterPageRoutingModule
   ],
+
   declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent]
 })
 export class FilterPageModule {}

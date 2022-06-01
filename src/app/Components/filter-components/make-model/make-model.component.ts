@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 export interface Task {
   name: string;
@@ -30,6 +30,7 @@ export interface Item {
   selector: 'app-make-model',
   templateUrl: './make-model.component.html',
   styleUrls: ['./make-model.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 
 export class MakeModelComponent implements OnInit {

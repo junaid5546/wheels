@@ -16,7 +16,7 @@ import { SwiperModule } from "swiper/angular";
     PostsPageRoutingModule,
     SwiperModule
   ],
-  declarations: [PostsPage,FiltersComponent]
+  declarations: [PostsPage]
   
 })
 export class PostsPageModule {}

@@ -19,7 +19,7 @@ import { InventoryItemComponent } from './inventory-item/inventory-item.componen
     SwiperModule,
     Tab1PageRoutingModule,
     TranslateModule,
-    AppSharedModule
+    AppSharedModule,
   ],
   declarations: [Tab1Page,SettingsComponent,FiltersComponent,FilterHeadingComponent,InventoryItemComponent]
 })

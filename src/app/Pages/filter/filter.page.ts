@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Filter } from '../../Interface/filter';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.page.html',
   styleUrls: ['./filter.page.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class FilterPage implements OnInit {
  
 
   filters = [
-    { result: { count: 1 }, selected: false, id: 0, name: 'Body',url:'filter/car-body' },
+    { result: { count: 1 }, selected: true, id: 0, name: 'Body',url:'filter/car-body' },
     { result: { count: 0 }, selected: false, id: 1, name: 'Make/Model',url:'filter/car-make-model' },
     { result: { count: 0 }, selected: false, id: 2, name: 'Price',url:'filter/car-price'},
     { result: { count: 0 }, selected: false, id: 3, name: 'Condition',url:'filter/car-condition' },
@@ -37,7 +38,7 @@ export class FilterPage implements OnInit {
     { result: { count: 0 }, selected: false, id: 18, name: 'Sale Type',url:'filter/car-sale-type' },
   ];
 
-  selectedIndex = -1;
+  selectedIndex = 0;
 
   heading = {
     has_main_heading: true,
@@ -55,20 +56,19 @@ export class FilterPage implements OnInit {
 
   constructor(private router:Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    let filter = new Filter();
+    setInterval(() => {
+    filter.addFilter("body","lsajdflksjdf");
+    }, 1000);
+    this.router.navigate(['filter/car-body']);
+  }
 
   selectedItem(index,url) {
-    if (this.selectedIndex === -1) {
-      console.log('If', index, this.selectedIndex);
-      this.selectedIndex = index;
-      this.filters[index].selected = true;
-    } else {
-      console.log('Else', index, this.selectedIndex);
       this.filters[this.selectedIndex].selected = false;
       this.filters[index].selected = true;
       this.selectedIndex = index;
       this.router.navigate([url]);
-    }
   }
 
  

@@ -59,20 +59,10 @@ export class Tab1Page implements OnInit {
     console.log("Card Elements",cards);
   }
 
- 
-
 
   onSwiper(swiper) {
     console.log(swiper);
   }
-
-
-
-
-  
-
-
- 
 
 
   share(){
@@ -87,9 +77,9 @@ export class Tab1Page implements OnInit {
     console.log("FAV");
   }
 
-  
-
-
+  /**
+   * GETTING ALL POSTS
+   */
   getPosts(){
     this.post.getAllPosts()
     .then((post:any)=>{

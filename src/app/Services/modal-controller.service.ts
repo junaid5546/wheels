@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { BehaviorSubject } from "rxjs";
-import { CarInfoModalComponent } from '../Models/car-info-modal/car-info-modal.component';
 import { ImagePreviewComponent } from '../Models/image-preview/image-preview.component';
 import { ToastController } from '@ionic/angular';
 @Injectable({
@@ -58,11 +57,11 @@ export class ModalControllerService {
 
   ) { }
 
-  async presentModal(props) {
+  async presentModal(component,props) {
     this.modalProps = props;
     console.log("PROPS: ", this.modalProps);
     const modal = await this.modalController.create({
-      component: CarInfoModalComponent,
+      component: component,
       cssClass: 'my-custom-class',
       swipeToClose: true,
       componentProps: props,
@@ -223,6 +222,11 @@ export class ModalControllerService {
     return this.currentObject.asObservable();
   }
 
+/**
+ * 
+ * @param imagesArray 
+ * @returns 
+ */
 async presentImagePreviewModal(imagesArray){
 const modal = await this.modalController.create({
   component:ImagePreviewComponent,
@@ -232,8 +236,13 @@ const modal = await this.modalController.create({
 return await modal.present();
 }
 
-
-  async presentSheetModal(component,arr) {
+/**
+ * PRESENTING SHEET MODAL 
+ * @param component 
+ * @param arr 
+ * @returns 
+ */
+  async presentSheetModal(component,arr:any[]) {
     const modal = await this.modalController.create({
       component: component,
       cssClass: "custom-modal",
@@ -243,6 +252,7 @@ return await modal.present();
     });
     return await modal.present();
   }
+
 
   applyFilter(arr: any[], filterId) {
     switch (filterId) {
@@ -293,7 +303,7 @@ return await modal.present();
   }
 
 /**
- * 
+ * PRESENTING TOAST 
  * @param header
  * @param message
  */

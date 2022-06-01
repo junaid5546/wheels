@@ -101,6 +101,11 @@ const routes: Routes = [
       {
         component:SaleTypeComponent,      //19
         path:'car-sale-type'
+      },
+      {
+        path: 'car-body',
+        redirectTo: '/tabs/tab1/car-body',
+        pathMatch: 'full'
       }
     ]
   }

@@ -15,6 +15,7 @@ export class AuthenticationService {
   recaptchaVerify;
   confirmationResult:ConfirmationResult;
   otpSent:boolean = false;
+  
   authUrl = 'register/';
   loginUrl = 'sessions';
   getToken = 'token'

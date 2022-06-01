@@ -7,6 +7,7 @@ import { ModalControllerService } from '../../Services/modal-controller.service'
 import { AnimationController,Animation } from '@ionic/angular';
 import { DeviceInfoService } from '../../Services/device-info.service';
 import { CamGalService } from '../../Services/cam-gal.service';
+import { CarInfoModalComponent } from '../../Models/car-info-modal/car-info-modal.component';
 @Component({
   selector: 'app-take-car-images',
   templateUrl: './take-car-images.page.html',
@@ -132,7 +133,7 @@ drop(event: CdkDragDrop<string[]>) {
 
   presentModal(){
     console.log("Starting Point: ", this.modalStartingPoint);
-    this.modalService.presentModal(this.modalStartingPoint);
+    this.modalService.presentModal(CarInfoModalComponent,this.modalStartingPoint);
   }
 
   checkModalCurrentState(){
