@@ -4,7 +4,7 @@ import {  ModalControllerService } from '../../Services/modal-controller.service
 import { FiltersComponent } from '../../Models/filters/filters.component';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular'; 
-import { PostsService } from '../../Services/posts.service';
+import { PostService } from 'dm-api';
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.page.html',
@@ -36,7 +36,7 @@ export class PostsPage implements OnInit {
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Vehicles for Sale Inventory', has_sub_heading:false, sub_heading_name:''};
-  constructor(private deviceInfo:DeviceInfoService, private modelCtrl:ModalControllerService, private router:Router, private nav:NavController, private post:PostsService) { }
+  constructor(private deviceInfo:DeviceInfoService, private modelCtrl:ModalControllerService, private router:Router, private nav:NavController, private post:PostService) { }
 
   ngOnInit() {
     setTimeout(() => {

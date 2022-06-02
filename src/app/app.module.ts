@@ -15,13 +15,6 @@ import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
-// FIREBASE
-import { environment } from 'src/environments/environment';
-import { provideFirebaseApp, initializeApp} from '@angular/fire/app';
-import { getFirestore, provideFirestore} from '@angular/fire/firestore';
-import { provideAuth,getAuth } from '@angular/fire/auth';  
-import { provideStorage } from '@angular/fire/storage';
-import { getStorage } from 'firebase/storage';
 Injectable()
 
 export function setTranslateLoader(http: HttpClient) {
@@ -31,10 +24,6 @@ export function setTranslateLoader(http: HttpClient) {
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-    provideFirebaseApp(()=>initializeApp(environment.firebase)),
-    provideAuth(()=> getAuth()),
-    provideStorage(()=> getStorage()),
-    provideFirestore(()=> getFirestore()),
     HttpClientModule,
     BrowserAnimationsModule,
     HttpClientJsonpModule,

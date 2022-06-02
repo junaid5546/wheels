@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@capacitor/storage';
-import { ApiService } from '../api.service';
+import { DmApiService } from 'dm-api';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +9,7 @@ export class UserDataService {
   private userId:string = null;
   profileUrl = 'user/public-profile/';
 
-  constructor(private api:ApiService) { }
+  constructor(private api:DmApiService) { }
 
   /**
    * 

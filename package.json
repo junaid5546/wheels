@@ -52,7 +52,7 @@
     "cordova-plugin-inappbrowser": "^5.0.0",
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-x-socialsharing": "^6.0.3",
-    "dm-apis": "file:dm-apis-0.0.1.tgz",
+    "dm-api": "file:dm-api-0.0.1.tgz",
     "firebase": "^9.8.1",
     "rxjs": "~6.6.0",
     "swiper": "^8.0.7",

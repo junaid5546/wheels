@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit,OnDestroy, ChangeDetectionS
 import { IonInput } from '@ionic/angular';
 import { PickerController } from '@ionic/angular';
 import { UserRegistration } from '../../Interface/user';
-import { AuthenticationService } from '../../Services/authentication.service';
+import { AuthService } from 'dm-api';
 import { ModalControllerService } from '../../Services/modal-controller.service';
 import { Router } from '@angular/router';
 // RxJS v6+
@@ -38,7 +38,7 @@ export class RegisterPage implements OnInit, AfterViewInit,OnDestroy {
 
   constructor(private pickerController: PickerController,
               private router:Router,
-              private auth:AuthenticationService,
+              private auth:AuthService,
               private popUp:ModalControllerService) {
 
    }

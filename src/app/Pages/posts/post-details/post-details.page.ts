@@ -26,7 +26,7 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
   @Input() goBack:string = "true";
  
   // LEFT AND RIGHT ICON.
-  icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/notification.svg'};
+  icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:false, right_icon:'../../assets/icon/notification.svg'};
  
   // MAIN HEADING/SUBHEADING.
   @Input() heading = {has_main_heading:true, main_heading_name:'Toyota Avalon XLS 2021 New', has_sub_heading:false, sub_heading_name:''};
@@ -60,6 +60,7 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
     const item = JSON.parse(this.route.snapshot.params.item);
     console.log(item); 
     this.sellerNotes = item.sellerNotes;
+
      this.heading.main_heading_name =  `${item.make.makeEn} ${item.models.modelEn} ${item.trim.trimAr} ${item.year} ${item.condition.typeNameEn}`
     for (const [key, value] of Object.entries(item)) {
       console.log("KEY",key, "VALUE",value);  // first one, second two

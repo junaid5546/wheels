@@ -5,9 +5,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { UserDataService } from './Services/user-data.service';
-import { TokenService } from './Services/token.service';
-import { AuthenticationService } from './Services/authentication.service';
-import { StatusBar, Style } from '@capacitor/status-bar';
+import { TokenService } from 'dm-api';
+import { AuthService } from 'dm-api';
 export type platform_name = 'ios' | 'android' | 'web' ;
 
 @Component({
@@ -28,10 +27,10 @@ export class AppComponent  implements OnInit  {
   theme: string = 'light'; // light, dark
   
   constructor( 
-      private auth:AuthenticationService,
+      private auth:AuthService,
       private platform: Platform,
       private deviceInfo:DeviceInfoService,
-      private router:NavController,
+      private router:Router,
       private userData:UserDataService,
       private token:TokenService,
       public translate: TranslateService) {
@@ -39,16 +38,13 @@ export class AppComponent  implements OnInit  {
       this.translate.setDefaultLang('ar');
       window.addEventListener('statusTap', function () {
         console.log('statusbar tapped');
-      });
-      
-        
+      });  
   }
 
 
   ngOnInit(): void {
-      this.router.navigateBack(['filter'])
     this.initializeApp();
-
+    this.router.navigate(['register']);
   }
 
   initializeApp() {
@@ -61,13 +57,13 @@ export class AppComponent  implements OnInit  {
       console.log('Platform:', "Web");
     }
 
-    this.auth.getAuthToken()
+    /*this.auth.getAuthToken()
     .then((token:string)=>{
       console.log("TOKEN GOT", token);
     })
     .catch((error)=>{
       console.log("TOKEN ERROR: ", error);
-    });
+    });*/
     
     this.userData.getUserObj()
     .then((obj)=>{

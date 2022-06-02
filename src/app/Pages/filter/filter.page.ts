@@ -79,13 +79,7 @@ export class FilterPage implements OnInit {
 }
 
    applyFilters(filterList:any[]){
-    this.filterServices.applyFilters(filterList)
-    .then((response)=>{
-      console.log("Filter API response", response);
-    })
-    .catch((error)=>{
-      console.log("Filter API ERROR: ", error);
-    })
+ 
     }
 
 }

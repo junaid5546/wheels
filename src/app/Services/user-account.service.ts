@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApiService } from '../api.service';
+import { DmApiService } from 'dm-api';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +8,7 @@ import { ApiService } from '../api.service';
 export class UserAccountService {
   
   accountsUrl = 'user'
-  constructor(private api:ApiService) { }
+  constructor(private api:DmApiService) { }
 
 /**
  * 
