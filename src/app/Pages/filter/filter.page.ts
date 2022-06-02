@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Filter } from '../../Interface/filter';
+import { BehaviorSubject } from 'rxjs';
+import { FiltersService } from 'dm-api';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.page.html',
@@ -8,7 +9,7 @@ import { Filter } from '../../Interface/filter';
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class FilterPage implements OnInit {
- 
+  private filtersList = new BehaviorSubject<any[]>([]);
 
   filters = [
     { result: { count: 1 }, selected: true, id: 0, name: 'Body',url:'filter/car-body' },
@@ -54,13 +55,13 @@ export class FilterPage implements OnInit {
     right_icon: 'assets/icon/posts/post-details/Phone/Vector.svg',
   };
 
-  constructor(private router:Router) {}
+  constructor(private router:Router, private filterServices:FiltersService) {
+    this.filtersList.subscribe((res)=>{
+      this.applyFilters(res);
+  })
+  }
 
   ngOnInit() {
-    let filter = new Filter();
-    setInterval(() => {
-    filter.addFilter("body","lsajdflksjdf");
-    }, 1000);
     this.router.navigate(['filter/car-body']);
   }
 
@@ -71,32 +72,20 @@ export class FilterPage implements OnInit {
       this.router.navigate([url]);
   }
 
- 
+  addFilter(name:string, value:string){
+    let obj = {};
+    obj[name] = value;
+    this.filtersList.next((this.filtersList.getValue().concat([obj])));
+}
 
- 
+   applyFilters(filterList:any[]){
+    this.filterServices.applyFilters(filterList)
+    .then((response)=>{
+      console.log("Filter API response", response);
+    })
+    .catch((error)=>{
+      console.log("Filter API ERROR: ", error);
+    })
+    }
 
-
-
-
-
-
-
-
-
- 
-
-
-
-
-  //**     test   */ 
-
-  // THIS FUNCTION CALL WHENEVER CHANGE IN MODEL SELECTION OCCURS AND IT CHNAGE FLAG OF MAKE COMPLETED TO TRUE IF ALL MODELS ARE SELECTED AND FALSE IF SOME OF THEM ARE LEFT.
- 
-
-
-
-  
-
- 
- //*****     test   ****/
 }
