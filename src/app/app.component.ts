@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NavController, Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ export type platform_name = 'ios' | 'android' | 'web' ;
 })
 
 
-export class AppComponent  implements OnInit  {
+export class AppComponent  implements OnInit,OnDestroy  {
   platform_name:platform_name;
   authUrl = 'register';
   apiRoute: any = {};
@@ -40,11 +40,14 @@ export class AppComponent  implements OnInit  {
         console.log('statusbar tapped');
       });  
   }
+  
+  ngOnDestroy(): void {
+    console.log("ngOnDestroy");
+  }
 
 
   ngOnInit(): void {
     this.initializeApp();
-    this.router.navigate(['register']);
   }
 
   initializeApp() {

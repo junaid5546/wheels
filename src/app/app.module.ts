@@ -13,8 +13,8 @@ import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
 import { SwiperModule } from "swiper/angular";
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
-import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
-
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';  
+import { DmApiModule } from 'dm-api';
 Injectable()
 
 export function setTranslateLoader(http: HttpClient) {
@@ -24,6 +24,7 @@ export function setTranslateLoader(http: HttpClient) {
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
+    DmApiModule,
     HttpClientModule,
     BrowserAnimationsModule,
     HttpClientJsonpModule,

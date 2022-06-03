@@ -28,35 +28,35 @@ heading:any = { has_main_heading:true, main_heading_name:"The Digital Mall", has
 
 items:any[] = [
 
-{name:'Vehicles',img:'assets/icon/main-items-icon/vehicles.svg',hasClock:false, clock:'assets/icon/main-items-icon/clock.svg', },
+{name:'Vehicles',img:'assets/icon/main-items-icon/vehicles.svg',hasClock:false, clock:'assets/icon/main-items-icon/clock.svg',navigate:'vehicle' },
 
-{name:'Estates',img:'assets/icon/main-items-icon/estates.svg',hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Estates',img:'assets/icon/main-items-icon/estates.svg',hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'estate'},
 
-{name:'Electronics',img:'assets/icon/main-items-icon/electronics.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Electronics',img:'assets/icon/main-items-icon/electronics.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'electronic'},
 
-{name:'Furniture',img:'assets/icon/main-items-icon/furniture.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Furniture',img:'assets/icon/main-items-icon/furniture.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'furniture'},
 
-{name:'Fashion',img:'assets/icon/main-items-icon/fashion.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Fashion',img:'assets/icon/main-items-icon/fashion.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'fashion'},
 
-{name:'Kid Toys',img:'assets/icon/main-items-icon/kid toys.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Kid Toys',img:'assets/icon/main-items-icon/kid toys.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'kids-toys'},
 
-{name:'Animals',img:'assets/icon/main-items-icon/animals.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Animals',img:'assets/icon/main-items-icon/animals.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'animals'},
 
-{name:'Plants',img:'assets/icon/main-items-icon/plants.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Plants',img:'assets/icon/main-items-icon/plants.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'plants'},
 
-{name:'Food',img:'assets/icon/main-items-icon/food.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Food',img:'assets/icon/main-items-icon/food.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'food'},
 
-{name:'Jobs',img:'assets/icon/main-items-icon/jobs.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Jobs',img:'assets/icon/main-items-icon/jobs.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'jobs'},
 
-{name:'Services',img:'assets/icon/main-items-icon/services.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Services',img:'assets/icon/main-items-icon/services.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'services'},
 
-{name:'Tools',img:'assets/icon/main-items-icon/tools.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Tools',img:'assets/icon/main-items-icon/tools.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'tools'},
 
-{name:'Bills',img:'assets/icon/main-items-icon/bills.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Bills',img:'assets/icon/main-items-icon/bills.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'bills'},
 
-{name:'Tourism',img:'assets/icon/main-items-icon/travel.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Tourism',img:'assets/icon/main-items-icon/travel.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'tourism'},
 
-{name:'Library',img:'assets/icon/main-items-icon/library.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg'},
+{name:'Library',img:'assets/icon/main-items-icon/library.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'library'},
 
 ];
 

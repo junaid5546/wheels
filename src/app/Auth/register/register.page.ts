@@ -14,12 +14,13 @@ import { timer } from 'rxjs';
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss']
 })
-export class RegisterPage implements OnInit, AfterViewInit,OnDestroy {
+export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
   // THREE STEPS LOGIN/REGISTER
   // 0 MEANS PHONE
   // 1 MEANS DATE OF BIRTH IT MEANS THAT USER WILL LOGIN
   // 2 MEANS FIRST NAME AND LAST NAME 
   // 3 OTP ENTER 
+  
   subscribeTimer = null;
   user:UserRegistration = new UserRegistration();
   timer = timer(1000,2000);
@@ -50,7 +51,7 @@ export class RegisterPage implements OnInit, AfterViewInit,OnDestroy {
   ngOnInit() {
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     console.log("Destroyed: ");
     this.subscribeTimer.unsubscribe();
   }

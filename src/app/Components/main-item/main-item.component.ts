@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { DeviceInfoService } from '../../Services/device-info.service';
 @Component({
   selector: 'app-main-item',
@@ -12,7 +13,8 @@ export class MainItemComponent implements OnInit {
   mainItemDimensions = {height:'', width:''};
 
   
-  constructor(deviceInfo:DeviceInfoService) {
+  constructor(deviceInfo:DeviceInfoService, private router:Router) {
+
     let deviceHeight = deviceInfo.getDeviceHeight();
     if(deviceHeight < 700) {
       this.mainItemHeightPercentage = 10;
@@ -61,6 +63,10 @@ export class MainItemComponent implements OnInit {
   ngAfterViewInit(){
     console.log('Called view init');
     this.setMainItemHeight();
+  }
+
+  navigate(){
+    this.router.navigate(['']);
   }
 
 

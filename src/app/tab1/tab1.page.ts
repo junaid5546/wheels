@@ -83,7 +83,6 @@ export class Tab1Page implements OnInit {
   getPosts(){
     this.post.getAllPosts()
     .then((post:any)=>{
-      
       console.log("POSTS: ", post);
       this.items = post.result;
     })

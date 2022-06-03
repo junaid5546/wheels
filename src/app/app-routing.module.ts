@@ -11,8 +11,8 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/take-car-images/take-car-images.module').then( m => m.TakeCarImagesPageModule)
   },
   {
-    path: 'posts',
-    loadChildren: () => import('./Pages/posts/posts.module').then( m => m.PostsPageModule)
+    path: 'post-details',
+    loadChildren: () => import('./Pages/post-details/post-details.module').then( m => m.PostDetailsPageModule)
   },
   {
     path: 'filter',

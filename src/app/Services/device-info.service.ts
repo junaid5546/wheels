@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DeviceInfoService {
 
-  private platform = null;
+private platform = null;
 
  filter$ = new BehaviorSubject('all');
  private height:number = null;
