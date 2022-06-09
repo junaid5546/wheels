@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, filter } from 'rxjs';
 import { FiltersService } from 'dm-api';
 @Component({
   selector: 'app-filter',
@@ -8,9 +8,9 @@ import { FiltersService } from 'dm-api';
   styleUrls: ['./filter.page.scss'],
   changeDetection:ChangeDetectionStrategy.OnPush
 })
-export class FilterPage implements OnInit {
+export class FilterPage implements OnInit,AfterViewInit {
   private filtersList = new BehaviorSubject<any[]>([]);
-
+/*
   filters = [
     { result: { count: 1 }, selected: true, id: 0, name: 'Body',url:'filter/car-body' },
     { result: { count: 0 }, selected: false, id: 1, name: 'Make/Model',url:'filter/car-make-model' },
@@ -37,8 +37,8 @@ export class FilterPage implements OnInit {
       url:'filter/car-readliness'
     },
     { result: { count: 0 }, selected: false, id: 18, name: 'Sale Type',url:'filter/car-sale-type' },
-  ];
-
+  ];*/
+  filters:any[];
   selectedIndex = 0;
 
   heading = {
@@ -57,27 +57,45 @@ export class FilterPage implements OnInit {
 
   constructor(private router:Router, private filterServices:FiltersService) {
     this.filtersList.subscribe((res)=>{
-      this.applyFilters(res);
-  })
+      this.applyFilters(res) })
+  }
+  
+  ngAfterViewInit(): void {
+     this.getFiltersList();
   }
 
   ngOnInit() {
-    this.router.navigate(['filter/car-body']);
+    this.getFiltersList();
   }
 
-  selectedItem(index,url) {
-      this.filters[this.selectedIndex].selected = false;
-      this.filters[index].selected = true;
-      this.selectedIndex = index;
-      this.router.navigate([url]);
+  selectedItem(index,url) {      
+    this.filters[this.selectedIndex].selected = false;
+    this.filters[index].selected = true;
+    this.selectedIndex = index;
+    this.router.navigate([url]);
   }
 
   addFilter(name:string, value:string){
     let obj = {};
     obj[name] = value;
     this.filtersList.next((this.filtersList.getValue().concat([obj])));
-}
+  }
+  /**
+   * THIS METHOD GIVES BACK ALL FILTER LIST.
+   */
+  getFiltersList() {
+    this.filterServices.getVehicleFilters()
+    .then((filters:any)=>{
+      if(filters.code === 0) {
+        this.filters = filters.result;
+      }
+    })
+  }
 
+  /**
+   * 
+   * @param filterList Array
+   */
    applyFilters(filterList:any[]){
  
     }

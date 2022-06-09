@@ -12,10 +12,6 @@ const routes: Routes = [
     path:'settings',
     component:SettingsComponent
   },
-  {
-    path: 'post-details',
-    loadChildren: () => import('../Pages/post-details/post-details.module').then( m => m.PostDetailsPageModule)
-  }
 ];
 
 @NgModule({

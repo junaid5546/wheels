@@ -41,7 +41,7 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
               private router:Router,
               private auth:AuthService,
               private popUp:ModalControllerService) {
-
+               
    }
 
 

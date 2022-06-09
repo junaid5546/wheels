@@ -10,7 +10,8 @@ export class InventoryItemComponent implements OnInit {
   {name:'https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw0ODkwNDc5fHxlbnwwfHx8fA%3D%3D&w=1000&q=80'}]
  
   @Input() items:any[] = [];
-
+  @Input() title:any;
+  
   constructor(private router:Router) { }
 
   ngOnInit() {
@@ -18,7 +19,7 @@ export class InventoryItemComponent implements OnInit {
   }
 
   navigatePostDetails(item:any) {
-    this.router.navigate(['tabs/tab1/post-details',{'item': JSON.stringify(item)}]);
+    this.router.navigate(['tabs/post-details',{'item': JSON.stringify(item)}]);
   }
 
   onSwiper(swiper) {

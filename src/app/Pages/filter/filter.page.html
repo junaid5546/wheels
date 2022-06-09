@@ -1,42 +1,41 @@
 <app-header [heading]="heading"
 [icons]="icons"
 [filter]=true
+forwardTo="/tabs/tab1"
 ></app-header>
 
 <ion-content scrollEvents="false" scrollY="false">
-
   <div class="left-right-container">
     <div class="left">
       <ion-list class="left">
-        <div (click)="selectedItem(i,item.url)" [ngClass]="{'selected-filter-left-label': item.selected==true, 'filter-left-label':item.selected==false}"  class="item-container" *ngFor="let item of filters; let i=index">
+        <!---[ngClass]="{'selected-filter-left-label': item.selected==true, 'filter-left-label':item.selected==false}"-->
+        <!---(click)="selectedItem(i,item.url)"-->
+        <div class="item-container" *ngFor="let item of filters; let i=index">
         <div class="inner-item-container">
-          <ion-label>{{item.name}}</ion-label>
-          <div class="count" *ngIf="item.result.count != 0">
-          <ion-label>{{item.result.count}}</ion-label>
-        </div>
+          <ion-label>{{item.nameEn}}</ion-label>
+         
         </div>
       </div>
       </ion-list>
     </div>
 
-    <div class="right">
-
-    <router-outlet></router-outlet>
+    <div class="right" >
+  <ion-router-outlet></ion-router-outlet>
     </div>
-
 </div>
-
 </ion-content>
 
 <div class="bottom-button-container select-images-button">
   <div class="bottom-button-inner">
-<div class="left-button-clear">
+    <div class="left-button-clear">
   <ion-label>CLear All</ion-label>
-</div>
+  </div>
+
 <div class="right-button-apply-filters">
   <div class="show-vehicle-button">
     <ion-label>Show 1,100 Vehicle</ion-label>
-  </div>
-</div>
-</div>
+     </div>
+   </div>
+ </div>
+
 </div>

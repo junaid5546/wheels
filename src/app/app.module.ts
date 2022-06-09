@@ -26,8 +26,8 @@ export function setTranslateLoader(http: HttpClient) {
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     DmApiModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     HttpClientJsonpModule,
+    BrowserAnimationsModule,
     SwiperModule,
     TranslateModule.forRoot({
     loader: {

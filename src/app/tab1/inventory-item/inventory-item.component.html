@@ -1,5 +1,5 @@
 <!--Car item-->
-  <ion-card   class="item-container-posts"    *ngFor="let item of items">
+  <ion-card   class="item-container-posts"   *ngFor="let item of items">
     <!--top-->
     <div (click)="navigatePostDetails(item)" class="top">
        <swiper
@@ -29,7 +29,7 @@
     <!---bottom-->
     <div class="bottom">
       <div class="item-name">
-        <ion-label> {{item.make.makeAr}} {{item.models.modelAr}}</ion-label>
+        <ion-label>{{item.titel.nameEn}}</ion-label>
       </div>
       
       <div class="chips">
@@ -38,13 +38,13 @@
             <ion-icon src="assets/icon/posts/km.svg" ></ion-icon> 
           </div>
           <div class="title-container"> 
-           <ion-label >{{item.distanceKilometer}}</ion-label> </div>
+           <ion-label >{{item.items[11].value}}</ion-label> </div>
           </div>
 
 
           <div class="chip h-v-centered">
             <div class="icon-container  h-v-centered"> <ion-icon src="assets/icon/posts/Odometer.svg"></ion-icon> </div>
-            <div class="title-container">   <ion-label>{{item.governorate.govNameAr}}</ion-label> </div>
+            <div class="title-container">   <ion-label>{{item.items[10].value.nameEn}}</ion-label> </div>
           
           </div>
 

@@ -9,11 +9,12 @@ goBack="false"
   <!--SKELETON LOADER-->
   <app-post-item-skeleton *ngIf="items.length == 0"></app-post-item-skeleton>
   <!--SKELETON LOADER-->
+
   <ion-list *ngIf="items.length != 0">
 
-  <app-inventory-item [items]="items"></app-inventory-item>
+  <app-inventory-item 
+   [items]="items"></app-inventory-item>
   
   </ion-list>
-
-
+  
 </ion-content>

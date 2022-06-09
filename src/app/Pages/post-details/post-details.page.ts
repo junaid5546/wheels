@@ -14,11 +14,10 @@ SwiperCore.use([FreeMode, Scrollbar, Mousewheel]);
   styleUrls: ['./post-details.page.scss'],
 })
 export class PostDetailsPage implements OnInit,AfterViewInit {
-  
-  sellerNotes;
-  featureList;
-  items:any[] = [];
 
+  sellerNotes;
+  items:any;
+  
   @ViewChild(IonContent,{read:ElementRef}) content: ElementRef;
   @Input() forwardTo:string = null;
 
@@ -34,9 +33,10 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
   constructor(private gestureCtrl: GestureController,
               private router:Router,
               private route: ActivatedRoute,
-              public deviceInfo:DeviceInfoService, private nav:NavController) {
+              public deviceInfo:DeviceInfoService,
+              private nav:NavController) {
 
-    
+                
    }
 
   
@@ -59,21 +59,9 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
    ngOnInit() {
     const item = JSON.parse(this.route.snapshot.params.item);
     console.log(item); 
-    this.sellerNotes = item.sellerNotes;
-
-     this.heading.main_heading_name =  `${item.make.makeEn} ${item.models.modelEn} ${item.trim.trimAr} ${item.year} ${item.condition.typeNameEn}`
-    for (const [key, value] of Object.entries(item)) {
-      console.log("KEY",key, "VALUE",value);  // first one, second two
-  if(key === 'featuersList'){
-    this.featureList = value;
+    this.items = item;
     
-  } else if(key != '_id' && key != 'postId' && key != 'userId' && key != 'mediaList' && key != 'sellerNotes' && key != 'levelId'  ) {
-    this.items.push({key:key,value:value})
-  }
-  
-    }
-
-    console.log("FEATUE: ", this.featureList);
+     this.heading.main_heading_name =  item.titel.nameEn;
    
   }
 

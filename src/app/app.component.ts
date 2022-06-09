@@ -1,12 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { UserDataService } from './Services/user-data.service';
 import { TokenService } from 'dm-api';
-import { AuthService } from 'dm-api';
 export type platform_name = 'ios' | 'android' | 'web' ;
 
 @Component({
@@ -27,7 +26,6 @@ export class AppComponent  implements OnInit,OnDestroy  {
   theme: string = 'light'; // light, dark
   
   constructor( 
-      private auth:AuthService,
       private platform: Platform,
       private deviceInfo:DeviceInfoService,
       private router:Router,
@@ -59,7 +57,7 @@ export class AppComponent  implements OnInit,OnDestroy  {
     } else if(Capacitor.getPlatform() == (this.platform_name = 'web')){
       console.log('Platform:', "Web");
     }
-
+    //this.router.navigate(['take-car-images']);
     /*this.auth.getAuthToken()
     .then((token:string)=>{
       console.log("TOKEN GOT", token);

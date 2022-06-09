@@ -7,9 +7,6 @@ import { AppSharedModule } from '../../Components/Shared/shared.module';
 import { TakeCarImagesPage } from './take-car-images.page';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CarInfoModalComponent } from '../../Models/car-info-modal/car-info-modal.component';
-import { ItemBodyComponent } from '../../Components/item-body/item-body.component';
-import { ItemColorComponent } from '../../Components/item-color/item-color.component';
-import { MainItemComponent } from '../../Components/main-item/main-item.component';
 import { SpecialPlansComponent } from '../../Components/special-plans/special-plans.component';
 
 @NgModule({
@@ -21,6 +18,6 @@ import { SpecialPlansComponent } from '../../Components/special-plans/special-pl
     AppSharedModule,
     DragDropModule,
   ],
-  declarations: [TakeCarImagesPage,CarInfoModalComponent,ItemBodyComponent,ItemColorComponent,SpecialPlansComponent]
+  declarations: [TakeCarImagesPage,CarInfoModalComponent,SpecialPlansComponent]
 })
 export class TakeCarImagesPageModule {}

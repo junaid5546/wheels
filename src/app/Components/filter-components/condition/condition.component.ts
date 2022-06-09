@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ThemePalette} from '@angular/material/core';
+import { filter } from '../../../Interface/car-filter';
 export interface Task {
   name: string;
   completed: boolean;
@@ -13,6 +14,8 @@ export interface Task {
 })
 export class ConditionComponent implements OnInit {
 
+  @Input() condition:filter;
+  
   allComplete: boolean = false;
   task: Task = {
     name: 'Select All',

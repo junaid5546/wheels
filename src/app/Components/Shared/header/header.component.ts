@@ -25,21 +25,21 @@ export class HeaderComponent implements OnInit {
   
   ngOnInit() {}
 
-  navigate = async ()=> {
+  navigate = ()=> {
     
     if(this.goBack=='true'){
       this.nav.back();
-
     } else if(this.isModal) {
-      
       this.modalCtrl.dismissModal()
-    } else if (this.filter){
-      this.router.navigate(['tabs/tab1']);
+    } else if(this.filter){
+      this.nav.pop()
+      .then(()=>{
+        console.log("Route poped");
+        
+      })
     }
      else {
-       console.log("forwardTo");
       this.router.navigate([this.forwardTo]);
     }
-    console.log("Clicking");
   }
 }

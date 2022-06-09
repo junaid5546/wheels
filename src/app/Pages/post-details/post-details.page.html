@@ -8,7 +8,7 @@
         <ion-list>
             <ion-grid>
                 <ion-row>
-                <ion-col size="12" *ngFor="let item of items; let i=index">
+                <ion-col size="12" *ngFor="let item of items.items; let i=index">
                     <div class="list-item" [ngClass]="{'list-item': true, 'color': i%2==0 }">
                     <ion-col size="6" class="left-col">
                     <div class="icon-label-container">
@@ -25,7 +25,7 @@
                     
                     </ion-col>
                     <ion-col class="item-value" size="6">
-                        <ion-label class="dm-value">{{  item.value }}</ion-label>
+                        <ion-label class="dm-value">{{  item.value.nameEn }}</ion-label>
                     </ion-col>
                 </div>
                 </ion-col>
@@ -42,7 +42,7 @@
                 </ion-list-header>
             <ion-grid>
                 <ion-row>
-                <ion-col  size="6" *ngFor="let feature of featureList">
+                <ion-col  size="6" *ngFor="let feature of items.featuersList">
                     <div class="list-item" [ngClass]="{'list-item': true,'no-color':true}">
                     <ion-col size="12" class="left-col no-border">
                     <div class="icon-label-container">
@@ -52,7 +52,7 @@
                     </div>
     
                     <div class="label">
-                        <ion-label class="dm-value">{{feature.featureAr}}</ion-label>
+                        <ion-label class="dm-value">{{feature.featureEn}}</ion-label>
                     </div>
     
                     </div>
@@ -74,12 +74,12 @@
                 <ion-row>
                     <ion-col>
                         <div class="seller-notes">
-                            <ion-label class="dm-value">{{sellerNotes}}</ion-label>
+                            <ion-label class="dm-value">{{items.sellerNotes}}</ion-label>
                         </div>
                     </ion-col>
                 </ion-row>
         </ion-list>
-    
+    <!--
         <ion-list>
             <ion-grid>
                 <ion-row class="person-info-row">
@@ -87,15 +87,15 @@
                   
                     <ion-col class="contact-info" size="8">
                         <div class="contact-info-inner">
-                        <ion-label class="dm-heading">AA Dealership</ion-label>
-                        <ion-label class="dm-sub-heading">Alkhuwair, Bousher, Muscat</ion-label>
+                        <ion-label class="dm-heading">{{items.user.firstName == null ? ''  :  items.user.firstName  +''+ items.user.lastName == null ? '': items.user.lastName }}</ion-label>
+                       <ion-label class="dm-sub-heading">Alkhuwair, Bousher, Muscat</ion-label>
                         <ion-label class="dm-sub-heading">45 Ads</ion-label>
                     </div>
                     </ion-col>
                 </ion-row>
             </ion-grid>
         </ion-list>
-    
+    -->
     
         <ion-list class="bottom-buttons-list" >
             <div class="whatsapp bottom-buttons-container" (click)="this.deviceInfo.shareWhatsapp()">
