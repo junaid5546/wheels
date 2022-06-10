@@ -54,7 +54,7 @@ export class Tab1Page implements OnInit {
     for (let index = 0; index < cards.length; index++) {
       const e = cards[index];
       if(e instanceof HTMLElement){
-      //e.style.height = this.deviceInfo.getDeviceHeight()/2.5 + 'px';
+      e.style.height = this.deviceInfo.getDeviceHeight()/2 + 'px';
       }
    }
     console.log("Card Elements",cards);

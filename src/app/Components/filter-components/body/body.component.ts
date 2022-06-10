@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { filter } from '../../../Interface/car-filter';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-body',
   templateUrl: './body.component.html',
@@ -7,10 +8,13 @@ import { filter } from '../../../Interface/car-filter';
 })
 export class BodyComponent implements OnInit {
   
-  @Input() body:filter;
+  body:filter[] = [];
 
-  constructor() { }
+  constructor(private router:ActivatedRoute) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.body = JSON.parse(this.router.snapshot.params.data);
+    console.log("SNAPSHOT : ", JSON.parse(this.router.snapshot.params.data));
+  }
 
 }

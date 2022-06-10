@@ -32,10 +32,9 @@ export class HeaderComponent implements OnInit {
     } else if(this.isModal) {
       this.modalCtrl.dismissModal()
     } else if(this.filter){
-      this.nav.pop()
+      this.router.navigate(['tabs/tab1'])
       .then(()=>{
         console.log("Route poped");
-        
       })
     }
      else {

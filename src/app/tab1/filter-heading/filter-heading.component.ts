@@ -14,8 +14,7 @@ export class FilterHeadingComponent implements OnInit {
   ngOnInit() {}
 
   showFilters() {
-    this.route.navigate(['filter'])
-
+    this.route.navigate(['filter']);
   }
 
   openSheetmodel() {

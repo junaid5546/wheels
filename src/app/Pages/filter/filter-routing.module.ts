@@ -103,8 +103,8 @@ const routes: Routes = [
         path:'car-sale-type'
       },
       {
-        path: 'car-body',
-        redirectTo: '/tabs/tab1/car-body',
+        path: '',
+        redirectTo: 'filter/car-body',
         pathMatch: 'full'
       }
     ]

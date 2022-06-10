@@ -5,36 +5,42 @@ forwardTo="/tabs/tab1"
 ></app-header>
 
 <ion-content scrollEvents="false" scrollY="false">
+
+
   <div class="left-right-container">
     <div class="left">
       <ion-list class="left">
         <!---[ngClass]="{'selected-filter-left-label': item.selected==true, 'filter-left-label':item.selected==false}"-->
-        <!---(click)="selectedItem(i,item.url)"-->
-        <div class="item-container" *ngFor="let item of filters; let i=index">
+        <!----->
+        <div (click)="selectedItem(i,item.route,item.types)" class="item-container" *ngFor="let item of filters; let i=index">
         <div class="inner-item-container">
           <ion-label>{{item.nameEn}}</ion-label>
-         
         </div>
       </div>
       </ion-list>
     </div>
-
+   
     <div class="right" >
-  <ion-router-outlet></ion-router-outlet>
+      <ion-router-outlet></ion-router-outlet>
     </div>
+
 </div>
 </ion-content>
 
 <div class="bottom-button-container select-images-button">
   <div class="bottom-button-inner">
     <div class="left-button-clear">
-  <ion-label>CLear All</ion-label>
-  </div>
+ 
+      <ion-label>CLear All</ion-label>
+ 
+    </div>
 
 <div class="right-button-apply-filters">
   <div class="show-vehicle-button">
+   
     <ion-label>Show 1,100 Vehicle</ion-label>
-     </div>
+   
+  </div>
    </div>
  </div>
 

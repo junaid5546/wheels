@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, AfterViewInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
 import { FiltersService } from 'dm-api';
@@ -10,8 +10,8 @@ import { FiltersService } from 'dm-api';
 })
 export class FilterPage implements OnInit,AfterViewInit {
   private filtersList = new BehaviorSubject<any[]>([]);
-/*
-  filters = [
+
+  /*filters = [
     { result: { count: 1 }, selected: true, id: 0, name: 'Body',url:'filter/car-body' },
     { result: { count: 0 }, selected: false, id: 1, name: 'Make/Model',url:'filter/car-make-model' },
     { result: { count: 0 }, selected: false, id: 2, name: 'Price',url:'filter/car-price'},
@@ -38,7 +38,7 @@ export class FilterPage implements OnInit,AfterViewInit {
     },
     { result: { count: 0 }, selected: false, id: 18, name: 'Sale Type',url:'filter/car-sale-type' },
   ];*/
-  filters:any[];
+  public filters:any[] = [];
   selectedIndex = 0;
 
   heading = {
@@ -55,24 +55,27 @@ export class FilterPage implements OnInit,AfterViewInit {
     right_icon: 'assets/icon/posts/post-details/Phone/Vector.svg',
   };
 
-  constructor(private router:Router, private filterServices:FiltersService) {
+  constructor(private router:Router, private filterServices:FiltersService, private changeRef:ChangeDetectorRef ) {
     this.filtersList.subscribe((res)=>{
       this.applyFilters(res) })
   }
   
   ngAfterViewInit(): void {
-     this.getFiltersList();
+     
   }
 
   ngOnInit() {
     this.getFiltersList();
   }
 
-  selectedItem(index,url) {      
-    this.filters[this.selectedIndex].selected = false;
-    this.filters[index].selected = true;
-    this.selectedIndex = index;
-    this.router.navigate([url]);
+
+
+  selectedItem(index,url,data) {      
+    //this.filters[this.selectedIndex].selected = false;
+    //this.filters[index].selected = true;
+    //this.selectedIndex = index;
+    this.router.navigate([url,{data:JSON.stringify(this.filters[1].types)}]);
+    console.log("URL: ", url);
   }
 
   addFilter(name:string, value:string){
@@ -80,6 +83,7 @@ export class FilterPage implements OnInit,AfterViewInit {
     obj[name] = value;
     this.filtersList.next((this.filtersList.getValue().concat([obj])));
   }
+
   /**
    * THIS METHOD GIVES BACK ALL FILTER LIST.
    */
@@ -87,7 +91,17 @@ export class FilterPage implements OnInit,AfterViewInit {
     this.filterServices.getVehicleFilters()
     .then((filters:any)=>{
       if(filters.code === 0) {
-        this.filters = filters.result;
+
+        // MODIFYING FILTERS ARRAY
+        this.filters = filters.result.map(x => {
+          let obj = {...x , selected:false, route:'filter/car-body'} 
+          return obj;
+        });
+
+        console.log("FILTERS: ", this.filters);
+        this.changeRef.markForCheck()
+        //console.log("CAR FILTER BODY: ", this.filters[1].types);
+        //this.router.navigate(['filter/car-body',{data: JSON.stringify(this.filters[1].types)}])
       }
     })
   }
