@@ -11,8 +11,8 @@ import { FiltersService } from 'dm-api';
 export class FilterPage implements OnInit,AfterViewInit {
   private filtersList = new BehaviorSubject<any[]>([]);
 
-  /*filters = [
-    { result: { count: 1 }, selected: true, id: 0, name: 'Body',url:'filter/car-body' },
+  filter = [
+    { result: { count: 1 }, selected: true, id: 0,  name: 'Body',url:'filter/car-body' },
     { result: { count: 0 }, selected: false, id: 1, name: 'Make/Model',url:'filter/car-make-model' },
     { result: { count: 0 }, selected: false, id: 2, name: 'Price',url:'filter/car-price'},
     { result: { count: 0 }, selected: false, id: 3, name: 'Condition',url:'filter/car-condition' },
@@ -37,7 +37,7 @@ export class FilterPage implements OnInit,AfterViewInit {
       url:'filter/car-readliness'
     },
     { result: { count: 0 }, selected: false, id: 18, name: 'Sale Type',url:'filter/car-sale-type' },
-  ];*/
+  ];
   public filters:any[] = [];
   selectedIndex = 0;
 
@@ -56,6 +56,7 @@ export class FilterPage implements OnInit,AfterViewInit {
   };
 
   constructor(private router:Router, private filterServices:FiltersService, private changeRef:ChangeDetectorRef ) {
+
     this.filtersList.subscribe((res)=>{
       this.applyFilters(res) })
   }
@@ -67,14 +68,13 @@ export class FilterPage implements OnInit,AfterViewInit {
   ngOnInit() {
     this.getFiltersList();
   }
-
-
-
+ 
+  
   selectedItem(index,url,data) {      
-    //this.filters[this.selectedIndex].selected = false;
-    //this.filters[index].selected = true;
-    //this.selectedIndex = index;
-    this.router.navigate([url,{data:JSON.stringify(this.filters[1].types)}]);
+    this.filters[this.selectedIndex].selected = false;
+    this.filters[index].selected = true;
+    this.selectedIndex = index;
+    this.router.navigate([url, {data: JSON.stringify(data) }]);
     console.log("URL: ", url);
   }
 
@@ -93,15 +93,15 @@ export class FilterPage implements OnInit,AfterViewInit {
       if(filters.code === 0) {
 
         // MODIFYING FILTERS ARRAY
-        this.filters = filters.result.map(x => {
-          let obj = {...x , selected:false, route:'filter/car-body'} 
+        this.filters = filters.result.map((element, index) => {
+          let obj = { ...element , selected:false, route:this.filter[index].url } 
           return obj;
         });
 
         console.log("FILTERS: ", this.filters);
         this.changeRef.markForCheck()
-        //console.log("CAR FILTER BODY: ", this.filters[1].types);
-        //this.router.navigate(['filter/car-body',{data: JSON.stringify(this.filters[1].types)}])
+        console.log("CAR FILTER BODY: ", this.filters[1].types);
+        this.router.navigate(['filter/car-body',{data: JSON.stringify(this.filters[1].types)}])
       }
     })
   }
