@@ -1,0 +1,124 @@
+
+  <app-header [heading]="heading"
+  [icons]="icons"
+  goBack="true"></app-header>
+
+<ion-content>  
+    <app-item-detail-view></app-item-detail-view>
+        <ion-list>
+            <ion-grid>
+                <ion-row>
+                <ion-col size="12" *ngFor="let item of items.items; let i=index">
+                    <div class="list-item" [ngClass]="{'list-item': true, 'color': i%2==0 }">
+                    <ion-col size="6" class="left-col">
+                    <div class="icon-label-container">
+    
+                        <div class="icon">
+                        <ion-icon name="flower-outline"></ion-icon>
+                    </div>
+    
+                    <div class="label">
+                        <ion-label class="dm-value">{{  item.key }}</ion-label>
+                    </div>
+    
+                    </div>
+                    
+                    </ion-col>
+                    <ion-col class="item-value" size="6">
+                        <ion-label class="dm-value">{{  item.value.nameEn }}</ion-label>
+                    </ion-col>
+                </div>
+                </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+    
+    
+        <ion-list>
+            <ion-list-header>
+                <div class="list-header-container">
+                <ion-label class="dm-heading">Vehicle Features</ion-label>
+            </div>
+                </ion-list-header>
+            <ion-grid>
+                <ion-row>
+                <ion-col  size="6" *ngFor="let feature of items.featuersList">
+                    <div class="list-item" [ngClass]="{'list-item': true,'no-color':true}">
+                    <ion-col size="12" class="left-col no-border">
+                    <div class="icon-label-container">
+    
+                        <div class="icon">
+                        <ion-icon name="flower-outline"></ion-icon>
+                    </div>
+    
+                    <div class="label">
+                        <ion-label class="dm-value">{{feature.featureEn}}</ion-label>
+                    </div>
+    
+                    </div>
+                    </ion-col>
+                </div>
+                </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+    
+    
+        <ion-list>
+            <ion-list-header>
+                <div class="list-header-container">
+                <ion-label class="dm-heading" >Seller Notes</ion-label>
+            </div>
+                </ion-list-header>
+    
+                <ion-row>
+                    <ion-col>
+                        <div class="seller-notes">
+                            <ion-label class="dm-value">{{items.sellerNotes}}</ion-label>
+                        </div>
+                    </ion-col>
+                </ion-row>
+        </ion-list>
+    <!--
+        <ion-list>
+            <ion-grid>
+                <ion-row class="person-info-row">
+                        <div class="person-icon"></div>
+                  
+                    <ion-col class="contact-info" size="8">
+                        <div class="contact-info-inner">
+                        <ion-label class="dm-heading">{{items.user.firstName == null ? ''  :  items.user.firstName  +''+ items.user.lastName == null ? '': items.user.lastName }}</ion-label>
+                       <ion-label class="dm-sub-heading">Alkhuwair, Bousher, Muscat</ion-label>
+                        <ion-label class="dm-sub-heading">45 Ads</ion-label>
+                    </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-list>
+    -->
+    
+        <ion-list class="bottom-buttons-list" >
+            <div class="whatsapp bottom-buttons-container" (click)="this.deviceInfo.shareWhatsapp()">
+                <div class="item-icon">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                </div>
+                <div class="whatsapp-label">
+                    <ion-label>WhatsApp</ion-label>
+                </div>
+            </div>
+            <div class="message bottom-buttons-container" (click)="this.deviceInfo.shareSms()">
+                <div class="item-icon"><ion-icon name="chatbubble-outline"></ion-icon></div>
+                <div class="message-label">
+                    <ion-label>Message</ion-label>
+                </div>
+            </div>
+            <div class="call bottom-buttons-container" (click)="this.deviceInfo.callTheNumber()">
+                <div class="item-icon"><ion-icon name="call-outline"></ion-icon></div>
+                <div class="call-label">
+                    <ion-label>Call</ion-label>
+                </div>
+            </div>
+        </ion-list>
+
+   
+</ion-content>

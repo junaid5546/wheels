@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -8,19 +8,12 @@ const routes: Routes = [
   },
   {
     path: 'take-car-images',
-    loadChildren: () => import('./take-car-images/take-car-images.module').then( m => m.TakeCarImagesPageModule)
+    loadChildren: () => import('./Pages/take-car-images/take-car-images.module').then( m => m.TakeCarImagesPageModule)
   },
-  {
-    path: 'posts',
-    loadChildren: () => import('./posts/posts.module').then( m => m.PostsPageModule)
-  },
-  {
-    path: 'signup',
-    loadChildren: () => import('./identity/signup/signup.module').then( m => m.SignupPageModule)
-  },
+ 
   {
     path: 'filter',
-    loadChildren: () => import('./filter/filter.module').then( m => m.FilterPageModule)
+    loadChildren: () => import('./Pages/filter/filter.module').then( m => m.FilterPageModule)
   },
   {
     path: 'register',
@@ -28,12 +21,8 @@ const routes: Routes = [
   },
   {
     path: 'personal-information',
-    loadChildren: () => import('./personal-information/personal-information.module').then( m => m.PersonalInformationPageModule)
+    loadChildren: () => import('./Pages/personal-information/personal-information.module').then( m => m.PersonalInformationPageModule)
   },
-  {
-    path: 'change-detect',
-    loadChildren: () => import('./change-detect/change-detect.module').then( m => m.ChangeDetectPageModule)
-  }
 ];
 @NgModule({
   imports: [

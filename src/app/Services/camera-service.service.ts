@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Camera, CameraDirection, CameraResultType, CameraSource } from '@capacitor/camera';
-import { FilePath } from '@awesome-cordova-plugins/file-path/ngx';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { PermissionsService } from './permissions.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
@@ -10,7 +9,9 @@ import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
 })
 export class CameraServiceService {
 
-  constructor(private permission: PermissionsService,private filePath: FilePath, private webview: WebView , private sanitizer:DomSanitizer) { }
+  
+  constructor(private permission: PermissionsService,
+     private webview: WebView , private sanitizer:DomSanitizer) { }
 
 // TAKING IMAGE FROM CAMERA AND RETURN URL.
   takePicture = async () => {
@@ -30,6 +31,7 @@ export class CameraServiceService {
    try{
      image = await Camera.pickImages({
       quality:90,
+      limit:20,
       presentationStyle:'fullscreen',
       correctOrientation:true
     });
@@ -67,7 +69,6 @@ export class CameraServiceService {
       }
       
   }
-
 
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { filter } from '../../../Interface/car-filter';
 @Component({
   selector: 'app-engine-size',
   templateUrl: './engine-size.component.html',

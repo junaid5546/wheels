@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { OpenNativeSettings } from '@awesome-cordova-plugins/open-native-settings/ngx';
 @Component({
   selector: 'app-ask-permission',
@@ -13,7 +12,7 @@ export class AskPermissionComponent implements OnInit {
   @Input() subtitle:string = null;
   @Input() description:string = null;
 
-  constructor(public modalController: ModalController,private diagnostic: Diagnostic, private settings:OpenNativeSettings) { }
+  constructor(public modalController: ModalController, private settings:OpenNativeSettings) { }
 
   ngOnInit() {}
 
@@ -23,12 +22,7 @@ export class AskPermissionComponent implements OnInit {
     
   }
 
-  navigateToSettings() {
-    this.diagnostic.switchToSettings()
-    .then((res:any) => {
-      console.log("Settings Result: ", res);
-    })
-  }
+  
 
 
 }

@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { AskPermissionComponent } from '../Components/Shared/ask-permission/ask-permission.component';
-import { Diagnostic } from '@awesome-cordova-plugins/diagnostic/ngx';
 import { Camera } from '@capacitor/camera';
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -86,6 +83,5 @@ export class PermissionsService {
      let result = await Camera.requestPermissions()
 
    }
-
 
 }
