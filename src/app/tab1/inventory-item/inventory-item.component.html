@@ -1,0 +1,86 @@
+<!--Car item-->
+  <ion-card   class="item-container-posts"   *ngFor="let item of items">
+    <!--top-->
+    <div (click)="navigatePostDetails(item)" class="top">
+       <swiper
+       (swiper)="onSwiper($event)"
+        (slideChange)="onSlideChange($event)"
+          [pagination]="{
+            dynamicBullets: true
+          }"
+          class="mySwiper"
+        >
+          <ng-template swiperSlide *ngFor="let item of images" >
+            <ion-img  [src]="item.name"></ion-img>
+          </ng-template>
+        
+        </swiper>
+        <div class="image-and-logos">
+          <div class="image">
+          </div>
+          
+          <div class="gold-diamond"></div>
+          <div class="dm-logo"></div>
+        </div>
+      
+    </div>
+    <!--top-->
+
+    <!---bottom-->
+    <div class="bottom">
+      <div class="item-name">
+        <ion-label>{{item.titel.nameEn}}</ion-label>
+      </div>
+      
+      <div class="chips">
+        <div class="chip h-v-centered">
+          <div class="icon-container  h-v-centered"> 
+            <ion-icon src="assets/icon/posts/km.svg" ></ion-icon> 
+          </div>
+          <div class="title-container"> 
+           <ion-label >{{item.items[11].value}}</ion-label> </div>
+          </div>
+
+
+          <div class="chip h-v-centered">
+            <div class="icon-container  h-v-centered"> <ion-icon src="assets/icon/posts/Odometer.svg"></ion-icon> </div>
+            <div class="title-container">   <ion-label>{{item.items[10].value.nameEn}}</ion-label> </div>
+          
+          </div>
+
+          <div class="chip  price">
+            <div class="icon-container  h-v-centered"> 
+              <ion-icon src="assets/icon/posts/omr.svg"></ion-icon> </div>
+              <div class="title-container"> 
+                <ion-label> {{item.price}}</ion-label></div>
+          </div>
+        </div>
+
+        <div class="chips no-border">
+          <div class="chip" >
+            <div class="icon-container  h-v-centered"> 
+              <ion-icon src="assets/icon/posts/share.svg" ></ion-icon> </div>
+              <div class="title-container"> <ion-label>Share</ion-label> </div>
+              
+            </div>
+
+
+            <div class="chip" >
+              <div class="icon-container  h-v-centered"> 
+                <ion-icon src="assets/icon/posts/notify.svg"></ion-icon>
+              </div>
+              <div class="title-container"><ion-label>Notify</ion-label></div>
+              
+            </div>
+
+            <div class="chip" >
+              <div class="icon-container  h-v-centered"> 
+                <ion-icon src="assets/icon/posts/fav.svg"></ion-icon></div>
+                <div class="title-container"> 
+                  <ion-label>Favorite</ion-label> </div>
+            </div>
+          </div>
+    </div>
+    <!---bottom-->
+  </ion-card>
+<!--Car item-->

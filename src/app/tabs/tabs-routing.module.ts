@@ -22,12 +22,8 @@ const routes: Routes = [
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
-        path: 'posts',
-        loadChildren: () => import('../posts/posts.module').then(m => m.PostsPageModule)
-      },
-      {
         path: 'post-details',
-        loadChildren: () => import('../posts/post-details/post-details.module').then( m => m.PostDetailsPageModule)
+        loadChildren: () => import('../Pages/post-details/post-details.module').then( m => m.PostDetailsPageModule)
       },
       {
         path: '',

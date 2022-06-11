@@ -21,22 +21,24 @@ export class HeaderComponent implements OnInit {
   @Input() heading = {has_main_heading:false, main_heading_name:'', has_sub_heading:false, sub_heading_name:''};
   // HAS MODAL BEING PRESENTED
   @Input() isModal:boolean;
+  @Input() filter:boolean;
   
   ngOnInit() {}
 
-  navigate = async ()=> {
+  navigate = ()=> {
     
     if(this.goBack=='true'){
       this.nav.back();
-
     } else if(this.isModal) {
-      
       this.modalCtrl.dismissModal()
+    } else if(this.filter){
+      this.router.navigate(['tabs/tab1'])
+      .then(()=>{
+        console.log("Route poped");
+      })
     }
      else {
-       console.log("forwardTo");
       this.router.navigate([this.forwardTo]);
     }
-    console.log("Clicking");
   }
 }

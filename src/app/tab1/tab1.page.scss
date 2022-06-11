@@ -1,130 +1,28 @@
 
-    //width: 100%;
+
+
+
+  .price {
+    font-size: 17px !important;
+    font-weight: 600;
+  }
+
+  ion-list{
+      padding-top: 50px;
+  }
+
+  .top-heading{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  .ripple-parent {
+    position: relative;
+    overflow: hidden;
+  }
+
+
+
+
   
-    .header-home-section{
-        background: #0178D4;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-top: 20px;
-        flex: 1;
-            .main-header-container{
-                display: flex;
-                justify-content: space-around;
-                align-items: flex-end;
-                flex-direction: row;
-                padding-bottom: 10px;
-                //background: pink;
-            .header-settings-container{
-                display: flex;
-                flex-direction: column;
-                .header-icon{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    ion-icon{
-                        font-size: 5vw;
-                        padding-bottom: 3px;
-                    }
-                }
-                .header-settings-label{
-                    ion-label{
-                        font-weight: 400;
-                        font-size: 3vw;
-                        display: flex;
-                        align-items: center;
-                        text-align: center;
-                        color: #FFFFFF;
-                    }
-                }
-               
-                
-            }
-                .header-title-container{
-                    display: flex;
-                    flex-direction: column;
-                    //background: yellow;
-                    justify-content: center;
-                    align-items: center;
-                    .header-title-main{
-                        ion-label{
-                            font-size: 4vw;
-                            font-weight: 600;
-                            letter-spacing: 0.24px;
-                            color: #FFFFFF;
-                            white-space: pre-line;
-                        }
-                    }
-                    .header-title-name-label{
-                        ion-label{
-                            font-weight: normal;
-                            font-size: 3vw;
-                            text-align: center;
-                            color: #FFFFFF;
-                            white-space: pre-line;
-                        }
-                    }
-                }
-            }
-        }
-    
-        .ripple-parent {
-            position: relative;
-            overflow: hidden;
-          }
-    
-    // TEST
-    .main-container{
-        display: flex;
-        flex-direction: column;
-        .header-ad-wraper{
-            display: flex;
-            flex-direction: column;
-            .header-container{
-                //margin-top: 10px;
-                display: flex;
-                flex: .5;
-            }
-            .ad-container{
-                display: flex;
-                flex:.5;
-                flex-direction: column;
-                justify-content: center;
-            }
-        }
-    
-        .item-container{
-            display: flex;
-            flex:1
-        }
-    }
-    ion-content {
-        // overwrite inline styles
-        --offset-bottom: auto!important;
-        --overflow: hidden;
-        overflow: auto;
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      }
-
-
-
-      .green{
-          
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 500px;
-      }
-
-      ion-content {
-        // overwrite inline styles
-        --offset-bottom: auto!important;
-        --overflow: hidden;
-        overflow: auto;
-        &::-webkit-scrollbar {
-          display: none;
-        }
-      }

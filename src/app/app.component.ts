@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ChildrenOutletContexts } from '@angular/router';
 import { Router } from '@angular/router';
-import { AuthService } from 'dm-apis';
-import { UserRegistration } from './user-model/user';
-import { ApiService } from './api.service'
+import { Capacitor } from '@capacitor/core';
+import { UserDataService } from './Services/user-data.service';
+import { TokenService } from 'dm-api';
+export type platform_name = 'ios' | 'android' | 'web' ;
 
 @Component({
   selector: 'app-root',
@@ -14,43 +14,69 @@ import { ApiService } from './api.service'
   styleUrls: ['app.component.scss']
 })
 
-export class AppComponent  implements OnInit  {
 
+export class AppComponent  implements OnInit,OnDestroy  {
+  platform_name:platform_name;
   authUrl = 'register';
   apiRoute: any = {};
   getTokenAccess: any = {};
   refreshToken: any = {};
 
-
   lang: string = 'ar'; // ar, en
   theme: string = 'light'; // light, dark
   
-  constructor( private authService:AuthService,
-     private platform: Platform,
+  constructor( 
+      private platform: Platform,
       private deviceInfo:DeviceInfoService,
-      private contexts: ChildrenOutletContexts,
-      private apiService:ApiService,
       private router:Router,
+      private userData:UserDataService,
+      private token:TokenService,
       public translate: TranslateService) {
 
       this.translate.setDefaultLang('ar');
-      this.initializeApp();
+      window.addEventListener('statusTap', function () {
+        console.log('statusbar tapped');
+      });  
+  }
+  
+  ngOnDestroy(): void {
+    console.log("ngOnDestroy");
+  }
+
+
+  ngOnInit(): void {
+    this.initializeApp();
   }
 
   initializeApp() {
 
-  let obj = new UserRegistration();
-  obj.firstName = "Muhammad";
-  obj.lastName  = "Gul";
-  obj.phoneOman.areacode = 11;
-  obj.phoneOman.phoneNumber = 1212122;
+    if (Capacitor.getPlatform() === (this.platform_name = 'ios')) {
+      console.log("Platform:", "IOS");
+    } else if(Capacitor.getPlatform() === (this.platform_name = 'android' )){
+      console.log("Platform:", "Android");
+    } else if(Capacitor.getPlatform() == (this.platform_name = 'web')){
+      console.log('Platform:', "Web");
+    }
+    this.router.navigate(['personal-information']);
+    
+    /*this.auth.getAuthToken()
+    .then((token:string)=>{
+      console.log("TOKEN GOT", token);
+    })
+    .catch((error)=>{
+      console.log("TOKEN ERROR: ", error);
+    });*/
+    
+    this.userData.getUserObj()
+    .then((obj)=>{
+      console.log("User OBJ :", JSON.parse(obj.value));
+    })
 
-  obj.getDateOfBirth("19/02/1995");
-  this.createUser(obj);
-  this.router.navigate(['register']);
-  
-  this.platform.ready().then(() => {
-      
+    this.userData.getUserId()
+    .then((id) => {
+    });
+
+    this.platform.ready().then((plt) => {
       // SETTING DEVICE HEIGHT AND WIDTH
       this.deviceInfo.setDeviceHeight(this.platform.height());
      
@@ -83,32 +109,6 @@ export class AppComponent  implements OnInit  {
         localStorage.setItem("Language",'ar');
       }
     });
-  }
+  }   
 
-
-  ngOnInit(): void {
-    
-  }
-    
-
-  getPosts() {
-  
-  }
-
-
-  createUser(userObj:UserRegistration) {
-    const apiRoute: any = {};
-    return new Promise((resolve, reject) => {
-    apiRoute.apiroute = this.authUrl;
-    apiRoute.data = userObj;
-    this.apiService.post(apiRoute, 'h3')
-        .then((data: any) => {
-            resolve(data);
-        })
-        .catch((error) => {
-            reject(error);
-        });
-    });
-}
-    
-}
+} 

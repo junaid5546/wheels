@@ -1,0 +1,123 @@
+ion-card{
+    flex-direction: column;
+    display: flex;
+    background: conic-gradient(from 125deg at 0% 0%, #E8E7E7 0deg, #F4F4F4 360deg);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    .top{
+        height: 65%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .image-and-logos{
+            z-index: 1000;
+            .price{
+                
+                position: absolute;
+                padding: 5px;
+                padding-left: 13px;
+                padding-right: 13px;
+                bottom: 5px;
+                left: 5px;
+                background: linear-gradient(225deg, rgba(0, 181, 221, 0.4) 6.77%, rgba(0, 145, 226, 0.4) 51.04%, rgba(0, 132, 228, 0.4) 90.62%);
+                border-radius: 50px;
+                ion-label{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-weight: 700;
+                    font-weight: 500;
+                    color: white;
+                }
+            }
+            .gold-diamond{
+                border: 2px solid white;
+                height: 40px;
+    width: 40px;
+    position: absolute;
+    background: #cac0ff;
+    top: 10px;
+    right: 20;
+    right: 10px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 8px rgb(0 0 0 / 38%);
+            }
+            .dm-logo{
+
+                height: 40px;
+                width: 40px;
+                position: absolute;
+                background: #8a83ae;
+                top: 10px;
+                left: 10px;
+                border-radius: 100px;
+                box-shadow: 0px 0px 8px rgb(0 0 0 / 38%);
+            }
+        }
+    }
+    .bottom{
+        height: 35%;
+        display: flex;
+    flex-direction: column;
+     justify-content: space-around;;
+    //background: white;
+    .item-name{
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        color: #494949;
+        padding-top: 5px;
+        ion-label{
+            font-weight: var(--dm-heading-weight);
+            letter-spacing:var(--dm-letter-spacing);
+            font-size: var(--dm-item-title-size);
+        }
+    }
+    .chips{
+        padding-bottom: 6px;
+    border-bottom: 1px solid;
+    padding-top: 5px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 14px;
+        border-color: #cdcdcd;
+        flex: 1;
+        width: 100%;
+        .chip{
+            display: flex;
+            flex: 1;
+            align-items: center;
+            justify-content: center;
+            //width: 32%;
+            
+            ion-icon{
+                font-size: 1em;
+                padding-left: 5px;
+                padding-right: 5px;
+            }
+        }
+        ion-label{
+            padding-left: 3px;
+            font-size: var(--dm-item-sub-title-size);
+        }
+    }
+    }
+    .price{
+        display: flex;
+        //justify-content: space-between;
+        align-items: center;
+        letter-spacing: 1px;
+    }
+    .price {
+        font-size: 17px !important;
+        font-weight: 600;
+      }
+    .no-border{
+        border-bottom: 0px !important;
+    }
+}

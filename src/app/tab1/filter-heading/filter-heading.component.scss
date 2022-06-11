@@ -1,0 +1,32 @@
+.top-heading{
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+
+    .buttons-default{
+        flex: 1;
+        ion-label{
+        color: #0091E2 !important;
+    }
+    ion-icon{
+        color: #0091E2 !important;
+    }
+
+    .button-name-and-logo-container{
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        .button-logo{
+            font-size: 1.5em;
+            padding-right: 5px;
+        }
+    }
+
+
+    }
+    .bordered{
+        border-left: 1px solid #0000001f;
+        border-right: 1px solid #0000001f;
+    }
+  }

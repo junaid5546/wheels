@@ -1,10 +1,10 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header [heading]=heading></app-header>
+   
 <ion-content>
+  <div
+  id="recaptcha-container"
+  class="justify-center flex"
+  ></div> 
 <ion-grid>
   <ion-row class="item-container">
  
@@ -30,40 +30,40 @@
       <div class="input-container">
         
         <ion-item class="item-inner">
-          <ion-input [disabled]="isOtpDisabled" autofocus="true"  inputmode="decimal" clearOnEdit="true"  #first (keyup)="gotoNextField(first, secnd, first, $event)" type="tel" maxlength="1" minlength="1">
+          <ion-input [disabled]="isOtpDisabled" autofocus="true"  inputmode="numeric" clearOnEdit="true"  #first (keyup)="gotoNextField(first, secnd, first, $event,0)" type="numeric" maxlength="1" minlength="1">
           </ion-input>
 
       </ion-item>
 
       <ion-item  class="item-inner"> 
-          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  #secnd (keyup)="gotoNextField(secnd,third,first, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" inputmode="numeric" clearOnEdit="true"  #secnd (keyup)="gotoNextField(secnd,third,first, $event,1)" required type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  #third (keyup)="gotoNextField(third,fourth,secnd, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" inputmode="numeric" clearOnEdit="true"  #third (keyup)="gotoNextField(third,fourth,secnd, $event,2)" required type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item class="item-inner">
-          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  #fourth (keyup)="gotoNextField(fourth,fifth,third, $event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" inputmode="numeric" clearOnEdit="true"  #fourth (keyup)="gotoNextField(fourth,fifth,third, $event,3)" required type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  (keyup)="gotoNextField(fifth,sixth,fourth,$event)" #fifth required type="tel" max="1" maxlength="1" minlength="1">
+          <ion-input [disabled]="isOtpDisabled" inputmode="numeric" clearOnEdit="true"  (keyup)="gotoNextField(fifth,sixth,fourth,$event,4)" #fifth required type="numeric" max="1" maxlength="1" minlength="1">
           </ion-input>
       </ion-item>
 
         <ion-item class="item-inner">
-          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"    #sixth (keyup)="gotoNextField(sixth,seven,fifth,$event)" type="tel" maxlength="1" minlength="1">
+          <ion-input [disabled]="isOtpDisabled" inputmode="numeric" clearOnEdit="true"    #sixth (keyup)="gotoNextField(sixth,seven,fifth,$event,5)" type="numeric" maxlength="1" minlength="1">
           </ion-input>
 
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input [disabled]="isOtpDisabled" inputmode="decimal" clearOnEdit="true"  #seven (keyup)="gotoNextField(seven,eight,sixth,$event)" required type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" inputmode="numeric" clearOnEdit="true"  #seven (keyup)="gotoNextField(seven,eight,sixth,$event,6)" required type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input [disabled]="isOtpDisabled" (ionChange)="validate($event)"  inputmode="decimal" clearOnEdit="true"  #eight (keyup)="gotoNextField(eight,firstName, seven,$event)"  type="tel" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled" (ionChange)="validate($event)"  inputmode="numeric" clearOnEdit="true"  #eight (keyup)="gotoNextField(eight,eight, seven,$event,7)"  type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       </div>
@@ -71,9 +71,7 @@
   
   </ion-row>
 
-
-
-  <ion-row class="item-container">
+  <ion-row class="item-container" *ngIf="step == 2">
  
     <ion-col class="name-input-container"  size="12">
 
@@ -84,17 +82,14 @@
 
        <div class="first-name-input">
          <div class="input-container first-name-container">
-          <ion-input #firstName [disabled]="isOtpDisabled" minlength="4" maxlength="10" id="firstname" class="first-name-input-field"></ion-input>
+          <ion-input #firstName [disabled]="isOtpDisabled" minlength="4" maxlength="10" id="firstname" [(ngModel)]="this.user.first_name" class="first-name-input-field"></ion-input>
          </div>
        </div>
      </ion-col>
   
   </ion-row>
 
-
-
-
-  <ion-row class="item-container">
+  <ion-row class="item-container" *ngIf="step == 2">
  
     <ion-col class="name-input-container"  size="12">
 
@@ -105,16 +100,14 @@
 
        <div class="first-name-input">
          <div class="input-container first-name-container">
-          <ion-input #lastName [disabled]="isOtpDisabled" minlength="4" maxlength="10" type="text" id="lastname" class="last-name-input-field"></ion-input>
+          <ion-input [(ngModel)]="this.user.last_name" #lastName [disabled]="isOtpDisabled" minlength="4" maxlength="10" type="text" id="lastname" class="last-name-input-field"></ion-input>
          </div>
        </div>
      </ion-col>
   
   </ion-row>
 
-
-
-  <ion-row id="dob-item" class="item-container" (click)="presentPicker()">
+  <ion-row *ngIf="step != 0" id="dob-item" class="item-container" (click)="presentPicker()">
  
     <ion-col class="name-input-container"  size="12">
 
@@ -144,16 +137,53 @@
   
   </ion-row>
 
+  <ion-row *ngIf="step == 3">
+    <ion-col size="12">
+      <div class="input-container">
+        
+        <ion-item class="item-inner">
+          <ion-input  autofocus="true"  inputmode="numeric" clearOnEdit="true"  #first (keyup)="gotoNextFieldOTP(first, secnd, first, $event,0)" type="numeric" maxlength="1" minlength="1">
+          </ion-input>
 
+      </ion-item>
 
-  <ion-row class="item-container">
+      <ion-item  class="item-inner"> 
+          <ion-input inputmode="numeric" clearOnEdit="true"  #secnd (keyup)="gotoNextFieldOTP(secnd,third,first, $event,1)" required type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
+      </ion-item>
+
+      <ion-item  class="item-inner">
+          <ion-input  inputmode="numeric" clearOnEdit="true"  #third (keyup)="gotoNextFieldOTP(third,fourth,secnd, $event,2)" required type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
+      </ion-item>
+
+      <ion-item class="item-inner">
+          <ion-input  inputmode="numeric" clearOnEdit="true"  #fourth (keyup)="gotoNextFieldOTP(fourth,fifth,third, $event,3)" required type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
+      </ion-item>
+
+      <ion-item  class="item-inner">
+          <ion-input inputmode="numeric" clearOnEdit="true"  (keyup)="gotoNextFieldOTP(fifth,sixth,fourth,$event,4)" #fifth required type="numeric" max="1" maxlength="1" minlength="1">
+          </ion-input>
+      </ion-item>
+
+        <ion-item class="item-inner">
+          <ion-input  inputmode="numeric" clearOnEdit="true"    #sixth (keyup)="gotoNextFieldOTP(sixth,sixth,fifth,$event,5)" type="numeric" maxlength="1" minlength="1">
+          </ion-input>
+
+      </ion-item>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="step !=0" class="item-container">
     <ion-col class="name-input-container h-v-centered no-border"  size="12" >
       <div class="day-month-year no-padding half-width">
       <ion-button (click)="countdown()" [disabled]="isOtpDisabled">
-        <ion-label id="timer">Send OTP</ion-label>
+        <ion-label id="timer" >Send OTP</ion-label>
       </ion-button>
     </div>
      </ion-col>
   </ion-row>
+
+  
 </ion-grid>
+
 </ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { DeviceInfoService } from '../../../Services/device-info.service';
 import { IonInput } from '@ionic/angular';
+import { filter } from '../../../Interface/car-filter';
 @Component({
   selector: 'app-price',
   templateUrl: './price.component.html',

@@ -1,46 +1,69 @@
 import { Injectable } from '@angular/core';
-import { Firebase } from '@awesome-cordova-plugins/firebase/ngx';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from '@angular/fire/auth'
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FirebaseAuthentication } from '@awesome-cordova-plugins/firebase-authentication/ngx';
-import firebase from 'firebase/compat';
+import { collectionData, doc, docData, Firestore, addDoc, setDoc, getDoc, } from '@angular/fire/firestore';
+import { getStorage, ref, uploadBytes, uploadString } from '@angular/fire/storage';
+import { collection } from 'firebase/firestore';
+import { Observable, Subject } from 'rxjs';
+import { UserRegistration } from './Interface/user';
+
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class FirebaseService {
-  
-  recaptchaVerifier: firebase.auth.RecaptchaVerifier;
-  
-  constructor(private firebase: Firebase, private auth:AngularFireAuth, private firestore:AngularFirestore,private firebaseAuthentication: FirebaseAuthentication) { }
 
-  getFirebaseToken(){
-  
-    this.firebase.getToken()
-    .then((token)=>{
-      console.log("Token is: ",token);
-    })
-    .catch(error=>{
-      console.log("Error getting token", error);
-    })
-  
+  userId = new Subject<string>();
+
+ constructor(private firestore:Firestore){}
+
+
+
+ getAllUsers():Observable<UserRegistration[]> {
+   const notesRef = collection(this.firestore, 'users');
+   return collectionData(notesRef, { idField:'id'}) as Observable<UserRegistration[]>;
+ }
+
+ getSpecificUser(userId):Observable<UserRegistration>{
+   const userRef = doc(this.firestore, `notes/${userId}`);
+   return docData(userRef, {idField:'id'}) as Observable<UserRegistration>; 
+ }
+
+
+async addNewUser(user:UserRegistration){
+  console.log(user);
+  let obj = Object.assign({},user);
+  console.log(obj);
+  try {
+        const docRef = await setDoc(doc(this.firestore,'users',''), obj);
+          
+
+  } catch (error) {
+        console.error("Error adding document: ", error); 
   }
+   
+
+ }
+
+ 
+
+async uploadImage(blob,imageName){
+  const storage = getStorage();
+  console.log("STORAGE: ", storage);
+  const storageRef = ref(storage, `images/${imageName}`);
+  console.log("REF: ", storageRef);
+  uploadBytes(storageRef, blob).then((snapshot) => {
+  console.log('Uploaded a blob or file!',snapshot);
+});
+ 
+
+}
 
 
-  loginWithPhone(){
+async getDoc(id:string) {
 
-    const auth = getAuth();
-    this.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {}, auth);
-    signInWithPhoneNumber(auth,"+96897022005",this.recaptchaVerifier)
-    .then((confirmationResult)=>{
-      console.log("Sms sent",confirmationResult);
-    })
-    .catch((error)=>{
-      console.log("Error sending sms",error);
-    });
+  const docRef = doc(this.firestore, "users", id);
+  
+}
 
-  }
 
 }

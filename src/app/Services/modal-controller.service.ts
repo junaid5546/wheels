@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { BehaviorSubject } from "rxjs";
-import { CarInfoModalComponent } from '../Models/car-info-modal/car-info-modal.component';
-import { FiltersComponent } from '../Models/filters/filters.component';
 import { ImagePreviewComponent } from '../Models/image-preview/image-preview.component';
+import { ToastController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,22 +30,22 @@ export class ModalControllerService {
       { key: 7, name: 'Door Count', value: [{ name: 1 }, { name: 2 }, { name: 3 }], selected: {} },
       { key: 8, name: 'Engine size', value: [{ name: 'big' }, { name: 'small' }], selected: {} },
       { key: 9, name: 'Cylinder count', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 10, name: 'Fuel Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 11, name: 'Transmission Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 12, name: 'Drivetrain', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 13, name: "interior Color", value: [{ name: 'sedan' }, { name: 'medtain' }, { name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 14, name: 'Seat type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 15, name: 'Origin', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 16, name: 'Governorate', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 17, name: 'State', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 18, name: 'Warranty Duration', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 19, name: 'Warranty Distance', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 20, name: 'Insurance type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 21, name: 'Driving Readlines', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 22, name: 'Sale Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 23, name: 'Features', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 24, name: 'Additional Details', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 25, name: 'Special Plans', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} }
+      { key: 10,name: 'Fuel Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 11,name: 'Transmission Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 12,name: 'Drivetrain', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 13,name: "interior Color", value: [{ name: 'sedan' }, { name: 'medtain' }, { name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 14,name: 'Seat type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 15,name: 'Origin', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 16,name: 'Governorate', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 17,name: 'State', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 18,name: 'Warranty Duration', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 19,name: 'Warranty Distance', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 20,name: 'Insurance type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 21,name: 'Driving Readlines', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 22,name: 'Sale Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 23,name: 'Features', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 24,name: 'Additional Details', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
+      { key: 25,name: 'Special Plans', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} }
     ],
     current: { index: 0, value: null },
     next: { index: 0, value: null },
@@ -54,15 +53,15 @@ export class ModalControllerService {
     length: -1
   };
 
-  constructor(private modalController: ModalController,
+  constructor(private modalController: ModalController,public toastController: ToastController
 
   ) { }
 
-  async presentModal(props) {
+  async presentModal(component,props) {
     this.modalProps = props;
     console.log("PROPS: ", this.modalProps);
     const modal = await this.modalController.create({
-      component: CarInfoModalComponent,
+      component: component,
       cssClass: 'my-custom-class',
       swipeToClose: true,
       componentProps: props,
@@ -223,6 +222,11 @@ export class ModalControllerService {
     return this.currentObject.asObservable();
   }
 
+/**
+ * 
+ * @param imagesArray 
+ * @returns 
+ */
 async presentImagePreviewModal(imagesArray){
 const modal = await this.modalController.create({
   component:ImagePreviewComponent,
@@ -232,8 +236,13 @@ const modal = await this.modalController.create({
 return await modal.present();
 }
 
-
-  async presentSheetModal(component,arr) {
+/**
+ * PRESENTING SHEET MODAL 
+ * @param component 
+ * @param arr 
+ * @returns 
+ */
+  async presentSheetModal(component,arr:any[]) {
     const modal = await this.modalController.create({
       component: component,
       cssClass: "custom-modal",
@@ -243,6 +252,7 @@ return await modal.present();
     });
     return await modal.present();
   }
+
 
   applyFilter(arr: any[], filterId) {
     switch (filterId) {
@@ -291,4 +301,23 @@ return await modal.present();
   dismissImagePreviewModal(){
     this.modalController.dismiss();
   }
+
+/**
+ * PRESENTING TOAST 
+ * @param header
+ * @param message
+ */
+  async presentToast(header:string, message:string) {
+    const toast = await this.toastController.create({
+      duration: 2000,
+      color:'warning',
+      cssClass:'toast-warning',
+      position: 'top',
+      icon: 'alert-outline',
+      header: header,
+      message: message,
+    });
+    toast.present();
+  }
+ 
 }
