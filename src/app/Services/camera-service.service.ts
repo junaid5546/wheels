@@ -7,13 +7,12 @@ import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CameraServiceService {
-
   
-  constructor(private permission: PermissionsService,
-     private webview: WebView , private sanitizer:DomSanitizer) { }
+  constructor( private permission: PermissionsService,private webview: WebView , private sanitizer:DomSanitizer ) { }
 
-// TAKING IMAGE FROM CAMERA AND RETURN URL.
+  // TAKING IMAGE FROM CAMERA AND RETURN URL.
   takePicture = async () => {
     const image = await Camera.getPhoto({
       quality: 90,
@@ -69,6 +68,5 @@ export class CameraServiceService {
       }
       
   }
-
 
 }
