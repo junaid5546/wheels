@@ -16,6 +16,7 @@ export type platform_name = 'ios' | 'android' | 'web' ;
 
 
 export class AppComponent  implements OnInit,OnDestroy  {
+
   platform_name:platform_name;
   authUrl = 'register';
   apiRoute: any = {};
@@ -34,9 +35,11 @@ export class AppComponent  implements OnInit,OnDestroy  {
       public translate: TranslateService) {
 
       this.translate.setDefaultLang('ar');
+      
       window.addEventListener('statusTap', function () {
         console.log('statusbar tapped');
       });  
+
   }
   
   ngOnDestroy(): void {
@@ -66,12 +69,14 @@ export class AppComponent  implements OnInit,OnDestroy  {
     .catch((error)=>{
       console.log("TOKEN ERROR: ", error);
     });*/
-    
+
+    // GETTING USER OBJECT FROM LOCAL STORAGE.
     this.userData.getUserObj()
     .then((obj)=>{
       console.log("User OBJ :", JSON.parse(obj.value));
     })
 
+    // GETTING USER ID FROM LOCAL STORAGE.
     this.userData.getUserId()
     .then((id) => {
     });
@@ -88,6 +93,20 @@ export class AppComponent  implements OnInit,OnDestroy  {
           this.deviceInfo.setDefaultLanguage(this.lang);
         }
       });
+
+      /**
+       * fetch('http://localhost:3000', {
+  
+            // HTTP request type
+            method: "POST",
+  
+            // Sending our blob with our request
+            body: blob
+        })
+        .then(response => alert('Blob Uploaded'))
+        .catch(err => alert(err));
+    }
+       */
      
       // CHECK DEFAULT THEME OF THE APP
       this.deviceInfo.getDefaultTheme()
