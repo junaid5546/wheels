@@ -70,8 +70,5 @@ export class CameraServiceService {
       
   }
 
- 
-
-
 
 }
