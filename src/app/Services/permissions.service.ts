@@ -35,7 +35,16 @@ export class PermissionsService {
       initialBreakpoint:0.8,
       presentingElement:document.getElementById('ion-router-outlet-content')
     });
+    modal.onDidDismiss().then((dataReturned) => {
+      console.log("Modal closed");
+      if (dataReturned !== null) {
+        if(dataReturned.data != undefined){
+          console.log("Modal Data: ", dataReturned.data);
+        }
+      }
+    });
     return await modal.present();
+    
   
   }
 
@@ -79,9 +88,11 @@ export class PermissionsService {
    }
 
    // REQUEST FOR GALLERY PERMISSION 
-   requestPermission = async ()  => {
-     let result = await Camera.requestPermissions()
-
+   requestPermission =  ()  => {
+      Camera.requestPermissions()
+      .then((res)=>{
+        console.log("res", res);
+      })
    }
 
 }

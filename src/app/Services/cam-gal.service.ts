@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Camera, CameraDirection, CameraResultType,ImageOptions,GalleryImageOptions } from '@capacitor/camera';
 import { Image } from '../Interface/image';
 import { FileSystemService } from './file-system.service';
-
+import { PermissionsService } from './permissions.service';
+import { StorageService } from 'dm-api';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,7 @@ export class CamGalService {
   // CAMERA OPTIONS
   private cameraOptions:ImageOptions = {
     quality: 100,
-    resultType:CameraResultType.Uri,
+    resultType:CameraResultType.DataUrl,
     direction:CameraDirection.Rear,
     presentationStyle:'popover',
     webUseInput:true
@@ -29,7 +30,7 @@ export class CamGalService {
     limit:20
   }
 
-  constructor(private fileSystem:FileSystemService) { }
+  constructor(private permission: PermissionsService,private fileSystem:FileSystemService, private storage:StorageService) { }
 
   /***
    * THIS FUNCTION TAKES IMAGE FROM CAM AND SENDS YOU DataUrl
@@ -44,7 +45,7 @@ export class CamGalService {
     return image;
   }
   /**
-   * 
+   * THIS FUNCTION SENDS YOU ARRAY OF SELECTED IMAGES.
    * @returns Array of images/blob()
    * 
    */
@@ -64,6 +65,38 @@ export class CamGalService {
        }
        return _blobArray;
        
+  }
+
+  getSingleImage = async () =>{
+   
+    let image = null;
+    try {
+    image = await Camera.getPhoto(this.cameraOptions)
+    .then((image)=>{
+   let file =   this.fileSystem.base64toFile(image,'profile');
+   console.log("FILE: ", file);
+    this.storage.uploadImageFirebase(file,'xyz.jpg');
+    })
+    } catch (e){
+      console.log(e.message);
+      switch (e.message) {
+        case "Error loading image":
+          break;
+          case "User cancelled photos app":
+          break;
+
+        case "User denied access to photos":
+          this.permission.askforPermission({
+            'title:':'Gallery Access',
+            'sub_title':'Allow the app to read and write',
+            'description':'You can upload pictures and many more'
+          })
+          break;
+      }
+      
+    }  finally{
+      return image;
+    }
   }
 
 }

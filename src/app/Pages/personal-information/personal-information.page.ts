@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 export type input_icon = 'calendar-outline'| 'call-outline' | 'business-outline';
 export type input_type = 'ion-text'| 'ion-select' | 'date-picker' | 'rich-text';
 import { UserAccountService } from '../../Services/user-account.service';
 import { UserDataService } from '../../Services/user-data.service';
 import { AuthService } from 'dm-api';
+import { CamGalService } from "../../Services/cam-gal.service"; 
 @Component({
   selector: 'app-personal-information',
   templateUrl: './personal-information.page.html',
@@ -74,13 +74,17 @@ export class PersonalInformationPage implements OnInit {
     left_icon: 'assets/icon/settings/back.svg',
     right_icon: 'assets/icon/posts/post-details/Phone/Vector.svg',
   };
-  constructor(private auth: AuthService, private userAccount:UserAccountService, private userData:UserDataService) {}
+  constructor( private auth: AuthService, private userAccount:UserAccountService, private userData:UserDataService, private camService:CamGalService) {}
 
   
 
   ngOnInit() {
     console.log("USER ID IN ACCOUNT: ", this.userData.fetchUserId());
     this.getPublicProfile()
+  }
+
+  takeImage(){
+    this.camService.getSingleImage();
   }
 
   segmentChanged(ev){

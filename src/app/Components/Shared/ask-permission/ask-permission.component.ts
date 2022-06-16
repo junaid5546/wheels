@@ -17,12 +17,12 @@ export class AskPermissionComponent implements OnInit {
   ngOnInit() {}
 
   closeModal() {
-
-    this.modalController.dismiss();
-    
+    this.modalController.dismiss();    
   }
 
-  
+  navigateToSettings(){
+    this.settings.open("application_details")
+  }
 
 
 }

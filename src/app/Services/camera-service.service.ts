@@ -10,7 +10,7 @@ import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
 
 export class CameraServiceService {
   
-  constructor( private permission: PermissionsService,private webview: WebView , private sanitizer:DomSanitizer ) { }
+  constructor( private permission: PermissionsService, private webview: WebView , private sanitizer:DomSanitizer ) { }
 
   // TAKING IMAGE FROM CAMERA AND RETURN URL.
   takePicture = async () => {
