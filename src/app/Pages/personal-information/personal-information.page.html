@@ -9,12 +9,32 @@ goBack="false"
   <div id="secHalfOfScreen">
     <div class="companyList">
       <div class="companyheader" >
-        <img src="assets/Gust_Profile_CoverPhoto_Blank-21edf1e2890708d5a507204f49afc10b7dc58eb7baea100b68a1bc2c96948297.png"/>
-        <div (click)="takeImage()" class="cameraIcon">
-          <ion-icon name="camera"></ion-icon>
-        </div>
-        <div class="companyIcon">
-          <img src="../../../assets/Image from iOS (1).jpg"/>
+
+                  
+          <div *ngIf="!hasCompanyCover;then defaultImage else uploadedImage"></div>
+          <ng-template #defaultImage> <img src="assets/Gust_Profile_CoverPhoto_Blank-21edf1e2890708d5a507204f49afc10b7dc58eb7baea100b68a1bc2c96948297.png"/></ng-template>
+          <ng-template #uploadedImage> <img [src]="companyCover"/></ng-template>
+
+          <div *ngIf="!hasCompanyCover;then defaultIcon else changeLabel"></div>
+        
+          <ng-template #defaultIcon>
+            <div #defaultIcon (click)="takeImage()" class="cameraIcon">
+              <ion-icon name="cloud-upload-outline"></ion-icon>
+            </div>
+          </ng-template>
+
+
+          <ng-template #changeLabel>
+            <div (click)="takeImage()" class="cameraIcon">
+              <ion-icon name="image"></ion-icon>
+            </div>
+          </ng-template>
+
+        <div ngi class="companyIcon">
+          <div class="company-profile" (click)="takeImage()">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+          </div>
+          <img *ngIf="!hasCompanyLogo" src="../../../assets/company-logo-default.png"/>
           </div>
       </div>
   

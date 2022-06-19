@@ -1,3 +1,10 @@
+// Copyright 2010 Google LLC
+/**
+ * (Type docs)
+ *
+ * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
+ */
+
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalControllerService } from '../../Services/modal-controller.service';
 import { NavParams } from '@ionic/angular';

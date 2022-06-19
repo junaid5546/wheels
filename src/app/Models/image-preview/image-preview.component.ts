@@ -1,3 +1,10 @@
+// Copyright 2010 Google LLC
+/**
+ * (Type docs)
+ *
+ * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
+ */
+
 import {  Component, ElementRef, Input, OnInit, ViewChild,AfterViewInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 import { Gesture, GestureController } from '@ionic/angular';

@@ -92,6 +92,7 @@
 , #656565, #0000001a);
     //background: url(../../../../assets/natalia-y-DIewyzpUbRc-unsplash.jpg);
     .companyIcon{
+      padding: 5px;
       overflow: hidden;
       display: flex;
       justify-content: center;
@@ -288,4 +289,19 @@
         width: 60%;
       }
     }
+  }
+
+  .icon-change{
+    font-size: 9px;
+  }
+
+  .company-profile{
+    padding: 10px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background: white;
+    opacity: .9;
   }

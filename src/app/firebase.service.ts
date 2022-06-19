@@ -1,3 +1,10 @@
+// Copyright 2022 Google LLC
+/**
+ * (Type docs)
+ *
+ * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
+ */
+
 import { Injectable } from '@angular/core';
 import { collectionData, doc, docData, Firestore, addDoc, setDoc, getDoc, } from '@angular/fire/firestore';
 import { getStorage, ref, uploadBytes, uploadString } from '@angular/fire/storage';

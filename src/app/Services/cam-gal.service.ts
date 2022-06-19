@@ -1,3 +1,9 @@
+// Copyright 2010 Google LLC
+/**
+ * (Type docs)
+ *
+ * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
+ */
 import { Injectable } from '@angular/core';
 import { Camera, CameraDirection, CameraResultType,ImageOptions,GalleryImageOptions } from '@capacitor/camera';
 import { Image } from '../Interface/image';
@@ -67,6 +73,10 @@ export class CamGalService {
        
   }
 
+  /**
+   * 
+   * @returns file object
+   */
   getSingleImage = async () =>{
    
     let image = null;
@@ -75,7 +85,7 @@ export class CamGalService {
     .then((image)=>{
    let file =   this.fileSystem.base64toFile(image,'profile');
    console.log("FILE: ", file);
-    this.storage.uploadImageFirebase(file,'xyz.jpg');
+   return file;
     })
     } catch (e){
       console.log(e.message);
@@ -98,5 +108,7 @@ export class CamGalService {
       return image;
     }
   }
+
+  
 
 }

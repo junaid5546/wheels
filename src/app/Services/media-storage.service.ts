@@ -1,3 +1,10 @@
+// Copyright 2010 Google LLC
+/**
+ * (Type docs)
+ *
+ * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
+ */
+
 import { Injectable } from '@angular/core';
 
 @Injectable({

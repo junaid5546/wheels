@@ -1,6 +1,14 @@
+// Copyright 2010 Google LLC
+/**
+ * (Type docs)
+ *
+ * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
+ */
+
 import { Injectable } from '@angular/core';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
-import { FirebaseService } from '../firebase.service'
+import { FirebaseService } from '../firebase.service';
+import * as watermark from 'watermarkjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -55,10 +63,32 @@ export class FileSystemService {
     while(n--){
         u8arr[n] = bstr.charCodeAt(n);
     }
-    
-    return new File([u8arr], filename, {type:mime});
+
+    let image =  new File([u8arr], filename, {type:mime});
+     this.addImageWatermark(image);
 }
 
+
+
+addImageWatermark(image) {
+  console.log('in watermark');
+  
+    watermark(['../../assets/Image from iOS (1).jpg', '../../assets/company-logo-default.png'])
+      .image(watermark.image.upperLeft(0.5))
+      .then(img => {
+      console.log("Watermarked Image: ", img);
+      console.log("Watermarked Image: ", img.src);
+       return img.src;
+      });
+  }
+
+  addTextWatermark(image) {
+    watermark([image])
+      .image(watermark.text.center('DM', '260px Arial', '#fff', 0.5))
+      .then(img => {
+        return img.src;
+      });
+  }
 
 
   

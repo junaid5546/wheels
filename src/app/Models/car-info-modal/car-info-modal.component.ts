@@ -1,3 +1,10 @@
+// Copyright 2010 Google LLC
+/**
+ * (Type docs)
+ *
+ * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
+ */
+
 import { Component, OnInit, Input, ViewChild,ElementRef, AfterViewInit } from '@angular/core';
 import { ModalControllerService } from '../../Services/modal-controller.service';
 import { AnimationController,Animation } from '@ionic/angular';
