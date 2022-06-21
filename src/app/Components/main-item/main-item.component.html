@@ -1,6 +1,6 @@
 <ion-grid>
     <ion-row >
-        <ion-col size="4" *ngFor="let item of items">
+        <ion-col (click)="navigate(item.navigate)" size="4" *ngFor="let item of items">
             <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
                 
                 <div class="clock" >

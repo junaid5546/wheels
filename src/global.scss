@@ -64,13 +64,14 @@ body {
   margin-top: env(safe-area-inset-top);
 }
 
+
+
 ion-tab-bar {
   margin-bottom: calc(4px + env(safe-area-inset-top));
 }
 
 .select-images-button {
-  margin-bottom: calc(4px + env(safe-area-inset-top));
-  margin-bottom: calc(14px + env(safe-area-inset-bottom));
+  margin-bottom: calc(30px + env(safe-area-inset-bottom));
 }
 
 ion-input .native-input[disabled].sc-ion-input-ios {

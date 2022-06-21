@@ -60,7 +60,7 @@ const routes: Routes = [
       },
       {
         component:CylindersComponent,     //9
-        path:'car-cylinder'
+        path:'car-cylinder-count'
       },
       {
         component:EngineSizeComponent,    //10
@@ -76,7 +76,7 @@ const routes: Routes = [
       },
       {
         component:DrivetrainComponent,    //13
-        path:'car-drivetrain'
+        path:'car-drivetrain-type'
       },
       {
         component:SeatsComponent,         //14

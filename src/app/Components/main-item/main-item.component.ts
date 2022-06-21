@@ -65,8 +65,8 @@ export class MainItemComponent implements OnInit {
     this.setMainItemHeight();
   }
 
-  navigate(){
-    this.router.navigate(['']);
+  navigate(url){
+    this.router.navigate([url]);
   }
 
 

@@ -74,7 +74,7 @@ export class FilterPage implements OnInit,AfterViewInit {
     this.filters[this.selectedIndex].selected = false;
     this.filters[index].selected = true;
     this.selectedIndex = index;
-    this.router.navigate([url, {data: JSON.stringify(data) }]);
+    this.router.navigate([`${url}`, {data: JSON.stringify(data) }]);
     console.log("URL: ", url);
   }
 

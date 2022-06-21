@@ -45,9 +45,9 @@ export class CameraServiceService {
      
      image =  image.photos.map(x=>{
         let imageObject = {webPath:null, format:'', path:null, check:'abc'};
-        imageObject.webPath = this.sanitizer.bypassSecurityTrustResourceUrl(this.webview.convertFileSrc(x.webPath));
+        imageObject.webPath = x.webPath;
         imageObject.format = x.format;
-        imageObject.path = this.sanitizer.bypassSecurityTrustResourceUrl(this.webview.convertFileSrc(x.path));
+        imageObject.path =x.path;
         console.log("Changing objects");
         return imageObject;
       });

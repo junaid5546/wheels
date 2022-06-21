@@ -67,7 +67,7 @@ export class AppComponent  implements OnInit,OnDestroy  {
     } else if(Capacitor.getPlatform() == (this.platform_name = 'web')){
       console.log('Platform:', "Web");
     }
-    this.router.navigate(['personal-information']);
+    this.router.navigate(['tabs']);
     
     /*this.auth.getAuthToken()
     .then((token:string)=>{

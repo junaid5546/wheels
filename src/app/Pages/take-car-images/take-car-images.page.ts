@@ -1,4 +1,4 @@
-import { Component,ElementRef,Input, OnInit,ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component,ElementRef,Input, OnInit,ViewChild } from '@angular/core';
 import { ActionSheetController, IonContent, IonItem, IonList, IonReorderGroup } from '@ionic/angular';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { CameraServiceService } from '../../Services/camera-service.service';
@@ -8,10 +8,13 @@ import { AnimationController,Animation } from '@ionic/angular';
 import { DeviceInfoService } from '../../Services/device-info.service';
 import { CamGalService } from '../../Services/cam-gal.service';
 import { CarInfoModalComponent } from '../../Models/car-info-modal/car-info-modal.component';
+import { DomSanitizer } from '@angular/platform-browser';
+import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
 @Component({
   selector: 'app-take-car-images',
   templateUrl: './take-car-images.page.html',
   styleUrls: ['./take-car-images.page.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class TakeCarImagesPage implements OnInit {
   anim:Animation;
@@ -50,11 +53,14 @@ drop(event: CdkDragDrop<string[]>) {
 }
 
   constructor(
+    public webView:WebView,
+    public senitizer:DomSanitizer,
     private camGal:CamGalService,
     private cam:CameraServiceService, private permission:PermissionsService,
     private modalService:ModalControllerService,
     private amimationCtrl:AnimationController,
     public  actionSheetController: ActionSheetController,
+    private changeDetector:ChangeDetectorRef,
     private deviceInfo:DeviceInfoService) {
      
      }
@@ -146,7 +152,7 @@ drop(event: CdkDragDrop<string[]>) {
     this.anim = this.amimationCtrl.create('swipe');
     
     this.anim.addElement(this.item.nativeElement)
-    .duration(300)
+    .duration(100)
     .easing('ease-out')
     .iterations(1)
     .fromTo('transform','translateX(300px)','translateX(0px)')
@@ -167,7 +173,7 @@ drop(event: CdkDragDrop<string[]>) {
     }
     this.bottomUp = this.amimationCtrl.create('bottom_up');
     this.bottomUp.addElement(this.bottomButton.nativeElement)
-    .duration(500)
+    .duration(100)
     .easing('ease-out')
     .iterations(1)
     .fromTo('transform',translateYfrom,translateYto)
@@ -179,6 +185,7 @@ drop(event: CdkDragDrop<string[]>) {
   checkImagesLength(){
     if(this.carImages.length > 0){
       this.toggleNext(true);
+      this.changeDetector.markForCheck();
     } else if(this.carImages.length == 0) {
       this.toggleNext(false);
     }
@@ -192,9 +199,14 @@ drop(event: CdkDragDrop<string[]>) {
     }
   }
 
-  popImages(){
-    this.carImages.pop();
-    this.checkImagesLength();
+  popImages(index){
+    if (this.carImages.length > 0) {
+      this.carImages.splice(index, 1); // 2nd parameter means remove one item only
+    } else {
+      this.toggleNext(false);
+      this.changeDetector.markForCheck();
+      return;
+    }
   }
 
   uploadFile(file){
@@ -207,15 +219,24 @@ drop(event: CdkDragDrop<string[]>) {
 
  async takeImageFromGallery() {
    if(this.canTakeImages()){
+
   this.checkImagesLength();
-   let images = await this.camGal.getLibraryImages();
+   
+  let images = await this.camGal.getLibraryImages();
    console.log("Gallery Images Fresh",images);
   this.carImages =  this.carImages.concat(images);
   console.log("Gallery Images all",this.carImages);
+ 
+   this.changeDetector.markForCheck();
+   this.toggleNext(true);
+
       } else {
-            return;
-        }
+        console.log('limit reached');
+        return;
+        
+      }
   
+
 }
      
 }

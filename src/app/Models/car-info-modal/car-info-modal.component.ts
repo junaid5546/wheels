@@ -52,7 +52,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
       this.anim = this.amimationCtrl.create('swipe');
       
       this.anim.addElement(this.card_items.nativeElement)
-      .duration(300)
+      .duration(100)
       .easing('ease-out')
       .iterations(1)
       .fromTo('transform','translateX(300px)','translateX(0px)')
@@ -70,9 +70,8 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
    }
 
   ngOnInit() {
-    setTimeout(() => {
+
       this.data = true;
-     }, 500);
   this.ItemService =   this.modelCtrl.getCurrentObject()
     .subscribe((currentState:any)=>{
       console.log("Current Object Observable: ", currentState)
@@ -94,10 +93,8 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     })
     this.currentItem[i].selected = true;
     this.modelCtrl.selectItem(item);
-    this.data = false;
-    setTimeout(() => {
       this.data = true;
-     }, 500);
+
     //this.animation();
   }
 
