@@ -3,8 +3,9 @@ export type input_icon = 'calendar-outline'| 'call-outline' | 'business-outline'
 export type input_type = 'ion-text'| 'ion-select' | 'date-picker' | 'rich-text';
 import { UserAccountService } from '../../Services/user-account.service';
 import { UserDataService } from '../../Services/user-data.service';
-import { AuthService, StorageService } from 'dm-api';
+import { AuthService } from 'dm-api';
 import { CamGalService } from "../../Services/cam-gal.service"; 
+import { MediaStorageService } from '../../Services/media-storage.service';
 
 @Component({
   selector: 'app-personal-information',
@@ -84,17 +85,17 @@ export class PersonalInformationPage implements OnInit {
     right_icon: 'assets/icon/posts/post-details/Phone/Vector.svg',
   };
 
-  constructor( private auth: AuthService, private userAccount:UserAccountService, private userData:UserDataService, private camService:CamGalService, private storage:StorageService) {}
+  constructor( private auth: AuthService, private userAccount:UserAccountService, private userData:UserDataService, private camService:CamGalService, private storage:MediaStorageService) {}
 
   ngOnInit() {
     console.log("USER ID IN ACCOUNT: ", this.userData.fetchUserId());
     this.getPublicProfile()
   }
 
-  takeImage(){
+  takeImage(_name){
    this.camService.getSingleImage()
    .then((file:File)=>{
-    this.uploadImage(file);
+    this.storage.uploadSingleImage(file,_name,'62b2fb48d18223d189ec6edb');
    })
   }
 
@@ -120,15 +121,6 @@ export class PersonalInformationPage implements OnInit {
 
   getPrivateProfile(){
 
-  }
-
-  uploadImage(file:File){
-    const formData: FormData = new FormData();
-    formData.append('mediaList', file, file.name+'.jpeg');
-      this.storage.uploadEntity(formData,'62a9715e93463e3d8c15e718')
-      .then((response)=>{
-        console.log("File Upload Response", response);
-      })
   }
 
 }

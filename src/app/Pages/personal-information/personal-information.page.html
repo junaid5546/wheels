@@ -18,20 +18,20 @@ goBack="false"
           <div *ngIf="!hasCompanyCover;then defaultIcon else changeLabel"></div>
         
           <ng-template #defaultIcon>
-            <div #defaultIcon (click)="takeImage()" class="cameraIcon">
+            <div #defaultIcon (click)="takeImage('cover')" class="cameraIcon">
               <ion-icon name="cloud-upload-outline"></ion-icon>
             </div>
           </ng-template>
 
 
           <ng-template #changeLabel>
-            <div (click)="takeImage()" class="cameraIcon">
+            <div (click)="takeImage('cover')" class="cameraIcon">
               <ion-icon name="image"></ion-icon>
             </div>
           </ng-template>
 
         <div ngi class="companyIcon">
-          <div class="company-profile" (click)="takeImage()">
+          <div class="company-profile" (click)="takeImage('cover')">
             <ion-icon name="cloud-upload-outline"></ion-icon>
           </div>
           <img *ngIf="!hasCompanyLogo" src="../../../assets/company-logo-default.png"/>

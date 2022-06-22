@@ -138,8 +138,8 @@ export class ModalControllerService {
   }
 
   initializeIndexes() {
-    this.modelData.current.index = 24;
-    this.modelData.current.value = this.modelData.items[24];
+    this.modelData.current.index = 0;
+    this.modelData.current.value = this.modelData.items[0];
 
     this.modelData.next.index = 1;
     this.modelData.next.value = this.modelData.items[1];
@@ -197,8 +197,6 @@ export class ModalControllerService {
       //return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
   }
-
-
 
   decrementOfIndexes() {
     if (this.getCurrentItemIndex() > 0) {

@@ -44,6 +44,7 @@ export class TakeCarImagesPage implements OnInit {
 
  
  carImages:any[] = [];
+ // INITIALLY STARTING POINT IS 0 OR OBJECT.
  modalStartingPoint;
 
 drop(event: CdkDragDrop<string[]>) {
@@ -161,6 +162,7 @@ drop(event: CdkDragDrop<string[]>) {
     this.toggleNext(false);
   }
 
+  // NEXT BUTTON ENABLE OR DISABLE
   toggleNext(next){
    let translateYfrom;
    let translateYto; 
@@ -182,6 +184,7 @@ drop(event: CdkDragDrop<string[]>) {
   }
 
 
+  // CHECKS THE IMAGE LENGTH AND ENABLE OR DISABLE THE NEXT BUTTON
   checkImagesLength(){
     if(this.carImages.length > 0){
       this.toggleNext(true);
@@ -191,7 +194,9 @@ drop(event: CdkDragDrop<string[]>) {
     }
   }
 
+  // CHECK THE LIMIT OF IMAGES EITHER IS IT LESS THAN 20 OR NOT.
   canTakeImages (){
+    // IF IMAGES ARE LESS THAN 20 RETURN TRUE OTHERWISE FALSE.
     if(this.carImages.length < 20){
       return true;
     } else {
@@ -199,38 +204,39 @@ drop(event: CdkDragDrop<string[]>) {
     }
   }
 
+  // DELETE THE IMAGE USING INDEX.
   popImages(index){
+    // IF HAVE IMAGES IN ARRAY.
     if (this.carImages.length > 0) {
       this.carImages.splice(index, 1); // 2nd parameter means remove one item only
     } else {
+      // IF NO IMAGES IN ARRAY OR WE DELETED ALL OF THEM THEN HIDE NEXT BUTTON AS WELL.
       this.toggleNext(false);
       this.changeDetector.markForCheck();
       return;
     }
   }
 
-  uploadFile(file){
 
-  }
-
+  // TAKES IMAGE FORM CAMERA
   captureImage(){
     this.camGal.captureImage();
   }
 
+  // PICK IMAGES FROM GALLERY
  async takeImageFromGallery() {
+ // IF THE LIMIT IS FINE 
    if(this.canTakeImages()){
-
-  this.checkImagesLength();
-   
+    this.checkImagesLength();
   let images = await this.camGal.getLibraryImages();
-   console.log("Gallery Images Fresh",images);
   this.carImages =  this.carImages.concat(images);
-  console.log("Gallery Images all",this.carImages);
- 
+  console.log("IMAGES: ", this.carImages)
+    // DETECT CHANGE AND SHOW THE NEXT BUTTON
    this.changeDetector.markForCheck();
    this.toggleNext(true);
-
+    this.camGal.uploadImages(this.carImages);
       } else {
+        // LIMIT REACHED TO 20.
         console.log('limit reached');
         return;
         

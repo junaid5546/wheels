@@ -5,11 +5,11 @@
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
 import { Injectable } from '@angular/core';
-import { Camera, CameraDirection, CameraResultType,ImageOptions,GalleryImageOptions } from '@capacitor/camera';
+import { Camera, CameraDirection, CameraResultType,ImageOptions,GalleryImageOptions, GalleryPhoto } from '@capacitor/camera';
 import { Image } from '../Interface/image';
 import { FileSystemService } from './file-system.service';
 import { PermissionsService } from './permissions.service';
-import { StorageService } from 'dm-api';
+import { MediaStorageService } from '../Services/media-storage.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,13 +30,13 @@ export class CamGalService {
   };
   // GALLERY OPTIONS
   private galleryOptions:GalleryImageOptions = {
-    quality:100,
+    quality:80,
     correctOrientation:true,
     presentationStyle:'popover',
     limit:20
   }
 
-  constructor(private permission: PermissionsService,private fileSystem:FileSystemService, private storage:StorageService) { }
+  constructor(private permission: PermissionsService,private fileSystem:FileSystemService, private storage:MediaStorageService) { }
 
   /***
    * THIS FUNCTION TAKES IMAGE FROM CAM AND SENDS YOU DataUrl
@@ -57,19 +57,8 @@ export class CamGalService {
    */
   getLibraryImages = async () =>{
     const images = await Camera.pickImages(this.galleryOptions);
-        let _blobArray:any[] = [];
-        for (var i = 0; i < images.photos.length; i++) {
-        let file_Name = images.photos[i].path.substring(images.photos[i].path.lastIndexOf("/") + 1);
-        this.imagesCount++;
-          if(this.imagesCount <= this.maximumImages ) {
-       let data = await this.fileSystem.readFile({path:images.photos[i].path},file_Name);
-          data["photo"] =  images.photos[i];
-          _blobArray.push(data);
-        } else {
-          return _blobArray;
-        }
-       }
-       return _blobArray;
+    console.log('IMAGES: ', images);
+    return images.photos;
        
   }
 
@@ -108,6 +97,33 @@ export class CamGalService {
       return image;
     }
   }
+
+  // UPLOAD IMAGES TO THE SERVER
+  /**
+   * 
+   * @param images File
+   */
+   async uploadImages (images:GalleryPhoto[]){
+    console.log("Received images in upload method: ", images);
+    
+        let _blobArray:any[] = [];
+        for (var i = 0; i < images.length; i++) {
+        let file_Name = images[i].path.substring(images[i].path.lastIndexOf("/") + 1);
+        this.imagesCount++;
+          if(this.imagesCount <= this.maximumImages ) {
+            let data:any = await this.fileSystem.readFile({path:images[i].path},file_Name);
+         _blobArray.push(data);
+         console.log('DATA',_blobArray);
+        
+              } else {
+          console.log("BLOB|FILE: ", _blobArray);
+          return _blobArray;
+        }
+       }
+       console.log("FILES: ", _blobArray);
+       this.storage.uploadMultipleImages(_blobArray,'62b2fb48d18223d189ec6edb');
+  }
+
 
   
 

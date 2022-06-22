@@ -15,44 +15,73 @@ import * as watermark from 'watermarkjs';
 export class FileSystemService {
  
   constructor(private firebase:FirebaseService) { }
+
+
 /**
  * @param object
  * @param name
  */
    readFile = async (path:{path:string}, name:string) => {
      return new Promise((res,rej)=>{
-
       Filesystem.requestPermissions().then( async (permission)=>{
         console.log("Permission: ", permission);
         if(permission.publicStorage == 'granted') {
          const contents = await Filesystem.readFile(path);
+        
          let data = `data:image/jpeg;base64,${contents.data}`;
-         console.log(data);
          const resp = await fetch(data);
          const blob = await resp.blob();
-         const file = new File([blob], name,{ type: "image/png" })
-         const fileObj = {file:file};
+       
+      let waterMarkedImage = await  watermark([blob, '../../assets/company-logo-default.png'])
+      .image(watermark.image.upperLeft(0.5))
+      .then(img => {
+      return img.src
+      });
+      console.log("WATERMARKED DATA: ", waterMarkedImage);
+      const respWaterMarked = await fetch(waterMarkedImage);
+      const blobWaterMarked = await respWaterMarked.blob();
+      const file = new File([blobWaterMarked], name,{ type: "image/png" })
+      res(file);
+
+         
+         
          //const Blobobj = {blob:null, name:null};
          //Blobobj.blob = blob;
          //Blobobj.name = name;
-         res (fileObj);
+         //res (fileObj);
+
         } else {
-          rej (false);
+          //rej (false);
         }
       })
+      
       .catch(err=>{
         return(err);
       })
+
      });
   };
 
-/**
+addImageWatermark(image, file_name) {
+    
+  }
+
+  addTextWatermark(image) {
+    watermark([image])
+      .image(watermark.text.center('DM', '260px Arial', '#fff', 0.5))
+      .then(img => {
+        return img.src;
+      });
+  }
+
+
+  /**
  * Take base64 and convert it into file.
  * @param dataurl base64 
  * @param filename string
  * @returns File
  */
-  base64toFile(dataurl, filename) {
+   base64toFile(dataurl, filename) {
     console.log('url:', dataurl.dataUrl);
     var arr = dataurl.dataUrl.split(','),
         mime = arr[0].match(/:(.*?);/)[1],
@@ -65,33 +94,10 @@ export class FileSystemService {
     }
 
     let image =  new File([u8arr], filename, {type:mime});
-     this.addImageWatermark(image);
+    return image;
 }
 
 
-
-addImageWatermark(image) {
-  console.log('in watermark');
-  
-    watermark(['../../assets/Image from iOS (1).jpg', '../../assets/company-logo-default.png'])
-      .image(watermark.image.upperLeft(0.5))
-      .then(img => {
-      console.log("Watermarked Image: ", img);
-      console.log("Watermarked Image: ", img.src);
-       return img.src;
-      });
-  }
-
-  addTextWatermark(image) {
-    watermark([image])
-      .image(watermark.text.center('DM', '260px Arial', '#fff', 0.5))
-      .then(img => {
-        return img.src;
-      });
-  }
-
-
-  
   /*async loadFileData(fileNames: string[]) {
     for (let f of fileNames) {
       const filePath = `${IMAGE_DIR}/${f}`;
