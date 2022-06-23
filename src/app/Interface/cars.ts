@@ -4,32 +4,238 @@
  *
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
-export interface Car {
-    // CAR SCHEMA
 
-    companyId:number;
-    make:{id:number,name:string};
-    model:{id:number, name:string};
-    trim:{id:number, name:string};
-    year:number;
-    condition:{id:number,status:string};
-    body:{id:number, name:string};
-    color:{id:number, colorCode:string};
-    doorCount:{id:number, doors:number};
-    engineSize:{id:number, size:number};
-    cylinderCount:{id:number, size:number};
-    fuelType:{id:number, type:string};
-    transmissionType:string;
-    drivetrain:string;
-    interiorColor:string;
-    seats:string;
-    origin:string;
-    governorate:string;
-    state:string;
-    warrentyDuration:string;
-    warrentyDistance:string;
-    insuranceType:string;
-    drivingReadiness:string;
-    saleType:string;
-    features:string;
+import { VehicleService } from 'dm-api';
+export class Car {
+  // CAR SCHEMA
+
+  make: { make_id: number; name: string };
+  model: { model_id: number; name: string };
+  trim: { trim_id: number; name: string };
+  year_id: { year_id: number; name: string };
+  condition: { id: number; name: string };
+  body: { body_id: number; name: string };
+  interiorColor: { interior_color_id: number; name: string };
+  exteriorColor: { exterior_color_id: number; name: string };
+  doorCount: { door_count_id: number; name: number };
+  engineSize: { engine_size: number; name: number };
+  cylinderCount: { cylinder_count_id: number; name: number };
+  fuelType: { fuel_type_id: number; name: string };
+  transmissionType: { transmission_type_id: string; name: string };
+  drivetrain: { drivetrain_id: string; name: string };
+  seats: { seats_type_id: string; name: string };
+  origin: { origin_id: string; name: string };
+  governate: { governorate_id: string; name: string };
+  state: { state_id: string; name: string };
+  warrantyDuration: { warranty_duration_id: string; name: string };
+  warrentyKilometer: { warranty_kilometer: number; name: string };
+  insurance: { insurance_type_id: string; name: string };
+  readiness: { readiness_id: string; name: string };
+  saleType: { sale_type_id: string; name: string };
+  features: { features_id_array: string[]; featuresList: any[] };
+  price: string;
+  distance_kilometer: number;
+  distance_mile: number;
+  seller_notes: string;
+
+  constructor(private vehicle: VehicleService) {}
+
+  /**
+   * TAKE ID AND NAME OF MAKE
+   * @param _id string
+   * @param _makeName string
+   * @returns boolean
+   */
+  setMake(_id: string, _makeName: string) {}
+
+  /**
+   * TAKE ID AND NAME OF MODEL
+   * @param _id string
+   * @param _modelName string
+   * @returns boolean
+   */
+  setModel(_id: string, _modelName: string) {}
+
+  /**
+   * TAKE ID AND NAME OF MAKE
+   * @param _id string
+   * @param _modelName string
+   * @returns boolean
+   */
+  setTrim() {}
+
+  /**
+   * TAKES YEAR ID.
+   * @param _id string
+   */
+  setYearId(_id: string) {}
+
+  /**
+   * SET CONDITION OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setCondition(_id: string, _name: string) {}
+
+  /**
+   * SET BODY OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setBody(_id: string, _name: string) {}
+
+  /**
+   * SET INTERIOR COLOR OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setInteriorColor(_id: string, _name: string) {}
+
+  /**
+   * SET EXTERIOR COLOR OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setExteriorColor(_id: string, _name: string) {}
+
+  /**
+   * SET DOOR COUNT OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setDoorCount(_id: string, _name: string) {}
+
+  /**
+   * SET ENGINE SIZE OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setEngineSize(_id: string, _name: string) {}
+
+  /**
+   * SET CYLINDER COUNT OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setCylinderCount(_id: string, _name: string) {}
+
+  /**
+   * SET FUEL TYPE COUNT OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setFuelType(_id: string, _name: string) {}
+
+  /**
+   * SET TRANSMISSION TYPE OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setTransmissionType(_id: string, _name: string) {}
+
+  /**
+   * SET DRIVETRAIN OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setdrivetrain(_id: string, _name: string) {}
+
+  /**
+   * SET SEATS OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setSeats(_id: string, _name: string) {}
+
+  /**
+   * SET ORIGIN OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setOrigins(_id: string, _name: string) {}
+
+  /**
+   * SET GOVERNATE OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setGovernate(_id: string, _name: string) {}
+
+  /**
+   * SET STATE OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setState(_id: string, _name: string) {}
+
+  /**
+   * SET WARRENTY DURATION OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setWarrantyDuration(_id: string, _name: string) {}
+
+  /**
+   * SET WARRENTY IN KILOMETERS OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setWarrentyKilometer(_id: string, _name: string) {}
+
+  /**
+   * SET INSURANCE OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setInsurance(_id: string, _name: string) {}
+
+  /**
+   * SET READINESS OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setReadiness(_id: string, _name: string) {}
+
+  /**
+   * SET SALE TYPE OF THE CAR
+   * @param _id string
+   * @param _name string
+   */
+  setSaleType(_id: string, _name: string) {}
+
+  /**
+   * SET FEATURES OF THE CAR
+   * @param _id string
+   * @param _value string
+   */
+  setFeatures(_id: string[], _value: any[]) {}
+
+  //price
+
+  /**
+   * SET PRICE OF THE CAR
+   * @param _value string
+   */
+  setPrice(_value: string) {}
+
+  /**
+   * SET DISTANCE IN KM OF THE CAR
+   * @param _value string
+   */
+  setDistanceKilometer(_value: string) {}
+
+  /**
+   * SET DISTANCE IN MILE OF THE CAR
+   * @param _value string
+   */
+  setDistanceMile(_value: string) {}
+
+  //seller_notes
+
+  /**
+   * SET SELLER NOTES IN MILE OF THE CAR
+   * @param _value string
+   */
+  setSellerNotes(_value: string) {}
+  
 }

@@ -127,12 +127,12 @@ export class AppComponent  implements OnInit,OnDestroy  {
 
       // getDefaultTheme();
       // getDefaultFontsize();
-      if(localStorage.getItem("Language")){
-        this.lang = localStorage.getItem("Language")
+      if(localStorage.getItem("lang")){
+        this.lang = localStorage.getItem("lang")
         this.translate.use(this.lang);
       }
       else{
-        localStorage.setItem("Language",'ar');
+        localStorage.setItem("lang",'ar');
       }
     });
   }   

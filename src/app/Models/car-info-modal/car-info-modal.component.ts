@@ -106,4 +106,12 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
       this.modelCtrl.postFinished();
       this.route.navigate(['tabs/posts']);
   }
+
+  getMake(){}
+  getModel(_makeId:string){}
+  getTrims(_modelId:string){}
+  getYears(){}
+  getBodyType(){}
+  getColors(){}
+  
 }

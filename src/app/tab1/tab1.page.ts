@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, AfterViewInit,ViewChild,ElementRef } from '@angular/core';
 import { DeviceInfoService  } from '../Services/device-info.service';
-import {  ModalControllerService } from '../Services/modal-controller.service';
-import { FiltersComponent } from '../Models/filters/filters.component';
+import { CarFiltersService } from '../Services/car-filters.service';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular'; 
 import { PostService } from 'dm-api';
@@ -35,7 +34,7 @@ export class Tab1Page implements OnInit {
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Vehicles for Sale Inventory', has_sub_heading:false, sub_heading_name:''};
-  constructor(private deviceInfo:DeviceInfoService,  private router:Router, private nav:NavController, private post:PostService) { }
+  constructor(private deviceInfo:DeviceInfoService,  private router:Router, private nav:NavController, private post:PostService, private filters:CarFiltersService) { }
 
   ngOnInit() {
    this.getPosts();
