@@ -18,7 +18,14 @@ export class CarFiltersService {
     saleType:[],
     cylinder:[],
     drivetrain:[],
-    driving_readiness:[]
+    driving_readiness:[],
+    body:[],
+    exteriorColor:[],
+    interiorColor:[],
+    state:[],
+    warrentyDuration:[],
+    warrentyDistance:[],
+    feature:[]
   };
 
 
@@ -46,6 +53,9 @@ export class CarFiltersService {
     })
   
   }
+
+
+  getMake(){}
 
   
 

@@ -10,11 +10,14 @@ import { ModalController } from '@ionic/angular';
 import { BehaviorSubject } from "rxjs";
 import { ImagePreviewComponent } from '../Models/image-preview/image-preview.component';
 import { ToastController } from '@ionic/angular';
+import { PlansService,VehicleService } from 'dm-api';
+import { CarFiltersService } from '../Services/car-filters.service';
+import { Car } from '../Interface/cars';
 @Injectable({
   providedIn: 'root'
 })
 export class ModalControllerService {
-
+  car:Car =  new Car();
   sortBy: any[] = [
     { id: 1, name: 'Sort by Price (Lowest)', icon: "arrow-down-outline" },
     { id: 2, name: 'Sort by Price (Highest)', icon: "arrow-up-outline" },
@@ -27,32 +30,32 @@ export class ModalControllerService {
   private currentObject = new BehaviorSubject<any>(null);
   modelData = {
     items: [
-      { key: 0, name: 'Make', value: [{ name: 'Toyota' }, { name: 'Nissan' }, { name: 'BMW' }], selected: {} },
-      { key: 1, name: 'Model', value: [{ name: 'Camry ' }, { name: 'Corolla' }, { name: 'Avalon' }], selected: {} },
-      { key: 2, name: 'Trims', value: [{ name: 'gli' }, { name: 'xli' }], selected: {} },
-      { key: 3, name: 'Year', value: [{ name: '20001' }, { name: 20002 }], selected: {} },
-      { key: 4, name: 'Condition', value: [{ name: 'Used' }, { name: 'New' }], selected: {} },
-      { key: 5, name: 'Body', value: [{ name: 'sedan' }, { name: 'medtain' }, { name: 'sedan' }, { name: 'medtain' }, { name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 6, name: 'Exterior Color', value: [{ name: 'E3E300' }, { name: "ECECC9" }, { name: 'F8F8F8' }, { name: 'EFCA00' }, { name: 'EC9900' }, { name: 'E2B322' }], selected: {} },
-      { key: 7, name: 'Door Count', value: [{ name: 1 }, { name: 2 }, { name: 3 }], selected: {} },
-      { key: 8, name: 'Engine size', value: [{ name: 'big' }, { name: 'small' }], selected: {} },
-      { key: 9, name: 'Cylinder count', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 10,name: 'Fuel Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 11,name: 'Transmission Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 12,name: 'Drivetrain', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 13,name: "interior Color", value: [{ name: 'sedan' }, { name: 'medtain' }, { name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 14,name: 'Seat type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 15,name: 'Origin', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 16,name: 'Governorate', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 17,name: 'State', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 18,name: 'Warranty Duration', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 19,name: 'Warranty Distance', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 20,name: 'Insurance type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 21,name: 'Driving Readlines', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 22,name: 'Sale Type', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 23,name: 'Features', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 24,name: 'Additional Details', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} },
-      { key: 25,name: 'Special Plans', value: [{ name: 'sedan' }, { name: 'medtain' }], selected: {} }
+      { key: 0, name: 'Make', value: [{name:'sdfdsf'}], selected: {} },
+      { key: 1, name: 'Model', value: [], selected: {} },
+      { key: 2, name: 'Trims', value: [], selected: {} },
+      { key: 3, name: 'Year', value: [], selected: {} },
+      { key: 4, name: 'Condition', value:this.carFilters.filters.condition , selected: {} },
+      { key: 5, name: 'Body', value: this.carFilters.filters.body, selected: {} },
+      { key: 6, name: 'Exterior Color', value: this.carFilters.filters.exteriorColor, selected: {} },
+      { key: 7, name: 'Door Count', value: [{ name: 1 }, { name: 2 }, { name: 3 }, {name:4}], selected: {} },
+      { key: 8, name: 'Engine size', value: [{ name: '4000' }, { name: '2000' }], selected: {} },
+      { key: 9, name: 'Cylinder count', value: this.carFilters.filters.cylinder, selected: {} },
+      { key: 10,name: 'Fuel Type', value: this.carFilters.filters.fueltype, selected: {} },
+      { key: 11,name: 'Transmission Type', value: this.carFilters.filters.transmission, selected: {} },
+      { key: 12,name: 'Drivetrain', value: this.carFilters.filters.drivetrain, selected: {} },
+      { key: 13,name: "interior Color", value: this.carFilters.filters.interiorColor, selected: {} },
+      { key: 14,name: 'Seat type', value: this.carFilters.filters.seatType, selected: {} },
+      { key: 15,name: 'Origin', value: this.carFilters.filters.origins, selected: {} },
+      { key: 16,name: 'Governorate', value: null, selected: {} },
+      { key: 17,name: 'State', value: this.carFilters.filters.state, selected: {} },
+      { key: 18,name: 'Warranty Duration', value: this.carFilters.filters.warrentyDuration, selected: {} },
+      { key: 19,name: 'Warranty Distance', value: this.carFilters.filters.warrentyDistance, selected: {} },
+      { key: 20,name: 'Insurance type', value: this.carFilters.filters.insurance, selected: {} },
+      { key: 21,name: 'Driving Readlines', value: this.carFilters.filters.driving_readiness, selected: {} },
+      { key: 22,name: 'Sale Type', value: this.carFilters.filters.saleType, selected: {} },
+      { key: 23,name: 'Features', value: this.carFilters.filters.feature, selected: {} },
+      { key: 24,name: 'Additional Details', value: null, selected: {} },
+      { key: 25,name: 'Special Plans', value:null , selected: {} }
     ],
     current: { index: 0, value: null },
     next: { index: 0, value: null },
@@ -60,9 +63,9 @@ export class ModalControllerService {
     length: -1
   };
 
-  constructor(private modalController: ModalController,public toastController: ToastController
-
-  ) { }
+  constructor(private modalController: ModalController,public toastController: ToastController, private plans:PlansService, private vehicle:VehicleService, private carFilters:CarFiltersService) { 
+    
+  }
 
   async presentModal(component,props) {
     this.modalProps = props;
@@ -87,23 +90,10 @@ export class ModalControllerService {
     return await modal.present();
   }
 
-  goToNextState() {
-    let item = this.getCurrentState();
-    this.modelData.pervious.value = item;
-    this.modelData.next.value = this.modelData.items[item.value + 2];
-    this.modelData.current.value = this.modelData.items[item.value + 1];
-    console.log("Current:", this.modelData.current, " Previous: ", this.modelData.pervious, " Next: ", this.modelData.next);
-  }
 
-  goToPreviousState() {
-    this.modelData.pervious.value = this.modelData.items[this.modelData.current.index - 1];
-    this.modelData.current = this.modelData.pervious;
-    this.modelData.next = this.modelData.current;
-
-    console.log("Current:", this.modelData.current, " Previous: ", this.modelData.pervious, " Next: ", this.modelData.next);
-  }
 
   selectItem(selected) {
+    console.log("Selected Item", selected);
     this.modelData.items[this.modelData.current.index].selected = selected;
     this.incrementOfCurrentIndex();
   }
@@ -156,6 +146,7 @@ export class ModalControllerService {
     if (validate.status) {
       let indexes = this.initializeIndexes();
       //console.log("Result from  initializeIndexes", indexes);
+      this.loadData(this.getCurrentItemIndex());
       return { status: true, value: indexes };
     } else {
       return { status: false, value: null };
@@ -178,6 +169,10 @@ export class ModalControllerService {
   incrementOfCurrentIndex() {
     if (this.getCurrentItemIndex() < this.getItemsLenght() - 1) {
       console.log("Current:", this.getCurrentItemIndex(), "Length: ", this.getItemsLenght());
+      console.log("Next Object: ",this.modelData.next);
+      console.log("Previous Object: ",this.modelData.pervious);
+      console.log("Current Object: ",this.modelData.current);
+        this.loadData(this.getCurrentItemIndex()+1)
       // CURRENT ONE GOES TO PREVIOUS
       this.modelData.pervious.value = this.modelData.current.value;
       this.modelData.pervious.index = this.modelData.current.index;
@@ -325,4 +320,41 @@ return await modal.present();
     toast.present();
   }
  
+ loadData(index){
+
+  switch (index) {
+     case 0:
+     this.vehicle.getMakes().then((makes:any)=>{this.modelData.items[0].value = makes.result});
+     break;
+
+     case 1:
+      console.log("Case ", 1);
+      //this.vehicle.getModels().then((makes:any)=>{this.modelData.items[0].value = makes.result});
+      break;
+
+      case 2:
+        console.log("Case ", 2);
+        //this.vehicle.getModels().then((makes:any)=>{this.modelData.items[0].value = makes.result});
+        break;
+
+        case 3:
+          console.log("Case ", 3);
+          //this.vehicle.getModels().then((makes:any)=>{this.modelData.items[0].value = makes.result});
+          break;
+
+    default:
+      break;
+  }
+ }
+
+
+  
+
+  
 }
+/// YEAR [{key:'lsafjlsdajf222324',value:'2001' name:""}].
+// BODY NOT GETTING INTO FILTERED POST.
+// List of colors [{key:'12121lsafjlsdajf222324',value:'#FFFFF', name:"White"}]
+//warranty Duration.
+//plate_type
+//features

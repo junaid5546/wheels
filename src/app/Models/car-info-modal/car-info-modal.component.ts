@@ -42,9 +42,6 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     this.animation();
    }
 
-   
-
-
    animation(){
     if(this.card_items != undefined){
       console.log("Claaed ngAfterViewInit");
@@ -83,19 +80,15 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
         
        });
        this.currentStep = currentState.index;
-      
+       
     });
   }
 
   selectItem(item,i) {
-    this.currentItem.forEach(x=>{
-      x.selected = false;
-    })
+    console.log("Selected Item: ", item , ' Index:', i);
     this.currentItem[i].selected = true;
     this.modelCtrl.selectItem(item);
       this.data = true;
-
-    //this.animation();
   }
 
   inputOccured(e) {
@@ -113,5 +106,5 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
   getYears(){}
   getBodyType(){}
   getColors(){}
-  
+
 }

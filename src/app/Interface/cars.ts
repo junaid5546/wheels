@@ -9,36 +9,36 @@ import { VehicleService } from 'dm-api';
 export class Car {
   // CAR SCHEMA
 
-  make: { make_id: number; name: string };
-  model: { model_id: number; name: string };
-  trim: { trim_id: number; name: string };
-  year_id: { year_id: number; name: string };
-  condition: { id: number; name: string };
-  body: { body_id: number; name: string };
-  interiorColor: { interior_color_id: number; name: string };
-  exteriorColor: { exterior_color_id: number; name: string };
-  doorCount: { door_count_id: number; name: number };
-  engineSize: { engine_size: number; name: number };
-  cylinderCount: { cylinder_count_id: number; name: number };
-  fuelType: { fuel_type_id: number; name: string };
-  transmissionType: { transmission_type_id: string; name: string };
-  drivetrain: { drivetrain_id: string; name: string };
-  seats: { seats_type_id: string; name: string };
-  origin: { origin_id: string; name: string };
-  governate: { governorate_id: string; name: string };
-  state: { state_id: string; name: string };
-  warrantyDuration: { warranty_duration_id: string; name: string };
-  warrentyKilometer: { warranty_kilometer: number; name: string };
-  insurance: { insurance_type_id: string; name: string };
-  readiness: { readiness_id: string; name: string };
-  saleType: { sale_type_id: string; name: string };
-  features: { features_id_array: string[]; featuresList: any[] };
-  price: string;
-  distance_kilometer: number;
-  distance_mile: number;
-  seller_notes: string;
+  private make: { make_id: number; name: string };
+  private model: { model_id: number; name: string };
+  private trim: { trim_id: number; name: string };
+  private year_id: { year_id: number; name: string };
+  private condition: { id: number; name: string };
+  private body: { body_id: number; name: string };
+  private interiorColor: { interior_color_id: number; name: string };
+  private exteriorColor: { exterior_color_id: number; name: string };
+  private doorCount: { door_count_id: number; name: number };
+  private engineSize: { engine_size: number; name: number };
+  private cylinderCount: { cylinder_count_id: number; name: number };
+  private fuelType: { fuel_type_id: number; name: string };
+  private transmissionType: { transmission_type_id: string; name: string };
+  private drivetrain: { drivetrain_id: string; name: string };
+  private seats: { seats_type_id: string; name: string };
+  private origin: { origin_id: string; name: string };
+  private governate: { governorate_id: string; name: string };
+  private state: { state_id: string; name: string };
+  private warrantyDuration: { warranty_duration_id: string; name: string };
+  private warrentyKilometer: { warranty_kilometer: number; name: string };
+  private insurance: { insurance_type_id: string; name: string };
+  private readiness: { readiness_id: string; name: string };
+  private saleType: { sale_type_id: string; name: string };
+  private features: { features_id_array: string[]; featuresList: any[] };
+  private price: string;
+  private distance_kilometer: number;
+  private distance_mile: number;
+  private seller_notes: string;
 
-  constructor(private vehicle: VehicleService) {}
+  constructor() {}
 
   /**
    * TAKE ID AND NAME OF MAKE
@@ -46,7 +46,9 @@ export class Car {
    * @param _makeName string
    * @returns boolean
    */
-  setMake(_id: string, _makeName: string) {}
+  setMake(_id: string, _makeName: string) {
+    
+  }
 
   /**
    * TAKE ID AND NAME OF MODEL

@@ -45,7 +45,7 @@ export class TakeCarImagesPage implements OnInit {
  
  carImages:any[] = [];
  // INITIALLY STARTING POINT IS 0 OR OBJECT.
- modalStartingPoint;
+ modalStartingPoint = 0;
 
 drop(event: CdkDragDrop<string[]>) {
 
@@ -144,7 +144,7 @@ drop(event: CdkDragDrop<string[]>) {
   }
 
   checkModalCurrentState(){
-   this.modalStartingPoint =  this.modalService.getCurrentState();
+   this.modalStartingPoint =  this.modalService.getCurrentItemIndex();
   }
 
   ngAfterViewInit() {
