@@ -22,7 +22,7 @@ const routes: Routes = [
   {
     path: 'personal-information',
     loadChildren: () => import('./Pages/personal-information/personal-information.module').then( m => m.PersonalInformationPageModule)
-  },
+  }
 ];
 @NgModule({
   imports: [
