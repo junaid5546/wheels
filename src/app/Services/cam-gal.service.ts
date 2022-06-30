@@ -5,11 +5,12 @@
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
 import { Injectable } from '@angular/core';
-import { Camera, CameraDirection, CameraResultType,ImageOptions,GalleryImageOptions, GalleryPhoto } from '@capacitor/camera';
+import { Camera, CameraDirection, CameraResultType,ImageOptions,GalleryImageOptions, GalleryPhoto, Photo } from '@capacitor/camera';
 import { Image } from '../Interface/image';
 import { FileSystemService } from './file-system.service';
 import { PermissionsService } from './permissions.service';
 import { MediaStorageService } from '../Services/media-storage.service';
+import { Platform } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +37,7 @@ export class CamGalService {
     limit:20
   }
 
-  constructor(private permission: PermissionsService,private fileSystem:FileSystemService, private storage:MediaStorageService) { }
+  constructor(private permission: PermissionsService,private fileSystem:FileSystemService, private storage:MediaStorageService,public platform: Platform) { }
 
   /***
    * THIS FUNCTION TAKES IMAGE FROM CAM AND SENDS YOU DataUrl
@@ -57,7 +58,7 @@ export class CamGalService {
    */
   getLibraryImages = async () =>{
     const images = await Camera.pickImages(this.galleryOptions);
-    console.log('IMAGES: ', images);
+    console.log('IMAGES PICKED CAM_GAL_SERVICE: ', images);
     return images.photos;
        
   }
@@ -66,13 +67,13 @@ export class CamGalService {
    * 
    * @returns file object
    */
-  getSingleImage = async () =>{
+  getSingleImage = async (file_name) =>{
    
     let image = null;
     try {
     image = await Camera.getPhoto(this.cameraOptions)
     .then((image)=>{
-   let file =   this.fileSystem.base64toFile(image,'profile');
+   let file =   this.fileSystem.base64toFile(image,file_name);
    console.log("FILE: ", file);
    return file;
     })
@@ -103,7 +104,7 @@ export class CamGalService {
    * 
    * @param images File
    */
-   async uploadImages (images:GalleryPhoto[]){
+   async uploadImages (images:GalleryPhoto[],mediaType:string,entity_id:string){
     console.log("Received images in upload method: ", images);
     
         let _blobArray:any[] = [];
@@ -120,11 +121,36 @@ export class CamGalService {
           return _blobArray;
         }
        }
+       
        console.log("FILES: ", _blobArray);
-       this.storage.uploadMultipleImages(_blobArray,'62b2fb48d18223d189ec6edb');
+
+       this.storage.uploadMultipleImages(_blobArray,mediaType,entity_id);
   }
 
+   async readAsFile(photo: Photo[]) {
+    console.log("PHOTOS: ", photo);
+    let files:File[] = [];
+      // Fetch the photo, read as a blob, then convert to base64 format
+      for (let index = 0; index < photo.length; index++) {
+        const response = await fetch(photo[index].webPath);
+        const blob = await response.blob();
+        let file_Name = photo[index].webPath.substring(photo[index].webPath.lastIndexOf("/") + 1) +'.'+ photo[index].format;
+        const file = new File([blob], file_Name ,{ type: "image/jpeg" })
+        files.push(file);
+      }
+      return files;     
+  }
 
+/**
+ * UPLOAD IMAGES AND RETURN RESPONSE
+ * @param files File
+ * @param entityId string
+ *
+ */
+  uploadMultipleImages(files:File[], mediaType:string, entityId:string) {
+    console.log("FILE: ", files);
+    this.storage.uploadMultipleImages(files,mediaType,entityId);
+  }
   
 
 }

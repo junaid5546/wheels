@@ -1,19 +1,19 @@
-<div class="special-plan" *ngFor="let item of plans">
-<ion-card>
+<div class="special-plan" *ngFor="let item of plans; let i=index">
+<ion-card [ngClass]="{ selected: item.selected }" (click)="selectPlan(item._id,item.ad_duration,i)">
   <ion-card-content>
     <div class="left-icon" >
-      <div class="icon-label" [ngClass]="item.color">
+      <div class="icon-label" [ngClass]="{gold:i==0, silver:i==1, bronze:i==2, regular:i==3 }">
         <ion-label class="item-label-color">{{item.name}}</ion-label>
       </div>
     </div>
     <div class="mid-content-details">
-      <ion-label class="label-mid">Special Duration: <span class="special-duration">{{item.special_duration}}</span>  <span class="days"> Days</span> </ion-label>
+      <ion-label class="label-mid">Special Duration: <span class="special-duration">{{item.special_duration}}</span>   </ion-label>
       <ion-label class="label-mid">Add order:<span class="special-duration"> {{item.order}}</span></ion-label>
-      <ion-label class="label-mid">Ad duration:<span class="ad-duration special-duration"> {{item.duration}}</span> <span class="days"> Days </span></ion-label>
+      <ion-label class="label-mid">Ad duration:<span class="ad-duration special-duration"> {{item.duration}}</span> </ion-label>
     </div>
     <div class="right-price-tag h-v-centered">
       <div class="wraper">
-      <ion-label>{{item.price}}<span class="price-omr"> OMR</span></ion-label>
+      <ion-label>{{item.price}}</ion-label>
     </div>
     </div>
   </ion-card-content>

@@ -1,0 +1,29 @@
+.wraper{
+    padding: 15px 10px 15px 10px;
+    width: 100%;
+  }
+
+  ion-card{
+    margin: 0px;
+    //width: 70%;
+     margin-bottom: 20px; 
+    height: 60px;
+    border-radius: 10px;
+      .container{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 60px;
+          background: conic-gradient(from 99.54deg at 0% 0%, #E8E7E7 0deg, #F4F4F4 360deg);
+          
+  .name-of-item{
+      padding-left: 20px;
+      ion-label{
+          font-size: 20px;
+      }
+  }
+  .icon-of-item {
+      padding-right: 20px;
+  }
+      }
+  }

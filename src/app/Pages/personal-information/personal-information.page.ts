@@ -80,7 +80,7 @@ export class PersonalInformationPage implements OnInit {
 
   icons = {
     has_left_icon: true,
-    has_right_icon: true,
+    has_right_icon: false,
     left_icon: 'assets/icon/settings/back.svg',
     right_icon: 'assets/icon/posts/post-details/Phone/Vector.svg',
   };
@@ -93,7 +93,7 @@ export class PersonalInformationPage implements OnInit {
   }
 
   takeImage(_name){
-   this.camService.getSingleImage()
+   this.camService.getSingleImage(_name)
    .then((file:File)=>{
     this.storage.uploadSingleImage(file,_name,'62b2fb48d18223d189ec6edb');
    })

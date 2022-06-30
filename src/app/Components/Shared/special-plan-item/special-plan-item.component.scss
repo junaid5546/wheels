@@ -1,4 +1,5 @@
 ion-card{
+    background: linear-gradient(225deg, #00B5DD 6.77%, #0091E2 51.04%, #0084E4 90.62%);
     margin: 0 !important;
     ion-card-content{
         padding: 10px !important;
@@ -34,6 +35,7 @@ ion-card{
         width: 60%;
         display: flex;
     flex-direction: column;
+    color: white;
     .label-mid{
         letter-spacing: var(--dm-letter-spacing);
         font-size: 12px;
@@ -56,7 +58,7 @@ ion-card{
     right: 10px;
         .wraper{
 
-            background: #5ee2ff59;
+            background: #7AE7FF;
             border-radius: 10px;
             height: 100%;
             display: flex;
@@ -65,11 +67,11 @@ ion-card{
             width: 100%;
 
             ion-label{
-                color: #04C400;
-                width: 60%;
+                color: #428EFF;
                 display: flex;
                 align-items: flex-end;
                 justify-content: space-around;
+                font-size: 11px;
             }
         }
     }
@@ -85,7 +87,7 @@ ion-card{
     letter-spacing: 0.5px;
 }
 
-.yellow{
+.gold{
     background-color: #F4DC6A !important;
 }
 .bronze{
@@ -96,4 +98,7 @@ ion-card{
 }
 .regular{
     background-color: white !important;
+}
+.selected{
+    border: 5px solid #43C27E;
 }

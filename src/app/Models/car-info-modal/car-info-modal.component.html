@@ -8,17 +8,19 @@
 <ion-content>
 
     <div *ngIf="data">
-    <ion-list *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 24 && currentStep != 25">
+    <ion-list *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 25 && currentStep != 24 && currentStep !=22" >
         <div #card_items  class="wraper">
             <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
                 <div class="container" [ngClass]="{selected: item.selected}" >
                 <div class="name-of-item">
-                    <ion-label>{{item.nameEn}} {{item.key}}</ion-label>
+                    <ion-label>{{item.name}}</ion-label>
                 </div>
                 <div class="icon-of-item">
+                    <!-- no logo yet
                     <ion-thumbnail>
                         <ion-img src="../../../assets/icon/cars-icon/toyota تويوتا.png"></ion-img>
                     </ion-thumbnail>
+                    -->
                 </div>
             </div>
 
@@ -29,7 +31,7 @@
     <ion-list *ngIf="currentStep == 5 || currentStep==6" >
         <ion-grid *ngIf="currentStep == 5">
             <ion-row >
-                <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem;let i=index">
+                <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem ;let i=index">
                     <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
                         <div class="item-picture-container">
                            <ion-img src="https://images.netdirector.co.uk/gforces-auto/image/upload/w_343,h_257,dpr_2.0,q_auto,c_fill,f_auto,fl_lossy/auto-client/4f3a94f309517d480173272c101fe224/thumbnail_mobile.jpg"></ion-img> 
@@ -59,11 +61,25 @@
             </ion-row>
         </ion-grid>
 
-        
-        
     </ion-list>
 
- 
+    <ion-list *ngIf="currentStep ===22" >
+        <div #card_items  class="wraper">
+            <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
+                <div class="container" [ngClass]="{selected: item.selected}" >
+                <div class="name-of-item">
+                    <ion-label>{{item.name}}</ion-label>
+                </div>
+                <div class="icon-of-item">
+                    <ion-checkbox></ion-checkbox>
+                </div>
+            </div>
+
+            </ion-card>
+        </div>
+
+    </ion-list>
+
     <ion-list *ngIf="currentStep == 24"  >
       <div class="item-main-container">
           <div class="inner-container">
@@ -73,7 +89,7 @@
               </div>
               <div class="input-and-label-container">
                   <div class="input">
-                      <ion-input maxlength="3" dir="rtl">000,</ion-input>
+                      <ion-input (ionChange)="addPrice($event)" [(ngModel)]="price" maxlength="3" dir="rtl">000,</ion-input>
                   </div>
                   <div class="label">OMR</div>
               </div>
@@ -86,7 +102,7 @@
             </div>
             <div class="input-and-label-container">
                 <div class="input">
-                    <ion-input maxlength="3" dir="rtl">000,</ion-input>
+                    <ion-input (ionChange)="addWarrantyKilo($event)"   [(ngModel)]="warrentyKilometer" maxlength="3" dir="rtl">000,</ion-input>
                 </div>
                 <div class="label">Kilometer</div>
             </div>
@@ -100,7 +116,7 @@
             </div>
             <div class="input-and-label-container">
                 <div class="input">
-                    <ion-input maxlength="3" dir="rtl">000,</ion-input>
+                    <ion-input (ionChange)="addDistanceTravelled($event)" [(ngModel)]="distanceTraveledKilometer" maxlength="3" dir="rtl">000,</ion-input>
                 </div>
                 <div class="label">
                     <ion-list>
@@ -129,7 +145,7 @@
             </div>
             <div class="input-and-label-container">
                 <div class="input input-more-width">
-                    <ion-input class="phone-number-input" maxlength="9" dir="ltr"></ion-input>
+                    <ion-label>+{{currentState.value.selected.primary_phone}}</ion-label>
                 </div>
                 <div class="label">
                     <ion-icon name="information-circle-outline"></ion-icon>
@@ -144,8 +160,8 @@
             </div>
             <div class="input-and-label-container">
                 <div class="input input-more-width">
-                   <ion-textarea rows="6" cols="20" placeholder="Enter about this vehicle here...">
-
+                   <ion-textarea (ionChange)="addSellerNotes($event)" [(ngModel)]="sellerNotes" rows="6" cols="20" placeholder="Enter about this vehicle here...">
+                    
                    </ion-textarea>
                 </div>
             </div>
@@ -157,22 +173,25 @@
     <ion-list *ngIf="currentStep == 25">
         <app-special-plans></app-special-plans>
     </ion-list>
+
+
     
 </div>
 
-<div *ngIf="!data">
-<app-vertical-list></app-vertical-list>
+<div *ngIf="!data" class="no-data-found">
+<ion-label>No {{this.currentState.value.name}} available yet.</ion-label>
 </div>
 
 </ion-content>
 
-<div *ngIf="currentStep == 24" class="select-images-button no-padding">
+<div *ngIf="currentStep === 24 || currentStep === 22 || currentStep === 25" class="select-images-button no-padding">
     <div #bottomButton class="wraper">
     <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex()">
       <div class="logo-and-label-container">
   
         <div class="label-container change-size">
-      <ion-label>{{"NEXT"}}</ion-label>
+      <ion-label *ngIf="currentStep != 25">{{"NEXT"}}</ion-label>
+      <ion-label *ngIf="currentStep === 25">{{"Publish for Free"}}</ion-label>
   </div>
       <div class="logo no-borders no-padding">
         <ion-icon src="../../assets/icon/select-images/Phone/Phone/Phone/arrow right.svg"></ion-icon>

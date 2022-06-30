@@ -19,13 +19,13 @@ export class MediaStorageService {
    * @param file File
    * @param entityId string
    */
-  uploadSingleImage(file:File,file_name,entityId:string){
+  uploadSingleImage(file:File, file_name, entityId:string){
     const formData: FormData = new FormData();
     formData.append('mediaList', file, `${file_name}.${file.type.split('/')[1]}`);
-      this.storage.uploadEntity(formData,entityId)
-      .then((response)=>{
-        console.log("File Upload Response", response);
-      })
+      //this.storage.uploadEntity(formData,entityId)
+      //.then((response)=>{
+        //console.log("File Upload Response", response);
+      //})
   }
 
   /**
@@ -33,13 +33,15 @@ export class MediaStorageService {
    * @param file File
    * @param entityId string
    */
-  uploadMultipleImages(file:File[],entityId){
+  uploadMultipleImages(file:File[],media_type,entityId){
+    console.log("UPLOAD IMAGE CALLED");
     const formData: FormData = new FormData();
     for (let i = 0; i < file.length; i++) {
       console.log("FIle name: ", file[i].name);
       formData.append('mediaList', file[i], file[i].name);
     }
-      this.storage.uploadEntity(formData,entityId)
+    
+      this.storage.uploadEntity(formData, media_type, entityId)
       .then((response)=>{
         console.log("File Upload Response", response);
       })

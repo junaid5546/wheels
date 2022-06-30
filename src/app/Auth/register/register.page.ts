@@ -5,6 +5,7 @@ import { UserRegistration } from '../../Interface/user';
 import { AuthService } from 'dm-api';
 import { ModalControllerService } from '../../Services/modal-controller.service';
 import { Router } from '@angular/router';
+import { UserDataService } from '../../Services/user-data.service';
 // RxJS v6+
 import { timer } from 'rxjs';
 
@@ -40,7 +41,8 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
   constructor(private pickerController: PickerController,
               private router:Router,
               private auth:AuthService,
-              private popUp:ModalControllerService) {
+              private popUp:ModalControllerService,
+              private userData:UserDataService) {
                
    }
 
@@ -267,8 +269,13 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
   login(){
     let obj = {phone:this.user.primary_phone,dob:this.user.dob};
     this.auth.login(obj)
-    .then((result)=>{
+    .then((result:any)=>{
       console.log("Login Result: ", result);
+      this.userData.setUserObj(result.result.user)
+      this.userData.setUserId(result.result.user._id)
+      let primaryPhone = String(result.result.user.primaryPhone.areaCode) +  String(result.result.user.primaryPhone.phoneNumber);
+      this.userData.setPrimaryPhone(primaryPhone);
+      this.userData.setBusinessPhone(result.result.user.phoneBusiness)
       this.subscribeTimer.unsubscribe();
       this.router.navigate([''])
     })

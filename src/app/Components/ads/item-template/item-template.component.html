@@ -1,3 +1,16 @@
-<p>
-  item-template works!
-</p>
+<div class="ad-item-main-container">
+  <div class="car-picture"></div>
+  <div class="car-functions">
+    <ion-label class="title">Toyota Avalon Limited 2022</ion-label>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="4" *ngFor="let item of [1,2,3,4]"> 
+        <div class="item">
+          <div class="name"> <ion-label>Name</ion-label> </div>
+          <div class="icon"> <ion-icon name="bowling-ball-outline"></ion-icon>  </div>
+        </div>  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>

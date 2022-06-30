@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { PlansService } from 'dm-api';
 @Component({
   selector: 'app-special-plans',
   templateUrl: './special-plans.component.html',
@@ -19,10 +19,35 @@ export class SpecialPlansComponent implements OnInit {
      {name:'Bronze', color:'bronze', order:'First', duration:60, special_duration:7, price:1},
      {name:'Regular', color:'white', order:'Last', duration:60, special_duration:7, price:0}
    ] 
-  constructor() { }
+  constructor(private plansApi:PlansService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getPlans(7);
+  }
 
   segmentChanged(ev: any) {
     console.log('Segment changed', ev);
-  }}
+    this.getPlans(ev.detail.value);
+  }
+
+  // FETCH ALL PLANS AGAINST DAYS.
+  getPlans(days:number) {
+    console.log("PLANS CALLED");
+    this.plansApi.getPlans(days)
+    .then((plans:any)=>{
+      console.log("THEN");
+      if(plans.code === 200){
+        console.log("PLANS");
+      this.plans = plans.result
+      } else {
+        console.log("NULL");
+        this.plans = null;
+      }
+    })
+    .catch((error)=>{
+      console.log("ERROR: ", error);
+    })
+  } 
+
+
+}

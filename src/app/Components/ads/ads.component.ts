@@ -10,5 +10,5 @@ export class AdsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {}
-
+  segmentChanged(e){}
 }

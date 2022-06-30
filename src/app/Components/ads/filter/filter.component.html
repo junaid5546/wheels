@@ -1,3 +1,30 @@
-<p>
-  filter works!
-</p>
+<div class="item-container">
+
+  <!--MAIN LSIT-->
+  <ion-col [ngClass]="{selected: item.selected}"  size="6" *ngFor="let item of itemsList">
+  <div >  {{item.name}} </div>
+  </ion-col>
+  <!--MAIN LIST-->
+</div>
+
+
+<div class="item-container">
+
+  <!--SUB LIST-->
+  <ion-col [ngClass]="{selected: item.selected}"  size="6" *ngFor="let item of subList">
+    <div >  {{item.name}} </div>
+    </ion-col>
+  <!--SUB LIST-->
+</div>
+
+
+<div class="item-container">
+
+  <!--SUB LIST-->
+  <ion-col [ngClass]="{selected: item.selected}"  size="6" *ngFor="let item of make">
+    <div >  {{item.name}} </div>
+    </ion-col>
+  <!--SUB LIST-->
+</div>
+
+

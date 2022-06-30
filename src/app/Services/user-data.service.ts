@@ -46,6 +46,7 @@ export class UserDataService {
  * @returns promise
  */
   setUserId = async (_id) => {
+    console.log("SETTING USER ID: ", _id);
     this.userId = _id;
     let id = String(_id);
     await Storage.set({
@@ -54,6 +55,49 @@ export class UserDataService {
     });
    
   }
+
+
+
+  /**
+ * 
+ * @param number 
+ * @returns promise
+ */
+   setBusinessPhone = async (number:string) => {
+    await Storage.set({
+      key: 'business_phone', 
+      value: number,
+    });
+   
+  }
+
+
+  /**
+ * 
+ * @param number 
+ * @returns promise
+ */
+   setPrimaryPhone = async (number:string) => {
+    await Storage.set({
+      key: 'primary_phone', 
+      value: number,
+    });
+   
+  }
+
+  getPhonePrimary = async () => {
+    let phone = await Storage.get({key:'primary_phone'});
+    let business_phone = phone.value;
+    return business_phone;
+  }
+
+  getPhoneBusiness = async () => {
+    let phone = await Storage.get({key:'business_phone'});
+    let business_phone = phone.value;
+    return business_phone;
+  }
+
+
 /**
  * 
  * @returns promise 
@@ -64,26 +108,6 @@ export class UserDataService {
   return userId;
   }
 
-/**
- * 
- * @param userId 
- */
-  getUserPublicProfile(userId:string) {
-    
-    const apiRoute: any = {};
-    return new Promise((resolve, reject) => {
-      apiRoute.apiroute = `${this.profileUrl}628e5e82ea2c9d0a66732e9b`;
-      this.api
-        .get(apiRoute, 'h3')
-        .then((data: any) => {
-          resolve(data);
-        })
-        .catch((error) => {
-          console.log('Error getting service', error);
-          reject(error);
-        });
-    });
-  }
 
   /**
    * USE THIS TO GET USER ID ANYWHERE

@@ -34,14 +34,14 @@ private platform = null;
    // GETTING DEFAULT LANGUAGE FROM DEVICE AND RETURN IT.
    async getDefaultLanguage(){
     return new Promise((resolve)=>{
-      let language = localStorage.getItem('Language');
+      let language = localStorage.getItem('lang');
         resolve(language);
     })
    }
 
    // SET DEFAULT LANGUAGE OF THE APP
    setDefaultLanguage(language:string){
-    localStorage.setItem('Language', language);
+    localStorage.setItem('lang', language);
    }
 
    //SET DEFAULT THEME OF THE APP
@@ -104,7 +104,7 @@ private platform = null;
   // CHANGE LANGUAGE
   changeLanguage(lang:string) {
     this.translate.use(lang);
-    localStorage.setItem("Language",lang);
+    localStorage.setItem("lang",lang);
     this.translate.setDefaultLang(lang);
   }
 

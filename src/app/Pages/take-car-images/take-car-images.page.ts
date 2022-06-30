@@ -10,6 +10,10 @@ import { CamGalService } from '../../Services/cam-gal.service';
 import { CarInfoModalComponent } from '../../Models/car-info-modal/car-info-modal.component';
 import { DomSanitizer } from '@angular/platform-browser';
 import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
+import { Platform } from '@ionic/angular';
+import { PostService } from 'dm-api';
+import { UserDataService } from '../../Services/user-data.service';
+
 @Component({
   selector: 'app-take-car-images',
   templateUrl: './take-car-images.page.html',
@@ -62,12 +66,15 @@ drop(event: CdkDragDrop<string[]>) {
     private amimationCtrl:AnimationController,
     public  actionSheetController: ActionSheetController,
     private changeDetector:ChangeDetectorRef,
+    public platform: Platform,
+    private post:PostService,
+    private userData:UserDataService,
     private deviceInfo:DeviceInfoService) {
      
      }
 
      ngOnInit(): void {
-     // this.presentModal();
+       this.presentModal();
        let IsModelInitialized =  this.modalService.startIndexing();
        if(IsModelInitialized.status){
          this.modalService.updatecurrentObject();
@@ -234,15 +241,54 @@ drop(event: CdkDragDrop<string[]>) {
     // DETECT CHANGE AND SHOW THE NEXT BUTTON
    this.changeDetector.markForCheck();
    this.toggleNext(true);
-    this.camGal.uploadImages(this.carImages);
+    if(this.platform.is('hybrid')){
+    let postCreate:any = await this.createPost();
+    console.log("POST CREATE RESP",postCreate);
+  
+    if(postCreate.code === 200){
+      console.log("POST ID: ", postCreate.result);
+   }
+    this.camGal.uploadImages(this.carImages,'post-images',postCreate.result);
       } else {
-        // LIMIT REACHED TO 20.
-        console.log('limit reached');
-        return;
-        
+        let postCreate:any = await this.createPost();
+      console.log("POST CREATE RESP",postCreate);
+      if(postCreate.code === 200){
+        console.log("POST ID: ", postCreate.result);
+        this.modalService.modelData.postId = postCreate.result;
+     }
+     let file = await this.camGal.readAsFile(this.carImages);
+     console.log("FILE:", file)
+     this.camGal.uploadMultipleImages(file,'post-images',postCreate.result);
       }
+    } else {
+      // LIMIT REACHED TO 20.
+      console.log('limit reached');
+      return;
+    }
   
 
+}
+
+
+/**
+ * CREATE NEW POST IN DB AND RETURNS ITS ID
+ * @returns CREATED POST
+ */
+
+async createPost(){
+
+  return new Promise((res,rej)=>{
+    this.post.createPost(this.userData.fetchUserId())
+    .then((post:any)=>{
+      console.log("POST CREATION: ", post);
+      res(post as any);
+    })
+    .catch(error=>{
+      console.log("POST CREATION ERROR: ", error);
+      rej(error);
+    })
+  })
+ 
 }
      
 }

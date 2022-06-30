@@ -1,9 +1,8 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Accounts</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-header [heading]="heading" ></app-header>
 <ion-content>
+
+  <ion-list>
+    <app-account-items-list [accountList]="accountList"></app-account-items-list>
+  </ion-list>
 
 </ion-content>

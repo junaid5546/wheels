@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { UserDataService } from './Services/user-data.service';
 import { TokenService } from 'dm-api';
+import { CarFiltersService} from './Services/car-filters.service';
 export type platform_name = 'ios' | 'android' | 'web' ;
 
 @Component({
@@ -39,6 +40,7 @@ export class AppComponent  implements OnInit,OnDestroy  {
       private router:Router,
       private userData:UserDataService,
       private token:TokenService,
+      private filters:CarFiltersService,
       public translate: TranslateService) {
 
       this.translate.setDefaultLang('ar');
@@ -67,7 +69,8 @@ export class AppComponent  implements OnInit,OnDestroy  {
     } else if(Capacitor.getPlatform() == (this.platform_name = 'web')){
       console.log('Platform:', "Web");
     }
-    this.router.navigate(['take-car-images']);
+    
+    //this.router.navigate(['register']);
     
     /*this.auth.getAuthToken()
     .then((token:string)=>{
@@ -86,6 +89,7 @@ export class AppComponent  implements OnInit,OnDestroy  {
     // GETTING USER ID FROM LOCAL STORAGE.
     this.userData.getUserId()
     .then((id) => {
+      console.log("USER ID: ", id);
     });
 
     this.platform.ready().then((plt) => {

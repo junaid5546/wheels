@@ -115,6 +115,8 @@ addImageWatermark(image, file_name) {
     }
   }*/
 
- 
+ readFileNew(){
+  
+ }
  
 }

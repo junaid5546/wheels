@@ -1,6 +1,6 @@
 <app-header [heading]="heading"
 [icons]="icons"
-goBack="false"
+goBack="true"
 ></app-header>
 
 <ion-content>
@@ -31,7 +31,7 @@ goBack="false"
           </ng-template>
 
         <div ngi class="companyIcon">
-          <div class="company-profile" (click)="takeImage('cover')">
+          <div class="company-profile" (click)="takeImage('profile')">
             <ion-icon name="cloud-upload-outline"></ion-icon>
           </div>
           <img *ngIf="!hasCompanyLogo" src="../../../assets/company-logo-default.png"/>

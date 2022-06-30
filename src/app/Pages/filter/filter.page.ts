@@ -90,7 +90,7 @@ export class FilterPage implements OnInit,AfterViewInit {
   getFiltersList() {
     this.filterServices.getVehicleFilters()
     .then((filters:any)=>{
-      if(filters.code === 0) {
+      if(filters.code === 200) {
 
         // MODIFYING FILTERS ARRAY
         this.filters = filters.result.map((element, index) => {

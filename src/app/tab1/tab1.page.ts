@@ -30,13 +30,14 @@ export class Tab1Page implements OnInit {
  @Input() goBack:string = null;
 
  // LEFT AND RIGHT ICON.
- icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/notification.svg'};
+ icons:any = { has_left_icon:false, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/notification.svg'};
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Vehicles for Sale Inventory', has_sub_heading:false, sub_heading_name:''};
   constructor(private deviceInfo:DeviceInfoService,  private router:Router, private nav:NavController, private post:PostService, private filters:CarFiltersService) { }
 
   ngOnInit() {
+    console.log("NG ON INIT TAB 1");
    this.getPosts();
   }
 
@@ -81,10 +82,11 @@ export class Tab1Page implements OnInit {
    * GETTING ALL POSTS
    */
   getPosts(){
+    console.log("GETTING POSTS");
     //these all the sort types: 1- price_low 2- price_hight 3- date_new 4- date_old 5- kilometer_low 6- kilometer_hight 7- year_new 8- year_old
     this.post.getAllPosts('price_low','active',0,10)
     .then((post:any)=>{
-      console.log("POSTS: ", post);
+      console.log("POSTS--: ", post);
       this.items = post.result;
     })
     .catch((error)=>{

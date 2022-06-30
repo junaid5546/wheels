@@ -8,7 +8,6 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
 import { AppSharedModule } from '../Components/Shared/shared.module';
 import { AdsComponent } from '../Components/ads/ads.component';
 import { ItemTemplateComponent } from '../Components/ads/item-template/item-template.component';
-import { SegmentComponent } from '../Components/ads/segment/segment.component';
 import { FilterComponent } from '../Components/ads/filter/filter.component';
 
 @NgModule({
@@ -20,6 +19,6 @@ import { FilterComponent } from '../Components/ads/filter/filter.component';
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
   ],
-  declarations: [Tab3Page,AdsComponent,ItemTemplateComponent,SegmentComponent,FilterComponent]
+  declarations: [Tab3Page,AdsComponent,ItemTemplateComponent,FilterComponent]
 })
 export class Tab3PageModule {}
