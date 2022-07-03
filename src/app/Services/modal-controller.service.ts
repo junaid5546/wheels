@@ -13,10 +13,20 @@ import { ToastController } from '@ionic/angular';
 import { PlansService, VehicleService, CountryDataService, PostService, Vehicle } from 'dm-api';
 import { CarFiltersService } from '../Services/car-filters.service';
 import { UserDataService } from "./user-data.service";
+import { ErrorHandlerService } from '../Services/error-handler.service';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
 export class ModalControllerService {
+  // SAVING POST TO LOCAL
+  _post = {
+    hasPostCreated:false,
+    postImages:null,
+    postData:{data:null,index:0},
+    postId:null
+  };
+
   sortBy: any[] = [
     { id: 1, name: 'Sort by Price (Lowest)', icon: 'arrow-down-outline' },
     { id: 2, name: 'Sort by Price (Highest)', icon: 'arrow-up-outline' },
@@ -82,7 +92,9 @@ export class ModalControllerService {
     private vehicle: VehicleService,
     private carFilters: CarFiltersService,
     private countryApi: CountryDataService,
-    private post:PostService
+    private post:PostService,
+    private error:ErrorHandlerService,
+    private router:Router
   ) {
 
     this.carFilters.plateType.subscribe((res:any)=>{
@@ -302,15 +314,16 @@ export class ModalControllerService {
   }
 
   validateItems() {
-    if (this.modelData.items != undefined || this.modelData.items.length != 0) {
+    if(this.modelData.items != undefined || this.modelData.items.length != 0) {
       this.modelData.length = this.modelData.items.length;
-      //console.log("LENGTH: ", this.modelData.length);
+      console.log("LENGTH: ", this.modelData.length);
       return { status: true, value: this.modelData.items.length };
     } else {
-      //console.log("Else: ", this.modelData.length);
+      console.log("Else: ", this.modelData.length);
       return { status: false, value: this.modelData.items };
     }
   }
+
 // INITIALIZATION OF INDEXES
   initializeIndexes() {
     this.modelData.current.index = 0;
@@ -386,7 +399,7 @@ export class ModalControllerService {
       console.log('ERROR');
       console.log('ITEM LENGTH: ', this.getItemsLenght());
       console.log('ITEM Index Length: ', this.getCurrentItemIndex());
-      this.updatePost();
+      
       //return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
   }
@@ -413,7 +426,14 @@ export class ModalControllerService {
     });
     this.post.updatePost(obj,this.modelData.postId)
     .then((post:any)=>{
-      console.log("UPDATE: ", post);
+      if(post.code == 200) {
+        this.modalController.dismiss();
+        this.error.toast(post.message).then(()=>{
+          console.log("POST UPDATE STATUS: ", post);
+          this.savePostLocal();
+          this.router.navigate(['tabs/tab4'])
+        })
+      }
     })
     console.log("OBJECT: ", obj);
   }
@@ -574,5 +594,10 @@ export class ModalControllerService {
 
   createPost(){
     //this.post.createPost()
+  }
+
+  savePostLocal() {
+    this._post.hasPostCreated = true;
+    localStorage.setItem('_post',null);
   }
 }

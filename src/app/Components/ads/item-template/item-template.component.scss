@@ -1,13 +1,30 @@
 .ad-item-main-container{
-    border: 3px solid #27AF8E;
     width: 100%;
-    background: pink;
+    //background: pink;
     display: flex;
     flex-direction: row;
     .car-picture{
         display: flex;
-        width: 60%;
-        background: yellow;
+        width: 30%;
+
+        img{
+            width: 100%;
+            border-radius: 8px;
+        }
+        //background: yellow;
+    }
+    .inner-container{
+
+        display: flex;
+        background: reg;
+        //background: red;
+        width: 100%;
+        margin-left: 20px;
+        border-radius: 10px;
+        margin-right: 20px;
+        height: 140px;
+        border: 3px solid #27AF8E;
+
     }
 }
 
@@ -40,6 +57,7 @@ ion-col{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 60%;
     .title{
         font-size: 14px;
         padding-top: 10px;

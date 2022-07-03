@@ -21,6 +21,9 @@ import { UserDataService } from '../../Services/user-data.service';
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class TakeCarImagesPage implements OnInit {
+  
+ 
+
   anim:Animation;
   bottomUp:Animation;
 
@@ -250,15 +253,25 @@ drop(event: CdkDragDrop<string[]>) {
    }
     this.camGal.uploadImages(this.carImages,'post-images',postCreate.result);
       } else {
-        let postCreate:any = await this.createPost();
-      console.log("POST CREATE RESP",postCreate);
-      if(postCreate.code === 200){
-        console.log("POST ID: ", postCreate.result);
-        this.modalService.modelData.postId = postCreate.result;
-     }
-     let file = await this.camGal.readAsFile(this.carImages);
-     console.log("FILE:", file)
-     this.camGal.uploadMultipleImages(file,'post-images',postCreate.result);
+        let checkPost:any = await this.checkPost();
+        let file = await this.camGal.readAsFile(this.carImages);
+        if(checkPost === null){ // NO POST IN DRAFT
+          console.log("NO POST IN DRAFT");
+          let postCreate:any = await this.createPost();
+          if(postCreate.code === 200){
+            this.savePostLocal(postCreate.result);
+            this.generatePostId(postCreate,file);
+         }
+         
+        } else { // POST IS AVAILABLE IN DRAFT
+          if(checkPost.hasPostCreated){
+            console.log("POST IN DRAFT");
+            this.camGal.uploadMultipleImages(file,'post-images',checkPost.postId);
+          } else {
+            console.log('Post Check Result: ', checkPost);
+          }
+        }
+    
       }
     } else {
       // LIMIT REACHED TO 20.
@@ -266,6 +279,22 @@ drop(event: CdkDragDrop<string[]>) {
       return;
     }
   
+
+}
+
+
+async generatePostId(post,file){
+  this.modalService._post.hasPostCreated = true;
+  this.modalService.modelData.postId = post.result;
+  this.camGal.uploadMultipleImages(file,'post-images',post.result);
+}
+
+
+async checkPost(){
+  return new Promise((res,rej)=>{
+    let post = JSON.parse( localStorage.getItem('_post') );
+    res(post);
+  });
 
 }
 
@@ -291,4 +320,15 @@ async createPost(){
  
 }
      
+savePostLocal(post_id) {
+  console.log("CALLED SAVE POST LOCAL");
+  this.modalService._post.hasPostCreated = true;
+  this.modalService._post.postId = post_id;
+  let obj = JSON.stringify(this.modalService._post)
+
+  console.log("OBJ POST: ",obj);
+
+  localStorage.setItem('_post', JSON.stringify(this.modalService._post));
+}
+
 }
