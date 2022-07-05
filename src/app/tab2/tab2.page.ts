@@ -1,7 +1,5 @@
-import { Component,OnInit,OnChanges,Input, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { DeviceInfoService } from '../Services/device-info.service';
-import { Router } from '@angular/router';
-import SwiperCore, { Pagination } from "swiper";
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -21,14 +19,14 @@ export class Tab2Page {
  @Input() heading = {has_main_heading:true, main_heading_name:'Vehicle Department', has_sub_heading:false, sub_heading_name:''};
   constructor() {}
 */
-settingsRoute = "tabs/tab1/settings";
+settingsRoute = "tabs/tab1/";
 ctx:any = null;
-icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings.svg', has_right_icon:true, right_icon:'../../assets/icon/notification.svg'};
-heading:any = { has_main_heading:true, main_heading_name:"The Digital Mall", has_sub_heading:false, sub_heading_name:'digital-mall.com'  };
+icons:any = { has_left_icon:true, left_icon:'../../assets/icon/notification.svg', has_right_icon:false, right_icon:'../../assets/icon/notification.svg'};
+heading:any = { has_main_heading:true, main_heading_name:"DigitalMall.App", has_sub_heading:false, sub_heading_name:'digital-mall.com'  };
 
 items:any[] = [
 
-{name:'Vehicles',img:'assets/icon/main-items-icon/vehicles.svg',hasClock:false, clock:'assets/icon/main-items-icon/clock.svg',navigate:'take-car-images' },
+{name:'Vehicles',img:'assets/icon/main-items-icon/vehicles.svg',hasClock:false, clock:'assets/icon/main-items-icon/clock.svg',navigate:'tabs/posts' },
 
 {name:'Estates',img:'assets/icon/main-items-icon/estates.svg',hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'estate'},
 

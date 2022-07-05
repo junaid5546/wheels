@@ -8,7 +8,7 @@
         <ion-list>
             <ion-grid>
                 <ion-row>
-                <ion-col size="12" *ngFor="let item of items.items; let i=index">
+                <ion-col size="12" *ngFor="let item of items; let i=index">
                     <div class="list-item" [ngClass]="{'list-item': true, 'color': i%2==0 }">
                     <ion-col size="6" class="left-col">
                     <div class="icon-label-container">
@@ -25,7 +25,7 @@
                     
                     </ion-col>
                     <ion-col class="item-value" size="6">
-                        <ion-label class="dm-value">{{  item.value.nameEn }}</ion-label>
+                        <ion-label class="dm-value">{{  item.value.name != null ? item.value.name : "N/A" }}</ion-label>
                     </ion-col>
                 </div>
                 </ion-col>
@@ -41,8 +41,12 @@
             </div>
                 </ion-list-header>
             <ion-grid>
-                <ion-row>
-                <ion-col  size="6" *ngFor="let feature of items.featuersList">
+            
+                <ng-template #nofeature>
+                    <ion-label>N/A</ion-label>
+                </ng-template>
+                <ion-row *ngIf="features.length > 0;else nofeature">
+                <ion-col   size="6" *ngFor="let feature of features">
                     <div class="list-item" [ngClass]="{'list-item': true,'no-color':true}">
                     <ion-col size="12" class="left-col no-border">
                     <div class="icon-label-container">
@@ -74,7 +78,7 @@
                 <ion-row>
                     <ion-col>
                         <div class="seller-notes">
-                            <ion-label class="dm-value">{{items.sellerNotes}}</ion-label>
+                            <ion-label class="dm-value">{{sellerNotes}}</ion-label>
                         </div>
                     </ion-col>
                 </ion-row>

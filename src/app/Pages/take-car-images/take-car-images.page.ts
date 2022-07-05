@@ -22,8 +22,8 @@ import { UserDataService } from '../../Services/user-data.service';
 })
 export class TakeCarImagesPage implements OnInit {
   
- 
-
+ // THIS NAME IS DYNAMIC
+  nextButtonText:string = "Next";
   anim:Animation;
   bottomUp:Animation;
 
@@ -48,8 +48,8 @@ export class TakeCarImagesPage implements OnInit {
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Images', has_sub_heading:false, sub_heading_name:''};
-
- 
+// DOES POST HAS INITIATED.
+ savedPost = null;
  carImages:any[] = [];
  // INITIALLY STARTING POINT IS 0 OR OBJECT.
  modalStartingPoint = 0;
@@ -77,7 +77,16 @@ drop(event: CdkDragDrop<string[]>) {
      }
 
      ngOnInit(): void {
-       this.presentModal();
+       //this.presentModal();
+       if( JSON.parse(localStorage.getItem('_post'))){
+        this.nextButtonText = 'CONTINUE';
+        console.log("POST: ", typeof(localStorage.getItem('_post')));
+        let post = JSON.parse(localStorage.getItem('_post'));
+        this.savedPost = post;
+        console.log("HAS POST", localStorage.getItem("_post"));
+        this.carImages = post.postImages;
+       }
+
        let IsModelInitialized =  this.modalService.startIndexing();
        if(IsModelInitialized.status){
          this.modalService.updatecurrentObject();
@@ -218,7 +227,15 @@ drop(event: CdkDragDrop<string[]>) {
   popImages(index){
     // IF HAVE IMAGES IN ARRAY.
     if (this.carImages.length > 0) {
-      this.carImages.splice(index, 1); // 2nd parameter means remove one item only
+      this.carImages.splice(index, 1);
+      if( this.savedPost != null )  {
+        this.savedPost.postImages = this.carImages;
+        localStorage.setItem('_post', JSON.stringify(this.savedPost));
+      }
+     // 2nd parameter means remove one item only.
+      
+      
+
     } else {
       // IF NO IMAGES IN ARRAY OR WE DELETED ALL OF THEM THEN HIDE NEXT BUTTON AS WELL.
       this.toggleNext(false);
@@ -259,13 +276,14 @@ drop(event: CdkDragDrop<string[]>) {
           console.log("NO POST IN DRAFT");
           let postCreate:any = await this.createPost();
           if(postCreate.code === 200){
-            this.savePostLocal(postCreate.result);
+            this.savePostLocal(postCreate.result,file);
             this.generatePostId(postCreate,file);
          }
          
         } else { // POST IS AVAILABLE IN DRAFT
           if(checkPost.hasPostCreated){
             console.log("POST IN DRAFT");
+            this.savePostLocal(checkPost.postId, this.carImages);
             this.camGal.uploadMultipleImages(file,'post-images',checkPost.postId);
           } else {
             console.log('Post Check Result: ', checkPost);
@@ -320,9 +338,10 @@ async createPost(){
  
 }
      
-savePostLocal(post_id) {
+savePostLocal(post_id,images) {
   console.log("CALLED SAVE POST LOCAL");
   this.modalService._post.hasPostCreated = true;
+  this.modalService._post.postImages = images;
   this.modalService._post.postId = post_id;
   let obj = JSON.stringify(this.modalService._post)
 

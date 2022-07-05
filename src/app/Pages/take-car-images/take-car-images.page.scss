@@ -257,4 +257,5 @@ ion-content{
 
   .wraper{
     width: 100%;
+    margin-bottom: calc(30px + env(safe-area-inset-bottom));
   }

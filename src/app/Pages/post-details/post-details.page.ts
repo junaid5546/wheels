@@ -14,9 +14,9 @@ SwiperCore.use([FreeMode, Scrollbar, Mousewheel]);
   styleUrls: ['./post-details.page.scss'],
 })
 export class PostDetailsPage implements OnInit,AfterViewInit {
-
-  sellerNotes;
-  items:any;
+  features:any[] = [];
+  sellerNotes:string = "N/A";  
+  items:any[] = [];
   
   @ViewChild(IonContent,{read:ElementRef}) content: ElementRef;
   @Input() forwardTo:string = null;
@@ -58,8 +58,8 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
 
    ngOnInit() {
     const item = JSON.parse(this.route.snapshot.params.item);
-    console.log(item); 
-    this.items = item;
+    console.log("POST DETAILS",item); 
+    this.items = item.items;
     
      this.heading.main_heading_name =  item.titel.nameEn;
    

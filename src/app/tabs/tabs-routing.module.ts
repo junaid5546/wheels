@@ -30,15 +30,19 @@ const routes: Routes = [
         loadChildren: () => import('../Pages/post-details/post-details.module').then( m => m.PostDetailsPageModule)
       },
       {
+        path: 'posts',
+        loadChildren: () => import('../Pages/posts/posts.module').then( m => m.PostsPageModule)
+      },
+      {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/tab2',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/tab2',
     pathMatch: 'full'
   }
 ];

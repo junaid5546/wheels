@@ -396,10 +396,12 @@ export class ModalControllerService {
 
       this.updatecurrentObject();
     } else {
-      console.log('ERROR');
       console.log('ITEM LENGTH: ', this.getItemsLenght());
       console.log('ITEM Index Length: ', this.getCurrentItemIndex());
       
+      if( this.getCurrentItemIndex() === 25 ) {
+        this.updatePost();
+      }
       //return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
   }
@@ -424,7 +426,9 @@ export class ModalControllerService {
         obj[item.key] = item.selected._id;
       }
     });
-    this.post.updatePost(obj,this.modelData.postId)
+    let post = JSON.parse( localStorage.getItem('_post') );
+    this._post.postId = post.postId;
+    this.post.updatePost(obj,this._post.postId)
     .then((post:any)=>{
       if(post.code == 200) {
         this.modalController.dismiss();
