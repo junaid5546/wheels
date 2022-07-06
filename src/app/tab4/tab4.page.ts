@@ -25,7 +25,7 @@ export class Tab4Page implements OnInit {
     {name:'Followers',available:false},
     {name:'Job Profile',available:false},
     {name:'Settings',available:false},
-    {name:'Contact Us',available:true}
+    {name:'Contact Us',available:true,route:'contact-us'}
   ]
   constructor() { }
 

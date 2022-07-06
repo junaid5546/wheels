@@ -1,7 +1,6 @@
-// Copyright 2010 Google LLC
+// Copyright 2022 Google LLC
 /**
  * (Type docs)
- *
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
 
@@ -22,10 +21,6 @@ export class MediaStorageService {
   uploadSingleImage(file:File, file_name, entityId:string){
     const formData: FormData = new FormData();
     formData.append('mediaList', file, `${file_name}.${file.type.split('/')[1]}`);
-      //this.storage.uploadEntity(formData,entityId)
-      //.then((response)=>{
-        //console.log("File Upload Response", response);
-      //})
   }
 
   /**

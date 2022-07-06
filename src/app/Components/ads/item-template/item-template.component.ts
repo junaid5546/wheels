@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'ad-item-template',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-template.component.scss'],
 })
 export class ItemTemplateComponent implements OnInit {
+
+  @Input() posts:any[] = [];
 
   constructor() { }
 

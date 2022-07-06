@@ -5,26 +5,29 @@
   <div >  {{item.name}} </div>
   </ion-col>
   <!--MAIN LIST-->
+
 </div>
 
 
 <div class="item-container">
 
   <!--SUB LIST-->
-  <ion-col [ngClass]="{selected: item.selected}"  size="6" *ngFor="let item of subList">
-    <div >  {{item.name}} </div>
+  <ion-col (click)="selectBody(item.name,i)" [ngClass]="{ selected: item.selected }"  size="6" *ngFor="let item of bodies; let i=index">
+    <div>  {{item.name}} </div>
     </ion-col>
   <!--SUB LIST-->
+
 </div>
 
 
 <div class="item-container">
 
   <!--SUB LIST-->
-  <ion-col [ngClass]="{selected: item.selected}"  size="6" *ngFor="let item of make">
-    <div >  {{item.name}} </div>
+  <ion-col (click)="selectModel(item.name,i)" [ngClass]="{ selected: item.selected }"  size="6" *ngFor="let item of models let i=index">
+    <div>  {{item.name}} </div>
     </ion-col>
   <!--SUB LIST-->
+
 </div>
 
 

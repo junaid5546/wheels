@@ -1,10 +1,10 @@
-<div class="ad-item-main-container">
+<div class="ad-item-main-container" *ngFor="let item of posts">
   <div class="inner-container">
   <div class="car-picture">
     <img src="../../../../assets/images/New-Car-Launches-In-January-2021-1000x600.jpeg"/>
   </div>
   <div class="car-functions">
-    <ion-label class="title">Toyota Avalon Limited 2022</ion-label>
+    <ion-label class="title">{{item.post_status}}</ion-label>
     <ion-grid>
       <ion-row>
         <ion-col size="4" *ngFor="let item of [1,2,3,4]"> 

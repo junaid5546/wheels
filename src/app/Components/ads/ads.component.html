@@ -1,21 +1,21 @@
 <ion-content>
 <!-- Default Segment -->
 <div class="segment">
-<ion-segment value="a" (ionChange)="segmentChanged($event)">
-    <ion-segment-button value="a">
+<ion-segment value="active" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="active">
       <ion-label>Active</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="b">
+    <ion-segment-button value="inactive">
       <ion-label>Inactive</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="c">
+    <ion-segment-button value="favorite">
         <ion-label>Favorite</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="d">
+      <ion-segment-button value="saved">
         <ion-label>Saved</ion-label>
       </ion-segment-button>
   </ion-segment>
 </div>
-<ad-filter></ad-filter>
-<ad-item-template></ad-item-template>
+<ad-filter (changeInBody)="changeBody($event)"  (changeInModel)="changeModel($event)"  [bodies]="this.bodies" [models]="this.models"></ad-filter>
+<ad-item-template [posts]="posts"></ad-item-template>
 </ion-content>
