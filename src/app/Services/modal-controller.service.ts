@@ -41,8 +41,8 @@ export class ModalControllerService {
 
   modelData = {
     items: [
-      { key: 'make_id',  name: 'Make', value: [], selected: { _id: '' } },   //0
-      { key: 'model_id', name: 'Model', value: [], selected: {} },//1
+      { key: 'make_id',  name: 'Make', value: [], selected: { _id: '',models:[] } },   //0
+      { key: 'model_id', name: 'Model', value: [], selected: {trims:[]} },//1
       { key: 'trim_id',  name: 'Trims', value: [], selected: { body: [] } },//2
       { key: 'year_id',  name: 'Year', value: [], selected: {} },//3
       { key: 'condition_id', name: 'Condition', value: [], selected: {} },//4
@@ -190,7 +190,7 @@ export class ModalControllerService {
     const modal = await this.modalController.create({
       component: component,
       cssClass: 'my-custom-class',
-      swipeToClose: true,
+      swipeToClose: false,
       componentProps: props,
       animated: true,
       backdropBreakpoint: 0.8,
@@ -207,24 +207,24 @@ export class ModalControllerService {
   }
 
   // SELECTS THE DATA AND GOES TO NEXT ITEM.
-  selectItem(selected) {
-    console.log('Selected Item', selected);
+  selectItem(selected,i) {
+    console.log("Selected Item: ", selected , ' Index:', i);
     this.modelData.items[this.modelData.current.index].selected = selected;
     if (this.modelData.current.index === 0) {
-      this.getModel(this.modelData.items[0].selected._id).then((resp) => {
-        console.log('FETCH MODELS: ', resp);
-        this.incrementOfCurrentIndex();
-      });
+      // SET MODEL ACCORDING TO MAKE
+      this.modelData.items[1].value = this.modelData.items[0].selected.models;
+      this.incrementOfCurrentIndex();
     } else if (this.modelData.current.index === 1) {
-      this.getTrim(this.modelData.items[1].selected._id).then((resp) => {
-        console.log('FETCH TRIMS: ', resp);
-        this.incrementOfCurrentIndex();
-      });
+
+      this.modelData.items[2].value = this.modelData.items[1].selected.trims;
+      this.incrementOfCurrentIndex();
+    
     } else if (this.modelData.current.index === 4) {
       this.modelData.items[5].value = this.modelData.items[2].selected.body;
       this.incrementOfCurrentIndex();
     } else if (this.modelData.current.index === 15) {
       this.getGovernate().then((governate: any) => {
+
         console.log('governate', governate);
         this.modelData.items[16].value = governate;
         this.incrementOfCurrentIndex();
@@ -352,7 +352,7 @@ export class ModalControllerService {
     if (validate.status) {
       let indexes = this.initializeIndexes();
       //console.log("Result from  initializeIndexes", indexes);
-      this.getMakes();
+     
       return { status: true, value: indexes };
     } else {
       return { status: false, value: null };
@@ -509,6 +509,7 @@ export class ModalControllerService {
       initialBreakpoint: 0.5,
       componentProps: { dataArray: arr },
       breakpoints: [0, 0.5, 1],
+      swipeToClose: false
     });
     return await modal.present();
   }
