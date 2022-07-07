@@ -157,6 +157,7 @@ drop(event: CdkDragDrop<string[]>) {
   }
   
 
+  // PRESENTING MODEL AFTER CREATING POST.
   presentModal(){
     console.log("Starting Point: ", this.modalStartingPoint);
     this.modalService.presentModal(CarInfoModalComponent,this.modalStartingPoint);
@@ -261,7 +262,8 @@ drop(event: CdkDragDrop<string[]>) {
     // DETECT CHANGE AND SHOW THE NEXT BUTTON
    this.changeDetector.markForCheck();
    this.toggleNext(true);
-    if(this.platform.is('hybrid')){
+    
+   if(this.platform.is('hybrid')){
     let postCreate:any = await this.createPost();
     console.log("POST CREATE RESP",postCreate);
   
@@ -300,7 +302,7 @@ drop(event: CdkDragDrop<string[]>) {
 
 }
 
-
+// UPLOADING IMAGES TO GENERATED POST.
 async generatePostId(post,file){
   this.modalService._post.hasPostCreated = true;
   this.modalService.modelData.postId = post.result;
@@ -337,8 +339,9 @@ async createPost(){
   })
  
 }
-     
-savePostLocal(post_id,images) {
+
+//SAVING POST TO LOCAL STORAGE 
+  savePostLocal(post_id,images) {
   console.log("CALLED SAVE POST LOCAL");
   this.modalService._post.hasPostCreated = true;
   this.modalService._post.postImages = images;

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { InsuranceComponent } from 'src/app/Components/filter-components/insurance/insurance.component';
+import { WarrantyDurationComponent } from 'src/app/Components/filter-components/warranty-duration/warranty-duration.component';
 import { BodyComponent } from '../../Components/filter-components/body/body.component';
 import { ConditionComponent } from '../../Components/filter-components/condition/condition.component';
 import { CylindersComponent } from '../../Components/filter-components/cylinders/cylinders.component';
@@ -80,11 +82,11 @@ const routes: Routes = [
       },
       {
         component:SeatsComponent,         //14
-        path:'car-seats'
+        path:'car-seat'
       },
       {
         component:OriginComponent,        //15
-        path:'car-origin'
+        path:'car-origins'
       },
       {
         component:LocationComponent,      //16
@@ -101,6 +103,14 @@ const routes: Routes = [
       {
         component:SaleTypeComponent,      //19
         path:'car-sale-type'
+      },
+      {
+        component:InsuranceComponent,      //19
+        path:'car-insurance'
+      },
+      {
+        component:WarrantyDurationComponent,      //19
+        path:'car-warranty-duration'
       },
       {
         path: '',

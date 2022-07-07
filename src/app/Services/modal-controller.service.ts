@@ -15,6 +15,7 @@ import { CarFiltersService } from '../Services/car-filters.service';
 import { UserDataService } from "./user-data.service";
 import { ErrorHandlerService } from '../Services/error-handler.service';
 import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -37,6 +38,7 @@ export class ModalControllerService {
   ];
   modalProps: any;
   private currentObject = new BehaviorSubject<any>(null);
+
   modelData = {
     items: [
       { key: 'make_id',  name: 'Make', value: [], selected: { _id: '' } },   //0
@@ -204,6 +206,7 @@ export class ModalControllerService {
     return await modal.present();
   }
 
+  // SELECTS THE DATA AND GOES TO NEXT ITEM.
   selectItem(selected) {
     console.log('Selected Item', selected);
     this.modelData.items[this.modelData.current.index].selected = selected;
@@ -349,7 +352,7 @@ export class ModalControllerService {
     if (validate.status) {
       let indexes = this.initializeIndexes();
       //console.log("Result from  initializeIndexes", indexes);
-      this.loadData(this.getCurrentItemIndex());
+      this.getMakes();
       return { status: true, value: indexes };
     } else {
       return { status: false, value: null };
@@ -370,13 +373,14 @@ export class ModalControllerService {
 
   incrementOfCurrentIndex() {
     console.log('INDEX INCREMENTED');
+    
     if (this.getCurrentItemIndex() < this.getItemsLenght() - 1) {
       console.log(
         'Current:',
         this.getCurrentItemIndex(),
         'Length: ',
         this.getItemsLenght()
-      );
+      )
       console.log("Object: ", this.modelData.items);
       console.log('Next Object: ', this.modelData.next);
       console.log('Previous Object: ', this.modelData.pervious);
@@ -413,7 +417,13 @@ export class ModalControllerService {
     let obj = {};
     this.modelData.items.forEach(item => {
       if(item.key == 'additional_features'){
-        // do nothing.
+        let mile = 1.609344;
+        obj["warranty_kilometer"] = item.selected.warranty_kilometer;
+        obj["price"] = item.selected.warranty_kilometer;
+        obj["distance_mile"] =  (Number(item.selected.warranty_kilometer) * 1 /mile) ;
+        obj["primary_phone"] = item.selected.primary_phone;
+        obj["seller_notes"] = item.selected.seller_notes;
+        obj["distance_kilometer"] = item.selected.distance_kilometer;
       } else if (item.key == 'engine_size'){
         obj[item.key] = item.selected.name;
       } else if (item.key == 'door_count_id'){
@@ -563,37 +573,11 @@ export class ModalControllerService {
     toast.present();
   }
 
-  loadData(index) {
-    switch (index) {
-      case 0:
-        console.log('Case ', 0);
+  // FETCH ALL MAKES.
+  getMakes() {
         this.vehicle.getMakes().then((makes: any) => {
           this.modelData.items[0].value = makes.result;
         });
-        break;
-
-      case 1:
-        console.log('Case ', 1);
-        this.vehicle
-          .getModels(this.modelData.items[0].selected._id)
-          .then((models: any) => {
-            console.log('Models:', models);
-            this.modelData.items[1].value = models.result;
-          });
-        break;
-
-      case 2:
-        console.log('Case ', 2);
-        this.vehicle
-          .getTrims(this.modelData.items[1].selected._id)
-          .then((makes: any) => {
-            this.modelData.items[2].value = makes.result;
-          });
-        break;
-
-      default:
-        break;
-    }
   }
 
   createPost(){
