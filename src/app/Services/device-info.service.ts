@@ -108,6 +108,7 @@ private platform = null;
     this.translate.setDefaultLang(lang);
   }
 
+  //SET THE DARK/LIGHT THEME
   setTheme(theme:string) {
     localStorage.setItem('theme',theme);
   }
@@ -115,7 +116,7 @@ private platform = null;
   isArray(input:any) {
    return  Array.isArray(input);
   }
-
+// SOCIAL MEDIA SHARING.
   socialShare(){
     let options = {
       message: '', // not supported on some apps (Facebook, Instagram)
@@ -129,6 +130,7 @@ private platform = null;
     this.socialSharing.shareWithOptions(options)
   }
 
+  // SMS TO THE USER.
   shareSms(){
     this.socialSharing.shareViaSMS('Hello World','21')
     .then((res=>{
@@ -136,6 +138,7 @@ private platform = null;
     }))
   }
 
+  // SHARING WHATSAPP POST
   shareWhatsapp(){
     this.socialSharing.shareViaWhatsApp('Hello')
     .then((res=>{
@@ -144,6 +147,7 @@ private platform = null;
   }
 
 
+  // CALL USER THROUGH DIALER.
   callTheNumber(){
     this.callNumber.callNumber('9702222222',true)
     .then(res => console.log('Launched dialer!', res))

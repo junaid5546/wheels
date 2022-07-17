@@ -31,6 +31,7 @@
     "@awesome-cordova-plugins/ionic-webview": "^5.39.1",
     "@awesome-cordova-plugins/open-native-settings": "^5.43.0",
     "@awesome-cordova-plugins/social-sharing": "^5.41.0",
+    "@capacitor-community/sqlite": "^3.5.1",
     "@capacitor/android": "3.5.1",
     "@capacitor/app": "1.1.0",
     "@capacitor/camera": "^1.3.0",

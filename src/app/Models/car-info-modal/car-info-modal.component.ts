@@ -97,7 +97,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     else{
       console.log("Selected Item: ", item , ' Index:', i);
       this.currentItem[i].selected = true;
-      this.modelCtrl.selectItem(item);
+      this.modelCtrl.selectItem(item,i);
       this.data = true;
     }
 

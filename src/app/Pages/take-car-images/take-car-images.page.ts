@@ -78,6 +78,7 @@ drop(event: CdkDragDrop<string[]>) {
 
      ngOnInit(): void {
        //this.presentModal();
+       this.fetchPostFeed();
        if( JSON.parse(localStorage.getItem('_post'))){
         this.nextButtonText = 'CONTINUE';
         console.log("POST: ", typeof(localStorage.getItem('_post')));
@@ -352,5 +353,16 @@ async createPost(){
 
   localStorage.setItem('_post', JSON.stringify(this.modalService._post));
 }
+
+  fetchPostFeed() {
+    this.post.getPostFeed()
+    .then((feed:any)=>{
+      console.log("Post Feed:", feed);
+      this.modalService.modelData.items[0].value = feed.result.makes;
+    })
+    .catch(error=>{
+      console.log("Could not get post feed", error);
+    })
+  }
 
 }

@@ -62,19 +62,6 @@ export class FileSystemService {
      });
   };
 
-addImageWatermark(image, file_name) {
-    
-  }
-
-  addTextWatermark(image) {
-    watermark([image])
-      .image(watermark.text.center('DM', '260px Arial', '#fff', 0.5))
-      .then(img => {
-        return img.src;
-      });
-  }
-
-
   /**
  * Take base64 and convert it into file.
  * @param dataurl base64 
@@ -96,27 +83,5 @@ addImageWatermark(image, file_name) {
     let image =  new File([u8arr], filename, {type:mime});
     return image;
 }
-
-
-  /*async loadFileData(fileNames: string[]) {
-    for (let f of fileNames) {
-      const filePath = `${IMAGE_DIR}/${f}`;
- 
-      const readFile = await Filesystem.readFile({
-        path: filePath,
-        directory: Directory.Data,
-      });
- 
-      this.images.push({
-        name: f,
-        path: filePath,
-        data: `data:image/jpeg;base64,${readFile.data}`,
-      });
-    }
-  }*/
-
- readFileNew(){
-  
- }
  
 }
