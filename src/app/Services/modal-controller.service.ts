@@ -105,7 +105,7 @@ export class ModalControllerService {
 
      this.userData.getPhonePrimary().then((phone)=>{
       console.log("PRIMARY PHONE: ", phone);
-      this.modelData.items[24].selected.primary_phone =phone;
+      this.modelData.items[24].selected.primary_phone =phone || '968';
     })
     this.carFilters.year.subscribe((res: any) => {
       console.log('YEAR: ', res);

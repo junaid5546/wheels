@@ -114,7 +114,8 @@ export class UserDataService {
    * @returns userid:string
    */
   fetchUserId(){
-    return this.userId;
+
+    return this.userId ?? '628e5e82ea2c9d0a66732e9b';
   }
 
 

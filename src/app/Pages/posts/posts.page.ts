@@ -85,7 +85,7 @@ export class PostsPage implements OnInit {
   getPosts(){
     console.log("GETTING POSTS");
     //these all the sort types: 1- price_low 2- price_hight 3- date_new 4- date_old 5- kilometer_low 6- kilometer_hight 7- year_new 8- year_old
-    this.post.getAllPosts('price_low','active',0,10)
+    this.post.getAllPosts('price_low','approved',0,10)
     .then((post:any)=>{
       console.log("POSTS--: ", post);
       this.items = post.result;

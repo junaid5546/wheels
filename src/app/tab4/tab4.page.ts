@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab4Page implements OnInit {
  // LEFT AND RIGHT ICON.
- icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/notification.svg'};
+ icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/Language.svg'};
 
  // MAIN HEADING/SUBHEADING.
  heading = {has_main_heading:true, main_heading_name:'Account', has_sub_heading:false, sub_heading_name:''};

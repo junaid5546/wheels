@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
+import {  Router } from '@angular/router';
 import { DeviceInfoService } from '../../Services/device-info.service';
 @Component({
   selector: 'app-main-item',
@@ -9,6 +9,7 @@ import { DeviceInfoService } from '../../Services/device-info.service';
 export class MainItemComponent implements OnInit {
   @Input() items:any[];
   @Input() name:string;
+  href:String;
   mainItemHeightPercentage:number = 10;
   mainItemDimensions = {height:'', width:''};
 
@@ -32,6 +33,9 @@ export class MainItemComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit main item');
     this.setMainItemHeight();
+
+    this.href = this.router.url;
+   
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -65,8 +69,16 @@ export class MainItemComponent implements OnInit {
     this.setMainItemHeight();
   }
 
-  navigate(url){
+  navigate(url,url_tab_1){
+    console.log("NAV")
+   
+   if(this.href=='/tabs/tab2'){
     this.router.navigate([url]);
+   }else{
+    this.router.navigate([url_tab_1]);
+   }
+
+    // this.router.navigate([url]);
   }
 
 
