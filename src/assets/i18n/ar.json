@@ -12,5 +12,123 @@
     "Notifications":"إشعارات",
     "Want to advertise here":"تريد الإعلان هنا؟",
     "Book your advertising space now!":"احجز مساحتك الإعلانية الآن!",
-    "FILTER":"تمنسشتيبمنت" 
+    "FILTER":"تمنسشتيبمنت" ,
+    "items": {
+      "names": [
+        {
+          "name": "المركبات",
+          "img": "assets/icon/main-items-icon/vehicles.svg",
+          "hasClock": false,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "tabs/posts",
+          "navigate_tab_1":"take-car-images"
+        },
+        {
+          "name": "العقارات",
+          "img": "assets/icon/main-items-icon/estates.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "estate"
+        },
+        {
+          "name": "الالكترونيات",
+          "img": "assets/icon/main-items-icon/electronics.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "electronic"
+        },
+        {
+          "name": "الأثاث",
+          "img": "assets/icon/main-items-icon/furniture.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "furniture"
+        },
+        {
+          "name": "الموضه",
+          "img": "assets/icon/main-items-icon/fashion.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "fashion"
+        },
+        {
+          "name": "لعب الأطفال",
+          "img": "assets/icon/main-items-icon/kid toys.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "kids-toys"
+        },
+        {
+          "name": "الحيوانات",
+          "img": "assets/icon/main-items-icon/animals.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "animals"
+        },
+        {
+          "name": "النباتات",
+          "img": "assets/icon/main-items-icon/plants.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "plants"
+        },
+        {
+          "name": "الغذاء",
+          "img": "assets/icon/main-items-icon/food.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "food"
+        },
+        {
+          "name": "الوظائف",
+          "img": "assets/icon/main-items-icon/jobs.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "jobs"
+        },
+        {
+          "name": "الخدمات",
+          "img": "assets/icon/main-items-icon/services.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "services"
+        },
+        {
+          "name": "الأدوات",
+          "img": "assets/icon/main-items-icon/tools.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "tools"
+        },
+        {
+          "name": "الفواتير",
+          "img": "assets/icon/main-items-icon/bills.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "bills"
+        },
+        {
+          "name": "السياحة",
+          "img": "assets/icon/main-items-icon/travel.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "tourism"
+        },
+        {
+          "name": "المكتبة",
+          "img": "assets/icon/main-items-icon/library.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "library"
+        }
+      ]
+    },
+
+    "tabs":{
+      "Home":"الرئيسية",
+      "Add Post":"إضافة إعلان",
+      "Ads":"الإعلانات",
+      "Account":"حسابي"
+  
+    }
   }

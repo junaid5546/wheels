@@ -1,6 +1,6 @@
 <ion-grid>
     <ion-row >
-        <ion-col (click)="navigate(item.navigate)" size="4" *ngFor="let item of items">
+        <ion-col (click)="navigate(item.navigate,item.navigate_tab_1)" size="4" *ngFor="let item of ('items.names' | translate)">
             <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
                 
                 <div class="clock" >
@@ -12,7 +12,7 @@
                    <ion-img [src]="item.img"></ion-img> 
                   </div>
                 <div class="item-name-container">
-                    <ion-label>{{item.name}}</ion-label>
+                    <ion-label>{{item.name | translate}}</ion-label>
                 </div>
                 <ion-ripple-effect></ion-ripple-effect>
             </div>

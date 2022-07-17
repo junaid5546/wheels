@@ -167,3 +167,53 @@ ion-select-popover{
 .sub-heading-icon{
   font-size: var(--dm-sub-heading-icon-size);
 }
+
+
+/*
+
+swiper bullets
+*/ 
+
+
+// .mySwiper{
+//   .swiper-pagination-bullets-dynamic{
+//     bottom: -7px !important;
+//   }
+//   .swiper-pagination-bullet{
+//     border-radius: 0;
+//     width: 19px;
+//     height: 4px;
+
+//     &-active{
+//       background: linear-gradient(225deg, #00DDDD 6.77%, #00ACE2 51.04%, #0092E4 90.62%);
+//     }
+    
+//   }
+ 
+
+// } 
+html[dir="rtl"]{
+ 
+
+  .header-settings-container{
+    
+    padding-right: 15px;
+    
+  }
+
+  .select-images-button-top ion-button .logo-and-label-container{ 
+    .logo{
+    padding-left: 10px;
+    padding-right: 0;
+    border-left: 1px solid #C4C4C4;
+    border-right: none !important;
+  }
+  .label-container{
+    padding-left: 0;
+    padding-right: 10px;
+  }
+}
+
+
+ 
+}

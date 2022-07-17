@@ -44,7 +44,7 @@ export class TakeCarImagesPage implements OnInit {
  @Input() goBack:string = null;
 
  // LEFT AND RIGHT ICON.
- icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/notification.svg'};
+ icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:false, right_icon:'../../assets/icon/Language.svg'};
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Images', has_sub_heading:false, sub_heading_name:''};
@@ -78,6 +78,7 @@ drop(event: CdkDragDrop<string[]>) {
 
      ngOnInit(): void {
        //this.presentModal();
+       this.fetchPostFeed();
        if( JSON.parse(localStorage.getItem('_post'))){
         this.nextButtonText = 'CONTINUE';
         console.log("POST: ", typeof(localStorage.getItem('_post')));
@@ -352,5 +353,16 @@ async createPost(){
 
   localStorage.setItem('_post', JSON.stringify(this.modalService._post));
 }
+
+  fetchPostFeed() {
+    this.post.getPostFeed()
+    .then((feed:any)=>{
+      console.log("Post Feed:", feed);
+      this.modalService.modelData.items[0].value = feed.result.makes;
+    })
+    .catch(error=>{
+      console.log("Could not get post feed", error);
+    })
+  }
 
 }

@@ -22,6 +22,7 @@ import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';  
 import { DmApiModule } from 'dm-api';
+
 Injectable()
 
 export function setTranslateLoader(http: HttpClient) {

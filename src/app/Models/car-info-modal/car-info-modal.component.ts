@@ -42,7 +42,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
  @Input() goBack:string = null;
 
  // LEFT AND RIGHT ICON.
- icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/notification.svg'};
+ icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:false, right_icon:'../../assets/icon/Language.svg'};
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Images', has_sub_heading:false, sub_heading_name:''};
@@ -97,7 +97,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     else{
       console.log("Selected Item: ", item , ' Index:', i);
       this.currentItem[i].selected = true;
-      this.modelCtrl.selectItem(item);
+      this.modelCtrl.selectItem(item,i);
       this.data = true;
     }
 

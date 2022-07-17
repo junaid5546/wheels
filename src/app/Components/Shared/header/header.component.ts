@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalControllerService } from '../../../Services/modal-controller.service';
+import { DeviceInfoService } from 'src/app/Services/device-info.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { ModalControllerService } from '../../../Services/modal-controller.servi
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private nav:NavController, private router:Router, private modalCtrl:ModalControllerService) { }
+  constructor(private nav:NavController, private router:Router, private modalCtrl:ModalControllerService,private deviceInfo:DeviceInfoService) { }
   // ROUTE NAME HERE.
   @Input() forwardTo:string = null;
   // ROUTE IS FORWARD OR BACK.
@@ -22,8 +23,14 @@ export class HeaderComponent implements OnInit {
   // HAS MODAL BEING PRESENTED
   @Input() isModal:boolean;
   @Input() filter:boolean;
-  
-  ngOnInit() {}
+  routeLink:string;
+  ngOnInit() {
+
+    this.router.events.subscribe((val) => {
+      this.routeLink=val['url'];
+    }
+    );
+  }
 
   navigate = ()=> {
     
@@ -32,13 +39,39 @@ export class HeaderComponent implements OnInit {
     } else if(this.isModal) {
       this.modalCtrl.dismissModal()
     } else if(this.filter){
-      this.router.navigate(['tabs/tab1'])
-      .then(()=>{
-        console.log("Route poped");
-      })
+      // this.router.navigate(['tabs/tab1'])
+      // .then(()=>{
+      //   console.log("Route poped");
+      // })
     }
      else {
-      this.router.navigate([this.forwardTo]);
+      // this.router.navigate([this.forwardTo]);
     }
   }
+
+  translate=()=>{
+    if(this.routeLink!='/tabs/posts'){
+    let language = localStorage.getItem('lang');
+    if(language=='ar'){
+      this.deviceInfo.changeLanguage('en');
+      document.documentElement.dir = "ltr";
+      document.getElementsByTagName("body")[0].style.direction="ltr";
+      console.log(language);
+    }else{
+      this.deviceInfo.changeLanguage('ar');
+      document.documentElement.dir = "rtl";
+      document.getElementsByTagName("body")[0].style.direction="rtl";
+      console.log(language);
+    }
+    
+  }else{
+    console.log("FOR NOTIFICATION ICON");
+  }
+  }
+
+
+  // changeLanguage(lan) {
+  //   let lang = lan.detail.value;
+  //   this.deviceInfo.changeLanguage(lang);
+  // }
 }
