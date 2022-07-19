@@ -29,6 +29,9 @@ ion-list{
 }
 ion-list{
     padding: 20px 10px 20px 10px;
+    background-color: transparent;
+    position: relative;
+    z-index: 0;
 }
 ion-content {
     // overwrite inline styles
@@ -312,3 +315,38 @@ ion-content {
     letter-spacing: 2px;
 
   }
+
+  .hide{
+    display: none;
+  }
+.searchInput{
+  display: block;
+  bottom: 5px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50px;
+  z-index: 99;
+  ion-input{
+    --padding-start: 50px;
+    height: 50px;
+    width: 88%;
+    margin: auto;
+    background: linear-gradient(91.09deg, #E9E9E9 7.92%, #E6E6E6 93.59%);
+box-shadow: 0px 4px 2px rgba(0, 0, 0, 0.25);
+border-radius: 30px;
+  }
+  img{
+    position: absolute;
+    z-index: 9;
+    width: 20px;
+    left: 37px;
+    bottom: 13px;
+  }
+}
+
+.try{
+  height: calc(84vh - 40px);
+    overflow-y: scroll;
+}

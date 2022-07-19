@@ -7,8 +7,9 @@
 
 <ion-content>
 
-    <div *ngIf="data">
-    <ion-list *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 25 && currentStep != 24 && currentStep !=22" >
+    <div *ngIf="data" [ngClass]="{'markScroll': currentStep == '0' }">
+       
+    <ion-list [ngClass]="{'try': currentStep == '0' }"  *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 25 && currentStep != 24 && currentStep !=22">
         <div #card_items  class="wraper">
             <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
                 <div class="container" [ngClass]="{selected: item.selected}" >
@@ -16,15 +17,17 @@
                     <ion-label>{{item.name}}</ion-label>
                 </div>
                 <div class="icon-of-item">
-                    <!-- no logo yet
-                    <ion-thumbnail>
-                        <ion-img src="../../../assets/icon/cars-icon/toyota تويوتا.png"></ion-img>
-                    </ion-thumbnail>
-                    -->
+                    <!-- no logo yet -->
+                    <!-- <ion-thumbnail>
+                        <ion-img src="../../../assets/icon/cars-icon/toyota_تويوتا.png"></ion-img>
+                    </ion-thumbnail> -->
+                   
                 </div>
             </div>
 
             </ion-card>
+
+          
         </div>
     </ion-list>
 
@@ -174,14 +177,19 @@
         <app-special-plans></app-special-plans>
     </ion-list>
 
-
+  
     
 </div>
 
 <div *ngIf="!data" class="no-data-found">
 <ion-label>No {{this.currentState.value.name}} available yet.</ion-label>
 </div>
-
+<div class="hide" [ngClass]="{'searchInput': currentStep == '0' }">
+    <img src="../../../assets/icon/additional_details/VectorSearch.svg">
+    <ion-input placeholder="Search..." (ionChange)="filterData($event)">
+       
+    </ion-input>
+</div>
 </ion-content>
 
 <div *ngIf="currentStep === 24 || currentStep === 22 || currentStep === 25" class="select-images-button no-padding">
@@ -201,3 +209,7 @@
   </div>
     
   </div>
+
+
+
+ 

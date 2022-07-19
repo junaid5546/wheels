@@ -33,7 +33,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
   distanceTraveledKilometer:string = null;
   // SELLER NOTES
   sellerNotes:string = null;
-
+  backupUpModels: any = [];
  @Input() isModal:boolean; 
  // ROUTE NAME HERE.
  @Input() forwardTo:string = null;
@@ -70,10 +70,17 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
       console.log("Current Object Observable: ", currentState)
       this.currentState = currentState;
       this.heading.main_heading_name =  currentState.value.name;
-      this.currentItem = currentState.value.value.map(x=>{
-        x = {...x,selected:false};
-        return x
-       });
+      if(currentState.value.value!=undefined){
+        this.currentItem = currentState.value.value.map(x=>{
+          x = {...x,selected:false};
+          return x
+         });
+      }
+      // this.currentItem = currentState.value.value.map(x=>{
+      //   x = {...x,selected:false};
+      //   return x
+      //  });
+   
        console.log("Current ITEM VALUE: ", this.currentItem)
        if(this.currentItem.length != 0){
         this.data = true;
@@ -83,6 +90,8 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
        this.currentStep = currentState.index;
        this.change.markForCheck();
     });
+
+    this.backupUpModels = this.currentItem;
   }
 
   selectItem(item,i) {
@@ -135,4 +144,24 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     console.log("Price: ",e.detail.value);
     this.modelCtrl.modelData.items[24].selected.price = e.detail.value;
   }
+ 
+  filterData(e){
+    
+    const filteration =(e.detail.value);
+    this.currentItem = this.filterItems(filteration);
+    if (filteration.length === 0) {
+         this.currentItem = this.backupUpModels;
+    }
+  }
+
+ 
+
+
+
+filterItems(searchTerm) {
+    console.log(searchTerm);
+    return this.backupUpModels.filter(item => {
+        return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    });
+}
 }
