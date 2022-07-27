@@ -21,9 +21,19 @@ ion-list{
             font-size: 20px;
         }
     }
+    .checkboxName{
+      padding-left: 0px;
+    }
     .icon-of-item {
         padding-right: 20px;
     }
+        }
+        .editContainer{
+          display: flex;
+          align-items: center;
+          padding-left: 22px;
+          justify-content: flex-start;
+          height: 60px;
         }
     }
 }

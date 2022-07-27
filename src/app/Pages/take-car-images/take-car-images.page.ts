@@ -358,7 +358,12 @@ async createPost(){
     this.post.getPostFeed()
     .then((feed:any)=>{
       console.log("Post Feed:", feed);
+      /*
+      
+      */
       this.modalService.modelData.items[0].value = feed.result.makes;
+      this.modalService.modelData.items[16].value=feed.result.governorates;
+      this.modalService.modelData.items[22].value = feed.result.features;
     })
     .catch(error=>{
       console.log("Could not get post feed", error);

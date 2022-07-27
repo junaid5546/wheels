@@ -145,6 +145,11 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     this.modelCtrl.modelData.items[24].selected.price = e.detail.value;
   }
  
+
+  /*
+  
+  this function return array with filtered values after search
+  */ 
   filterData(e){
     
     const filteration =(e.detail.value);

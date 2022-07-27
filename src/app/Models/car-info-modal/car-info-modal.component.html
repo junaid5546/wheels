@@ -68,14 +68,15 @@
 
     <ion-list *ngIf="currentStep ===22" >
         <div #card_items  class="wraper">
-            <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
-                <div class="container" [ngClass]="{selected: item.selected}" >
-                <div class="name-of-item">
-                    <ion-label>{{item.name}}</ion-label>
-                </div>
-                <div class="icon-of-item">
-                    <ion-checkbox></ion-checkbox>
-                </div>
+            <ion-card  *ngFor="let item of currentItem;let i=index" class="" (click)="selectItem(item,i)">
+                <div class="container  editContainer" [ngClass]="{selected: item.selected}" >
+                    <div class="icon-of-item">
+                        <ion-checkbox mode="md"></ion-checkbox>
+                    </div>
+                    <div class="name-of-item checkboxName">
+                        <ion-label>{{item.name}}</ion-label>
+                    </div>
+               
             </div>
 
             </ion-card>
@@ -184,7 +185,8 @@
 <div *ngIf="!data" class="no-data-found">
 <ion-label>No {{this.currentState.value.name}} available yet.</ion-label>
 </div>
-<div class="hide" [ngClass]="{'searchInput': currentStep == '0' }">
+ <!-- this div for search bar to filter make  -->
+<div class="hide" [ngClass]="{'searchInput': currentStep == '0'}">
     <img src="../../../assets/icon/additional_details/VectorSearch.svg">
     <ion-input placeholder="Search..." (ionChange)="filterData($event)">
        

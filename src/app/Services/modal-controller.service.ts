@@ -48,16 +48,10 @@ export class ModalControllerService {
       { key: 'condition_id', name: 'Condition', value: [], selected: {} },//4
       { key: 'body_id', name: 'Body', value: [], selected: {} },//5
       { key: 'exterior_color_id', name: 'Exterior Color', value: [], selected: {} },//6
-      {
-        key: 'door_count_id',
-        name: 'Door Count',
-        value: [{ name: 1 }, { name: 2 }, { name: 3 }, { name: 4 }],
+      {key: 'door_count_id',name: 'Door Count',value: [{ name: 1 }, { name: 2 }, { name: 3 }, { name: 4 }],
         selected: {},
       },//7
-      {
-        key: 'engine_size',
-        name: 'Engine size',
-        value: [{ name: 3000 }, { name: 4000 }, { name: 5000 }],
+      {key: 'engine_size',name: 'Engine size',value: [{ name: 3000 }, { name: 4000 }, { name: 5000 }],
         selected: {name:null},
       },//8
       { key: 'cylinder_count_id', name: 'Cylinder count', value: [], selected: {} },//9
@@ -67,7 +61,7 @@ export class ModalControllerService {
       { key: 'interior_color_id', name: 'interior Color', value: [], selected: {} },//13
       { key: 'seats_type_id', name: 'Seat type', value: [], selected: {} },//14
       { key: 'origin_id', name: 'Origin', value: [], selected: {} },//15
-      { key: 'governorate_id', name: 'Governorate', value: null, selected: {} },//16
+      { key: 'governorate_id', name: 'Governorate', value: [], selected: {} },//16
       { key: 'state_id', name: 'State', value: [], selected: { states: null } },//17
       { key: 'warranty_duration_id', name: 'Warranty Duration', value: [], selected: {} },//18
      // { key: 19, name: 'Warranty Distance', value: [], selected: {} },
@@ -223,21 +217,26 @@ export class ModalControllerService {
       this.modelData.items[5].value = this.modelData.items[2].selected.body;
       this.incrementOfCurrentIndex();
     } else if (this.modelData.current.index === 15) {
-      this.getGovernate().then((governate: any) => {
 
-        console.log('governate', governate);
-        this.modelData.items[16].value = governate;
+      /*
+        i have commented this because we already get this data from post-feed so we don't need to call it again
+      */
+     
+      //this.getGovernate().then((governate: any) => {
+
+        // console.log('governate', governate);
+        // this.modelData.items[16].value = governate;
         this.incrementOfCurrentIndex();
-      });
+    //  });
     } else if (this.modelData.current.index === 16) {
       this.modelData.items[17].value = this.modelData.items[16].selected.states;
       this.incrementOfCurrentIndex();
     } else if(this.modelData.current.index === 21) {
-      this.getFeatures()
-      .then((features:any)=>{
-        this.modelData.items[22].value = features;
+      // this.getFeatures()
+      // .then((features:any)=>{
+        // this.modelData.items[22].value = features;
         this.incrementOfCurrentIndex();
-      })
+      // })
     } else {
       this.incrementOfCurrentIndex();
     }
