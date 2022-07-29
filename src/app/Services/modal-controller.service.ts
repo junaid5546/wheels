@@ -42,18 +42,20 @@ export class ModalControllerService {
   modelData = {
     items: [
       { key: 'make_id',  name: 'Make', value: [], selected: { _id: '',models:[] } },   //0
-      { key: 'model_id', name: 'Model', value: [], selected: {trims:[]} },//1
+      { key: 'model_id', name: 'Model', value: [], selected: {trims:[],engineSize:[]} },//1
       { key: 'trim_id',  name: 'Trims', value: [], selected: { body: [] } },//2
       { key: 'year_id',  name: 'Year', value: [], selected: {} },//3
       { key: 'condition_id', name: 'Condition', value: [], selected: {} },//4
-      { key: 'body_id', name: 'Body', value: [], selected: {} },//5
+      { key: 'body_id', name: 'Body', value: [], selected: {bodies:[],doorCount:[]} },//5
       { key: 'exterior_color_id', name: 'Exterior Color', value: [], selected: {} },//6
       {key: 'door_count_id',name: 'Door Count',value: [{ name: 1 }, { name: 2 }, { name: 3 }, { name: 4 }],
-        selected: {},
+        selected: {name:null},
       },//7
-      {key: 'engine_size',name: 'Engine size',value: [{ name: 3000 }, { name: 4000 }, { name: 5000 }],
+      {key: 'engine_size',name: 'engineSize',value: [{ name: 3000 }, { name: 4000 }, { name: 5000 }],
         selected: {name:null},
       },//8
+
+      
       { key: 'cylinder_count_id', name: 'Cylinder count', value: [], selected: {} },//9
       { key: 'fuel_type_id', name: 'Fuel Type', value: [], selected: {} },//10
       { key: 'transmission_type_id', name: 'Transmission Type', value: [], selected: {} },//11
@@ -207,6 +209,10 @@ export class ModalControllerService {
     if (this.modelData.current.index === 0) {
       // SET MODEL ACCORDING TO MAKE
       this.modelData.items[1].value = this.modelData.items[0].selected.models;
+      console.log("MODELS",this.modelData.items[1].value)
+      console.log("MODELS TWO",this.modelData.items[0].selected.models)
+
+    
       this.incrementOfCurrentIndex();
     } else if (this.modelData.current.index === 1) {
 
@@ -214,9 +220,25 @@ export class ModalControllerService {
       this.incrementOfCurrentIndex();
     
     } else if (this.modelData.current.index === 4) {
-      this.modelData.items[5].value = this.modelData.items[2].selected.body;
+      this.modelData.items[5].value = this.modelData.items[2].selected.bodies;
       this.incrementOfCurrentIndex();
-    } else if (this.modelData.current.index === 15) {
+    }else if(this.modelData.current.index === 5){
+        //SET ENGINE SIZE ACCORDING TO TRIMS
+        console.log("ENGINE SIZE CONDITION");
+        console.log(this.modelData.items[1].selected.trims);
+        this.modelData.items[8].value=this.modelData.items[2].selected.engineSize;
+        
+        this.incrementOfCurrentIndex();
+    }else if(this.modelData.current.index === 6){
+      //SET ENGINE SIZE ACCORDING TO TRIMS
+      console.log("DOORS COUNT");
+      console.log(this.modelData.items[5].selected['doorCount']);
+       this.modelData.items[7].value=this.modelData.items[5].selected.doorCount;
+      
+       this.incrementOfCurrentIndex();
+  }
+    
+    else if (this.modelData.current.index === 15) {
 
       /*
         i have commented this because we already get this data from post-feed so we don't need to call it again
@@ -241,66 +263,6 @@ export class ModalControllerService {
       this.incrementOfCurrentIndex();
     }
   }
-
-  // GET MODELS OF CAR ACCORDING TO MAKE
-  getModel(makeId) {
-    return new Promise((res, rej) => {
-      this.vehicle.getModels(makeId).then((models: any) => {
-        this.modelData.items[1].value = models.result;
-        console.log('MODEL: ', this.modelData);
-        res(true);
-      });
-    });
-  }
-
-  // GET TRIMS OF CAR ACCORDING TO MODELS
-  getTrim(modelId) {
-    return new Promise((res, rej) => {
-      this.vehicle.getTrims(modelId).then((trims: any) => {
-        this.modelData.items[2].value = trims.result;
-        console.log('TRIMS: ', this.modelData);
-        res(true);
-      });
-    });
-  }
-
-  // GET LOCATIONS
-  getGovernate() {
-    return new Promise((res, rej) => {
-      this.countryApi
-        .getGovernate()
-        .then((governate: any) => {
-          if (governate.code === 200) {
-            res(governate.result);
-          } else {
-            res(governate.message);
-          }
-        })
-        .catch((err) => {
-          rej(err);
-        });
-    });
-  }
-
-  // GET FEATURES
-  getFeatures(){
-
-    return new Promise((res,rej)=>{
-      this.vehicle.getFeatures()
-      .then((features:any)=>{
-        console.log("Features: ", features);
-        if(features.code ===  200){
-          res(features.features)
-        } else {
-          res(features.message)
-        }
-      })
-      .catch((err) => {
-        rej(err);
-      });
-    })
-  }
-
   dismissModal = () => {
     if (this.modelData.current.index > 0) {
       this.decrementOfIndexes();
@@ -403,6 +365,7 @@ export class ModalControllerService {
       console.log('ITEM Index Length: ', this.getCurrentItemIndex());
       
       if( this.getCurrentItemIndex() === 25 ) {
+      
         this.updatePost();
       }
       //return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };

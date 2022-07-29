@@ -9,12 +9,13 @@
 
     <div *ngIf="data" [ngClass]="{'markScroll': currentStep == '0' }">
        
-    <ion-list [ngClass]="{'try': currentStep == '0' }"  *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 25 && currentStep != 24 && currentStep !=22">
+    <ion-list [ngClass]="{'try': currentStep == '0' }"  *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 25 && currentStep != 24 && currentStep !=22 && currentStep!=13">
         <div #card_items  class="wraper">
             <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
                 <div class="container" [ngClass]="{selected: item.selected}" >
                 <div class="name-of-item">
                     <ion-label>{{item.name}}</ion-label>
+                    
                 </div>
                 <div class="icon-of-item">
                     <!-- no logo yet -->
@@ -31,14 +32,17 @@
         </div>
     </ion-list>
 
-    <ion-list *ngIf="currentStep == 5 || currentStep==6" >
+    <ion-list *ngIf="currentStep == 5 || currentStep==6 || currentStep==13" >
         <ion-grid *ngIf="currentStep == 5">
             <ion-row >
                 <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem ;let i=index">
                     <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
                         <div class="item-picture-container">
-                           <ion-img src="https://images.netdirector.co.uk/gforces-auto/image/upload/w_343,h_257,dpr_2.0,q_auto,c_fill,f_auto,fl_lossy/auto-client/4f3a94f309517d480173272c101fe224/thumbnail_mobile.jpg"></ion-img> 
-                          </div>
+                           <!-- <ion-img src="https://images.netdirector.co.uk/gforces-auto/image/upload/w_343,h_257,dpr_2.0,q_auto,c_fill,f_auto,fl_lossy/auto-client/4f3a94f309517d480173272c101fe224/thumbnail_mobile.jpg"></ion-img>  -->
+                        <ion-img src="http://45.79.249.189/{{item.image}}">
+                           
+                        </ion-img>  
+                        </div>
                         <div class="item-name-container">
                             <ion-label>{{item.name}}</ion-label>
                         </div>
@@ -48,11 +52,11 @@
             </ion-row>
         </ion-grid>
 
-        <ion-grid *ngIf="currentStep == 6">
+        <ion-grid *ngIf="currentStep == 6 || currentStep==13">
             <ion-row >
                 <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem;let i=index">
                     <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
-                        <div class="item-picture-container">
+                        <div class="item-picture-container color-container" [style.background]="'red'">
                            <ion-card></ion-card>
                           </div>
                         <div class="item-name-container">
@@ -68,19 +72,20 @@
 
     <ion-list *ngIf="currentStep ===22" >
         <div #card_items  class="wraper">
-            <ion-card  *ngFor="let item of currentItem;let i=index" class="" (click)="selectItem(item,i)">
-                <div class="container  editContainer" [ngClass]="{selected: item.selected}" >
+            <ion-card  *ngFor="let item of currentItem;let i=index" button class="" (click)="selectItem(item,i)">
+                <!-- [ngClass]="{selected: item.selected}" -->
+                <div class="container  editContainer">
                     <div class="icon-of-item">
-                        <ion-checkbox mode="md"></ion-checkbox>
+                        <ion-checkbox mode="md" [checked]="item.selected" ></ion-checkbox>
                     </div>
                     <div class="name-of-item checkboxName">
                         <ion-label>{{item.name}}</ion-label>
                     </div>
                
-            </div>
-
+                </div>
             </ion-card>
         </div>
+        
 
     </ion-list>
 
@@ -93,7 +98,7 @@
               </div>
               <div class="input-and-label-container">
                   <div class="input">
-                      <ion-input (ionChange)="addPrice($event)" [(ngModel)]="price" maxlength="3" dir="rtl">000,</ion-input>
+                      <ion-input (ionChange)="addPrice($event)" type="number" [(ngModel)]="price" maxlength="3" dir="rtl">000,</ion-input>
                   </div>
                   <div class="label">OMR</div>
               </div>

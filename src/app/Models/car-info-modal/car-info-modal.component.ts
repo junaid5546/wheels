@@ -51,7 +51,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
    }
 
    ngAfterViewInit() {
-
+     
     
 
    }
@@ -70,18 +70,12 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
       console.log("Current Object Observable: ", currentState)
       this.currentState = currentState;
       this.heading.main_heading_name =  currentState.value.name;
-      if(currentState.value.value!=undefined){
-        this.currentItem = currentState.value.value.map(x=>{
-          x = {...x,selected:false};
-          return x
-         });
-      }
-      // this.currentItem = currentState.value.value.map(x=>{
-      //   x = {...x,selected:false};
-      //   return x
-      //  });
+      this.currentItem = currentState.value.value.map(x=>{
+        x = {...x,selected:false};
+        return x
+       });
    
-       console.log("Current ITEM VALUE: ", this.currentItem)
+       console.log("Current ITEM VALUE: ", this.currentItem);
        if(this.currentItem.length != 0){
         this.data = true;
        } else {
@@ -95,12 +89,22 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
   }
 
   selectItem(item,i) {
-    console.log("SELECTED INDEX:", i);
+    console.log("SELECTED INDEX:", item._id);
+   
+    item.selected=!item.selected;
    
     if(this.currentStep == 22){
       this.selectedFeatures = this.selectedFeatures.filter(x=>x != item._id);
-      this.selectedFeatures.push(item._id);
+      if(item.selected==true){
+        this.selectedFeatures.push(item._id);
+      }else{
+        console.log("REMOVE ELEMENT ")
+      }
+     
       this.modelCtrl.modelData.items[22].selected.features_id_array = this.selectedFeatures;
+      console.log("SELECTED ARRAY:", this.selectedFeatures);
+      console.log('check box value ',item.selected);
+      
     }
 
     else{
@@ -113,7 +117,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
   }
 
   inputOccured(e) {
-    console.log(e.detail.value );
+    console.log(e.detail.value);
   }
 
   navigateToPosts() {

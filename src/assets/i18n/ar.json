@@ -8,11 +8,11 @@
     "A":"أ",
     "A+":"+أ",
     "A-":"-أ",
-    "Settings":"ضبط",
-    "Notifications":"إشعارات",
-    "Want to advertise here":"تريد الإعلان هنا؟",
+    "Settings":"الضبط",
+    "Notifications":"الإشعارات",
+    "Want to advertise here":"هل تريد الإعلان هنا؟",
     "Book your advertising space now!":"احجز مساحتك الإعلانية الآن!",
-    "FILTER":"تمنسشتيبمنت" ,
+    "FILTER":"خيارت البحث" ,
     "items": {
       "names": [
         {
@@ -31,7 +31,7 @@
           "navigate": "estate"
         },
         {
-          "name": "الالكترونيات",
+          "name": "الإلكترونيات",
           "img": "assets/icon/main-items-icon/electronics.svg",
           "hasClock": true,
           "clock": "assets/icon/main-items-icon/clock.svg",
@@ -45,7 +45,7 @@
           "navigate": "furniture"
         },
         {
-          "name": "الموضه",
+          "name": "الأزياء",
           "img": "assets/icon/main-items-icon/fashion.svg",
           "hasClock": true,
           "clock": "assets/icon/main-items-icon/clock.svg",
@@ -127,7 +127,7 @@
     "tabs":{
       "Home":"الرئيسية",
       "Add Post":"إضافة إعلان",
-      "Ads":"الإعلانات",
+      "Ads":"إعلاناتي",
       "Account":"حسابي"
   
     }
