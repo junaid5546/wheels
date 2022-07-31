@@ -93,7 +93,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
    
     item.selected=!item.selected;
    
-    if(this.currentStep == 22){
+    if(this.currentStep == 23){
       this.selectedFeatures = this.selectedFeatures.filter(x=>x != item._id);
       if(item.selected==true){
         this.selectedFeatures.push(item._id);
@@ -101,7 +101,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
         console.log("REMOVE ELEMENT ")
       }
      
-      this.modelCtrl.modelData.items[22].selected.features_id_array = this.selectedFeatures;
+      this.modelCtrl.modelData.items[23].selected.features_id_array = this.selectedFeatures;
       console.log("SELECTED ARRAY:", this.selectedFeatures);
       console.log('check box value ',item.selected);
       
@@ -138,7 +138,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
   }
   addDistanceTravelled(e){
     console.log("Distance Travelled: ", e.detail.value);
-    this.modelCtrl.modelData.items[24].selected.warranty_kilometer = e.detail.value;
+   this.modelCtrl.modelData.items[24].selected.warranty_kilometer = e.detail.value;
   }
   addWarrantyKilo(e){
     console.log("Warranty Kilometer:", e.detail.value);

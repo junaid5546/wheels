@@ -35,8 +35,7 @@ export class MediaStorageService {
       console.log("FIle name: ", file[i].name);
       formData.append('mediaList', file[i], file[i].name);
     }
-    
-      this.storage.uploadEntity(formData, media_type, entityId)
+    this.storage.uploadEntity(formData, media_type, entityId)
       .then((response)=>{
         console.log("File Upload Response", response);
       })

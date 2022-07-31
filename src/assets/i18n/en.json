@@ -24,7 +24,7 @@
         "name": "Estates",
         "img": "assets/icon/main-items-icon/estates.svg",
         "hasClock": true,
-        "clock": "assets/icon/main-items-icon/clock.svg",
+        "clock": "assets/icon/main-items-icon/Soon.svg",
         "navigate": "estate"
       },
       {

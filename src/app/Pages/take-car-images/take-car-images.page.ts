@@ -362,9 +362,16 @@ async createPost(){
       
       */
       this.modalService.modelData.items[0].value = feed.result.makes;
-      this.modalService.modelData.items[16].value=feed.result.governorates;
-      this.modalService.modelData.items[22].value = feed.result.features;
-    
+      this.modalService.modelData.items[21].value=feed.result.governorates;
+      this.modalService.modelData.items[23].value = feed.result.features;
+      feed.result.filters.forEach(filterElement => {
+     
+      this.modalService.modelData.items.forEach(modelDataElement => {
+        if(filterElement.name==modelDataElement.name){
+          modelDataElement.value=filterElement.types;
+        }
+      });
+     });
     })
     .catch(error=>{
       console.log("Could not get post feed", error);
