@@ -104,7 +104,7 @@ const routes: Routes = [
       {
         path: 'car-body',
         redirectTo: '/tabs/tab1/car-body',
-        pathMatch: 'full'
+        pathMatch: 'full',
       }
     ]
   }

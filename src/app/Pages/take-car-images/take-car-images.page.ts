@@ -78,7 +78,7 @@ drop(event: CdkDragDrop<string[]>) {
 
      ngOnInit(): void {
        //this.presentModal();
-       this.fetchPostFeed();
+      // this.fetchPostFeed();
        if( JSON.parse(localStorage.getItem('_post'))){
         this.nextButtonText = 'CONTINUE';
         console.log("POST: ", typeof(localStorage.getItem('_post')));
@@ -354,28 +354,28 @@ async createPost(){
   localStorage.setItem('_post', JSON.stringify(this.modalService._post));
 }
 
-  fetchPostFeed() {
-    this.post.getPostFeed()
-    .then((feed:any)=>{
-      console.log("Post Feed:", feed);
-      /*
+  // fetchPostFeed() {
+  //   this.post.getPostFeed()
+  //   .then((feed:any)=>{
+  //     console.log("Post Feed:", feed);
+  //     /*
       
-      */
-      this.modalService.modelData.items[0].value = feed.result.makes;
-      this.modalService.modelData.items[21].value=feed.result.governorates;
-      this.modalService.modelData.items[23].value = feed.result.features;
-      feed.result.filters.forEach(filterElement => {
+  //     */
+  //     this.modalService.modelData.items[0].value = feed.result.makes;
+  //     this.modalService.modelData.items[21].value=feed.result.governorates;
+  //     this.modalService.modelData.items[23].value = feed.result.features;
+  //     feed.result.filters.forEach(filterElement => {
      
-      this.modalService.modelData.items.forEach(modelDataElement => {
-        if(filterElement.name==modelDataElement.name){
-          modelDataElement.value=filterElement.types;
-        }
-      });
-     });
-    })
-    .catch(error=>{
-      console.log("Could not get post feed", error);
-    })
-  }
+  //     this.modalService.modelData.items.forEach(modelDataElement => {
+  //       if(filterElement.name==modelDataElement.name){
+  //         modelDataElement.value=filterElement.types;
+  //       }
+  //     });
+  //    });
+  //   })
+  //   .catch(error=>{
+  //     console.log("Could not get post feed", error);
+  //   })
+  // }
 
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: 'tab1',
-        data: { animation: 'posts' } ,
+        data: { animation: 'vehicles-department' } ,
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
@@ -32,6 +32,10 @@ const routes: Routes = [
       {
         path: 'posts',
         loadChildren: () => import('../Pages/posts/posts.module').then( m => m.PostsPageModule)
+      },
+      {
+        path: 'vehicles-department/:type',
+        loadChildren: () => import('../pages/vehicles-department/vehicles-department.module').then( m => m.VehiclesDepartmentPageModule)
       },
       {
         path: '',

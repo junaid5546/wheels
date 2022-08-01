@@ -30,7 +30,8 @@ const routes: Routes = [
   {
     path: 'contact-us',
     loadChildren: () => import('./Pages/contact-us/contact-us.module').then( m => m.ContactUsPageModule)
-  }
+  },
+ 
 ];
 @NgModule({
   imports: [

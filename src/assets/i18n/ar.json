@@ -20,8 +20,8 @@
           "img": "assets/icon/main-items-icon/vehicles.svg",
           "hasClock": false,
           "clock": "assets/icon/main-items-icon/clock.svg",
-          "navigate": "tabs/posts",
-          "navigate_tab_1":"take-car-images"
+          "navigate": "tabs/vehicles-department",
+          "navigate_tab_1":"tabs/vehicles-department"
         },
         {
           "name": "العقارات",
@@ -123,7 +123,54 @@
         }
       ]
     },
-
+    "vehiclesDepart":{
+      "names":[
+        {
+          "name": "Vehicles for Sale",
+          "img": "assets/icon/main-items-icon/vehicles.svg",
+          "hasClock": false,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "tabs/posts",
+          "navigate_tab_1":"take-car-images"
+          
+        },
+        {
+          "name": "Vehicles for Rent",
+          "img": "assets/icon/main-items-icon/estates.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "estate"
+        },
+        {
+          "name": "Spare Parts",
+          "img": "assets/icon/main-items-icon/electronics.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "electronic"
+        },
+        {
+          "name": "Vehicles Numbers",
+          "img": "assets/icon/main-items-icon/electronics.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "electronic"
+        }, {
+          "name": "Vehicles Reports",
+          "img": "assets/icon/main-items-icon/electronics.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "electronic"
+        },
+        {
+          "name": "Vehicles Inspection",
+          "img": "assets/icon/main-items-icon/electronics.svg",
+          "hasClock": true,
+          "clock": "assets/icon/main-items-icon/clock.svg",
+          "navigate": "electronic"
+        }
+        
+      ]
+    },
     "tabs":{
       "Home":"الرئيسية",
       "Add Post":"إضافة إعلان",

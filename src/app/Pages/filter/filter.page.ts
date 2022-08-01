@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
+import {  map } from 'rxjs/operators';
+
 import { FiltersService } from 'dm-api';
+import { CarFiltersService } from 'src/app/Services/car-filters.service';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.page.html',
@@ -30,7 +33,10 @@ export class FilterPage implements OnInit,AfterViewInit {
     right_icon: 'assets/icon/posts/post-details/Phone/Vector.svg',
   };
 
-  constructor(private router:Router, private filterServices:FiltersService, private changeRef:ChangeDetectorRef ) {
+  constructor(private router:Router,
+     private filterServices:FiltersService,
+      private changeRef:ChangeDetectorRef,
+      private filterPost:CarFiltersService ) {
 
     this.filtersList.subscribe((res)=>{
       this.applyFilters(res) })
@@ -63,22 +69,37 @@ export class FilterPage implements OnInit,AfterViewInit {
    * THIS METHOD GIVES BACK ALL FILTER LIST.
    */
   getFiltersList() {
-    this.filterServices.getVehicleFilters()
-    .then((filters:any)=>{
-      if(filters.code === 200) {
 
+      this.filterPost.data$.subscribe((data)=>{
+        console.log(data);
+        this.filters=data;
+        data.map((element, index) => {
+            let obj = { ...element , selected:false } 
+          
+            return obj;
+          });
+      })
+
+  
+  //this.filter.getFiltersList();
+    // this.filterServices.getVehicleFilters()
+    // .then((filters:any)=>{
+    //   if(filters.code === 200) {
+        
         // MODIFYING FILTERS ARRAY
-        this.filters = filters.result.map((element, index) => {
-          let obj = { ...element , selected:false } 
-          return obj;
-        });
+        // this.filters = this.filter.map((element, index) => {
+        //   let obj = { ...element , selected:false } 
+        //   return obj;
+        // });
 
-        console.log("FILTERS: ", this.filters);
+       
         this.changeRef.markForCheck()
         console.log("CAR FILTER BODY: ", this.filters[1].types);
-        this.router.navigate(['filter/car-body',{data: JSON.stringify(this.filters[1].types)}])
-      }
-    })
+       // this.router.navigate(['filter/car-body',{data: JSON.stringify(this.filters[1].types)}])
+       this.router.navigate(['filter/car-body'],{state:this.filters[1].types})
+       
+    //   }
+    // })
   }
 
   /**

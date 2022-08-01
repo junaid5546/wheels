@@ -30,7 +30,8 @@ const routes: Routes = [
     children:[
       {
         component:BodyComponent,            //1
-        path:'car-body'
+        path:'car-body',
+        data:[],
       },
       {
         component:MakeModelComponent,       //2
