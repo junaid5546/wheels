@@ -20,8 +20,8 @@
           "img": "assets/icon/main-items-icon/vehicles.svg",
           "hasClock": false,
           "clock": "assets/icon/main-items-icon/clock.svg",
-          "navigate": "tabs/vehicles-department",
-          "navigate_tab_1":"tabs/vehicles-department"
+          "navigate": "tabs/vehicles-department/posts",
+          "navigate_tab_1":"tabs/vehicles-department/addPost"
         },
         {
           "name": "العقارات",
@@ -126,7 +126,7 @@
     "vehiclesDepart":{
       "names":[
         {
-          "name": "Vehicles for Sale",
+          "name": "مركبات للبيع",
           "img": "assets/icon/main-items-icon/vehicles.svg",
           "hasClock": false,
           "clock": "assets/icon/main-items-icon/clock.svg",

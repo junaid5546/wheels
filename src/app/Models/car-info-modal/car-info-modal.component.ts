@@ -9,12 +9,15 @@ import { Component, OnInit, Input, ViewChild,ElementRef, AfterViewInit, ChangeDe
 import { ModalControllerService } from '../../Services/modal-controller.service';
 import { AnimationController,Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { IonInput } from '@ionic/angular';
+
 @Component({
   selector: 'app-car-info-modal',
   templateUrl: './car-info-modal.component.html',
   styleUrls: ['./car-info-modal.component.scss']
 })
 export class CarInfoModalComponent implements OnInit,AfterViewInit  {
+  @ViewChild(IonInput, { static: false }) inputElement: IonInput;
   data:boolean= false;
   inputCharacter:number = 0;
   anim:Animation;
@@ -51,20 +54,20 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
    }
 
    ngAfterViewInit() {
-     
+    console.log("loaded");
+   
     
 
    }
-
+  
 
    ngOnDestroy() {
      
      this.ItemService.unsubscribe();
      console.log("Unsubscribed");
    }
-
+  
   ngOnInit() {
-
     this.ItemService =   this.modelCtrl.getCurrentObject()
     .subscribe((currentState:any)=>{
       console.log("Current Object Observable: ", currentState)
@@ -76,6 +79,15 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
        });
    
        console.log("Current ITEM VALUE: ", this.currentItem);
+       if(currentState.index===3){
+       this.currentItem.sort().reverse();
+
+       }
+       else{
+        this.currentItem.sort((a, b) => (a.name > b.name ? 1 : -1));
+       }
+       
+    
        if(this.currentItem.length != 0){
         this.data = true;
        } else {
@@ -162,10 +174,6 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
          this.currentItem = this.backupUpModels;
     }
   }
-
- 
-
-
 
 filterItems(searchTerm) {
     console.log(searchTerm);

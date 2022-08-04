@@ -5,8 +5,8 @@
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
 
-import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Injectable, ViewChild } from '@angular/core';
+import { ModalController} from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ImagePreviewComponent } from '../Models/image-preview/image-preview.component';
 import { ToastController } from '@ionic/angular';
@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ModalControllerService {
+  
   // SAVING POST TO LOCAL
   _post = {
     hasPostCreated:false,
@@ -46,8 +47,9 @@ export class ModalControllerService {
       { key: 'trim_id',  name: 'Trims', value: [], selected: { body: [] } },//2
       { key: 'year_id',  name: 'Model Year', value: [], selected: {} },//3
       { key: 'condition_id', name: 'Condition', value: [], selected: {} },//4
-      {key: 'engine_size',name: 'Engine Size',value: [],selected: {name:null},},//5
-      { key: 'body_id', name: 'Body', value: [], selected: {bodies:[],doorCount:[]} },//6
+      { key: 'body_id', name: 'Body', value: [], selected: {bodies:[],doorCount:[]} },//6==>5
+      {key: 'engine_size',name: 'Engine Size',value: [],selected: {name:null},},//5==>>6
+      
       {key: 'door_count_id',name: 'Doors',value: [],selected: {name:null},},//7
       { key: 'exterior_color_id', name: 'Exterior Color',cssHex:[], value: [], selected: {} },//8
       { key: 'cylinder_count_id', name: 'Cylinders', value: [], selected: {} },//9
@@ -134,16 +136,17 @@ export class ModalControllerService {
       this.incrementOfCurrentIndex();
     
     } else if (this.modelData.current.index === 4) {
-      this.modelData.items[5].value = this.modelData.items[2].selected.engineSize;
+      //console.log('hello',this.modelData.items[1].selected.trims);
+      this.modelData.items[5].value = this.modelData.items[2].selected.bodies;
       this.incrementOfCurrentIndex();
     }else if(this.modelData.current.index === 5){
-        console.log(this.modelData.items[1].selected.trims);
-        this.modelData.items[6].value=this.modelData.items[2].selected.bodies;
+        
+        this.modelData.items[6].value=this.modelData.items[2].selected.engineSize;
         
         this.incrementOfCurrentIndex();
     }else if(this.modelData.current.index === 6){
-      console.log(this.modelData.items[6].selected['doorCount']);
-       this.modelData.items[7].value=this.modelData.items[6].selected.doorCount;
+      console.log(this.modelData.items[5]);
+       this.modelData.items[7].value=this.modelData.items[5].selected.doorCount;
       
        this.incrementOfCurrentIndex();
   }
@@ -151,6 +154,11 @@ export class ModalControllerService {
       this.modelData.items[22].value = this.modelData.items[21].selected.states;
       this.incrementOfCurrentIndex();
     } 
+
+    else if(this.modelData.current.index===24){
+        console.log("additional setting");
+       
+    }
     else {
       this.incrementOfCurrentIndex();
     }
@@ -227,6 +235,7 @@ export class ModalControllerService {
   incrementOfCurrentIndex() {
     console.log('INDEX INCREMENTED');
     
+    
     if (this.getCurrentItemIndex() < this.getItemsLenght() - 1) {
       console.log(
         'Current:',
@@ -260,9 +269,21 @@ export class ModalControllerService {
       
         this.updatePost();
       }
+      
       //return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
+    
+    // SCROLL INTO VIEW AFTER CHOICE DONE
+    document.getElementById("content").scrollIntoView();
+
+    
+
+
+    
+  
   }
+
+  
 
   // UPDATE POST TO THE SERVER
   updatePost() {
