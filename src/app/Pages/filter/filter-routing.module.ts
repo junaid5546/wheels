@@ -71,7 +71,7 @@ const routes: Routes = [
       },
       {
         component:FuelComponent,          //11
-        path:'car-fuel'
+        path:'Fuel'
       },
       {
         component:TransmissionComponent,  //12
@@ -83,7 +83,7 @@ const routes: Routes = [
       },
       {
         component:SeatsComponent,         //14
-        path:'car-seat'
+        path:'car-seats'
       },
       {
         component:OriginComponent,        //15
@@ -111,7 +111,8 @@ const routes: Routes = [
       },
       {
         component:WarrantyDurationComponent,      //19
-        path:'car-warranty-duration'
+        path:'car-warranty-duration',
+        data:[],
       },
       {
         path: '',

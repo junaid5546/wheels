@@ -14,6 +14,7 @@ import { ConditionComponent } from '../../Components/filter-components/condition
 import { YearComponent } from '../../Components/filter-components/year/year.component';
 import { ExteriorColorComponent } from '../../Components/filter-components/exterior-color/exterior-color.component';
 import { InteriorColorComponent } from '../../Components/filter-components/interior-color/interior-color.component';
+import { WarrantyDurationComponent } from 'src/app/Components/filter-components/warranty-duration/warranty-duration.component';
 
 @NgModule({
   imports: [
@@ -23,9 +24,10 @@ import { InteriorColorComponent } from '../../Components/filter-components/inter
     IonicModule,
     AppSharedModule,
     MatCheckboxModule,
-    FilterPageRoutingModule
+    FilterPageRoutingModule,
+    
   ],
 
-  declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent]
+  declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent,WarrantyDurationComponent]
 })
 export class FilterPageModule {}

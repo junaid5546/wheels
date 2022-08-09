@@ -51,11 +51,14 @@ export class FilterPage implements OnInit,AfterViewInit {
   }
  
   
-  selectedItem(index,url,data) {      
+  selectedItem(index,url,data) {  
+    // console.log(data);
+    // console.log(index);    
     this.filters[this.selectedIndex].selected = false;
     this.filters[index].selected = true;
     this.selectedIndex = index;
-    this.router.navigate([`filter/${url}`, {data: JSON.stringify(data) }]);
+    
+    this.router.navigate([`filter/${url}`],{state: (data)});
     console.log("URL: ", url);
   }
 
@@ -94,9 +97,9 @@ export class FilterPage implements OnInit,AfterViewInit {
 
        
         this.changeRef.markForCheck()
-        console.log("CAR FILTER BODY: ", this.filters[1].types);
+      //  console.log("CAR FILTER BODY: ", this.filters[1].types);
        // this.router.navigate(['filter/car-body',{data: JSON.stringify(this.filters[1].types)}])
-       this.router.navigate(['filter/car-body'],{state:this.filters[1].types})
+      // this.router.navigate(['filter/car-body'],{state:this.filters[1].types})
        
     //   }
     // })

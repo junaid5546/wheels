@@ -27,13 +27,13 @@ export class SpecialPlansComponent implements OnInit {
 
   segmentChanged(ev: any) {
     console.log('Segment changed', ev);
-    this.getPlans(ev.detail.value);
+    // this.getPlans(ev.detail.value);
   }
 
-  // FETCH ALL PLANS AGAINST DAYS.
+  //FETCH ALL PLANS AGAINST DAYS.
   getPlans(days:number) {
     console.log("PLANS CALLED");
-    this.plansApi.getPlans(days)
+    this.plansApi.getPlans('62e76b90839e15bb730a935e','en')
     .then((plans:any)=>{
       console.log("THEN");
       if(plans.code === 200){

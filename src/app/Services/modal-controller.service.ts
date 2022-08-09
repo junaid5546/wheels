@@ -47,10 +47,10 @@ export class ModalControllerService {
       { key: 'trim_id',  name: 'Trims', value: [], selected: { body: [] } },//2
       { key: 'year_id',  name: 'Model Year', value: [], selected: {} },//3
       { key: 'condition_id', name: 'Condition', value: [], selected: {} },//4
-      { key: 'body_id', name: 'Body', value: [], selected: {bodies:[],doorCount:[]} },//6==>5
-      {key: 'engine_size',name: 'Engine Size',value: [],selected: {name:null},},//5==>>6
+      { key: 'body_id', name: 'Body', value: [], selected: {bodies:[],doorCount:[],error:'',maxPrice: null,minPrice:null,filtersId:[]}},//6==>5
+      { key: 'engine_size',name: 'Engine Size',value: [],selected: {name:null},},//5==>>6
       
-      {key: 'door_count_id',name: 'Doors',value: [],selected: {name:null},},//7
+      { key: 'door_count_id',name: 'Doors',value: [],selected: {name:null},},//7
       { key: 'exterior_color_id', name: 'Exterior Color',cssHex:[], value: [], selected: {} },//8
       { key: 'cylinder_count_id', name: 'Cylinders', value: [], selected: {} },//9
       { key: 'fuel_type_id', name: 'Fuel', value: [], selected: {} },//10
@@ -67,9 +67,9 @@ export class ModalControllerService {
       { key: 'origin_id', name: 'Origin', value: [], selected: {} },//20
       { key: 'governorate_id', name: 'Governorate', value: [], selected: {} },//21
       { key: 'state_id', name: 'State', value: [], selected: { states: null } },//22
-       { key: 'features_id_array', name: 'Features (Optional)', value: [], selected: {features_id_array:[]} },//23
-       { key: 'additional_features', name: 'Additional Details', value: [{},{}], selected: {price:0,distance_kilometer:0,seller_notes:null,distance_mile:0,primary_phone:null,warranty_kilometer:null} },//24
-       { key: 'level_id', name: 'Post Type', value: [{},{}], selected: {} },//25 
+      { key: 'features_id_array', name: 'Features (Optional)', value: [], selected: {features_id_array:[]} },//23
+      { key: 'additional_features', name: 'Additional Details', value: [{},{}], selected: {price:0,distance_kilometer:0,seller_notes:null,distance_mile:0,primary_phone:null,business_phone:false,warranty_kilometer:null} },//24
+      { key: 'level_id', name: 'Post Type', value: [{},{}], selected: {} },//25 
       // {"id": "62275964de5b632b481db474","level_duration":21},
     ],
     current: { index: 0, value: null },
@@ -78,7 +78,6 @@ export class ModalControllerService {
     length: -1,
     postId:null
   };
-
   constructor(
     private modalController: ModalController,
     public toastController: ToastController,
@@ -92,7 +91,7 @@ export class ModalControllerService {
   ) {
      this.userData.getPhonePrimary().then((phone)=>{
       console.log("PRIMARY PHONE: ", phone);
-      this.modelData.items[24].selected.primary_phone =phone || '968';
+      this.modelData.items[24].selected.primary_phone =phone || '968 97725964';
     })
    }
 
@@ -114,7 +113,8 @@ export class ModalControllerService {
     modal.onDidDismiss().then((res: any) => {
       console.log('Dismiss result: ', res);
     });
-
+ // SCROLL INTO VIEW AFTER CHOICE DONE
+ 
     return await modal.present();
   }
 
@@ -136,13 +136,14 @@ export class ModalControllerService {
       this.incrementOfCurrentIndex();
     
     } else if (this.modelData.current.index === 4) {
-      //console.log('hello',this.modelData.items[1].selected.trims);
+     
       this.modelData.items[5].value = this.modelData.items[2].selected.bodies;
+
+     
       this.incrementOfCurrentIndex();
     }else if(this.modelData.current.index === 5){
         
-        this.modelData.items[6].value=this.modelData.items[2].selected.engineSize;
-        
+        this.modelData.items[6].value=this.modelData.items[2].selected.engineSize;    
         this.incrementOfCurrentIndex();
     }else if(this.modelData.current.index === 6){
       console.log(this.modelData.items[5]);
@@ -152,17 +153,22 @@ export class ModalControllerService {
   }
     else if (this.modelData.current.index === 21) {
       this.modelData.items[22].value = this.modelData.items[21].selected.states;
+    
       this.incrementOfCurrentIndex();
     } 
 
-    else if(this.modelData.current.index===24){
+    else if(this.modelData.current.index===23){
+      
         console.log("additional setting");
+
        
     }
     else {
       this.incrementOfCurrentIndex();
     }
   }
+
+  
   dismissModal = () => {
     if (this.modelData.current.index > 0) {
       this.decrementOfIndexes();
@@ -234,8 +240,10 @@ export class ModalControllerService {
 
   incrementOfCurrentIndex() {
     console.log('INDEX INCREMENTED');
-    
-    
+     // SCROLL INTO VIEW AFTER CHOICE DONE
+     document.getElementById("content").scrollIntoView({block: "start", inline: "nearest"});
+      // THIS CONDITION BECAUSE NOT ALL DIVS CONTAIN ION LIST WITH LIST ID
+     ((document.getElementById("list"))!= null) ? (document.getElementById("list").scrollTo(0,0)) : '';
     if (this.getCurrentItemIndex() < this.getItemsLenght() - 1) {
       console.log(
         'Current:',
@@ -261,7 +269,8 @@ export class ModalControllerService {
       //this.presentModal(this.getCurrentState());
 
       this.updatecurrentObject();
-    } else {
+     
+    }else {
       console.log('ITEM LENGTH: ', this.getItemsLenght());
       console.log('ITEM Index Length: ', this.getCurrentItemIndex());
       
@@ -273,8 +282,7 @@ export class ModalControllerService {
       //return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
     
-    // SCROLL INTO VIEW AFTER CHOICE DONE
-    document.getElementById("content").scrollIntoView();
+   
 
     
 
@@ -341,12 +349,16 @@ export class ModalControllerService {
         this.modelData.items[this.modelData.pervious.index];
       // return {status:true, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
       this.updatecurrentObject();
+       
     } else {
       console.log('ERROR');
       console.log('ITEM LENGTH: ', this.getItemsLenght());
       console.log('ITEM Index Length: ', this.getCurrentItemIndex());
       // return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
+
+    
+     
   }
 
   updatecurrentObject() {
