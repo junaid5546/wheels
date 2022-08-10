@@ -11,6 +11,8 @@ import { AnimationController,Animation } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { IonInput } from '@ionic/angular';
 import { PlansService } from 'dm-api';
+import { UserDataService } from 'src/app/Services/user-data.service';
+import { CarFiltersService } from 'src/app/Services/car-filters.service';
 
 @Component({
   selector: 'app-car-info-modal',
@@ -57,7 +59,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Images', has_sub_heading:false, sub_heading_name:''};
-  constructor(private plansApi:PlansService,public modelCtrl: ModalControllerService, private amimationCtrl:AnimationController, private route:Router, private change:ChangeDetectorRef) {
+  constructor(private filters:CarFiltersService ,private userData:UserDataService,private plansApi:PlansService,public modelCtrl: ModalControllerService, private amimationCtrl:AnimationController, private route:Router, private change:ChangeDetectorRef) {
 
    }
 
@@ -89,12 +91,31 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
        console.log("Current ITEM VALUE: ", this.currentItem);
        this.filteration='';
        this.stableData=this.currentItem;
+
+      
        if(currentState.index===3){
        this.currentItem.sort().reverse();
 
        }
        else if(currentState.index==1 || currentState.index==2 || currentState.index==0){
         this.currentItem.sort((a, b) => (a.name > b.name ? 1 : -1));
+       }
+       //THIS FOR CALLING PALNS API BEFORE REACH PLANS PAGE
+       else if(currentState.index==24){
+        this.getPlans();
+
+       
+
+        if(this.modelCtrl.modelData.items[4].selected._id=='a83d7d24-5e48-4bd1-83a9-05d51b6fe839'){
+            // console.log("ITS USED CAR REMOVE WARRANTY DISTANCE");
+             this.warrantyCheck=false;
+             this.distanceCheck=true;
+        }else if(this.modelCtrl.modelData.items[4].selected._id=='c96de34f-2116-44ed-ada2-509bb993e36a'){
+           //  console.log("NEW CAR");
+             this.distanceCheck=false;
+             this.warrantyCheck=true;
+             this.modelCtrl.modelData.items[24].selected.distance_kilometer=0;
+        }
        }
        
     
@@ -110,13 +131,19 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     this.backupUpModels = this.currentItem;
    
   }
+
+  // THIS FUNCTIONS TO CALL PLANS API 
   getPlans() {
-    console.log("PLANS CALLED");
-    this.plansApi.getPlans('62e76b90839e15bb730a935e','en')
+   // console.log("PLANS CALLED",);
+    let id=this.userData.fetchUserId();
+    let lang=localStorage.getItem('lang');
+    //console.log(id);
+    this.plansApi.getPlans(id,lang)
     .then((plans:any)=>{
       console.log("THEN");
       if(plans.code === 200){
-        console.log("PLANS",plans);
+        //console.log("PLANS",plans);
+        this.filters.getPlans(plans);
      
       } else {
         console.log("NULL");
@@ -126,10 +153,13 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     .catch((error)=>{
       console.log("ERROR: ", error);
     })
+   
   } 
+
+
   selectItem(item,i) {
     console.log("SELECTED INDEX:", item._id);
-   this.getPlans();
+  
     item.selected=!item.selected;
    
     if(this.currentStep == 23){
@@ -147,18 +177,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
       console.log('check box value ',item.selected);
 
       //CHECK IF CAR IS USED OR NEW SO WE CAN HIDE WARRANTY FIELDS
-       console.log('VALUE OF CONDITION', this.modelCtrl.modelData.items[4].selected);
-
-       if(this.modelCtrl.modelData.items[4].selected._id=='a83d7d24-5e48-4bd1-83a9-05d51b6fe839'){
-            console.log("ITS USED CAR REMOVE WARRANTY DISTANCE");
-            this.warrantyCheck=false;
-            this.distanceCheck=true;
-       }else if(this.modelCtrl.modelData.items[4].selected._id=='c96de34f-2116-44ed-ada2-509bb993e36a'){
-            console.log("NEW CAR");
-            this.distanceCheck=false;
-            this.warrantyCheck=true;
-            this.modelCtrl.modelData.items[24].selected.distance_kilometer=0;
-       }
+     
 
       
     }

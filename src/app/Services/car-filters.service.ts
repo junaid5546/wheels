@@ -30,6 +30,9 @@ export class CarFiltersService {
 
   private filterSource = new BehaviorSubject<any[]>([]);
   data$ = this.filterSource.asObservable();
+
+  private plansSource=new BehaviorSubject<any[]>([]);
+  plansData=this.plansSource.asObservable();
   constructor(private carFilters: FiltersService) {
     // FETCH FILTERS LIST AND ASSIGN IT TO LOCAL VARIABLE.
     // this.carFilters.getVehicleFilters().then((filters: any) => {
@@ -59,6 +62,10 @@ export class CarFiltersService {
     this.filterSource.next(Filters);
   }
 
+// MOVE PLANS TO PLANS COMPONENT
 
+getPlans(plans:[]){
+   this.plansSource.next(plans);
+}
 
 }

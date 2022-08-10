@@ -1,6 +1,8 @@
 ion-card{
     background: linear-gradient(225deg, #00B5DD 6.77%, #0091E2 51.04%, #0084E4 90.62%);
     margin: 0 !important;
+    margin-top: 18px !important;
+    padding: 2% 1px;
     ion-card-content{
         padding: 10px !important;
         display: flex;
@@ -52,10 +54,22 @@ ion-card{
     }
     }
     .right-price-tag{
-        width: 24%;
+    //     width: 24%;
+    // position: absolute;
+    // height: 35%;
+    // right: 10px;
+    width: 24%;
     position: absolute;
-    height: 35%;
+    height: 71%;
+    top: 18px;
     right: 10px;
+    display: flex;
+    flex-direction: column;
+    .hook{
+        font-weight: 600;
+        font-size: 12px;
+        color: #04C400;
+        }
         .wraper{
 
             background: #7AE7FF;

@@ -223,19 +223,19 @@
 
 <div *ngIf="nextButton === 24 || currentStep === 23 || currentStep === 25" class="select-images-button">
     <div #bottomButton class="wraper">
-    <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex()">
+     <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex('updatepost')">
       <div class="logo-and-label-container">
   
-        <div class="label-container change-size">
-      <ion-label *ngIf="currentStep != 25">{{"NEXT"}}</ion-label>
-      <ion-label *ngIf="currentStep === 25">{{"Publish for Free"}}</ion-label>
-  </div>
-      <div class="logo no-borders no-padding">
-        <ion-icon src="../../assets/icon/select-images/Phone/Phone/Phone/arrow right.svg"></ion-icon>
+            <div class="label-container change-size">
+                <ion-label *ngIf="currentStep != 25">{{"NEXT"}}</ion-label>
+                <ion-label *ngIf="currentStep === 25">{{"Publish"}}</ion-label>
+            </div>
+            <div class="logo no-borders no-padding">
+                <ion-icon src="../../assets/icon/select-images/Phone/Phone/Phone/arrow right.svg"></ion-icon>
+            </div>
+       </div>
+     </ion-button>
     </div>
-    </div>
-    </ion-button>
-  </div>
     
   </div>
   

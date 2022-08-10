@@ -69,7 +69,8 @@ export class ModalControllerService {
       { key: 'state_id', name: 'State', value: [], selected: { states: null } },//22
       { key: 'features_id_array', name: 'Features (Optional)', value: [], selected: {features_id_array:[]} },//23
       { key: 'additional_features', name: 'Additional Details', value: [{},{}], selected: {price:0,distance_kilometer:0,seller_notes:null,distance_mile:0,primary_phone:null,business_phone:false,warranty_kilometer:null} },//24
-      { key: 'level_id', name: 'Post Type', value: [{},{}], selected: {} },//25 
+     // { key: 'level_id', name: 'Post Type', value: [{},{}], selected: {} },//25 
+     { key: 'post_type', name: 'Post Type', value: [{},{}], selected: {} },//25 
       // {"id": "62275964de5b632b481db474","level_duration":21},
     ],
     current: { index: 0, value: null },
@@ -238,7 +239,7 @@ export class ModalControllerService {
     return this.modelData.current;
   }
 
-  incrementOfCurrentIndex() {
+  incrementOfCurrentIndex(type?) {
     console.log('INDEX INCREMENTED');
      // SCROLL INTO VIEW AFTER CHOICE DONE
      document.getElementById("content").scrollIntoView({block: "start", inline: "nearest"});
@@ -274,7 +275,7 @@ export class ModalControllerService {
       console.log('ITEM LENGTH: ', this.getItemsLenght());
       console.log('ITEM Index Length: ', this.getCurrentItemIndex());
       
-      if( this.getCurrentItemIndex() === 25 ) {
+      if( this.getCurrentItemIndex() === 25 && type==='updatepost') {
       
         this.updatePost();
       }
@@ -305,7 +306,7 @@ export class ModalControllerService {
         obj["price"] = item.selected.warranty_kilometer;
         obj["distance_mile"] =  (Number(item.selected.warranty_kilometer) * 1 /mile) ;
         obj["primary_phone"] = item.selected.primary_phone;
-        obj["seller_notes"] = item.selected.seller_notes;
+        obj["seller_notes"] = item.selected.seller_notes || '';
         obj["distance_kilometer"] = item.selected.distance_kilometer;
       } else if (item.key == 'engine_size'){
         obj[item.key] = item.selected.name;
@@ -313,7 +314,7 @@ export class ModalControllerService {
         obj[item.key] = item.selected.name;
       } else if (item.key == 'features_id_array'){
         obj[item.key] = item.selected.features_id_array;
-      } else if(item.key == 'level_id') {
+      } else if(item.key == 'post_type') {
         obj[item.key] = item.selected;
       } else{
         obj[item.key] = item.selected._id;
