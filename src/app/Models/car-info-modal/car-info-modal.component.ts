@@ -116,7 +116,10 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
              this.warrantyCheck=true;
              this.modelCtrl.modelData.items[24].selected.distance_kilometer=0;
         }
+       }else if(currentState.index==25){
+        this.nextButton=0;
        }
+       
        
     
        if(this.currentItem.length != 0){
@@ -181,8 +184,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
 
       
     }
-  
-    else{
+   else{
      // console.log("Selected Item: ", item , ' Index:', i);
       this.currentItem[i].selected = true;
       this.modelCtrl.selectItem(item,i);

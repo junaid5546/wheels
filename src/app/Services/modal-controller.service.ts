@@ -47,7 +47,7 @@ export class ModalControllerService {
       { key: 'trim_id',  name: 'Trims', value: [], selected: { body: [] } },//2
       { key: 'year_id',  name: 'Model Year', value: [], selected: {} },//3
       { key: 'condition_id', name: 'Condition', value: [], selected: {} },//4
-      { key: 'body_id', name: 'Body', value: [], selected: {bodies:[],doorCount:[],error:'',maxPrice: null,minPrice:null,filtersId:[]}},//6==>5
+      { key: 'body_id', name: 'Body', value: [], selected: {bodies:[],doorCount:[],error:'',maxPrice: null,minPrice:null,filtersId:[]}},//5
       { key: 'engine_size',name: 'Engine Size',value: [],selected: {name:null},},//5==>>6
       
       { key: 'door_count_id',name: 'Doors',value: [],selected: {name:null},},//7
@@ -79,6 +79,8 @@ export class ModalControllerService {
     length: -1,
     postId:null
   };
+
+  publish=0;
   constructor(
     private modalController: ModalController,
     public toastController: ToastController,
@@ -156,13 +158,16 @@ export class ModalControllerService {
       this.modelData.items[22].value = this.modelData.items[21].selected.states;
     
       this.incrementOfCurrentIndex();
-    } 
+    }
 
     else if(this.modelData.current.index===23){
       
         console.log("additional setting");
 
        
+    }else if(this.modelData.current.index===25){
+      console.log("SUBSCRIPTION DATA");
+      this.publish=25;
     }
     else {
       this.incrementOfCurrentIndex();
