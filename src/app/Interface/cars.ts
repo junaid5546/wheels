@@ -9,34 +9,7 @@ import { VehicleService } from 'dm-api';
 export class Car {
   // CAR SCHEMA
 
-  private make: { make_id: number; name: string };
-  private model: { model_id: number; name: string };
-  private trim: { trim_id: number; name: string };
-  private year_id: { year_id: number; name: string };
-  private condition: { id: number; name: string };
-  private body: { body_id: number; name: string };
-  private interiorColor: { interior_color_id: number; name: string };
-  private exteriorColor: { exterior_color_id: number; name: string };
-  private doorCount: { door_count_id: number; name: number };
-  private engineSize: { engine_size: number; name: number };
-  private cylinderCount: { cylinder_count_id: number; name: number };
-  private fuelType: { fuel_type_id: number; name: string };
-  private transmissionType: { transmission_type_id: string; name: string };
-  private drivetrain: { drivetrain_id: string; name: string };
-  private seats: { seats_type_id: string; name: string };
-  private origin: { origin_id: string; name: string };
-  private governate: { governorate_id: string; name: string };
-  private state: { state_id: string; name: string };
-  private warrantyDuration: { warranty_duration_id: string; name: string };
-  private warrentyKilometer: { warranty_kilometer: number; name: string };
-  private insurance: { insurance_type_id: string; name: string };
-  private readiness: { readiness_id: string; name: string };
-  private saleType: { sale_type_id: string; name: string };
-  private features: { features_id_array: string[]; featuresList: any[] };
-  private price: string;
-  private distance_kilometer: number;
-  private distance_mile: number;
-  private seller_notes: string;
+  
 
   constructor() {}
 

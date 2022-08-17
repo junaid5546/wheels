@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService  } from '../../../Services/car-filters.service';
 export interface Task {
   name: string;
   completed: boolean;
@@ -35,6 +35,13 @@ export interface Item {
 })
 
 export class MakeModelComponent implements OnInit {
+
+  //When searching, the page should show the things that are being searched for
+  //We shouldn’t select for the user. Because, we don’t know if he wants Ford Mustang GT or Ford GT or Mercedes GT.
+  //So it’s better to show and expand all of the makes models trims based on that key search
+  
+  searchedText = '';
+  currentItratot = 0;
   counter =0;
   makeCheckboxColor = "primary";
   modelCheckboxColor = "primary";
@@ -53,131 +60,94 @@ export class MakeModelComponent implements OnInit {
   allMakeComplete: boolean = false;
   allModelComplete:boolean = false
     
-    items =  [
+    items;
+  constructor( private carFilters:CarFiltersService) { }
 
-      {
-        completed: false,
-        make: {
-          name: 'Toyota',
-          model: [
-            {
-              completed:false,
-              name: 'Corolla',
-              trim: [{completed:false, name: 'GLI', body: ['j2l2s2garbdfd2', '21kwerdsn23'] }],
-            },
-            {
-              completed:false,
-              name: 'Camry',
-              trim: [{completed:false, name: 'XLI', body: ['j2l2setyruy2d2', '21knabrwer23'] }],
-            },
-            {
-              completed:false,
-              name: 'Avalon',
-              trim: [{completed:false, name: 'BCB', body: ['j2lqtbqr2s2d2', '21kreyjtgfdn23'] }],
-            },
-          ],
-        },
-      },
-
-      {
-        completed: false,
-        make: {
-          name: 'Honda',
-          model: [
-            {
-              completed:false,
-              name: 'Civic',
-              trim: [{completed:false, name: 'GLI', body: ['j2ls2s2arerdd2', '21knwrtaasfbrasf23'] }],
-            },
-            {
-              completed:false,
-              name: 'City',
-              trim: [{completed:false, name: 'GLI', body: ['j2xl324b2regtxs2d2', '21kn2sdfasxc3'] }],
-            },
-          ],
-        },
-      },
-
-      {
-        completed: false,
-        make: {
-          name: 'Nissan',
-          model: [
-            {
-              completed:false,
-              name: 'unknown',
-              trim: [{completed:false, name: 'A', body: ['ja2ler235fewd42t22s2ad2', '21kujkuykb2e234hgtn23'] }],
-            },
-          ],
-        },
-      },
-      {
-        completed: false,
-        make: {
-          name: 'Honda',
-          model: [
-            {
-              completed:false,
-              name: 'Civic',
-              trim: [{completed:false, name: 'GLI', body: ['j2ls2s2arerdd2', '21knwrtaasfbrasf23'] }],
-            },
-            {
-              completed:false,
-              name: 'City',
-              trim: [{completed:false, name: 'GLI', body: ['j2xl324b2regtxs2d2', '21kn2sdfasxc3'] }],
-            },
-          ],
-        },
-      },
-    ];
-  constructor() { }
-
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("Got MAKE MODEL TRIM: ", this.carFilters.getMakeModelTrims());
+    this.items = this.carFilters.getMakeModelTrims();
+    console.log("ITEMS: ", this.items);
+  }
 
 // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
 someComplete(makeIndex): boolean {
-  let result = this.items[makeIndex].make.model.filter(t=>t.completed).length > 0 && !this.items[makeIndex].completed;
+  console.log("Result",makeIndex);
+  let result = this.items[makeIndex].models.filter(t=>t.completed).length > 0 && !this.items[makeIndex].completed;
   console.log("Result",result);
-  return this.items[makeIndex].make.model.filter(t => t.completed).length > 0 && !this.items[makeIndex].completed;
+  return this.items[makeIndex].models.filter(t => t.completed).length > 0 && !this.items[makeIndex].completed;
 }
 
 
 // THIS FUNCTION CHECKES ALL THE MODELS AND TRIMS OF MAKE.
 setAll(completed: boolean,makeIndex:number) {
   this.items[makeIndex].completed = true;
-  this.items[makeIndex].make.model.forEach(t => {t.completed = completed 
-    t.trim.forEach(x=>x.completed = completed)});
-  console.log("Checked All", this.items[makeIndex].make.model);
+  this.items[makeIndex].models.forEach(t => {t.completed = completed 
+    t.trims.forEach(x=>x.completed = completed)});
+  console.log("Checked All", this.items[makeIndex].models);
 }
 
 ModelsomeComplete(i,modelIndex,model):boolean{
   //let result = this.items[0].make.model[modelIndex].trim.filter(x=>x.completed).length;
   //console.log('Length of total completed trims:', result);
   //return false;
-  return this.items[i].make.model[modelIndex].trim.filter(x=>x.completed).length > 0 && !this.items[i].make.model[modelIndex].completed;
+  return this.items[i].models[modelIndex].trims.filter(x=>x.completed).length > 0 && !this.items[i].models[modelIndex].completed;
 }
 
 
 updateAllComplete(makeIndex:number) {
-  this.items[makeIndex].completed =  this.items[makeIndex].make.model.every(t => t.completed);
+  this.items[makeIndex].completed =  this.items[makeIndex].models.every(t => t.completed);
   console.log("Every: ", this.allComplete);
 } 
 
 setModelAllTrims(completed: boolean,i,modeli, model) {
   console.log('Set- ALL - Trims of Model ', completed, model, 'Make Index:',i, "Model Index:", modeli);
-   this.items[i].make.model[modeli].completed = completed;
-   this.items[i].make.model[modeli].trim.forEach(x=>x.completed = completed); 
+   this.items[i].models[modeli].completed = completed;
+   this.items[i].models[modeli].trims.forEach(x=>x.completed = completed); 
 }
 
 
 updateMake(makeIndex,modelIndex,trimIndex){
-  this.items[makeIndex].completed = this.items[makeIndex].make.model.every(x=>x.completed) && this.items[makeIndex].make.model[modelIndex].trim.every(x=>x.completed);
+  this.items[makeIndex].completed = this.items[makeIndex].models.every(x=>x.completed) && this.items[makeIndex].models[modelIndex].trims.every(x=>x.completed);
 }
 
 updateAllModelComplete(makeIndex,modelIndex,trim) {
    
-  this.items[makeIndex].make.model[modelIndex].completed = this.items[makeIndex].make.model[modelIndex].trim.every(x=>x.completed);
+  this.items[makeIndex].models[modelIndex].completed = this.items[makeIndex].models[modelIndex].trims.every(x=>x.completed);
   console.log("All Model Complete: ", this.allModelComplete);
+}
+
+
+searchByName(name) { //qx
+
+  this.searchedText = name.detail.value;
+  console.log(this.searchedText);
+
+  let foundIndex = -1;
+ 
+    //LC 500
+   this.items.filter((make,index)=>{
+    if (make.name.toLocaleLowerCase() == this.searchedText.toLocaleLowerCase()) {
+      foundIndex = index;
+      this.items[index].completed = true;
+    } else {
+      make.models.filter((model,modelIndex) => {
+        if (model.name.toLocaleLowerCase() === this.searchedText.toLocaleLowerCase()) {
+          console.log("IN MODEL IF");
+          this.items[index].models[modelIndex].completed = true;
+          foundIndex = index;
+        } else{
+          model.trims.filter((trim,trimIndex)=>{
+            if (trim.name.toLocaleLowerCase() == this.searchedText.toLocaleLowerCase()) {
+              console.log("IN trim IF",trim);
+              this.items[index].models[modelIndex].trims[trimIndex].completed = true;
+              foundIndex =  index;
+            } 
+          })
+        }
+      })
+    }
+  });
+  console.log("RESULT: ", this.items[foundIndex]);
 }
 
 

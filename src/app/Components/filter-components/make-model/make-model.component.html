@@ -3,7 +3,7 @@
   <div class="make-model">
 
     <ion-toolbar>
-      <ion-searchbar placeholder="make model trim" showCancelButton="focus"></ion-searchbar>
+      <ion-searchbar (ionChange)="searchByName($event)" placeholder="make model trim" showCancelButton="focus"></ion-searchbar>
     </ion-toolbar>
      
       <ion-accordion-group multiple="true" value="colors">
@@ -15,7 +15,7 @@
                               [color]="makeCheckboxColor"
                               [indeterminate]="someComplete(i)"
                               (change)="setAll($event.checked,i)">
-                              <ion-label>{{item.make.name}}</ion-label>
+                              <ion-label>{{item.name}}</ion-label>
                 </mat-checkbox>
                 
       <!----------------------------------------------MAKE ITEM ENDS---------------------------------------------------->
@@ -23,7 +23,7 @@
           <ion-list slot="content">
             
             <ion-accordion-group multiple="true" value="models">
-            <ion-accordion *ngFor="let model of item.make.model; let modelIndex=index">
+            <ion-accordion *ngFor="let model of item.models; let modelIndex=index">
               <ion-item slot="header">
       <!----------------------------------------------MODELS ITEM STARTS---------------------------------------------------->
                 <mat-checkbox class="example-margin make-class model-class"
@@ -47,14 +47,14 @@
                   </span>
                   <span class="example-list-section">
       <!----------------------------------------------TRIMS ITEM STARTS---------------------------------------------------->              
-                      <ion-item *ngFor="let trims of model.trim; let trimIndex=index" >
+                      <ion-item *ngFor="let trim of model.trims; let trimIndex=index" >
                         <mat-checkbox class="example-margin make-class trim-class"
                                       [color]="trimCheckboxColor"
-                                      [(ngModel)]="trims.completed"
-                                      [checked]="trims.completed"
+                                      [(ngModel)]="trim.completed"
+                                      [checked]="trim.completed"
                                       (change)="updateMake(i,modelIndex,trimIndex)"
                                       (ngModelChange)="updateAllModelComplete(i,modelIndex,trimIndex)">
-                          <ion-label class="trims-label">{{trims.name}}</ion-label>
+                          <ion-label class="trims-label">{{trim.name}}</ion-label>
                         </mat-checkbox>
                       </ion-item>
       <!----------------------------------------------TRIMS ITEM ENDS---------------------------------------------------->

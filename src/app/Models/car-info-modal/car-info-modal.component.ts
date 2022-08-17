@@ -146,8 +146,6 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
       console.log("THEN");
       if(plans.code === 200){
         //console.log("PLANS",plans);
-        this.filters.getPlans(plans);
-     
       } else {
         console.log("NULL");
        

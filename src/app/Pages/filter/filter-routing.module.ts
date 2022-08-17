@@ -35,7 +35,7 @@ const routes: Routes = [
       },
       {
         component:MakeModelComponent,       //2
-        path:'car-make-model'
+        path:'car-make'
       },
       {
         component:PriceComponent,           //3

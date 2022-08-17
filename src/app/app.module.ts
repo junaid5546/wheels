@@ -4,7 +4,7 @@
  *
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
-
+ import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -49,6 +49,7 @@ export function setTranslateLoader(http: HttpClient) {
 
     OpenNativeSettings,
     WebView,
+    SQLite,
     CallNumber,
     InAppBrowser,
     SocialSharing],

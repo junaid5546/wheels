@@ -4,6 +4,12 @@ import { PostService } from 'dm-api';
 import { CarFiltersService } from 'src/app/Services/car-filters.service';
 import { ModalControllerService } from 'src/app/Services/modal-controller.service';
 
+export interface Item {
+  make: string;
+  completed: boolean;
+  item?: Item[];
+  //subtasks?: Task[];
+}
 @Component({
   selector: 'app-vehicles-department',
   templateUrl: './vehicles-department.page.html',
@@ -47,13 +53,45 @@ export class VehiclesDepartmentPage implements OnInit {
       this.modalService.modelData.items[0].value = feed.result.makes;
       this.modalService.modelData.items[21].value=feed.result.governorates;
       this.modalService.modelData.items[23].value = feed.result.features;
-      this.filter.getFiltersList(feed.result.filters);
+      // body, make, price,
+      // condition, year, extirior color
+      // Interior color, doors, cylinder 
+      // Engine Size, Fuel, Transmission
+      // Drivetrain, Seats, Origin
+      // Location, Plate, Driving Readiness
+      // Sale Type
+      //
+    let NewMakeModelArray =   feed.result.makes.map(make=>{
+       let newModels = make.models.map(model=>{
+        
+        let newTrims = model.trims.map(trim=>{
+          let trimObj = {...trim,completed:false};
+          return trimObj;
+        });
+          let newModel = {name:model.name,completed:false,_id:model._id,trims:newTrims};
+          return newModel;
+        });
+        let newMakeModelObject = {name:make.name, id:make._id, models:newModels, completed:false};
+        return newMakeModelObject;
+      });
+    
+      console.log("NEW :",NewMakeModelArray);
+      let filters = feed.result.filters;
+      filters.push(
+        {name:"Make", path:'car-make',types:feed.result.makes },
+        {name:"Body", path:'car-body',},
+        {name:"Price",path:'car-price'}
+      );
+      console.log("Filters:", filters);
+      this.filter.getFiltersList(filters);
+      this.filter.setMakeModelTrims(NewMakeModelArray);
       feed.result.filters.forEach(filterElement => {
-     
+        
       this.modalService.modelData.items.forEach(modelDataElement => {
         if(filterElement.name==modelDataElement.name){
           modelDataElement.value=filterElement.types;
         }
+
       });
      });
     })
