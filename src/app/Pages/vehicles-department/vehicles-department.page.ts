@@ -84,7 +84,7 @@ export class VehiclesDepartmentPage implements OnInit {
       console.log("Filters:", filters);
       this.filter.getFiltersList(filters);
       this.filter.setMakeModelTrims(NewMakeModelArray);
-      feed.result.filters.forEach(filterElement => {
+      feed.result.filters.forEach(filterElement => { 
         
       this.modalService.modelData.items.forEach(modelDataElement => {
         if(filterElement.name==modelDataElement.name){

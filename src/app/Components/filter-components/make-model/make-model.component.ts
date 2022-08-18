@@ -65,15 +65,13 @@ export class MakeModelComponent implements OnInit {
 
   ngOnInit() {
     console.log("Got MAKE MODEL TRIM: ", this.carFilters.getMakeModelTrims());
-    this.items = this.carFilters.getMakeModelTrims();
+     this.items = this.carFilters.getMakeModelTrims();
     console.log("ITEMS: ", this.items);
   }
 
 // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
 someComplete(makeIndex): boolean {
-  console.log("Result",makeIndex);
-  let result = this.items[makeIndex].models.filter(t=>t.completed).length > 0 && !this.items[makeIndex].completed;
-  console.log("Result",result);
+  console.log("Some Complete");
   return this.items[makeIndex].models.filter(t => t.completed).length > 0 && !this.items[makeIndex].completed;
 }
 
@@ -87,9 +85,6 @@ setAll(completed: boolean,makeIndex:number) {
 }
 
 ModelsomeComplete(i,modelIndex,model):boolean{
-  //let result = this.items[0].make.model[modelIndex].trim.filter(x=>x.completed).length;
-  //console.log('Length of total completed trims:', result);
-  //return false;
   return this.items[i].models[modelIndex].trims.filter(x=>x.completed).length > 0 && !this.items[i].models[modelIndex].completed;
 }
 
@@ -107,13 +102,12 @@ setModelAllTrims(completed: boolean,i,modeli, model) {
 
 
 updateMake(makeIndex,modelIndex,trimIndex){
-  this.items[makeIndex].completed = this.items[makeIndex].models.every(x=>x.completed) && this.items[makeIndex].models[modelIndex].trims.every(x=>x.completed);
+  this.items[makeIndex].completed = this.items[makeIndex].models.every(x=>  x.completed) && this.items[makeIndex].models[modelIndex].trims.every(x=>x.completed);
 }
 
 updateAllModelComplete(makeIndex,modelIndex,trim) {
    
   this.items[makeIndex].models[modelIndex].completed = this.items[makeIndex].models[modelIndex].trims.every(x=>x.completed);
-  console.log("All Model Complete: ", this.allModelComplete);
 }
 
 
