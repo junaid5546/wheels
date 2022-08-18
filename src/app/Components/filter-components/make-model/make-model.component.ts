@@ -118,17 +118,24 @@ updateAllModelComplete(makeIndex,modelIndex,trim) {
 
 
 searchByName(name) { //qx
-
+  
   this.searchedText = name.detail.value;
   console.log(this.searchedText);
-
+  if(this.searchedText == '') {
+    console.log("SEARCH CLEARED");
+    this.items.forEach(element => {
+      element.show = true
+    });
+  }
   let foundIndex = -1;
- 
-    //LC 500
    this.items.filter((make,index)=>{
     if (make.name.toLocaleLowerCase() == this.searchedText.toLocaleLowerCase()) {
       foundIndex = index;
-      this.items[index].completed = true;
+      this.items.forEach(element => {
+        element.show = false
+      });
+      this.items[index].show = true;
+      
     } else {
       make.models.filter((model,modelIndex) => {
         if (model.name.toLocaleLowerCase() === this.searchedText.toLocaleLowerCase()) {
@@ -149,6 +156,8 @@ searchByName(name) { //qx
   });
   console.log("RESULT: ", this.items[foundIndex]);
 }
+
+
 
 
 }

@@ -63,7 +63,6 @@ export class VehiclesDepartmentPage implements OnInit {
       //
     let NewMakeModelArray =   feed.result.makes.map(make=>{
        let newModels = make.models.map(model=>{
-        
         let newTrims = model.trims.map(trim=>{
           let trimObj = {...trim,completed:false};
           return trimObj;
@@ -71,7 +70,7 @@ export class VehiclesDepartmentPage implements OnInit {
           let newModel = {name:model.name,completed:false,_id:model._id,trims:newTrims};
           return newModel;
         });
-        let newMakeModelObject = {name:make.name, id:make._id, models:newModels, completed:false};
+        let newMakeModelObject = {name:make.name, id:make._id, models:newModels, completed:false, show:true};
         return newMakeModelObject;
       });
     

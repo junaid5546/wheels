@@ -77,7 +77,7 @@ export class FilterPage implements OnInit,AfterViewInit {
         console.log(data);
         this.filters=data;
         data.map((element, index) => {
-            let obj = { ...element , selected:false } 
+            let obj = { ...element , selected:false, show:false } 
           
             return obj;
           });
