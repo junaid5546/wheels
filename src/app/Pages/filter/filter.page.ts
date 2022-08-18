@@ -15,7 +15,18 @@ export class FilterPage implements OnInit,AfterViewInit {
   private filtersList = new BehaviorSubject<any[]>([]);
 
 
-  
+  dummyData =  [{name:'toyota', model:[{name:'Corolla', trim:[{name:'Altis 1.8'}]}]},
+  {name:'Honda', model:[{name:'Civic', trim:[{name:'city 1.6'}]}]},
+  {name:'Suzuki', model:[{name:'Alto', trim:[{name:'700 cc'}]}]},
+  {name:'Hyndai', model:[{name:'Sonata', trim:[{name:'vvti'}]}]},
+  {name:'Mercides', model:[{name:'Benz', trim:[{name:'cctv'}]}]},
+  {name:'MG', model:[{name:'E-Pace', trim:[{name:'S'}]}]},
+  {name:"Foton", model:[{name:'Genesis', trim:[{name:'SE'}]}]},
+  {name:'Indian Motorcycle', model:[{name:'Corolla', trim:[{name:'Isuzu'}]}]},
+  {name:'Kia', model:[{name:'Nissan', trim:[{name:'R-Dynamic S'}]}]},
+  {name:'Lexus', model:[{name:'Corolla', trim:[{name:'Haval'}]}]},
+  {name:'"BAIC"', model:[{name:'Genesis', trim:[{name:'S'}]}]},
+ ];
   public filters:any[] = [];
   selectedIndex = 0;
 
@@ -111,6 +122,25 @@ export class FilterPage implements OnInit,AfterViewInit {
    */
    applyFilters(filterList:any[]){
  
+    }
+
+    binarySearch( array, size,key) {
+      let s = 0;
+      let e = size;
+      while (s<=e) {
+        let mid = (s+e)/2;
+        if(array[mid].name == key){
+          console.log("MID: ", mid);
+          return mid;
+        } else if(array[mid].name != key) {
+          console.log(" e: ", e);
+          e = mid-1;
+        } else {
+          console.log(" s: ", s);
+          s = mid + 1; 
+        }
+        return -1;
+      }
     }
 
 }
