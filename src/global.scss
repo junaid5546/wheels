@@ -217,3 +217,16 @@ html[dir="rtl"]{
 
  
 }
+
+
+
+.markScroll{
+  overflow-y: scroll;
+  height: calc(91vh - 40px);
+  position: relative;
+  z-index: 1;
+}
+
+ion-content:has(.markScroll) {
+  overflow: hidden !important;
+}

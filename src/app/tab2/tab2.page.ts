@@ -23,7 +23,6 @@ settingsRoute = "tabs/tab1/";
 ctx:any = null;
 icons:any = { has_left_icon:true, left_icon:'../../assets/icon/notification.svg', has_right_icon:true, right_icon:'../../assets/icon/Language.svg'};
 heading:any = { has_main_heading:true, main_heading_name:"DigitalMall.App", has_sub_heading:false, sub_heading_name:'digital-mall.com'  };
-
 items:any[] = [
 
 {name:'Vehicles',img:'assets/icon/main-items-icon/vehicles.svg',hasClock:false, clock:'assets/icon/main-items-icon/clock.svg',navigate:'tabs/posts' },

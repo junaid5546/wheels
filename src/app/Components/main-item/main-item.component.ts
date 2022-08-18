@@ -9,6 +9,8 @@ import { DeviceInfoService } from '../../Services/device-info.service';
 export class MainItemComponent implements OnInit {
   @Input() items:any[];
   @Input() name:string;
+  @Input() size:string;
+  
   href:String;
   mainItemHeightPercentage:number = 10;
   mainItemDimensions = {height:'', width:''};
@@ -70,15 +72,21 @@ export class MainItemComponent implements OnInit {
   }
 
   navigate(url,url_tab_1){
-    console.log("NAV")
+    // console.log(this.href)
    
    if(this.href=='/tabs/tab2'){
     this.router.navigate([url]);
-   }else{
+   }else if(this.href=='/tabs/tab1'){
+    this.router.navigate([url_tab_1]);
+   }else if(this.href=='/tabs/vehicles-department/posts'){
+    console.log("posts",url);
+    this.router.navigate([url]);
+   }else if(this.href=="/tabs/vehicles-department/addPost"){
+    console.log("add Post",url_tab_1);
     this.router.navigate([url_tab_1]);
    }
 
-    // this.router.navigate([url]);
+    
   }
 
 

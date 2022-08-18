@@ -1,20 +1,24 @@
 <div class="special-plan" *ngFor="let item of plans; let i=index">
-<ion-card [ngClass]="{ selected: item.selected }" (click)="selectPlan(item._id,item.ad_duration,i)">
+<ion-card [ngClass]="{ selected: item.selected }" (click)="selectPlan(item._id,item.post_type_duration,i,item.post_type_duration,item.price)">
   <ion-card-content>
     <div class="left-icon" >
       <div class="icon-label" [ngClass]="{gold:i==0, silver:i==1, bronze:i==2, regular:i==3 }">
-        <ion-label class="item-label-color">{{item.name}}</ion-label>
+        <ion-label class="item-label-color">{{item.post_type_name}}</ion-label>
       </div>
     </div>
     <div class="mid-content-details">
-      <ion-label class="label-mid">Special Duration: <span class="special-duration">{{item.special_duration}}</span>   </ion-label>
+      <ion-label class="label-mid">Special Duration: <span class="special-duration">{{item.post_type_duration}}</span>   </ion-label>
       <ion-label class="label-mid">Add order:<span class="special-duration"> {{item.order}}</span></ion-label>
-      <ion-label class="label-mid">Ad duration:<span class="ad-duration special-duration"> {{item.duration}}</span> </ion-label>
+      <!-- <ion-label class="label-mid">Ad duration:<span class="ad-duration special-duration"> {{item.duration}}</span> </ion-label> -->
     </div>
     <div class="right-price-tag h-v-centered">
       <div class="wraper">
-      <ion-label>{{item.price}}</ion-label>
-    </div>
+        <ion-label *ngIf="item.remaining==' 0'">{{item.price}} OMR</ion-label>
+        <ion-label *ngIf="item.remaining!=' 0'">{{item.remaining}}</ion-label>
+      </div>
+      <ion-label class="hook">
+        {{item.hook}}
+      </ion-label>
     </div>
   </ion-card-content>
   </ion-card>

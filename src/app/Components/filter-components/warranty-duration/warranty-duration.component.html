@@ -1,3 +1,10 @@
-<p>
-  warranty-duration works!
-</p>
+  <ion-content>
+    <ion-list lines="none">
+      <ion-item *ngFor="let item of WarrantyDuration">
+        <ion-checkbox mode="md" slot="start" (ionChange)="check(item._id)"></ion-checkbox>
+        <ion-label>{{item.name}}</ion-label>
+      </ion-item>
+     
+      </ion-list>
+  </ion-content>
+  

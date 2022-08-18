@@ -5,8 +5,8 @@
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
 
-import { Injectable } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Injectable, ViewChild } from '@angular/core';
+import { ModalController} from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ImagePreviewComponent } from '../Models/image-preview/image-preview.component';
 import { ToastController } from '@ionic/angular';
@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ModalControllerService {
+  
   // SAVING POST TO LOCAL
   _post = {
     hasPostCreated:false,
@@ -42,43 +43,35 @@ export class ModalControllerService {
   modelData = {
     items: [
       { key: 'make_id',  name: 'Make', value: [], selected: { _id: '',models:[] } },   //0
-      { key: 'model_id', name: 'Model', value: [], selected: {trims:[]} },//1
+      { key: 'model_id', name: 'Model', value: [], selected: {trims:[],engineSize:[]} },//1
       { key: 'trim_id',  name: 'Trims', value: [], selected: { body: [] } },//2
-      { key: 'year_id',  name: 'Year', value: [], selected: {} },//3
+      { key: 'year_id',  name: 'Model Year', value: [], selected: {} },//3
       { key: 'condition_id', name: 'Condition', value: [], selected: {} },//4
-      { key: 'body_id', name: 'Body', value: [], selected: {} },//5
-      { key: 'exterior_color_id', name: 'Exterior Color', value: [], selected: {} },//6
-      {
-        key: 'door_count_id',
-        name: 'Door Count',
-        value: [{ name: 1 }, { name: 2 }, { name: 3 }, { name: 4 }],
-        selected: {},
-      },//7
-      {
-        key: 'engine_size',
-        name: 'Engine size',
-        value: [{ name: 3000 }, { name: 4000 }, { name: 5000 }],
-        selected: {name:null},
-      },//8
-      { key: 'cylinder_count_id', name: 'Cylinder count', value: [], selected: {} },//9
-      { key: 'fuel_type_id', name: 'Fuel Type', value: [], selected: {} },//10
-      { key: 'transmission_type_id', name: 'Transmission Type', value: [], selected: {} },//11
-      { key: 'drivetrain_id', name: 'Drivetrain', value: [], selected: {} },//12
-      { key: 'interior_color_id', name: 'interior Color', value: [], selected: {} },//13
-      { key: 'seats_type_id', name: 'Seat type', value: [], selected: {} },//14
-      { key: 'origin_id', name: 'Origin', value: [], selected: {} },//15
-      { key: 'governorate_id', name: 'Governorate', value: null, selected: {} },//16
-      { key: 'state_id', name: 'State', value: [], selected: { states: null } },//17
-      { key: 'warranty_duration_id', name: 'Warranty Duration', value: [], selected: {} },//18
-     // { key: 19, name: 'Warranty Distance', value: [], selected: {} },
-      { key: 'insurance_type_id', name: 'Insurance type', value: [], selected: {} },//19
-      { key: 'readiness_id', name: 'Driving Readlines', value: [], selected: {} },//20
-      { key: 'sale_type_id', name: 'Sale Type', value: [], selected: {} },//21
+      { key: 'body_id', name: 'Body', value: [], selected: {bodies:[],doorCount:[],error:'',maxPrice: null,minPrice:null,filtersId:[]}},//5
+      { key: 'engine_size',name: 'Engine Size',value: [],selected: {name:null},},//5==>>6
       
-      { key: 'features_id_array', name: 'Features', value: [], selected: {features_id_array:[]} },//22
-      { key: 'plate_type_id', name: 'Plate Type', value: [], selected: {features_id_array:[]} },//23
-      { key: 'additional_features', name: 'Additional Details', value: [{},{}], selected: {price:0,distance_kilometer:0,seller_notes:null,distance_mile:0,primary_phone:null,warranty_kilometer:null} },//24
-      { key: 'level_id', name: 'Special Plans', value: [{},{}], selected: {} }, //25 // {"id": "62275964de5b632b481db474","level_duration":21},
+      { key: 'door_count_id',name: 'Doors',value: [],selected: {name:null},},//7
+      { key: 'exterior_color_id', name: 'Exterior Color',cssHex:[], value: [], selected: {} },//8
+      { key: 'cylinder_count_id', name: 'Cylinders', value: [], selected: {} },//9
+      { key: 'fuel_type_id', name: 'Fuel', value: [], selected: {} },//10
+      { key: 'transmission_type_id', name: 'Transmission', value: [], selected: {} },//11
+      { key: 'drivetrain_id', name: 'Drivetrain', value: [], selected: {} },//12
+      { key: 'interior_color_id', name: 'Interior Color', value: [], selected: {} },//13
+      { key: 'seats_type_id', name: 'Seats', value: [], selected: {} },//14
+      { key: 'insurance_type_id', name: 'Insurance', value: [], selected: {} },//15
+      { key: 'plate_type_id', name: 'Plate', value: [], selected: {} },//16
+      { key: 'readiness_id', name: 'Driving Readiness', value: [], selected: {} },//17
+      { key: 'sale_type_id', name: 'Sale Type', value: [], selected: {} },//18
+      { key: 'warranty_duration_id', name: 'Warranty Duration', value: [], selected: {} },//19
+       // { key: 19, name: 'Warranty Distance', value: [], selected: {} },
+      { key: 'origin_id', name: 'Origin', value: [], selected: {} },//20
+      { key: 'governorate_id', name: 'Governorate', value: [], selected: {} },//21
+      { key: 'state_id', name: 'State', value: [], selected: { states: null } },//22
+      { key: 'features_id_array', name: 'Features (Optional)', value: [], selected: {features_id_array:[]} },//23
+      { key: 'additional_features', name: 'Additional Details', value: [{},{}], selected: {price:0,distance_kilometer:0,seller_notes:null,distance_mile:0,primary_phone:null,business_phone:false,warranty_kilometer:null} },//24
+     // { key: 'level_id', name: 'Post Type', value: [{},{}], selected: {} },//25 
+     { key: 'post_type', name: 'Post Type', value: [{},{}], selected: {} },//25 
+      // {"id": "62275964de5b632b481db474","level_duration":21},
     ],
     current: { index: 0, value: null },
     next: { index: 0, value: null },
@@ -87,6 +80,7 @@ export class ModalControllerService {
     postId:null
   };
 
+  publish=0;
   constructor(
     private modalController: ModalController,
     public toastController: ToastController,
@@ -98,91 +92,11 @@ export class ModalControllerService {
     private error:ErrorHandlerService,
     private router:Router
   ) {
-
-    this.carFilters.plateType.subscribe((res:any)=>{
-        this.modelData.items[23].value = res.types;
-    })
-
      this.userData.getPhonePrimary().then((phone)=>{
       console.log("PRIMARY PHONE: ", phone);
-      this.modelData.items[24].selected.primary_phone =phone || '968';
+      this.modelData.items[24].selected.primary_phone =phone || '968 97725964';
     })
-    this.carFilters.year.subscribe((res: any) => {
-      console.log('YEAR: ', res);
-      this.modelData.items[3].value = res.types;
-    });
-
-    this.carFilters.condition.subscribe((res: any) => {
-      console.log('CONDITION: ', res);
-      this.modelData.items[4].value = res;
-    });
-
-    this.carFilters.exteriorColor.subscribe((res: any) => {
-      this.modelData.items[6].value = res.types;
-    });
-
-    this.carFilters.cylinder.subscribe((res: any) => {
-      console.log('CYLINDER: ', res);
-      this.modelData.items[9].value = res;
-    });
-
-    this.carFilters.fueltype.subscribe((res: any) => {
-      console.log('FUEL: ', res);
-      this.modelData.items[10].value = res;
-    });
-
-    this.carFilters.transmission.subscribe((res: any) => {
-      console.log('TRANSMISSION: ', res);
-      this.modelData.items[11].value = res;
-    });
-
-    this.carFilters.drivetrain.subscribe((res: any) => {
-      console.log('Drivetrain: ', res);
-      this.modelData.items[12].value = res;
-    });
-
-    this.carFilters.interiorColor.subscribe((res: any) => {
-      console.log('interiorColor: ', res);
-      this.modelData.items[13].value = res.types;
-    });
-
-    this.carFilters.seatType.subscribe((res: any) => {
-      console.log('seatType: ', res);
-      this.modelData.items[14].value = res;
-    });
-
-    this.carFilters.origins.subscribe((res: any) => {
-      console.log('Origin: ', res);
-      this.modelData.items[15].value = res;
-    });
-
-    this.carFilters.warrentyDuration.subscribe((res:any)=>{
-      console.log('warrentyDuration: ', res);
-      this.modelData.items[18].value = res.types;
-    })
-
-    this.carFilters.insurance.subscribe((res:any)=>{
-      console.log('insurance: ', res);
-      this.modelData.items[19].value = res;
-    })
-
-    this.carFilters.driving_readiness.subscribe((res:any)=>{
-      console.log('driving_readiness: ', res);
-      this.modelData.items[20].value = res;
-    })
-
-    this.carFilters.saleType.subscribe((res:any)=>{
-      console.log('saleType: ', res);
-      this.modelData.items[21].value = res;
-    })
-
-    this.carFilters.feature.subscribe((res:any)=>{
-      console.log('feature: ', res);
-      this.modelData.items[22].value = res;
-    })
-
-    console.log('ADDED: ', this.modelData);
-  }
+   }
 
   async presentModal(component, props) {
     this.modalProps = props;
@@ -202,7 +116,8 @@ export class ModalControllerService {
     modal.onDidDismiss().then((res: any) => {
       console.log('Dismiss result: ', res);
     });
-
+ // SCROLL INTO VIEW AFTER CHOICE DONE
+ 
     return await modal.present();
   }
 
@@ -213,6 +128,10 @@ export class ModalControllerService {
     if (this.modelData.current.index === 0) {
       // SET MODEL ACCORDING TO MAKE
       this.modelData.items[1].value = this.modelData.items[0].selected.models;
+      console.log("MODELS",this.modelData.items[1].value)
+      console.log("MODELS TWO",this.modelData.items[0].selected.models)
+
+    
       this.incrementOfCurrentIndex();
     } else if (this.modelData.current.index === 1) {
 
@@ -220,88 +139,42 @@ export class ModalControllerService {
       this.incrementOfCurrentIndex();
     
     } else if (this.modelData.current.index === 4) {
-      this.modelData.items[5].value = this.modelData.items[2].selected.body;
-      this.incrementOfCurrentIndex();
-    } else if (this.modelData.current.index === 15) {
-      this.getGovernate().then((governate: any) => {
+     
+      this.modelData.items[5].value = this.modelData.items[2].selected.bodies;
 
-        console.log('governate', governate);
-        this.modelData.items[16].value = governate;
-        this.incrementOfCurrentIndex();
-      });
-    } else if (this.modelData.current.index === 16) {
-      this.modelData.items[17].value = this.modelData.items[16].selected.states;
+     
       this.incrementOfCurrentIndex();
-    } else if(this.modelData.current.index === 21) {
-      this.getFeatures()
-      .then((features:any)=>{
-        this.modelData.items[22].value = features;
+    }else if(this.modelData.current.index === 5){
+        
+        this.modelData.items[6].value=this.modelData.items[2].selected.engineSize;    
         this.incrementOfCurrentIndex();
-      })
-    } else {
+    }else if(this.modelData.current.index === 6){
+      console.log(this.modelData.items[5]);
+       this.modelData.items[7].value=this.modelData.items[5].selected.doorCount;
+      
+       this.incrementOfCurrentIndex();
+  }
+    else if (this.modelData.current.index === 21) {
+      this.modelData.items[22].value = this.modelData.items[21].selected.states;
+    
+      this.incrementOfCurrentIndex();
+    }
+
+    else if(this.modelData.current.index===23){
+      
+        console.log("additional setting");
+
+       
+    }else if(this.modelData.current.index===25){
+      console.log("SUBSCRIPTION DATA");
+      this.publish=25;
+    }
+    else {
       this.incrementOfCurrentIndex();
     }
   }
 
-  // GET MODELS OF CAR ACCORDING TO MAKE
-  getModel(makeId) {
-    return new Promise((res, rej) => {
-      this.vehicle.getModels(makeId).then((models: any) => {
-        this.modelData.items[1].value = models.result;
-        console.log('MODEL: ', this.modelData);
-        res(true);
-      });
-    });
-  }
-
-  // GET TRIMS OF CAR ACCORDING TO MODELS
-  getTrim(modelId) {
-    return new Promise((res, rej) => {
-      this.vehicle.getTrims(modelId).then((trims: any) => {
-        this.modelData.items[2].value = trims.result;
-        console.log('TRIMS: ', this.modelData);
-        res(true);
-      });
-    });
-  }
-
-  // GET LOCATIONS
-  getGovernate() {
-    return new Promise((res, rej) => {
-      this.countryApi
-        .getGovernate()
-        .then((governate: any) => {
-          if (governate.code === 200) {
-            res(governate.result);
-          } else {
-            res(governate.message);
-          }
-        })
-        .catch((err) => {
-          rej(err);
-        });
-    });
-  }
-
-  // GET FEATURES
-  getFeatures(){
-
-    return new Promise((res,rej)=>{
-      this.vehicle.getFeatures()
-      .then((features:any)=>{
-        console.log("Features: ", features);
-        if(features.code ===  200){
-          res(features.features)
-        } else {
-          res(features.message)
-        }
-      })
-      .catch((err) => {
-        rej(err);
-      });
-    })
-  }
-
+  
   dismissModal = () => {
     if (this.modelData.current.index > 0) {
       this.decrementOfIndexes();
@@ -371,9 +244,12 @@ export class ModalControllerService {
     return this.modelData.current;
   }
 
-  incrementOfCurrentIndex() {
+  incrementOfCurrentIndex(type?) {
     console.log('INDEX INCREMENTED');
-    
+     // SCROLL INTO VIEW AFTER CHOICE DONE
+     document.getElementById("content").scrollIntoView({block: "start", inline: "nearest"});
+      // THIS CONDITION BECAUSE NOT ALL DIVS CONTAIN ION LIST WITH LIST ID
+     ((document.getElementById("list"))!= null) ? (document.getElementById("list").scrollTo(0,0)) : '';
     if (this.getCurrentItemIndex() < this.getItemsLenght() - 1) {
       console.log(
         'Current:',
@@ -399,16 +275,29 @@ export class ModalControllerService {
       //this.presentModal(this.getCurrentState());
 
       this.updatecurrentObject();
-    } else {
+     
+    }else {
       console.log('ITEM LENGTH: ', this.getItemsLenght());
       console.log('ITEM Index Length: ', this.getCurrentItemIndex());
       
-      if( this.getCurrentItemIndex() === 25 ) {
+      if( this.getCurrentItemIndex() === 25 && type==='updatepost') {
+      
         this.updatePost();
       }
+      
       //return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
+    
+   
+
+    
+
+
+    
+  
   }
+
+  
 
   // UPDATE POST TO THE SERVER
   updatePost() {
@@ -422,7 +311,7 @@ export class ModalControllerService {
         obj["price"] = item.selected.warranty_kilometer;
         obj["distance_mile"] =  (Number(item.selected.warranty_kilometer) * 1 /mile) ;
         obj["primary_phone"] = item.selected.primary_phone;
-        obj["seller_notes"] = item.selected.seller_notes;
+        obj["seller_notes"] = item.selected.seller_notes || '';
         obj["distance_kilometer"] = item.selected.distance_kilometer;
       } else if (item.key == 'engine_size'){
         obj[item.key] = item.selected.name;
@@ -430,7 +319,7 @@ export class ModalControllerService {
         obj[item.key] = item.selected.name;
       } else if (item.key == 'features_id_array'){
         obj[item.key] = item.selected.features_id_array;
-      } else if(item.key == 'level_id') {
+      } else if(item.key == 'post_type') {
         obj[item.key] = item.selected;
       } else{
         obj[item.key] = item.selected._id;
@@ -466,12 +355,16 @@ export class ModalControllerService {
         this.modelData.items[this.modelData.pervious.index];
       // return {status:true, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
       this.updatecurrentObject();
+       
     } else {
       console.log('ERROR');
       console.log('ITEM LENGTH: ', this.getItemsLenght());
       console.log('ITEM Index Length: ', this.getCurrentItemIndex());
       // return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
+
+    
+     
   }
 
   updatecurrentObject() {

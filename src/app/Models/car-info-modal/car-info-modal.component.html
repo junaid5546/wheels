@@ -5,37 +5,44 @@
             [isModal]="true"
             ></app-header>
 
-<ion-content>
+<ion-content >
 
-    <div *ngIf="data">
-    <ion-list *ngIf="currentStep != 5 && currentStep != 6 && currentStep != 25 && currentStep != 24 && currentStep !=22" >
+    <div *ngIf="data" [ngClass]="{'markScroll': currentStep == 0 || currentStep==1 }" id="content">
+    <ion-list id="list" [ngClass]="{'try': currentStep == 0 || currentStep==1}"  *ngIf="currentStep != 5 && currentStep!=8 && currentStep != 25 && currentStep != 24 && currentStep !=23 && currentStep!=13">
+        
         <div #card_items  class="wraper">
             <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
                 <div class="container" [ngClass]="{selected: item.selected}" >
                 <div class="name-of-item">
                     <ion-label>{{item.name}}</ion-label>
+                    
                 </div>
                 <div class="icon-of-item">
-                    <!-- no logo yet
-                    <ion-thumbnail>
-                        <ion-img src="../../../assets/icon/cars-icon/toyota تويوتا.png"></ion-img>
-                    </ion-thumbnail>
-                    -->
+                    <!-- no logo yet -->
+                    <!-- <ion-thumbnail>
+                        <ion-img src="../../../assets/icon/cars-icon/toyota_تويوتا.png"></ion-img>
+                    </ion-thumbnail> -->
+                   
                 </div>
             </div>
 
             </ion-card>
+
+          
         </div>
     </ion-list>
 
-    <ion-list *ngIf="currentStep == 5 || currentStep==6" >
+    <ion-list *ngIf="currentStep == 5 || currentStep==13 || currentStep==8" >
         <ion-grid *ngIf="currentStep == 5">
             <ion-row >
                 <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem ;let i=index">
                     <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
                         <div class="item-picture-container">
-                           <ion-img src="https://images.netdirector.co.uk/gforces-auto/image/upload/w_343,h_257,dpr_2.0,q_auto,c_fill,f_auto,fl_lossy/auto-client/4f3a94f309517d480173272c101fe224/thumbnail_mobile.jpg"></ion-img> 
-                          </div>
+                           <!-- <ion-img src="https://images.netdirector.co.uk/gforces-auto/image/upload/w_343,h_257,dpr_2.0,q_auto,c_fill,f_auto,fl_lossy/auto-client/4f3a94f309517d480173272c101fe224/thumbnail_mobile.jpg"></ion-img>  -->
+                        <ion-img src="http://45.79.249.189/{{item.image}}">
+                           
+                        </ion-img>  
+                        </div>
                         <div class="item-name-container">
                             <ion-label>{{item.name}}</ion-label>
                         </div>
@@ -45,11 +52,11 @@
             </ion-row>
         </ion-grid>
 
-        <ion-grid *ngIf="currentStep == 6">
+        <ion-grid *ngIf="currentStep==13 || currentStep==8">
             <ion-row >
                 <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem;let i=index">
                     <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
-                        <div class="item-picture-container">
+                        <div class="item-picture-container color-container" [style.background]="item.cssHex">
                            <ion-card></ion-card>
                           </div>
                         <div class="item-name-container">
@@ -63,60 +70,69 @@
 
     </ion-list>
 
-    <ion-list *ngIf="currentStep ===22" >
+    <ion-list *ngIf="currentStep ===23" >
         <div #card_items  class="wraper">
-            <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
-                <div class="container" [ngClass]="{selected: item.selected}" >
-                <div class="name-of-item">
-                    <ion-label>{{item.name}}</ion-label>
+            <ion-card  *ngFor="let item of currentItem;let i=index" button class="" (click)="selectItem(item,i)">
+                <!-- [ngClass]="{selected: item.selected}" -->
+                <div class="container  editContainer">
+                    <div class="icon-of-item">
+                        <ion-checkbox mode="md" [checked]="item.selected" ></ion-checkbox>
+                    </div>
+                    <div class="name-of-item checkboxName">
+                        <ion-label>{{item.name}}</ion-label>
+                    </div>
+               
                 </div>
-                <div class="icon-of-item">
-                    <ion-checkbox></ion-checkbox>
-                </div>
-            </div>
-
             </ion-card>
         </div>
+        
 
     </ion-list>
 
     <ion-list *ngIf="currentStep == 24"  >
       <div class="item-main-container">
-          <div class="inner-container">
+      
+          <div class="inner-container" [ngClass]="{'errorborder': errorField}">
               <div class="price-icon">
                   <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
                   <div class="price-label">Price</div>
               </div>
               <div class="input-and-label-container">
                   <div class="input">
-                      <ion-input (ionChange)="addPrice($event)" [(ngModel)]="price" maxlength="3" dir="rtl">000,</ion-input>
+                      <ion-input  (ionChange)="addPrice($event)"  type="number" [(ngModel)]="price" maxlength="3" dir="rtl"></ion-input>
                   </div>
                   <div class="label">OMR</div>
               </div>
+             
+          </div>
+          <div class="priceError" *ngIf="errorField">
+            <span>
+                {{priceError}}
+            </span>
           </div>
 
-          <div class="inner-container">
+          <div class="inner-container" *ngIf="warrantyCheck">
             <div class="price-icon">
                 <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
                 <div class="price-label">Warranty Kilometers</div>
             </div>
             <div class="input-and-label-container">
                 <div class="input">
-                    <ion-input (ionChange)="addWarrantyKilo($event)"   [(ngModel)]="warrentyKilometer" maxlength="3" dir="rtl">000,</ion-input>
+                    <ion-input (ionChange)="addWarrantyKilo($event)" (ionFocus)="testfocus()" type="number"  [(ngModel)]="warrentyKilometer" maxlength="3" dir="rtl">000,</ion-input>
                 </div>
                 <div class="label">Kilometer</div>
             </div>
         </div>
 
 
-          <div class="inner-container">
+          <div class="inner-container" *ngIf="distanceCheck">
             <div class="price-icon">
                 <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
                 <div class="price-label">Distance Travelled</div>
             </div>
             <div class="input-and-label-container">
                 <div class="input">
-                    <ion-input (ionChange)="addDistanceTravelled($event)" [(ngModel)]="distanceTraveledKilometer" maxlength="3" dir="rtl">000,</ion-input>
+                    <ion-input (ionChange)="addDistanceTravelled($event)" (ionFocus)="testfocus()" type="number" [(ngModel)]="distanceTraveledKilometer" maxlength="3" dir="rtl">000,</ion-input>
                 </div>
                 <div class="label">
                     <ion-list>
@@ -143,12 +159,27 @@
                 <div class="icon"><ion-icon name="cash-outline"></ion-icon></div>
                 <div class="price-label">Phone Number</div>
             </div>
-            <div class="input-and-label-container">
-                <div class="input input-more-width">
-                    <ion-label>+{{currentState.value.selected.primary_phone}}</ion-label>
+            <div class="phoneSelected">
+                <div class="phoneOnly" *ngIf="!currentState.value.selected.business_phone">
+                    <div class="input input-more-width" >
+                        <ion-label>+{{currentState.value.selected.primary_phone}}</ion-label>
+                    </div>
+                    <div class="label" *ngIf="!currentState.value.selected.business_phone">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                    </div>
                 </div>
-                <div class="label">
+                <div *ngIf="currentState.value.selected.business_phone">
+                  <div style="display: flex;align-items: center;">
+                    <ion-item lines="none" class="input input-more-width">
+                        <ion-checkbox mode="md" checked="true"></ion-checkbox>
+                        <ion-label>+{{currentState.value.selected.primary_phone}}</ion-label>
+                    </ion-item>
                     <ion-icon name="information-circle-outline"></ion-icon>
+                  </div>
+                    <ion-item lines="none" class="input input-more-width" >
+                        <ion-checkbox mode="md"></ion-checkbox>
+                        <ion-label>+966 60784</ion-label>
+                    </ion-item>
                 </div>
             </div>
         </div>
@@ -174,30 +205,60 @@
         <app-special-plans></app-special-plans>
     </ion-list>
 
-
+  
     
 </div>
 
 <div *ngIf="!data" class="no-data-found">
 <ion-label>No {{this.currentState.value.name}} available yet.</ion-label>
 </div>
-
+ <!-- this div for search bar to filter make  -->
+<div class="hide" [ngClass]="{'searchInput': currentStep == 0 || currentStep==1}">
+    <img src="../../../assets/icon/additional_details/VectorSearch.svg">
+    <ion-input placeholder="Search..." (ionChange)="filterData($event)" [(ngModel)]="filteration">
+       
+    </ion-input>
+</div>
 </ion-content>
 
-<div *ngIf="currentStep === 24 || currentStep === 22 || currentStep === 25" class="select-images-button no-padding">
+<div class="select-images-button">
     <div #bottomButton class="wraper">
-    <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex()">
-      <div class="logo-and-label-container">
-  
-        <div class="label-container change-size">
-      <ion-label *ngIf="currentStep != 25">{{"NEXT"}}</ion-label>
-      <ion-label *ngIf="currentStep === 25">{{"Publish for Free"}}</ion-label>
-  </div>
-      <div class="logo no-borders no-padding">
-        <ion-icon src="../../assets/icon/select-images/Phone/Phone/Phone/arrow right.svg"></ion-icon>
+     <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex()" *ngIf="nextButton === 24 || currentStep === 23 ">
+        <div class="logo-and-label-container">
+    
+                <div class="label-container change-size">
+                    <ion-label >{{"NEXT"}}</ion-label>
+                    
+                </div>
+                <div class="logo no-borders no-padding">
+                    <ion-icon src="../../assets/icon/select-images/Phone/Phone/Phone/arrow right.svg"></ion-icon>
+                </div>
+        </div>
+     </ion-button>
+     <!-- ========== -->
+
+     <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex('updatepost')" *ngIf="currentStep === 25 && modelCtrl.publish!=0" >
+        <div class="logo-and-label-container">
+    
+                <div class="label-container change-size">
+                 
+                    <ion-label >{{"Publish"}}</ion-label>
+                </div>
+                <div class="logo no-borders no-padding">
+                    <ion-icon src="../../assets/icon/select-images/Phone/Phone/Phone/arrow right.svg"></ion-icon>
+                </div>
+        </div>
+     </ion-button>
+
+     
     </div>
-    </div>
-    </ion-button>
-  </div>
     
   </div>
+
+
+  
+  
+
+
+
+ 

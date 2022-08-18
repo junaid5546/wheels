@@ -20,9 +20,9 @@ export class SpecialPlanItemComponent implements OnInit {
   }
 
   // SELECT PLAN
-  selectPlan(planId:string, level_duration:string, index:number) {
+  selectPlan(planId:string, level_duration:string, index:number,order:number,price:number) {
     this.plans.forEach(x=>x.selected = false);
-    let obj = {id:planId, level_duration};
+    let obj = {id:planId,level_duration:level_duration,order:order,price:price};
     console.log("PLAN:", obj);
     this.modal.selectItem(obj,index);
     this.plans[index].selected = true;
