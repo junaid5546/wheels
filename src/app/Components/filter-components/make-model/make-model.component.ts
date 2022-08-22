@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit,ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { CarFiltersService  } from '../../../Services/car-filters.service';
+import { IonAccordionGroup } from '@ionic/angular';
 export interface Task {
   name: string;
   completed: boolean;
@@ -36,7 +37,8 @@ export interface Item {
 
 export class MakeModelComponent implements OnInit {
 
-
+  @ViewChild('parent', { static: true }) makeAccordian: IonAccordionGroup;
+  @ViewChild('child', { static: true }) modelAccordian: IonAccordionGroup;
   //When searching, the page should show the things that are being searched for
   //We shouldn’t select for the user. Because, we don’t know if he wants Ford Mustang GT or Ford GT or Mercedes GT.
   //So it’s better to show and expand all of the makes models trims based on that key search
@@ -115,6 +117,7 @@ updateAllModelComplete(makeIndex,modelIndex,trim) {
 searchByName(name) { //qx
   
   this.searchedText = name.detail.value;
+  this.searchedText = this.searchedText.toLocaleLowerCase();
   console.log(this.searchedText);
   if(this.searchedText == '') {
     console.log("SEARCH CLEARED");
@@ -125,7 +128,7 @@ searchByName(name) { //qx
   let foundIndex = -1;
    this.items.filter((make,index)=>{
     this.items[index].show = false;
-    if (make.name.toLocaleLowerCase() == this.searchedText.toLocaleLowerCase()) {
+    if (make.name.toLocaleLowerCase().startsWith(this.searchedText)) {
       foundIndex = index;
       this.items[index].show = true;
       this.items[index].models.forEach(element => {
@@ -141,7 +144,7 @@ searchByName(name) { //qx
 
         this.items[index].models[modelIndex].show = false;
 
-        if (model.name.toLocaleLowerCase() === this.searchedText.toLocaleLowerCase()) {
+        if (model.name.toLocaleLowerCase().startsWith(this.searchedText)) {
           console.log("IN MODEL IF");
           foundIndex = index;
           this.items[index].models[modelIndex].show = true;
@@ -149,7 +152,7 @@ searchByName(name) { //qx
         } else{
           model.trims.filter((trim,trimIndex)=>{
             this.items[index].models[modelIndex].trims[trimIndex].show = false;
-            if (trim.name.toLocaleLowerCase() == this.searchedText.toLocaleLowerCase()) {
+            if (trim.name.toLocaleLowerCase().startsWith(this.searchedText)) {
               
               console.log("IN trim IF",trim);
               foundIndex =  index;
