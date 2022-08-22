@@ -30,8 +30,7 @@ const routes: Routes = [
     children:[
       {
         component:BodyComponent,            //1
-        path:'car-body',
-        data:[],
+        path:'car-body'
       },
       {
         component:MakeModelComponent,       //2
@@ -71,7 +70,7 @@ const routes: Routes = [
       },
       {
         component:FuelComponent,          //11
-        path:'Fuel'
+        path:'car-fuel'
       },
       {
         component:TransmissionComponent,  //12
@@ -111,8 +110,7 @@ const routes: Routes = [
       },
       {
         component:WarrantyDurationComponent,      //19
-        path:'car-warranty-duration',
-        data:[],
+        path:'car-warranty-duration'
       },
       {
         path: '',

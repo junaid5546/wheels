@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 @Component({
   selector: 'app-fuel',
   templateUrl: './fuel.component.html',
@@ -7,8 +7,15 @@ import { filter } from '../../../Interface/car-filter';
 })
 export class FuelComponent implements OnInit {
 
-  constructor() { }
+  fuel:any = null;
+  constructor(private carFilter:CarFiltersService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.fuel  = this.carFilter.getFuel();
+  }
+
+  check(index){
+    this.carFilter.fuel[index].checked = !this.carFilter.fuel[index].checked;
+  }
 
 }

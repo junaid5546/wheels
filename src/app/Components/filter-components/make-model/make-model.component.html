@@ -26,7 +26,8 @@
             
             <ion-accordion-group multiple="true" value="models">
             <ion-accordion *ngFor="let model of item.models; let modelIndex=index">
-              <ion-item *ngIf="item.show" slot="header">
+              <ion-item *ngIf="model.show" slot="header">
+                <ng-container >
       <!----------------------------------------------MODELS ITEM STARTS---------------------------------------------------->
                 <mat-checkbox class="example-margin make-class model-class"
                                   [color]="modelCheckboxColor"
@@ -38,6 +39,7 @@
                                   <ion-label class="model-label">{{model.name}}</ion-label>
                     </mat-checkbox>
       <!----------------------------------------------MODELS ITEM ENDS---------------------------------------------------->
+    </ng-container>
               </ion-item>
           
               <ion-list slot="content">
@@ -49,6 +51,7 @@
                   <span class="example-list-section">
       <!----------------------------------------------TRIMS ITEM STARTS---------------------------------------------------->              
                       <ion-item *ngFor="let trim of model.trims; let trimIndex=index" >
+                        <ng-container *ngIf="trim.show">
                         <mat-checkbox class="example-margin make-class trim-class"
                                       [color]="trimCheckboxColor"
                                       [(ngModel)]="trim.completed"
@@ -57,6 +60,7 @@
                                       (ngModelChange)="updateAllModelComplete(i,modelIndex,trimIndex)">
                           <ion-label class="trims-label">{{trim.name}}</ion-label>
                         </mat-checkbox>
+                      </ng-container>
                       </ion-item>
       <!----------------------------------------------TRIMS ITEM ENDS---------------------------------------------------->
                   </span>

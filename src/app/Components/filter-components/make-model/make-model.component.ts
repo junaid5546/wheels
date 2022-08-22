@@ -36,6 +36,7 @@ export interface Item {
 
 export class MakeModelComponent implements OnInit {
 
+
   //When searching, the page should show the things that are being searched for
   //We shouldn’t select for the user. Because, we don’t know if he wants Ford Mustang GT or Ford GT or Mercedes GT.
   //So it’s better to show and expand all of the makes models trims based on that key search
@@ -72,7 +73,7 @@ export class MakeModelComponent implements OnInit {
 // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
 someComplete(makeIndex): boolean {
   console.log("Some Complete");
-  return this.items[makeIndex].models.filter(t => t.completed).length > 0 && !this.items[makeIndex].completed;
+  return this.items[makeIndex].models.filter(t => (t.completed && (t.trims.every(trim=> trim.completed).length>0))).length > 0 && !this.items[makeIndex].completed;
 }
 
 
@@ -123,25 +124,31 @@ searchByName(name) { //qx
   }
   let foundIndex = -1;
    this.items.filter((make,index)=>{
+    this.items[index].show = false;
     if (make.name.toLocaleLowerCase() == this.searchedText.toLocaleLowerCase()) {
       foundIndex = index;
-      this.items.forEach(element => {
-        element.show = false
-      });
       this.items[index].show = true;
       
     } else {
       make.models.filter((model,modelIndex) => {
+
+        this.items[index].models[modelIndex].show = false;
+
         if (model.name.toLocaleLowerCase() === this.searchedText.toLocaleLowerCase()) {
           console.log("IN MODEL IF");
-          this.items[index].models[modelIndex].completed = true;
           foundIndex = index;
+          this.items[index].models[modelIndex].show = true;
+          this.items[index].show = true;
         } else{
           model.trims.filter((trim,trimIndex)=>{
+            this.items[index].models[modelIndex].trims[trimIndex].show = false;
             if (trim.name.toLocaleLowerCase() == this.searchedText.toLocaleLowerCase()) {
+              
               console.log("IN trim IF",trim);
-              this.items[index].models[modelIndex].trims[trimIndex].completed = true;
               foundIndex =  index;
+              this.items[index].models[modelIndex].trims[trimIndex].show = true;
+              this.items[index].models[modelIndex].show = true;
+              this.items[index].show = true;
             } 
           })
         }
@@ -151,7 +158,37 @@ searchByName(name) { //qx
   console.log("RESULT: ", this.items[foundIndex]);
 }
 
+ a(){
+  let result = [].filter((make,index)=>{
 
+    if(make.name === "a"){
+        console.log("MAKE:", make,",", index)
+    }
+    
+    else {
+
+        make.model.filter((model,index)=>{
+            console.log("MODEL",model, ",",index);
+            
+            if(model.name === "searched"){
+                console.log("MODEL found:", model,',', index);    
+            } else{
+            
+                model.trim.filter((trim,index)=>{
+                console.log("TRIM:", model,',', index); 
+
+                if(trim.name === "searched"){
+                    console.log("TRIM found:", model,',', index); 
+                }
+            })
+                
+            }
+        })
+        
+    }
+    
+  });
+ }
 
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ThemePalette} from '@angular/material/core';
-import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 
 export interface Task {
   name: string;
@@ -16,37 +16,19 @@ export interface Task {
 })
 export class YearComponent implements OnInit {
 
-  allComplete: boolean = false;
-  task: Task = {
-    name: 'Select All',
-    completed: false,
-    color: 'primary',
-    subtasks: [
-      {name: '2002', completed: false, color: 'primary'},
-      {name: '2003', completed: false, color: 'warn'},
-    ],
-  };
-  constructor() { }
+  modelYear:any[] = null;
 
-  ngOnInit() {}
+  constructor(private filters:CarFiltersService) { }
 
-  updateAllComplete() {
-    this.allComplete = this.task.subtasks != null && this.task.subtasks.every(t => t.completed);
+  ngOnInit() {
+   this.modelYear =  this.filters.getModelYear();
+   console.log("YEAR: ", this.modelYear);
+   
   }
 
-  someComplete(): boolean {
-    if (this.task.subtasks == null) {
-      return false;
-    }
-    return this.task.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
+  check(index){
+    this.filters.modelYear[index].checked = !this.filters.modelYear[index].checked;
   }
 
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.task.subtasks == null) {
-      return;
-    }
-    this.task.subtasks.forEach(t => (t.completed = completed));
-  }
 
 }

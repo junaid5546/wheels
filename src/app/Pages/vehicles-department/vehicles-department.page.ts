@@ -53,21 +53,30 @@ export class VehiclesDepartmentPage implements OnInit {
       this.modalService.modelData.items[0].value = feed.result.makes;
       this.modalService.modelData.items[21].value=feed.result.governorates;
       this.modalService.modelData.items[23].value = feed.result.features;
-      // body, make, price,
-      // condition, year, extirior color
-      // Interior color, doors, cylinder 
-      // Engine Size, Fuel, Transmission
-      // Drivetrain, Seats, Origin
-      // Location, Plate, Driving Readiness
-      // Sale Type
-      //
+      this.filter.setInteriorColor(feed.result.filters[14]);
+      this.filter.setExteriorColor(feed.result.filters[13]);
+      this.filter.setPlateType(feed.result.filters[10]);
+      this.filter.setWarrentyDuration(feed.result.filters[12]);
+      this.filter.setModelYear(feed.result.filters[11]);
+      this.filter.setFuel(feed.result.filters[0]);
+      this.filter.setOrigin(feed.result.filters[1]);
+      this.filter.setInsurance(feed.result.filters[2]);
+      this.filter.setSeats(feed.result.filters[3]);
+      this.filter.setTransmission(feed.result.filters[4]);
+      this.filter.setCondition(feed.result.filters[5]);
+      this.filter.setSaleType(feed.result.filters[6]);
+      this.filter.setCylinderType(feed.result.filters[7]);
+      this.filter.setDriveTrain(feed.result.filters[8]);
+      this.filter.setDrivingReadiness(feed.result.filters[9]);
+      this.filter.setPlateType(feed.result.filters[10]);
+      
     let NewMakeModelArray =   feed.result.makes.map(make=>{
        let newModels = make.models.map(model=>{
         let newTrims = model.trims.map(trim=>{
-          let trimObj = {...trim,completed:false};
+          let trimObj = {...trim,completed:false,show:true};
           return trimObj;
         });
-          let newModel = {name:model.name,completed:false,_id:model._id,trims:newTrims};
+          let newModel = {name:model.name,completed:false,_id:model._id,trims:newTrims,show:true};
           return newModel;
         });
         let newMakeModelObject = {name:make.name, id:make._id, models:newModels, completed:false, show:true};
@@ -83,12 +92,19 @@ export class VehiclesDepartmentPage implements OnInit {
       );
       console.log("Filters:", filters);
       this.filter.getFiltersList(filters);
+
       this.filter.setMakeModelTrims(NewMakeModelArray);
-      feed.result.filters.forEach(filterElement => { 
-        
-      this.modalService.modelData.items.forEach(modelDataElement => {
+
+      this.filter.setBodies(feed.result.bodies);
+
+      feed.result.filters.forEach(filterElement => {   
+      
+        this.modalService.modelData.items.forEach(modelDataElement => {
+
         if(filterElement.name==modelDataElement.name){
+
           modelDataElement.value=filterElement.types;
+          
         }
 
       });
