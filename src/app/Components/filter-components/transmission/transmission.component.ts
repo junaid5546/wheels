@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 @Component({
   selector: 'app-transmission',
   templateUrl: './transmission.component.html',
@@ -7,8 +7,14 @@ import { filter } from '../../../Interface/car-filter';
 })
 export class TransmissionComponent implements OnInit {
 
-  constructor() { }
+  transmission:any = null;
+  constructor(private filters:CarFiltersService) { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.transmission = this.filters.getTransmission();
+  }
+  
+  check(i) {
+    this.filters.transmission[i].checked = !this.filters.transmission[i].checked;
+  }
 }

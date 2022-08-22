@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 @Component({
   selector: 'app-plate',
   templateUrl: './plate.component.html',
@@ -7,8 +7,19 @@ import { filter } from '../../../Interface/car-filter';
 })
 export class PlateComponent implements OnInit {
 
-  constructor() { }
+  plateType:any[] = null;
+  constructor(private carFilters:CarFiltersService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    let getType = this.carFilters.getPlateType();
+    this.plateType = getType.types.map(plate=>{
+      let obj = {...plate, checked:false};
+      return obj
+    })
+  }
+
+  check(index){
+
+  }
 
 }

@@ -1,3 +1,9 @@
-<p>
-  plate works!
-</p>
+<ion-content>
+  <ion-list lines="none">
+    <ion-item *ngFor="let item of plateType; let i=index">
+      <ion-checkbox mode="md" slot="start" (ionChange)="check(i)"></ion-checkbox>
+      <ion-label>{{item.name}}</ion-label>
+    </ion-item>
+   
+    </ion-list>
+</ion-content>

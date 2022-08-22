@@ -1,4 +1,5 @@
 .item-body-inner{
+    position:relative;
     background: conic-gradient(from 127deg at 0% 0%, #E8E7E7 0deg, #F4F4F4 360deg);
     border-radius: 5px;
     margin: 0;
@@ -6,7 +7,7 @@
 }
 
 ion-card{
-    padding-top: 10px;
+   // padding-top: 10px;
     .body-image{
         height: 70%;
         width: 100%;
@@ -25,4 +26,23 @@ ion-card{
          font-size: 3vw;;
     }
     }
+}
+
+.check-mark{
+   .checkmark-sharp{
+    color: white;
+   }
+    height: 20px;
+    width: 20px;
+    background: linear-gradient(225deg, #00B5DD 6.77%, #0091E2 51.04%, #0084E4 90.62%);
+    position: absolute;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.selected_border{
+    border:1px solid #00B5DD;
 }

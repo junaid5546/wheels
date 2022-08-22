@@ -30,12 +30,11 @@ const routes: Routes = [
     children:[
       {
         component:BodyComponent,            //1
-        path:'car-body',
-        data:[],
+        path:'car-body'
       },
       {
         component:MakeModelComponent,       //2
-        path:'car-make-model'
+        path:'car-make'
       },
       {
         component:PriceComponent,           //3
@@ -71,7 +70,7 @@ const routes: Routes = [
       },
       {
         component:FuelComponent,          //11
-        path:'Fuel'
+        path:'car-fuel'
       },
       {
         component:TransmissionComponent,  //12
@@ -83,7 +82,7 @@ const routes: Routes = [
       },
       {
         component:SeatsComponent,         //14
-        path:'car-seats'
+        path:'car-seat'
       },
       {
         component:OriginComponent,        //15
@@ -111,8 +110,11 @@ const routes: Routes = [
       },
       {
         component:WarrantyDurationComponent,      //19
-        path:'car-warranty-duration',
-        data:[],
+        path:'car-warranty-duration'
+      },
+      {
+        component:DoorsComponent,      //19
+        path:'car-doors'
       },
       {
         path: '',

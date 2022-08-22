@@ -1,71 +1,265 @@
 import { Injectable } from '@angular/core';
-import { FiltersService } from 'dm-api';
 import { filter, Observable, BehaviorSubject } from 'rxjs';
-import { Car } from '../Interface/cars';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarFiltersService {
-  Filters:any;
-  year = new BehaviorSubject<any[]>([]);
-  fueltype = new BehaviorSubject<any[]>([]);
-  origins = new BehaviorSubject<any[]>([]);
-  insurance = new BehaviorSubject<any[]>([]);
-  seatType = new BehaviorSubject<any[]>([]);
-  transmission = new BehaviorSubject<any[]>([]);
-  condition = new BehaviorSubject<any[]>([]);
-  saleType = new BehaviorSubject<any[]>([]);
-  cylinder = new BehaviorSubject<any[]>([]);
-  drivetrain = new BehaviorSubject<any[]>([]);
-  driving_readiness = new BehaviorSubject<any[]>([]);
-  body = new BehaviorSubject<any[]>([]);
-  exteriorColor = new BehaviorSubject<any[]>([]);
-  interiorColor = new BehaviorSubject<any[]>([]);
-  state = new BehaviorSubject<any[]>([]);
-  warrentyDuration = new BehaviorSubject<any[]>([]);
-  warrentyDistance = new BehaviorSubject<any[]>([]);
-  feature = new BehaviorSubject<any[]>([]);
-  plateType = new BehaviorSubject<any[]>([]);
 
-  private filterSource = new BehaviorSubject<any[]>([]);
+  paginationOfMakeModelTrim:number = 10;
+
+  Filters:any;
+  interiorColor:any = null;
+  exteriorColor:any = null;
+  makeModelTrim:any = null;
+  bodies:any = null;
+  plateType:any = null;
+  warrentyDuration:any = null;
+  modelYear:any = null;
+  driveTrain:any = null;
+  drivingReadiness:any=null;
+  cylinders:any=null;
+  saleType:any = null;
+  condition:any=null;
+  transmission:any=null;
+  seats:any=null;
+  insurance:any=null;
+  origin:any=null;
+  fuel:any=null;
+  engineSize:any=null;
+  doors:any = null;
+
+  filterSource = new BehaviorSubject<any[]>([]);
+
   data$ = this.filterSource.asObservable();
 
+
   private plansSource=new BehaviorSubject<any[]>([]);
+
   plansData=this.plansSource.asObservable();
-  constructor(private carFilters: FiltersService) {
-    // FETCH FILTERS LIST AND ASSIGN IT TO LOCAL VARIABLE.
-    // this.carFilters.getVehicleFilters().then((filters: any) => {
-    //   if (filters.code === 200) {
-    //     this.year.next(filters.result[11]);
-    //     this.fueltype.next(filters.result[0].types);
-    //     this.origins.next(filters.result[1].types);
-    //     this.insurance.next(filters.result[2].types);
-    //     this.seatType.next(filters.result[3].types);
-    //     this.transmission.next(filters.result[4].types);
-    //     this.condition.next(filters.result[5].types);
-    //     this.saleType.next(filters.result[6].types);
-    //     this.cylinder.next(filters.result[7].types);
-    //     this.drivetrain.next(filters.result[8].types);
-    //     this.driving_readiness.next(filters.result[9].types);
-    //     this.plateType.next(filters.result[10]);
-    //     this.warrentyDuration.next(filters.result[12]);
-    //     this.exteriorColor.next(filters.result[13]);
-    //     this.interiorColor.next(filters.result[14]);
-    //   } else {
-    //     // API FAILED TO LOAD
-    //   }
-    // });
+  
+  constructor() {
+  
   }
 
-  getFiltersList(Filters:[]){
+
+  getFiltersList(Filters:any){
     this.filterSource.next(Filters);
   }
 
-// MOVE PLANS TO PLANS COMPONENT
+  setMakeModelTrims(makeModelTrim){
+    this.makeModelTrim = makeModelTrim;
+  }
 
-getPlans(plans:[]){
-   this.plansSource.next(plans);
-}
+  setBodies(bodies:any){
+    this.bodies =  bodies.map(element => {
+      let obj = {...element,checked:false};
+      return obj;
+    });;
+  }
+
+  getBodies(){
+    return this.bodies;
+  }
+
+  getMakeModelTrims(){
+    this.makeModelTrim.slice(0,this.paginationOfMakeModelTrim);
+    return this.makeModelTrim
+  }
+
+  setInteriorColor(interiorColor:any) {
+    console.log("Interior color set",interiorColor);
+    this.interiorColor = interiorColor.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  setExteriorColor(exteriorColor:any){
+    console.log("Exterior color set",exteriorColor);
+    this.exteriorColor = exteriorColor.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  setPlateType(plateType:any) {
+    this.plateType = plateType;
+  }
+
+  getPlateType(){
+    return this.plateType;
+  }
+
+  getInteriorColor(){
+    return this.interiorColor;
+  };
+
+  getExteriorColor(){
+
+    return this.exteriorColor;
+  };
+
+  setWarrentyDuration(warrantyDuration:any) {
+    this.warrentyDuration = warrantyDuration.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });;
+  }
+
+  getWarrentyDuration(){
+    return this.warrentyDuration;
+  };
+
+  setModelYear(modelYear:any){
+    this.modelYear = modelYear.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getModelYear(){
+    return this.modelYear;
+  }
+
+  setFuel(fuel:any) {
+    this.fuel = fuel.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getFuel() {
+    return this.fuel;
+  }
+
+  setOrigin(origin:any) {
+    this.origin = origin.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getOrigin(){
+    return this.origin;
+  }
+
+  setInsurance(insurance:any) {
+    this.insurance = insurance.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getInsurance(){
+    return this.insurance;
+  }
+
+  setSeats(seats:any) {
+    this.seats = seats.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getSeats(){
+    return this.seats;
+  }
+
+  setTransmission(transmission:any){
+    this.transmission = transmission.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getTransmission(){
+    return this.transmission;
+  }
+
+  setCondition(condition:any){
+  this.condition =   condition.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getCondition(){
+    return this.condition;
+  }
+
+  setSaleType(saleType:any){
+    this.saleType =  saleType.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getSaleType(){
+    return this.saleType;
+  }
+
+  setCylinderType(cylinderType:any){
+    this.cylinders = cylinderType.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getCylinderType(){
+    return this.cylinders;
+  }
+
+  setDriveTrain(drivetrain:any){
+    this.driveTrain = drivetrain.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getDrivTrain(){
+    return this.driveTrain;
+  }
+
+  setDrivingReadiness(readiness:any){
+    this.drivingReadiness = readiness.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getDrivingReadiness(){
+    return this.drivingReadiness;
+  }
+
+  setEngineSize(engineSize:any){
+    this.engineSize = engineSize.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+
+  }
+
+  getEngineSize(){
+    return this.engineSize;
+  }
+
+  // MOVE PLANS TO PLANS COMPONENT
+
+  getPlans(plans:[]){
+    this.plansSource.next(plans);
+  }
+
+  setDoors(door:any) {
+    this.doors = door.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getDoors() {
+    return this.doors;
+  }
+
 
 }
