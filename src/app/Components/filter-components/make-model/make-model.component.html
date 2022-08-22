@@ -42,26 +42,28 @@
     </ng-container>
               </ion-item>
           
-              <ion-list slot="content">
+              <ion-list slot="content" *ngIf="model.show">
                 <section class="example-section">
       
                   <span class="example-list-section">
                     
                   </span>
-                  <span class="example-list-section">
-      <!----------------------------------------------TRIMS ITEM STARTS---------------------------------------------------->              
-                      <ion-item *ngFor="let trim of model.trims; let trimIndex=index" >
-                        <ng-container *ngIf="trim.show">
-                        <mat-checkbox class="example-margin make-class trim-class"
-                                      [color]="trimCheckboxColor"
-                                      [(ngModel)]="trim.completed"
-                                      [checked]="trim.completed"
-                                      (change)="updateMake(i,modelIndex,trimIndex)"
-                                      (ngModelChange)="updateAllModelComplete(i,modelIndex,trimIndex)">
-                          <ion-label class="trims-label">{{trim.name}}</ion-label>
-                        </mat-checkbox>
-                      </ng-container>
-                      </ion-item>
+                  <span  class="example-list-section">
+      <!----------------------------------------------TRIMS ITEM STARTS---------------------------------------------------->
+      <ng-container *ngFor="let trim of model.trims; let trimIndex=index" >
+        <ion-item *ngIf="trim.show">
+                        
+          <mat-checkbox  class="example-margin make-class trim-class"
+                        [color]="trimCheckboxColor"
+                        [(ngModel)]="trim.completed"
+                        [checked]="trim.completed"
+                        (change)="updateMake(i,modelIndex,trimIndex)"
+                        (ngModelChange)="updateAllModelComplete(i,modelIndex,trimIndex)">
+            <ion-label class="trims-label">{{trim.name}}</ion-label>
+          </mat-checkbox>
+        </ion-item>
+      </ng-container>             
+                      
       <!----------------------------------------------TRIMS ITEM ENDS---------------------------------------------------->
                   </span>
                 </section>

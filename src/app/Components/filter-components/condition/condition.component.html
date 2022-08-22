@@ -1,19 +1,8 @@
 <ion-content>
-<div class="condition-main-container">
-  <div class="inner-container">
-    <section class="example-section">
-      <span class="example-list-section">
-      <ion-item *ngFor="let subtask of task.subtasks">
-         
-            <mat-checkbox [(ngModel)]="subtask.completed"
-                          [color]="subtask.color"
-                          (ngModelChange)="updateAllComplete()">
-              {{subtask.name}}
-            </mat-checkbox>
-         
-        </ion-item>
-      </span>
-    </section>
-  </div>
-</div>
+  <ion-list lines="none">
+    <ion-item *ngFor="let item of condition; let i=index">
+      <ion-checkbox [checked]="item.checked" mode="md" slot="start" (ionChange)="check(i)"></ion-checkbox>
+      <ion-label>{{item.name}}</ion-label>
+    </ion-item>
+    </ion-list>
 </ion-content>

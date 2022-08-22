@@ -53,23 +53,24 @@ export class VehiclesDepartmentPage implements OnInit {
       this.modalService.modelData.items[0].value = feed.result.makes;
       this.modalService.modelData.items[21].value=feed.result.governorates;
       this.modalService.modelData.items[23].value = feed.result.features;
-      this.filter.setInteriorColor(feed.result.filters[14]);
-      this.filter.setExteriorColor(feed.result.filters[13]);
-      this.filter.setPlateType(feed.result.filters[10]);
+      this.filter.setInteriorColor(feed.result.filters[3]);
+      this.filter.setExteriorColor(feed.result.filters[2]);
+      this.filter.setPlateType(feed.result.filters[13]);
       this.filter.setWarrentyDuration(feed.result.filters[12]);
-      this.filter.setModelYear(feed.result.filters[11]);
-      this.filter.setFuel(feed.result.filters[0]);
-      this.filter.setOrigin(feed.result.filters[1]);
-      this.filter.setInsurance(feed.result.filters[2]);
-      this.filter.setSeats(feed.result.filters[3]);
-      this.filter.setTransmission(feed.result.filters[4]);
-      this.filter.setCondition(feed.result.filters[5]);
-      this.filter.setSaleType(feed.result.filters[6]);
-      this.filter.setCylinderType(feed.result.filters[7]);
-      this.filter.setDriveTrain(feed.result.filters[8]);
-      this.filter.setDrivingReadiness(feed.result.filters[9]);
-      this.filter.setPlateType(feed.result.filters[10]);
-      
+      this.filter.setModelYear(feed.result.filters[1]);
+      this.filter.setFuel(feed.result.filters[7]);
+      this.filter.setOrigin(feed.result.filters[11]);
+      this.filter.setInsurance(feed.result.filters[12]);
+      this.filter.setSeats(feed.result.filters[10]);
+      this.filter.setTransmission(feed.result.filters[8]);
+      this.filter.setCondition(feed.result.filters[0]);
+      this.filter.setSaleType(feed.result.filters[15]);
+      this.filter.setCylinderType(feed.result.filters[5]);
+      this.filter.setDriveTrain(feed.result.filters[9]);
+      this.filter.setDrivingReadiness(feed.result.filters[14]);
+      this.filter.setPlateType(feed.result.filters[13]);
+      this.filter.setEngineSize(feed.result.filters[6]);
+      this.filter.setDoors(feed.result.filters[4]);
     let NewMakeModelArray =   feed.result.makes.map(make=>{
        let newModels = make.models.map(model=>{
         let newTrims = model.trims.map(trim=>{
