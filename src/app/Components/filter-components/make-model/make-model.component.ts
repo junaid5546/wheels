@@ -75,7 +75,7 @@ export class MakeModelComponent implements OnInit {
 // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
 someComplete(makeIndex): boolean {
   console.log("Some Complete");
-  return this.items[makeIndex].models.filter(t => (t.completed && (t.trims.every(trim=> trim.completed).length>0))).length > 0 && !this.items[makeIndex].completed;
+  return this.items[makeIndex].models.filter(t => t.completed ).length > 0 && !this.items[makeIndex].completed;
 }
 
 

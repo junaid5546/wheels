@@ -7,7 +7,7 @@
           <ion-label>Max Price</ion-label>
         </div>
         <div class="input-container">
-          <ion-input maxlength="3" dir="rtl">000,</ion-input>
+          <ion-input maxlength="7" dir="rtl">  {{1000000|number:'1.0':'en-US'}} </ion-input>
           <ion-label>OMR</ion-label>
         </div>
       </div>
@@ -16,13 +16,13 @@
           <ion-label>Min Price</ion-label>
         </div>  
         <div class="input-container">
-          <ion-input maxlength="3" dir="rtl">000,</ion-input>
+          <ion-input maxlength="7" dir="rtl"> {{999999|number:'1.0':'en-US'}}</ion-input>
           <ion-label>OMR</ion-label>
         </div>
       </div>
     </div>
     <div class="right">
-      <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
+      <ngx-slider [(value)]="value" [options]="options "></ngx-slider>
     </div>
   </div>
 </div>

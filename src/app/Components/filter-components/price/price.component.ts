@@ -9,13 +9,20 @@ import { filter } from '../../../Interface/car-filter';
   styleUrls: ['./price.component.scss'],
 })
 export class PriceComponent implements OnInit,AfterViewInit {
-  maximum:string = ",000"
-  minimum:string = ",000"
+  maximum:number = 1000000;
+  minimum:number = 100;
   value: number = 100;
   options: Options = {
-    floor: 0,
-    ceil: 200,
-    vertical: true
+    floor: 100,
+    ceil: 1000000,
+    vertical: true,
+    translate: (value: number): string => {
+      if(value == 1000000){
+      return '1m';
+      } else {
+        return `${value}`;
+      }
+    },
   };
   @ViewChild(IonInput,{static:false}) input:IonInput;
   constructor(private deviceInfo:DeviceInfoService) { }

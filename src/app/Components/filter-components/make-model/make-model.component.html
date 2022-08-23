@@ -9,7 +9,7 @@
 
       <ion-accordion-group  #parent multiple="true">
         <ng-container *ngFor="let item of items; let i=index">
-        <ion-accordion [value]="item.show">
+        <ion-accordion>
           <ion-item slot="header" *ngIf="item.show">
       <!----------------------------------------------MAKE ITEM STARTS---------------------------------------------------->
             <mat-checkbox class="example-margin make-class"
@@ -25,7 +25,7 @@
             
             <ion-accordion-group #child  multiple="true" value="models">
               <ng-container *ngFor="let model of item.models; let modelIndex=index">
-            <ion-accordion [value]="model.show">
+            <ion-accordion>
               <ion-item *ngIf="model.show" slot="header">
                 <ng-container >
       <!----------------------------------------------MODELS ITEM STARTS---------------------------------------------------->

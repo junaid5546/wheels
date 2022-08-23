@@ -7,8 +7,12 @@ import { filter, Observable, BehaviorSubject } from 'rxjs';
 export class CarFiltersService {
 
   paginationOfMakeModelTrim:number = 10;
-
+  currentProcess:string = null;
+  filterObject:any = {
+  
+  };
   Filters:any;
+
   interiorColor:any = null;
   exteriorColor:any = null;
   makeModelTrim:any = null;
@@ -30,12 +34,8 @@ export class CarFiltersService {
   doors:any = null;
 
   filterSource = new BehaviorSubject<any[]>([]);
-
   data$ = this.filterSource.asObservable();
-
-
   private plansSource=new BehaviorSubject<any[]>([]);
-
   plansData=this.plansSource.asObservable();
   
   constructor() {
