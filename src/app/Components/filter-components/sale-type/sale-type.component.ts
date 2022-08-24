@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 @Component({
   selector: 'app-sale-type',
   templateUrl: './sale-type.component.html',
@@ -7,8 +7,15 @@ import { filter } from '../../../Interface/car-filter';
 })
 export class SaleTypeComponent implements OnInit {
 
-  constructor() { }
+  saleType:any = null;
+  constructor(private carFilter:CarFiltersService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.saleType  = this.carFilter.getDrivingReadiness();
+  }
+
+  check(index){
+    this.carFilter.saleType[index].checked = !this.carFilter.saleType[index].checked;
+  }
 
 }

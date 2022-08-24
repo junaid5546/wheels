@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from '../../../Interface/car-filter';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CarFiltersService } from '../../../Services/car-filters.service';
 @Component({
   selector: 'app-body',
@@ -8,22 +7,21 @@ import { CarFiltersService } from '../../../Services/car-filters.service';
   styleUrls: ['./body.component.scss'],
 })
 export class BodyComponent implements OnInit {
-  
+  label:string = null;
   bodies:any[] = [];
 
   checkCurrentItem(item,index){
     this.carFilters.bodies[index].checked = !this.carFilters.bodies[index].checked;
     console.log("Current Clickec item: " , item);
+    this.carFilters.filterObject[this.label].push(item.name);
   }
   
-  constructor(private router:Router, private carFilters:CarFiltersService) { }
+  constructor( private carFilters:CarFiltersService, private activated:ActivatedRoute) { }
 
   ngOnInit() {
-    //this.body = JSON.parse(this.router.snapshot.params.data);
-    //this.body =  this.router.getCurrentNavigation().extras.state;
+    this.label = this.activated.snapshot.params.label;
     this.bodies = this.carFilters.getBodies();
-    console.log("Car body in bodies",this.carFilters.getBodies());
-    
+    this.carFilters.filterObject[this.label] = [];
   }
 
 }
