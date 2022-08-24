@@ -18,6 +18,7 @@ import { WarrantyDurationComponent } from 'src/app/Components/filter-components/
 import { PlateComponent } from 'src/app/Components/filter-components/plate/plate.component';
 import { FuelComponent } from 'src/app/Components/filter-components/fuel/fuel.component';
 import { OriginComponent } from 'src/app/Components/filter-components/origin/origin.component';
+import { LocationComponent } from 'src/app/Components/filter-components/location/location.component';
 import { EngineSizeComponent } from 'src/app/Components/filter-components/engine-size/engine-size.component';
 import { CylindersComponent } from 'src/app/Components/filter-components/cylinders/cylinders.component';
 import { DoorsComponent } from 'src/app/Components/filter-components/doors/doors.component';
@@ -40,6 +41,7 @@ import { SaleTypeComponent } from 'src/app/Components/filter-components/sale-typ
     
   ],
 
-  declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent,WarrantyDurationComponent,PlateComponent,FuelComponent,OriginComponent,EngineSizeComponent,CylindersComponent,DoorsComponent,TransmissionComponent,DrivetrainComponent,SeatsComponent,InsuranceComponent,ReadlinessComponent,SaleTypeComponent]
+  declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent,WarrantyDurationComponent,PlateComponent,FuelComponent,OriginComponent,EngineSizeComponent,CylindersComponent,DoorsComponent,TransmissionComponent,DrivetrainComponent,SeatsComponent,InsuranceComponent,ReadlinessComponent,SaleTypeComponent,LocationComponent]
+
 })
 export class FilterPageModule {}

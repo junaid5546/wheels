@@ -89,10 +89,12 @@ export class VehiclesDepartmentPage implements OnInit {
       filters.push(
         {name:"Make", path:'car-make',types:feed.result.makes },
         {name:"Body", path:'car-body',},
-        {name:"Price",path:'car-price'}
+        {name:"Price",path:'car-price'},
+        {name:"Location",path:"car-location",types:feed.result.governorates}
       );
       console.log("Filters:", filters);
       this.filter.getFiltersList(filters);
+      this.filter.getLocations(feed.result.governorates);
 
       this.filter.setMakeModelTrims(NewMakeModelArray);
 
