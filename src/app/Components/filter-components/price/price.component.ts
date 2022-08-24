@@ -1,5 +1,5 @@
 import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
-import { Options } from '@angular-slider/ngx-slider';
+import { ChangeContext, Options, PointerType } from '@angular-slider/ngx-slider';
 import { DeviceInfoService } from '../../../Services/device-info.service';
 import { IonInput } from '@ionic/angular';
 import { filter } from '../../../Interface/car-filter';
@@ -9,20 +9,58 @@ import { filter } from '../../../Interface/car-filter';
   styleUrls: ['./price.component.scss'],
 })
 export class PriceComponent implements OnInit,AfterViewInit {
-  maximum:string = ",000"
-  minimum:string = ",000"
-  value: number = 100;
+ // maximum:number = 1000000;
+ // minimum:number = 100;
+  //value: number = 100;
+  //highValue: number = 1000000;
+  // options: Options = {
+  //   floor: 0,
+  //   ceil: 1000000,
+  //   step: 500,
+  //   vertical: true,
+  //   noSwitching: true,
+  //   enforceStep: false,
+  //   enforceRange: false,
+  //   // translate: (value: number): string => {
+  //   //   if(value == 1000000){
+  //   //   return '1m';
+  //   //   } else {
+  //   //     return `${value}`;
+  //   //   }
+  //   // },
+  // };
+  // maxValue:any;
+  // minValue:any;
+  // minimum: number = 0;
+  // maximum: number = 1000000;
+  // options: Options = {
+  //   floor: 0,
+  //   ceil: 1000000,
+  //   step: 500,
+  //   noSwitching: true,
+  //   vertical: true,
+   
+  // };
+  minValue: number = 0;
+  maxValue: number = 1000000;
+  lastMin:number=0;
+  lastMax:number=1000000;
   options: Options = {
     floor: 0,
-    ceil: 200,
-    vertical: true
+    ceil: 1000000,
+    noSwitching: true,
+    vertical: true,
   };
+  
   @ViewChild(IonInput,{static:false}) input:IonInput;
   constructor(private deviceInfo:DeviceInfoService) { }
 
   ngAfterViewInit(): void {
     this.makeInnerHeight();
-    this.checkInput()
+    setTimeout(() => {
+      this.checkInput();
+    },150);
+    
   }
 
   ngOnInit() {
@@ -36,12 +74,27 @@ export class PriceComponent implements OnInit,AfterViewInit {
 
   focusOn(ev){
     console.log("Focus:",ev);
-
+   
   }
 
   checkInput() {
     this.input.setFocus().then(res=>{
       console.log("Settting focus: ", res);
     })
+  }
+  getChangeContextString(changeContext: ChangeContext) {
+
+    //“price”:{“min”:5000, “max”:8000},
+    console.log(`{“min”:${changeContext.value}, “max”:${changeContext.highValue}}`);
+  }
+  getInputValue(e,type){
+    if(type=='minValue'){
+        console.log("min",e.detail.value);
+        this.lastMin=e.detail.value;
+    }else if(type=='maxValue'){
+      console.log("max",e.detail.value);
+      this.lastMax=e.detail.value;
+    }
+  console.log(this.lastMax,this.lastMin)
   }
 }

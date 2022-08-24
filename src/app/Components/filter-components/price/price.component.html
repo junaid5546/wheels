@@ -1,29 +1,43 @@
 <ion-content>
-<div id="car-price" class="car-price">
-  <div class="inner-container">
-    <div class="left">
-      <div class="max-price-container">
-        <div class="label-container">
-          <ion-label>Max Price</ion-label>
+  <div id="car-price" class="car-price">
+    <div class="inner-container">
+      <div class="left">
+        <div class="max-price-container">
+          <div class="label-container">
+            <ion-label>Max Price</ion-label>
+          </div>
+          <div class="input-container">
+            <ion-input #input type="number" [(ngModel)]="maxValue" (ionChange)="getInputValue($event,'maxValue')"></ion-input>
+            <ion-label>OMR</ion-label>
+          </div>
         </div>
-        <div class="input-container">
-          <ion-input maxlength="3" dir="rtl">000,</ion-input>
-          <ion-label>OMR</ion-label>
+        <div class="min-price-container">
+          <div class="label-container">
+            <ion-label>Min Price</ion-label>
+          </div>
+          <div class="input-container">
+            <ion-input type="number" [(ngModel)]="minValue" (ionChange)="getInputValue($event,'minValue')"></ion-input>
+            <ion-label>OMR</ion-label>
+          </div>
         </div>
       </div>
-      <div class="min-price-container">
-        <div class="label-container">
-          <ion-label>Min Price</ion-label>
-        </div>  
-        <div class="input-container">
-          <ion-input maxlength="3" dir="rtl">000,</ion-input>
-          <ion-label>OMR</ion-label>
-        </div>
+      <div class="right">
+        <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="getChangeContextString($event)"></ngx-slider>
+        <!-- <ngx-slider [(value)]="value"  [options]="options"></ngx-slider> -->
       </div>
-    </div>
-    <div class="right">
-      <ngx-slider [(value)]="value" [options]="options"></ngx-slider>
     </div>
   </div>
-</div>
-</ion-content>
+  </ion-content>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
