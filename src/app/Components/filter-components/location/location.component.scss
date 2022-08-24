@@ -1,0 +1,25 @@
+ion-searchbar{
+    background-color: white;
+    --background: white;
+    border: solid 1px #00B5DD;
+    width: 92%;
+    margin: auto;
+    border-radius: 6px;
+    --box-shadow: none;   
+}
+.ios{
+    ion-searchbar{
+        padding-top: 12px;
+        height: 36px;
+    }
+}
+ion-toolbar{
+    --background: white;
+}
+ion-accordion{
+    ion-item{
+        border-bottom: 0.4px solid #898989;
+    }
+}
+
+

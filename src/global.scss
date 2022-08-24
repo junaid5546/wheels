@@ -230,3 +230,13 @@ html[dir="rtl"]{
 ion-content:has(.markScroll) {
   overflow: hidden !important;
 }
+
+
+.location{
+  .searchbar-input-container {
+      input{
+          font-size: 14px !important;
+          padding-right:0 !important
+      }
+  }
+}

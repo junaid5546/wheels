@@ -18,6 +18,7 @@ import { WarrantyDurationComponent } from 'src/app/Components/filter-components/
 import { PlateComponent } from 'src/app/Components/filter-components/plate/plate.component';
 import { FuelComponent } from 'src/app/Components/filter-components/fuel/fuel.component';
 import { OriginComponent } from 'src/app/Components/filter-components/origin/origin.component';
+import { LocationComponent } from 'src/app/Components/filter-components/location/location.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,6 @@ import { OriginComponent } from 'src/app/Components/filter-components/origin/ori
     
   ],
 
-  declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent,WarrantyDurationComponent,PlateComponent,FuelComponent,OriginComponent]
+  declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent,WarrantyDurationComponent,PlateComponent,FuelComponent,OriginComponent,LocationComponent]
 })
 export class FilterPageModule {}

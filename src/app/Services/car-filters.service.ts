@@ -11,6 +11,7 @@ export class CarFiltersService {
   Filters:any;
   interiorColor:any = null;
   exteriorColor:any = null;
+  
   makeModelTrim:any = null;
   bodies:any = null;
   plateType:any = null;
@@ -28,13 +29,14 @@ export class CarFiltersService {
   fuel:any=null;
 
   filterSource = new BehaviorSubject<any[]>([]);
-
   data$ = this.filterSource.asObservable();
 
 
   private plansSource=new BehaviorSubject<any[]>([]);
-
   plansData=this.plansSource.asObservable();
+//GOVERNERATE
+  locationSource = new BehaviorSubject<any[]>([]);
+  locations$ = this.locationSource.asObservable();
   
   constructor() {
   
@@ -43,6 +45,13 @@ export class CarFiltersService {
 
   getFiltersList(Filters:any){
     this.filterSource.next(Filters);
+  }
+  getLocations(Locations:any){
+    let x=Locations.map(element=>{
+      let obj = {...element,checked:false,show:true};
+      return obj;
+    })
+    this.locationSource.next(x);
   }
 
   setMakeModelTrims(makeModelTrim){
@@ -72,6 +81,7 @@ export class CarFiltersService {
       return obj;
     });
   }
+  
 
   setExteriorColor(exteriorColor:any){
     console.log("Exterior color set",exteriorColor);
@@ -97,6 +107,7 @@ export class CarFiltersService {
 
     return this.exteriorColor;
   };
+  
 
   setWarrentyDuration(warrantyDuration:any) {
     this.warrentyDuration = warrantyDuration.types.map(x=>{

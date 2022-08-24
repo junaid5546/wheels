@@ -1,11 +1,11 @@
 .car-price{
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 16px;
     .inner-container{
         display: flex;
         justify-content: space-around;
-        height: 50%;
+        height: 75%;
         .right{
             margin-right: 20px;
         }
