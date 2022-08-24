@@ -50,7 +50,16 @@ export class PriceComponent implements OnInit,AfterViewInit {
     floor: 0,
     ceil: 1000000,
     noSwitching: true,
+    step: 500,
+    enforceStep: false,
     vertical: true,
+     translate: (value: number): string => {
+    if(value == 1000000){
+    return '1m';
+     } else {
+      return `${value}`;
+    }
+  },
   };
   
   @ViewChild(IonInput,{static:false}) input:IonInput;
