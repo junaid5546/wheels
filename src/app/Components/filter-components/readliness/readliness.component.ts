@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 @Component({
   selector: 'app-readliness',
   templateUrl: './readliness.component.html',
@@ -7,8 +7,15 @@ import { filter } from '../../../Interface/car-filter';
 })
 export class ReadlinessComponent implements OnInit {
 
-  constructor() { }
+  drivingReadiness:any = null;
+  constructor(private carFilter:CarFiltersService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.drivingReadiness  = this.carFilter.getDrivingReadiness();
+  }
+
+  check(index){
+    this.carFilter.drivingReadiness[index].checked = !this.carFilter.drivingReadiness[index].checked;
+  }
 
 }

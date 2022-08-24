@@ -9,6 +9,7 @@ import { filter } from '../../../Interface/car-filter';
   styleUrls: ['./price.component.scss'],
 })
 export class PriceComponent implements OnInit,AfterViewInit {
+
  // maximum:number = 1000000;
  // minimum:number = 100;
   //value: number = 100;

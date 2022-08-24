@@ -26,6 +26,8 @@ import { TransmissionComponent } from 'src/app/Components/filter-components/tran
 import { DrivetrainComponent } from 'src/app/Components/filter-components/drivetrain/drivetrain.component';
 import { SeatsComponent } from 'src/app/Components/filter-components/seats/seats.component';
 import { InsuranceComponent } from 'src/app/Components/filter-components/insurance/insurance.component';
+import { ReadlinessComponent } from 'src/app/Components/filter-components/readliness/readliness.component';
+import { SaleTypeComponent } from 'src/app/Components/filter-components/sale-type/sale-type.component';
 
 @NgModule({
   imports: [
@@ -38,6 +40,8 @@ import { InsuranceComponent } from 'src/app/Components/filter-components/insuran
     FilterPageRoutingModule,
     
   ],
-  declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent,WarrantyDurationComponent,PlateComponent,FuelComponent,OriginComponent,EngineSizeComponent,CylindersComponent,DoorsComponent,TransmissionComponent,DrivetrainComponent,SeatsComponent,InsuranceComponent,LocationComponent]
+
+  declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent,WarrantyDurationComponent,PlateComponent,FuelComponent,OriginComponent,EngineSizeComponent,CylindersComponent,DoorsComponent,TransmissionComponent,DrivetrainComponent,SeatsComponent,InsuranceComponent,ReadlinessComponent,SaleTypeComponent,LocationComponent]
+
 })
 export class FilterPageModule {}

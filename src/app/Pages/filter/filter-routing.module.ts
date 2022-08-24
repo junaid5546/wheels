@@ -42,39 +42,39 @@ const routes: Routes = [
       },
       {
         component:ConditionComponent,       //4
-        path:'car-condition'
+        path:'Condition'
       },
       {
         component:YearComponent,            //5
-        path:'car-year'
+        path:'Kyear'
       },
       {
         component:ExteriorColorComponent,  //6
-        path:'car-exterior-color'
+        path:'exterior_color'
       },
       {
         component:InteriorColorComponent,  //7
-        path:'car-interior-color'
+        path:'interior_color'
       },
       {
         component:DoorsComponent,         //8
-        path:'car-doors'
+        path:'Kdoor'
       },
       {
         component:CylindersComponent,     //9
-        path:'car-cylinder-count'
+        path:'cylinder_count'
       },
       {
         component:EngineSizeComponent,    //10
-        path:'car-engine-size'
+        path:'engine_size'
       },
       {
         component:FuelComponent,          //11
-        path:'car-fuel'
+        path:'fuel'
       },
       {
         component:TransmissionComponent,  //12
-        path:'car-transmission'
+        path:'transmission'
       },
       {
         component:DrivetrainComponent,    //13
@@ -82,11 +82,11 @@ const routes: Routes = [
       },
       {
         component:SeatsComponent,         //14
-        path:'car-seat'
+        path:'seats'
       },
       {
         component:OriginComponent,        //15
-        path:'car-origins'
+        path:'origin'
       },
       {
         component:LocationComponent,      //16
@@ -94,15 +94,15 @@ const routes: Routes = [
       },
       {
         component:PlateComponent,         //17
-        path:'car-plate'
+        path:'plate_type'
       },
       {
         component:ReadlinessComponent,    //18
-        path:'car-readliness'
+        path:'driving_readiness'
       },
       {
         component:SaleTypeComponent,      //19
-        path:'car-sale-type'
+        path:'sale_type'
       },
       {
         component:InsuranceComponent,      //19
@@ -111,10 +111,6 @@ const routes: Routes = [
       {
         component:WarrantyDurationComponent,      //19
         path:'car-warranty-duration'
-      },
-      {
-        component:DoorsComponent,      //19
-        path:'car-doors'
       },
       {
         path: '',

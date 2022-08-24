@@ -232,9 +232,8 @@ export class FilterPage implements OnInit, AfterViewInit {
     this.filters[this.selectedIndex].selected = false;
     this.filters[index].selected = true;
     this.selectedIndex = index;
-
-    this.router.navigate([`filter/${url}`]);
-    console.log('URL: ', url);
+    this.filterPost.currentProcess = url;
+    this.router.navigate([`filter/${url}`,{label:this.filterPost.currentProcess}]);
   }
 
   addFilter(name: string, value: string) {
