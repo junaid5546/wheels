@@ -19,6 +19,12 @@ export class EngineSizeComponent implements OnInit {
 
   check(item,index){
     this.carFilter.engineSize[index].checked = !this.carFilter.engineSize[index].checked;
-    this.carFilter.filterObject[this.label].push(item.name);
+    if( this.carFilter.engineSize[index].checked ){
+
+      this.carFilter.filterObject[this.label].push(item.name);
+    }else{
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+    }
   }
 }

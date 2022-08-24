@@ -9,16 +9,22 @@ import { ActivatedRoute } from '@angular/router';
 export class DrivetrainComponent implements OnInit {
   label:string = null;
   drivtrain:any = null;
-  constructor(private filter:CarFiltersService,private activated:ActivatedRoute) { }
+  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
-    this.drivtrain = this.filter.getDrivTrain();
+    this.drivtrain = this.carFilter.getDrivTrain();
   }
 
-  check(item,i){
-    this.filter.driveTrain[i].checked = !this.filter.driveTrain[i].checked;
-    this.filter.filterObject[this.label].push(item.name);
+  check(item,index){
+    this.carFilter.driveTrain[index].checked = !this.carFilter.driveTrain[index].checked;
+    if( this.carFilter.driveTrain[index].checked ){
+
+      this.carFilter.filterObject[this.label].push(item.name);
+    }else{
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+    }
   }
 
 

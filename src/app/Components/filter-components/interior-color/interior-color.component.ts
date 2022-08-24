@@ -10,16 +10,22 @@ import { ActivatedRoute } from '@angular/router';
 export class InteriorColorComponent implements OnInit {
   label:string = null;
   interiorColor:any = null;
-  constructor(private carFilters:CarFiltersService,private activated:ActivatedRoute) { }
+  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
 
-  checkCurrentItem(item,index){
-    this.carFilters.interiorColor[index].checked = ! this.carFilters.interiorColor[index].checked;
-    this.carFilters.filterObject[this.label].push(item.name);
+  check(item,index){
+    this.carFilter.insurance[index].checked = !this.carFilter.interiorColor[index].checked;
+    if(this.carFilter.interiorColor[index].checked){
+    this.carFilter.filterObject[this.label].push(item.name);
+    } else {
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+    }
+    
   }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
-    this.interiorColor = this.carFilters.getInteriorColor();
+    this.interiorColor = this.carFilter.getInteriorColor();
   }
 
 }

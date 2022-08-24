@@ -10,18 +10,23 @@ export class BodyComponent implements OnInit {
   label:string = null;
   bodies:any[] = [];
 
-  checkCurrentItem(item,index){
-    this.carFilters.bodies[index].checked = !this.carFilters.bodies[index].checked;
-    console.log("Current Clickec item: " , item);
-    this.carFilters.filterObject[this.label].push(item.name);
+  check(item,index){
+    this.carFilter.bodies[index].checked = !this.carFilter.bodies[index].checked;
+    if( this.carFilter.bodies[index].checked ){
+
+      this.carFilter.filterObject[this.label].push(item.name);
+    }else{
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+    }
   }
   
-  constructor( private carFilters:CarFiltersService, private activated:ActivatedRoute) { }
+  constructor( private carFilter:CarFiltersService, private activated:ActivatedRoute) { }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
-    this.bodies = this.carFilters.getBodies();
-    this.carFilters.filterObject[this.label] = [];
+    this.bodies = this.carFilter.getBodies();
+    this.carFilter.filterObject[this.label] = [];
   }
 
 }

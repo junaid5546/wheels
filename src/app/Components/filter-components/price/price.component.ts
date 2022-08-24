@@ -2,14 +2,14 @@ import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { ChangeContext, Options, PointerType } from '@angular-slider/ngx-slider';
 import { DeviceInfoService } from '../../../Services/device-info.service';
 import { IonInput } from '@ionic/angular';
-import { filter } from '../../../Interface/car-filter';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-price',
   templateUrl: './price.component.html',
   styleUrls: ['./price.component.scss'],
 })
 export class PriceComponent implements OnInit,AfterViewInit {
-
+  label:string = null;
  // maximum:number = 1000000;
  // minimum:number = 100;
   //value: number = 100;
@@ -63,7 +63,7 @@ export class PriceComponent implements OnInit,AfterViewInit {
   };
   
   @ViewChild(IonInput,{static:false}) input:IonInput;
-  constructor(private deviceInfo:DeviceInfoService) { }
+  constructor(private deviceInfo:DeviceInfoService,private activated:ActivatedRoute) { }
 
   ngAfterViewInit(): void {
     this.makeInnerHeight();
@@ -74,7 +74,7 @@ export class PriceComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit() {
-    
+    this.label = this.activated.snapshot.params.label;
   }
 
   makeInnerHeight(){

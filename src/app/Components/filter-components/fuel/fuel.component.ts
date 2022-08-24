@@ -19,7 +19,13 @@ export class FuelComponent implements OnInit {
 
   check(item,index){
     this.carFilter.fuel[index].checked = !this.carFilter.fuel[index].checked;
-    this.carFilter.filterObject[this.label].push(item.name);
+    if( this.carFilter.fuel[index].checked ){
+
+      this.carFilter.filterObject[this.label].push(item.name);
+    }else{
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+    }
   }
 
 }

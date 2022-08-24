@@ -18,18 +18,24 @@ export class ConditionComponent implements OnInit {
   label:string = null;
   condition:any[] = null;
 
-    constructor(private filter:CarFiltersService,private activated:ActivatedRoute) { }
+    constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
-    this.filter.filterObject[this.label] = [];
-    this.condition = this.filter.getCondition();
+    this.carFilter.filterObject[this.label] = [];
+    this.condition = this.carFilter.getCondition();
 
   }
 
-  check(item,i) {
-    this.filter.condition[i].checked = !this.filter.condition[i].checked;
-    this.filter.filterObject[this.label].push(item.name);
+  check(item,index){
+    this.carFilter.condition[index].checked = !this.carFilter.condition[index].checked;
+    if( this.carFilter.condition[index].checked ){
+
+      this.carFilter.filterObject[this.label].push(item.name);
+    }else{
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+    }
   }
  
 

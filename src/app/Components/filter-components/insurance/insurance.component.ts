@@ -19,6 +19,12 @@ export class InsuranceComponent implements OnInit {
 
   check(item,index){
     this.carFilter.insurance[index].checked = !this.carFilter.insurance[index].checked;
+    if(this.carFilter.insurance[index].checked){
     this.carFilter.filterObject[this.label].push(item.name);
+    } else {
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+    }
+    
   }
 }

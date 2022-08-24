@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ThemePalette} from '@angular/material/core';
 import { CarFiltersService } from '../../../Services/car-filters.service';
+import { ActivatedRoute } from '@angular/router';
 
 export interface Task {
   name: string;
@@ -15,19 +16,25 @@ export interface Task {
   styleUrls: ['./year.component.scss'],
 })
 export class YearComponent implements OnInit {
-
+  label:string = null;
   modelYear:any[] = null;
 
-  constructor(private filters:CarFiltersService) { }
+  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute, ) { }
 
   ngOnInit() {
-   this.modelYear =  this.filters.getModelYear();
-   console.log("YEAR: ", this.modelYear);
+  this.label = this.activated.snapshot.params.label;
+   this.modelYear =  this.carFilter.getModelYear();
    
   }
 
-  check(index){
-    this.filters.modelYear[index].checked = !this.filters.modelYear[index].checked;
+  check(item,index){
+    this.carFilter.insurance[index].checked = !this.carFilter.modelYear[index].checked;
+    if(this.carFilter.modelYear[index].checked){
+    this.carFilter.filterObject[this.label].push(item.name);
+    } else {
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+    }
   }
 
 

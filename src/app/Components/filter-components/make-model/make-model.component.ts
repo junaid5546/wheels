@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit,ViewChild } from '@angular/c
 import { ThemePalette } from '@angular/material/core';
 import { CarFiltersService  } from '../../../Services/car-filters.service';
 import { IonAccordionGroup } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 export interface Task {
   name: string;
   completed: boolean;
@@ -36,7 +37,7 @@ export interface Item {
 })
 
 export class MakeModelComponent implements OnInit {
-
+  label:string = null;
   @ViewChild('parent', { static: true }) makeAccordian: IonAccordionGroup;
   @ViewChild('child', { static: true }) modelAccordian: IonAccordionGroup;
   //When searching, the page should show the things that are being searched for
@@ -64,12 +65,13 @@ export class MakeModelComponent implements OnInit {
   allModelComplete:boolean = false
     
     items;
-  constructor( private carFilters:CarFiltersService) { }
+  constructor( private carFilters:CarFiltersService,private activated:ActivatedRoute) { }
 
   ngOnInit() {
     console.log("Got MAKE MODEL TRIM: ", this.carFilters.getMakeModelTrims());
      this.items = this.carFilters.getMakeModelTrims();
     console.log("ITEMS: ", this.items);
+    this.label = this.activated.snapshot.params.label;
   }
 
 // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
@@ -131,6 +133,7 @@ searchByName(name) { //qx
     if (make.name.toLocaleLowerCase().startsWith(this.searchedText)) {
       foundIndex = index;
       this.items[index].show = true;
+      this.carFilters.filterObject[this.label].push(this.items[index].name);
       this.items[index].models.forEach(element => {
         element.show = true;
         element.trims.forEach(element => {
@@ -148,6 +151,7 @@ searchByName(name) { //qx
           console.log("IN MODEL IF");
           foundIndex = index;
           this.items[index].models[modelIndex].show = true;
+          this.carFilters.filterObject[this.label].push(this.items[index].models[modelIndex]);
           this.items[index].show = true;
         } else{
           model.trims.filter((trim,trimIndex)=>{
@@ -156,9 +160,11 @@ searchByName(name) { //qx
               
               console.log("IN trim IF",trim);
               foundIndex =  index;
+              this.carFilters.filterObject[this.label].push(this.items[index].models[modelIndex].trims[trimIndex].name);
               this.items[index].models[modelIndex].trims[trimIndex].show = true;
               this.items[index].models[modelIndex].show = true;
               this.items[index].show = true;
+
             } 
           })
         }

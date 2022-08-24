@@ -10,17 +10,23 @@ export class DoorsComponent implements OnInit {
   label:string = null;
   doors:any = null;
 
-  constructor(private filters:CarFiltersService,private activated:ActivatedRoute) { }
+  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
-    this.doors = this.filters.getDoors();
-    this.filters.filterObject[this.label] = [];
+    this.doors = this.carFilter.getDoors();
+    this.carFilter.filterObject[this.label] = [];
   }
 
-  check(item,i){
-        this.doors[i].checked = !this.doors[i].checked;
-        this.filters.filterObject[this.label].push(item.name);
+  check(item,index){
+    this.carFilter.doors[index].checked = !this.carFilter.doors[index].checked;
+    if( this.carFilter.doors[index].checked ){
+
+      this.carFilter.filterObject[this.label].push(item.name);
+    }else{
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+    }
   }
 
 }
