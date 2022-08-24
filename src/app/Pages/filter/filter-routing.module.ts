@@ -82,7 +82,7 @@ const routes: Routes = [
       },
       {
         component:SeatsComponent,         //14
-        path:'car-seats'
+        path:'car-seat'
       },
       {
         component:OriginComponent,        //15
@@ -111,6 +111,10 @@ const routes: Routes = [
       {
         component:WarrantyDurationComponent,      //19
         path:'car-warranty-duration'
+      },
+      {
+        component:DoorsComponent,      //19
+        path:'car-doors'
       },
       {
         path: '',

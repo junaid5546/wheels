@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 @Component({
   selector: 'app-engine-size',
   templateUrl: './engine-size.component.html',
@@ -7,8 +7,15 @@ import { filter } from '../../../Interface/car-filter';
 })
 export class EngineSizeComponent implements OnInit {
 
-  constructor() { }
+  engineSize:any = null;
 
-  ngOnInit() {}
+  constructor(private carFilter:CarFiltersService) { }
 
+  ngOnInit() {
+    this.engineSize = this.carFilter.getEngineSize();
+  }
+
+  check(index){
+    this.carFilter.engineSize[index].checked = !this.carFilter.engineSize[index].checked;
+  }
 }

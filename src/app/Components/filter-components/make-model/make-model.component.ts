@@ -128,6 +128,13 @@ searchByName(name) { //qx
     if (make.name.toLocaleLowerCase() == this.searchedText.toLocaleLowerCase()) {
       foundIndex = index;
       this.items[index].show = true;
+      this.items[index].models.forEach(element => {
+        element.show = true;
+        element.trims.forEach(element => {
+          element.show = true;
+        });
+      });
+      
       
     } else {
       make.models.filter((model,modelIndex) => {

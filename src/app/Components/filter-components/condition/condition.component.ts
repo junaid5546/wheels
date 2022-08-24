@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {ThemePalette} from '@angular/material/core';
 import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 export interface Task {
   name: string;
   completed: boolean;
@@ -14,39 +15,20 @@ export interface Task {
 })
 export class ConditionComponent implements OnInit {
 
-  @Input() condition:filter;
+  condition:any[] = null;
   
-  allComplete: boolean = false;
-  task: Task = {
-    name: 'Select All',
-    completed: false,
-    color: 'primary',
-    subtasks: [
-      {name: 'New', completed: false, color: 'primary'},
-      {name: 'Used', completed: false, color: 'warn'},
-    ],
-  };
-  constructor() { }
+ 
+    constructor(private filter:CarFiltersService) { }
 
-  ngOnInit() {}
-
-  updateAllComplete() {
-    this.allComplete = this.task.subtasks != null && this.task.subtasks.every(t => t.completed);
+  ngOnInit() {
+    this.condition = this.filter.getCondition();
   }
 
-  someComplete(): boolean {
-    if (this.task.subtasks == null) {
-      return false;
-    }
-    return this.task.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
+  check(i) {
+    this.filter.condition[i].checked = !this.filter.condition[i].checked;
   }
+ 
 
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.task.subtasks == null) {
-      return;
-    }
-    this.task.subtasks.forEach(t => (t.completed = completed));
-  }
+  
 
 }

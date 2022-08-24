@@ -27,6 +27,8 @@ export class CarFiltersService {
   insurance:any=null;
   origin:any=null;
   fuel:any=null;
+  engineSize:any=null;
+  doors:any = null;
 
   filterSource = new BehaviorSubject<any[]>([]);
   data$ = this.filterSource.asObservable();
@@ -220,7 +222,7 @@ export class CarFiltersService {
   }
 
   setDriveTrain(drivetrain:any){
-    this.cylinders = drivetrain.types.map(x=>{
+    this.driveTrain = drivetrain.types.map(x=>{
       let obj = {...x,checked:false};
       return obj;
     });
@@ -241,12 +243,34 @@ export class CarFiltersService {
     return this.drivingReadiness;
   }
 
+  setEngineSize(engineSize:any){
+    this.engineSize = engineSize.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+
+  }
+
+  getEngineSize(){
+    return this.engineSize;
+  }
+
   // MOVE PLANS TO PLANS COMPONENT
 
   getPlans(plans:[]){
     this.plansSource.next(plans);
   }
 
+  setDoors(door:any) {
+    this.doors = door.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
+  }
+
+  getDoors() {
+    return this.doors;
+  }
 
 
 }

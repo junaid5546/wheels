@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { filter } from '../../../Interface/car-filter';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 @Component({
   selector: 'app-cylinders',
   templateUrl: './cylinders.component.html',
@@ -7,10 +7,18 @@ import { filter } from '../../../Interface/car-filter';
 })
 export class CylindersComponent implements OnInit {
   
-  @Input() cylinders:filter;
+ 
+   cylinders:any = null;
 
-  constructor() { }
+  constructor(private carFilters:CarFiltersService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.cylinders = this.carFilters.getCylinderType();
+    console.log("CYLINDER: ", this.cylinders);;
+  }
+
+  check(i) {
+    this.carFilters.cylinders[i].checked = !this.carFilters.cylinders[i].checked;
+  }
 
 }
