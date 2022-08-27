@@ -45,6 +45,8 @@ export class MakeModelComponent implements OnInit {
   //So it’s better to show and expand all of the makes models trims based on that key search
   
   searchedText = '';
+  selectedMakeName:string=null;
+  selectedModelName:string=null;
   currentItratot = 0;
   counter =0;
   makeCheckboxColor = "primary";
@@ -72,6 +74,7 @@ export class MakeModelComponent implements OnInit {
      this.items = this.carFilters.getMakeModelTrims();
     console.log("ITEMS: ", this.items);
     this.label = this.activated.snapshot.params.label;
+    this.carFilters.filterObject[this.label] = [];
   }
 
 // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
@@ -117,7 +120,7 @@ updateAllModelComplete(makeIndex,modelIndex,trim) {
 
 
 searchByName(name) { //qx
-  
+ 
   this.searchedText = name.detail.value;
   this.searchedText = this.searchedText.toLocaleLowerCase();
   console.log(this.searchedText);
@@ -133,7 +136,8 @@ searchByName(name) { //qx
     if (make.name.toLocaleLowerCase().startsWith(this.searchedText)) {
       foundIndex = index;
       this.items[index].show = true;
-      this.carFilters.filterObject[this.label].push(this.items[index].name);
+      this.selectedMakeName = this.items[index].name;
+      //this.toggleAccordion('make',make.name);
       this.items[index].models.forEach(element => {
         element.show = true;
         element.trims.forEach(element => {
@@ -151,7 +155,8 @@ searchByName(name) { //qx
           console.log("IN MODEL IF");
           foundIndex = index;
           this.items[index].models[modelIndex].show = true;
-          this.carFilters.filterObject[this.label].push(this.items[index].models[modelIndex]);
+          this.selectedModelName = this.items[index].models[modelIndex].name;
+          //this.toggleAccordion('model',model.name);
           this.items[index].show = true;
         } else{
           model.trims.filter((trim,trimIndex)=>{
@@ -160,11 +165,11 @@ searchByName(name) { //qx
               
               console.log("IN trim IF",trim);
               foundIndex =  index;
-              this.carFilters.filterObject[this.label].push(this.items[index].models[modelIndex].trims[trimIndex].name);
+              //this.toggleAccordion('make',make.name);
+              //this.toggleAccordion('model',model.name);
               this.items[index].models[modelIndex].trims[trimIndex].show = true;
               this.items[index].models[modelIndex].show = true;
               this.items[index].show = true;
-
             } 
           })
         }
@@ -207,4 +212,45 @@ searchByName(name) { //qx
  }
 
 
+ toggleAccordion = (key,name) => {
+  console.log("NATIVE Make: ", this.makeAccordian);
+  console.log("NATIVE model: ", this.modelAccordian);
+  switch (key) {
+    case 'make':
+      const nativeElmake = this.makeAccordian;
+      if (nativeElmake.value === undefined) {
+        console.log("value undefined");
+        nativeElmake.value = name;
+    } else {
+      console.log("value =", nativeElmake.value);
+      nativeElmake.value === undefined;
+    }
+
+      break;
+
+    case 'model':
+      const nativeElmodel = this.modelAccordian;
+      if (nativeElmodel.value === undefined) {
+        nativeElmodel.value = name;
+    } else {
+      nativeElmodel.value === undefined;
+    }
+      break;
+  
+    default:
+      break;
+  }
+  
+
+};
+
+
+accordionGroupChange = (ev: any) => {
+  let doc = document.getElementsByTagName('ion-accordion');
+
+ 
+  console.log("DOC: ", doc);
+  const selectedValue = ev.detail.value;
+  console.log("EV: ", ev,"ITEM: ");
+}
 }

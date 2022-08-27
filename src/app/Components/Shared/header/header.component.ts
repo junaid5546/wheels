@@ -24,8 +24,8 @@ export class HeaderComponent implements OnInit {
   @Input() isModal:boolean;
   @Input() filter:boolean;
   routeLink:string;
-  ngOnInit() {
 
+  ngOnInit() {
     this.router.events.subscribe((val) => {
       this.routeLink=val['url'];
     }
@@ -39,13 +39,10 @@ export class HeaderComponent implements OnInit {
     } else if(this.isModal) {
       this.modalCtrl.dismissModal()
     } else if(this.filter){
-      // this.router.navigate(['tabs/tab1'])
-      // .then(()=>{
-      //   console.log("Route poped");
-      // })
+       this.router.navigate(['tabs/posts'])
     }
      else {
-      // this.router.navigate([this.forwardTo]);
+       this.router.navigate([this.forwardTo]);
     }
   }
 

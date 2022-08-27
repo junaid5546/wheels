@@ -7,9 +7,9 @@
     </ion-toolbar>
     
 
-      <ion-accordion-group  #parent multiple="true">
+      <ion-accordion-group  #parent multiple="true" [value]="searchedText.toUpperCase()">
         <ng-container *ngFor="let item of items; let i=index">
-        <ion-accordion>
+        <ion-accordion [id]="i" [value]="item.name.toUpperCase()">
           <ion-item slot="header" *ngIf="item.show">
       <!----------------------------------------------MAKE ITEM STARTS---------------------------------------------------->
             <mat-checkbox class="example-margin make-class"
@@ -23,9 +23,9 @@
           </ion-item>
           <ion-list slot="content">
             
-            <ion-accordion-group #child  multiple="true" value="models">
+            <ion-accordion-group (ionChange)="accordionGroupChange($event)" #child  multiple="true" [value]="searchedText.toUpperCase()">
               <ng-container *ngFor="let model of item.models; let modelIndex=index">
-            <ion-accordion>
+            <ion-accordion [value]="model.name.toUpperCase()">
               <ion-item *ngIf="model.show" slot="header">
                 <ng-container >
       <!----------------------------------------------MODELS ITEM STARTS---------------------------------------------------->

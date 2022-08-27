@@ -17,16 +17,18 @@ export class CylindersComponent implements OnInit {
     this.label = this.activated.snapshot.params.label;
     this.cylinders = this.carFilter.getCylinderType();
     this.carFilter.filterObject[this.label] = [];
+    console.log("Changes: ", this.carFilter.filterObject);
   }
 
   check(item,index){
     this.carFilter.cylinders[index].checked = !this.carFilter.cylinders[index].checked;
     if( this.carFilter.cylinders[index].checked ){
-
       this.carFilter.filterObject[this.label].push(item.name);
+      this.carFilter.getPost();
     }else{
       let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
       this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+      this.carFilter.getPost();
     }
   }
 

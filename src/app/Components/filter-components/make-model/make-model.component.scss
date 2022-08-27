@@ -7,11 +7,7 @@ ion-accordion {
     margin: 0 auto;
   }
   
-  ion-accordion.accordion-expanding,
-  ion-accordion.accordion-expanded {
-    width: calc(100% - 32px);
-    margin: 16px auto;
-  }
+ 
 
 
   ///MAT
@@ -70,13 +66,6 @@ ion-accordion {
      font-weight: 300;
  }
 
- ion-accordion{
-     
- ion-item{
-    //--min-height: 30px !important;
- }
-}
-
  ion-toolbar{
     position: sticky;
     top: 0;
@@ -90,3 +79,5 @@ ion-accordion {
     font-weight: 300 !important;
     }
  }
+
+ 

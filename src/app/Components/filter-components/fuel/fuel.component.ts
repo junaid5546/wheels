@@ -13,18 +13,22 @@ export class FuelComponent implements OnInit {
   constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
 
   ngOnInit() {
+    console.log("Fuel");
     this.label = this.activated.snapshot.params.label;
+    this.carFilter.filterObject[this.label] = [];
     this.fuel  = this.carFilter.getFuel();
   }
 
   check(item,index){
     this.carFilter.fuel[index].checked = !this.carFilter.fuel[index].checked;
     if( this.carFilter.fuel[index].checked ){
-
+      this.label = this.activated.snapshot.params.label;
       this.carFilter.filterObject[this.label].push(item.name);
+      this.carFilter.getPost();
     }else{
       let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
       this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+      this.carFilter.getPost();
     }
   }
 

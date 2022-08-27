@@ -13,7 +13,7 @@ export interface Item {
 @Component({
   selector: 'app-vehicles-department',
   templateUrl: './vehicles-department.page.html',
-  styleUrls: ['./vehicles-department.page.scss'],
+  styleUrls: ['./vehicles-department.page.scss']
 })
 export class VehiclesDepartmentPage implements OnInit {
   @Input() forwardTo:string = null;
@@ -55,7 +55,6 @@ export class VehiclesDepartmentPage implements OnInit {
       this.modalService.modelData.items[23].value = feed.result.features;
       this.filter.setInteriorColor(feed.result.filters[3]);
       this.filter.setExteriorColor(feed.result.filters[2]);
-      this.filter.setPlateType(feed.result.filters[13]);
       this.filter.setWarrentyDuration(feed.result.filters[12]);
       this.filter.setModelYear(feed.result.filters[1]);
       this.filter.setFuel(feed.result.filters[7]);
@@ -86,10 +85,13 @@ export class VehiclesDepartmentPage implements OnInit {
     
       console.log("NEW :",NewMakeModelArray);
       let filters = feed.result.filters;
+      //“price”:{“min”:5000, “max”:8000},
+      //“Kmake”:[“Toyota”],
+      //“Kbody”:[“Sports/Coupe”]
       filters.push(
-        {name:"Make", path:'car-make',types:feed.result.makes },
-        {name:"Body", path:'car-body',},
-        {name:"Price",path:'car-price'},
+        {name:"Make", path:'“Kmake”',types:feed.result.makes },
+        {name:"Body", path:'Kbody',},
+        {name:"Price",path:'“price”'},
         {name:"Location",path:"car-location",types:feed.result.governorates}
       );
       console.log("Filters:", filters);

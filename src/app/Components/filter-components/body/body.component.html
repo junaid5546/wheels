@@ -2,7 +2,7 @@
   <div class="item-body">
     <ion-grid>
       <ion-row>
-        <ion-col (click)="checkCurrentItem(item,i)" size="6" *ngFor="let item of bodies; let i = index;">
+        <ion-col (click)="check(item,i)" size="6" *ngFor="let item of bodies; let i = index;">
           <ion-card [ngClass]="{selected_border : item.checked, default: item.checked==false}" class="item-body-inner">
             <div class="check-mark" *ngIf="item.checked">
               <ion-icon class="checkmark-sharp" name="checkmark-sharp"></ion-icon>

@@ -15,11 +15,12 @@ export class ExteriorColorComponent implements OnInit {
   check(item,index){
     this.carFilter.exteriorColor[index].checked = !this.carFilter.exteriorColor[index].checked;
     if( this.carFilter.exteriorColor[index].checked ){
-
       this.carFilter.filterObject[this.label].push(item.name);
+      this.carFilter.getPost();
     }else{
       let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
       this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+      this.carFilter.getPost();
     }
   }
 
@@ -27,5 +28,6 @@ export class ExteriorColorComponent implements OnInit {
     this.label = this.activated.snapshot.params.label;
     console.log("On init called exterior color");
     this.exteriorColors = this.carFilter.getExteriorColor();
+    this.carFilter.filterObject[this.label] = [];
   }
 }

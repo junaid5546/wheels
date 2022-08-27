@@ -13,12 +13,14 @@ export class InteriorColorComponent implements OnInit {
   constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
 
   check(item,index){
-    this.carFilter.insurance[index].checked = !this.carFilter.interiorColor[index].checked;
+    this.carFilter.interiorColor[index].checked = !this.carFilter.interiorColor[index].checked;
     if(this.carFilter.interiorColor[index].checked){
     this.carFilter.filterObject[this.label].push(item.name);
+    this.carFilter.getPost();
     } else {
       let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
       this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+      this.carFilter.getPost();
     }
     
   }
@@ -26,6 +28,7 @@ export class InteriorColorComponent implements OnInit {
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
     this.interiorColor = this.carFilter.getInteriorColor();
+    this.carFilter.filterObject[this.label] = [];
   }
 
 }

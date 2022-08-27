@@ -36,6 +36,7 @@ export class LocationComponent implements OnInit {
 
   ngOnInit() {
    this.label = this.activated.snapshot.params.label;
+   this.carFilters.filterObject[this.label] = [];
    this.carFilters.locations$.subscribe(loc=>{
     this.locations=loc;
       console.log("On init called Locations",this.locations);
@@ -66,14 +67,12 @@ export class LocationComponent implements OnInit {
       this.locations[goverIndex].show = false;
         if (gover.name.toLocaleLowerCase() == this.searchedText.toLocaleLowerCase()) {
           this.locations[goverIndex].show = true;
-          this.carFilters.filterObject[this.label].push(this.locations[goverIndex].name);
           console.log(this.locations[goverIndex]);
         }else{
          gover.states.filter((a,stateIndex)=>{
           if(a.name.toLocaleLowerCase()==this.searchedText.toLocaleLowerCase()){
             console.log(a);
             this.locations[goverIndex].show=true;
-            this.carFilters.filterObject[this.label].push(this.locations[goverIndex].states[stateIndex].name);
             this.locationValue=`first_${goverIndex}`;
           }
          })
@@ -89,7 +88,6 @@ export class LocationComponent implements OnInit {
   }
 
   someComplete(makeIndex): boolean {
-
     return this.locations[makeIndex].states.filter(t => (t.completed)).length > 0 && !this.locations[makeIndex].completed;
   }
 }

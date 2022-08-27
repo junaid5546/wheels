@@ -1,6 +1,7 @@
 import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
 import { ChangeContext, Options, PointerType } from '@angular-slider/ngx-slider';
 import { DeviceInfoService } from '../../../Services/device-info.service';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 import { IonInput } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 @Component({
@@ -63,7 +64,7 @@ export class PriceComponent implements OnInit,AfterViewInit {
   };
   
   @ViewChild(IonInput,{static:false}) input:IonInput;
-  constructor(private deviceInfo:DeviceInfoService,private activated:ActivatedRoute) { }
+  constructor(private deviceInfo:DeviceInfoService,private activated:ActivatedRoute, private carFilter:CarFiltersService) { }
 
   ngAfterViewInit(): void {
     this.makeInnerHeight();
@@ -75,6 +76,7 @@ export class PriceComponent implements OnInit,AfterViewInit {
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
+    this.carFilter.filterObject[this.label] = [];
   }
 
   makeInnerHeight(){

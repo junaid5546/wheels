@@ -24,17 +24,19 @@ export class ConditionComponent implements OnInit {
     this.label = this.activated.snapshot.params.label;
     this.carFilter.filterObject[this.label] = [];
     this.condition = this.carFilter.getCondition();
+    console.log("Changes: ", this.carFilter.filterObject);
 
   }
 
   check(item,index){
     this.carFilter.condition[index].checked = !this.carFilter.condition[index].checked;
     if( this.carFilter.condition[index].checked ){
-
       this.carFilter.filterObject[this.label].push(item.name);
+      this.carFilter.getPost();
     }else{
       let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
       this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+      this.carFilter.getPost();
     }
   }
  

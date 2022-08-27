@@ -1,8 +1,10 @@
 <ion-content>
-  <ion-list lines="none">
+
+<ion-list lines="none">
     <ion-item *ngFor="let item of transmission; let i=index">
-      <ion-checkbox [checked]="item.checked" mode="md" slot="start" (ionChange)="check(i)"></ion-checkbox>
+      <ion-checkbox [checked]="item.checked" mode="md" slot="start" (ionChange)="check(item,i)"></ion-checkbox>
       <ion-label>{{item.name}}</ion-label>
     </ion-item>
-    </ion-list>
+</ion-list>
+
 </ion-content>

@@ -30,15 +30,15 @@ const routes: Routes = [
     children:[
       {
         component:BodyComponent,            //1
-        path:'car-body'
+        path:'Kbody'
       },
       {
         component:MakeModelComponent,       //2
-        path:'car-make'
+        path:'“Kmake”'
       },
       {
         component:PriceComponent,           //3
-        path:'car-price'
+        path:'“price”'
       },
       {
         component:ConditionComponent,       //4

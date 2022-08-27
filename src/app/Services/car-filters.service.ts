@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
-import { filter, Observable, BehaviorSubject } from 'rxjs';
+import { PostService } from 'dm-api';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarFiltersService {
+  //these all the sort types: 1- price_low 2- price_hight 3- date_new 4- date_old 5- kilometer_low 6- kilometer_hight 7- year_new 8- year_old
+  sortType:string = "price_low";
+  status:string = "627925bfda535aadb15ef3d4";
+  pageNumber:number = 1;
+  pageSize:number = 20;
+
+  resultCount:number = 0;
 
   paginationOfMakeModelTrim:number = 10;
   currentProcess:string = null;
-  filterObject:any = {
-  
-  };
+  filterObject:any = {};
+
   Filters:any;
 
   interiorColor:any = null;
   exteriorColor:any = null;
-  
   makeModelTrim:any = null;
   bodies:any = null;
   plateType:any = null;
@@ -42,7 +48,7 @@ export class CarFiltersService {
   locationSource = new BehaviorSubject<any[]>([]);
   locations$ = this.locationSource.asObservable();
   
-  constructor() {
+  constructor(private post:PostService) {
   
   }
 
@@ -96,10 +102,15 @@ export class CarFiltersService {
   }
 
   setPlateType(plateType:any) {
-    this.plateType = plateType;
+    console.log("PLATE:", plateType);
+    this.plateType = plateType.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
   }
 
   getPlateType(){
+  
     return this.plateType;
   }
 
@@ -272,6 +283,22 @@ export class CarFiltersService {
 
   getDoors() {
     return this.doors;
+  }
+
+  getPost(){
+    for (const property in this.filterObject) {
+      console.log(`${property}: ${this.filterObject[property]}`);
+        if(this.filterObject[property].length === 0) {
+            delete this.filterObject[property]
+        }
+    }
+    console.log("FILTER OBJ ", this.filterObject);
+    this.post.getAllPosts(this.sortType,this.status,this.pageNumber,this.pageSize,'app',this.filterObject)
+    
+    .then((response:any)=>{
+      console.log("Count",response.result.count);
+      this.resultCount = response.result.count;
+    })
   }
 
 
