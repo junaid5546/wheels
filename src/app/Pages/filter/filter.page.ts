@@ -1,21 +1,17 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   AfterViewInit,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { FiltersService } from 'dm-api';
 import { CarFiltersService } from 'src/app/Services/car-filters.service';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.page.html',
-  styleUrls: ['./filter.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./filter.page.scss']
 })
 export class FilterPage implements OnInit, AfterViewInit {
   private filtersList = new BehaviorSubject<any[]>([]);
@@ -211,9 +207,7 @@ export class FilterPage implements OnInit, AfterViewInit {
 
   constructor(
     private router: Router,
-    private filterServices: FiltersService,
-    private changeRef: ChangeDetectorRef,
-    private filterPost: CarFiltersService
+    public filterPost: CarFiltersService
   ) {
     this.filtersList.subscribe((res) => {
       this.applyFilters(res);
@@ -256,7 +250,7 @@ export class FilterPage implements OnInit, AfterViewInit {
       });
     });
 
-    this.changeRef.markForCheck();
+    //this.changeRef.markForCheck();
   }
 
   /**
