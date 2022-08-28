@@ -3,13 +3,14 @@
     <ion-grid>
       <ion-row>
         <ion-col (click)="check(item,i)" size="6" *ngFor="let item of interiorColor; let i = index;">
-          <ion-card [ngClass]="{selected_border : item.checked, default: item.checked==false}" class="item-body-inner">
-            <div class="check-mark" *ngIf="item.checked">
-              <ion-icon class="checkmark-sharp" name="checkmark-sharp"></ion-icon>
-            </div>
-           <ion-card [ngClass]="item.class">
-            <ion-label>{{item.name}}</ion-label>
+          <div class="check-mark" *ngIf="item.checked">
+            <ion-icon class="checkmark-sharp" name="checkmark-sharp"></ion-icon>
+          </div>
+          <ion-card  [ngClass]="{selected_border : item.checked, default: item.checked==false}" class="item-body-inner">
+           
+           <ion-card class="default-color-card" [ngStyle]="{'background':item.cssHex.toString()}" [ngClass]="item.class">
            </ion-card>
+           <ion-label>{{item.name}}</ion-label>
           </ion-card>
         </ion-col>
       </ion-row>

@@ -2,20 +2,21 @@
 <ion-content>
   <div class="make-model">
 
+   
     <ion-toolbar>
       <ion-searchbar (ionChange)="searchByName($event)" placeholder="make model trim" showCancelButton="focus"></ion-searchbar>
     </ion-toolbar>
     
-
-      <ion-accordion-group  #parent multiple="true" [value]="searchedText.toUpperCase()">
+      <ion-accordion-group [animated]="false" (ionChange)="accordionGroupChange($event)"  #parent multiple="true" [value]="searchedText.toUpperCase()">
+    
         <ng-container *ngFor="let item of items; let i=index">
-        <ion-accordion [id]="i" [value]="item.name.toUpperCase()">
+          
+        <ion-accordion [id]="i" [value]="item.name.toUpperCase() + i">
           <ion-item slot="header" *ngIf="item.show">
       <!----------------------------------------------MAKE ITEM STARTS---------------------------------------------------->
             <mat-checkbox class="example-margin make-class"
                               [checked]="item.completed"
                               [color]="makeCheckboxColor"
-                              [indeterminate]="someComplete(i)"
                               (change)="setAll($event.checked,i)">
                               <ion-label>{{item.name}}</ion-label>
                 </mat-checkbox>
@@ -23,7 +24,7 @@
           </ion-item>
           <ion-list slot="content">
             
-            <ion-accordion-group (ionChange)="accordionGroupChange($event)" #child  multiple="true" [value]="searchedText.toUpperCase()">
+            <ion-accordion-group  (ionChange)="accordionGroupChange($event)" #child  multiple="true" [value]="searchedText.toUpperCase()">
               <ng-container *ngFor="let model of item.models; let modelIndex=index">
             <ion-accordion [value]="model.name.toUpperCase()">
               <ion-item *ngIf="model.show" slot="header">
@@ -42,11 +43,9 @@
     </ng-container>
               </ion-item>
           
-              <ion-list slot="content" *ngIf="model.show">
+              <ion-item slot="content" *ngIf="model.show">
                 <section class="example-section">
-      
                   <span class="example-list-section">
-                    
                   </span>
                   <span  class="example-list-section">
       <!----------------------------------------------TRIMS ITEM STARTS---------------------------------------------------->
@@ -63,19 +62,20 @@
           </mat-checkbox>
         </ion-item>
       </ng-container>             
-                      
       <!----------------------------------------------TRIMS ITEM ENDS---------------------------------------------------->
                   </span>
                 </section>
           
-              </ion-list>
+              </ion-item>
             </ion-accordion>
           </ng-container>
           </ion-accordion-group>
+          
           </ion-list>
         </ion-accordion>
+     
       </ng-container>
+  
       </ion-accordion-group>
-
   </div>
   </ion-content>

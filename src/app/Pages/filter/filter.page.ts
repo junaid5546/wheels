@@ -209,9 +209,11 @@ export class FilterPage implements OnInit, AfterViewInit {
     private router: Router,
     public filterPost: CarFiltersService
   ) {
+
     this.filtersList.subscribe((res) => {
       this.applyFilters(res);
     });
+
   }
 
   ngAfterViewInit(): void {}
@@ -240,8 +242,9 @@ export class FilterPage implements OnInit, AfterViewInit {
    * THIS METHOD GIVES BACK ALL FILTER LIST.
    */
   getFiltersList() {
+
     this.filterPost.data$.subscribe((data) => {
-      console.log(data);
+      console.log("GOT FILTER LIST",data);
       this.filters = data;
       data.map((element, index) => {
         let obj = { ...element, selected: false, show: false };
@@ -258,24 +261,5 @@ export class FilterPage implements OnInit, AfterViewInit {
    * @param filterList Array
    */
   applyFilters(filterList: any[]) {}
-
-  recursiveFunction = function (liquidationArray,searched_number, startIndex, endIndex) {
-    // Base Condition
-    if (startIndex > endIndex) return false;
-
-    // Find the middle index
-    let mid = Math.floor((startIndex + endIndex) / 2);
-
-    // Compare mid with given key x
-    if (liquidationArray[mid].commercail_number === searched_number) return mid;
-
-    // If element at mid is greater than x,
-    // search in the left half of mid
-    if (liquidationArray[mid].commercail_number > searched_number)
-      return this.recursiveFunction(liquidationArray, searched_number, startIndex, mid - 1);
-    // If element at mid is smaller than x,
-    // search in the right half of mid
-    else return this.recursiveFunction(liquidationArray, searched_number, mid + 1, endIndex);
-  };
 
 }

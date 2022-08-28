@@ -47,7 +47,7 @@ export class VehiclesDepartmentPage implements OnInit {
   }
 
   fetchPostFeed() {
-    this.post.getPostFeed()
+    this.post.getPostFeed('')
     .then((feed:any)=>{
       console.log("Post Feed:", feed);
       this.modalService.modelData.items[0].value = feed.result.makes;
@@ -55,6 +55,7 @@ export class VehiclesDepartmentPage implements OnInit {
       this.modalService.modelData.items[23].value = feed.result.features;
       this.filter.setInteriorColor(feed.result.filters[3]);
       this.filter.setExteriorColor(feed.result.filters[2]);
+      this.filter.setPlateType(feed.result.filters[13]);
       this.filter.setWarrentyDuration(feed.result.filters[12]);
       this.filter.setModelYear(feed.result.filters[1]);
       this.filter.setFuel(feed.result.filters[7]);
@@ -70,6 +71,7 @@ export class VehiclesDepartmentPage implements OnInit {
       this.filter.setPlateType(feed.result.filters[13]);
       this.filter.setEngineSize(feed.result.filters[6]);
       this.filter.setDoors(feed.result.filters[4]);
+      
     let NewMakeModelArray =   feed.result.makes.map(make=>{
        let newModels = make.models.map(model=>{
         let newTrims = model.trims.map(trim=>{
@@ -79,41 +81,30 @@ export class VehiclesDepartmentPage implements OnInit {
           let newModel = {name:model.name,completed:false,_id:model._id,trims:newTrims,show:true};
           return newModel;
         });
-        let newMakeModelObject = {name:make.name, id:make._id, models:newModels, completed:false, show:true};
+        let newMakeModelObject = {name:make.name, id:make._id, models:newModels, completed:false, show:true, clicked:false};
         return newMakeModelObject;
       });
     
-      console.log("NEW :",NewMakeModelArray);
+      //console.log("NEW :",NewMakeModelArray);
       let filters = feed.result.filters;
-      //“price”:{“min”:5000, “max”:8000},
-      //“Kmake”:[“Toyota”],
-      //“Kbody”:[“Sports/Coupe”]
-      filters.push(
-        {name:"Make", path:'“Kmake”',types:feed.result.makes },
-        {name:"Body", path:'Kbody',},
-        {name:"Price",path:'“price”'},
-        {name:"Location",path:"car-location",types:feed.result.governorates}
-      );
-      console.log("Filters:", filters);
+
+      filters.unshift({name:"Body", path:'Kbody'},{name:"Make", path:'Kmake'},{name:"Price",path:'price'},);
+
+      filters.push({name:"Location",path:"car-location"});
+      
       this.filter.getFiltersList(filters);
       this.filter.getLocations(feed.result.governorates);
-
       this.filter.setMakeModelTrims(NewMakeModelArray);
-
       this.filter.setBodies(feed.result.bodies);
 
       feed.result.filters.forEach(filterElement => {   
-      
         this.modalService.modelData.items.forEach(modelDataElement => {
-
         if(filterElement.name==modelDataElement.name){
-
-          modelDataElement.value=filterElement.types;
-          
+          modelDataElement.value=filterElement.types
         }
-
       });
      });
+
     })
     .catch(error=>{
       console.log("Could not get post feed", error);

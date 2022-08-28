@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { IonicModule } from '@ionic/angular';
@@ -28,9 +29,11 @@ import { SeatsComponent } from 'src/app/Components/filter-components/seats/seats
 import { InsuranceComponent } from 'src/app/Components/filter-components/insurance/insurance.component';
 import { ReadlinessComponent } from 'src/app/Components/filter-components/readliness/readliness.component';
 import { SaleTypeComponent } from 'src/app/Components/filter-components/sale-type/sale-type.component';
+ import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   imports: [
+    ScrollingModule,
     CommonModule,
     NgxSliderModule,
     FormsModule,

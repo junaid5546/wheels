@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit,ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit,ViewChild,ChangeDetectorRef } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { CarFiltersService  } from '../../../Services/car-filters.service';
 import { IonAccordionGroup } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { IonInfiniteScroll } from '@ionic/angular';
+
+
 export interface Task {
   name: string;
   completed: boolean;
@@ -38,6 +41,7 @@ export interface Item {
 
 export class MakeModelComponent implements OnInit {
   label:string = null;
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @ViewChild('parent', { static: true }) makeAccordian: IonAccordionGroup;
   @ViewChild('child', { static: true }) modelAccordian: IonAccordionGroup;
   //When searching, the page should show the things that are being searched for
@@ -67,15 +71,16 @@ export class MakeModelComponent implements OnInit {
   allModelComplete:boolean = false
     
     items;
-  constructor( private carFilters:CarFiltersService,private activated:ActivatedRoute) { }
+    start=1;
+    count = 15;
+  constructor( private carFilters:CarFiltersService,private activated:ActivatedRoute, private detectionRef:ChangeDetectorRef) { }
 
   ngOnInit() {
-    console.log("Got MAKE MODEL TRIM: ", this.carFilters.getMakeModelTrims());
-     this.items = this.carFilters.getMakeModelTrims();
-    console.log("ITEMS: ", this.items);
+    this.items = this.carFilters.getMakeModelTrims();
     this.label = this.activated.snapshot.params.label;
     this.carFilters.filterObject[this.label] = [];
   }
+
 
 // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
 someComplete(makeIndex): boolean {
@@ -120,7 +125,7 @@ updateAllModelComplete(makeIndex,modelIndex,trim) {
 
 
 searchByName(name) { //qx
- 
+  
   this.searchedText = name.detail.value;
   this.searchedText = this.searchedText.toLocaleLowerCase();
   console.log(this.searchedText);
@@ -137,7 +142,6 @@ searchByName(name) { //qx
       foundIndex = index;
       this.items[index].show = true;
       this.selectedMakeName = this.items[index].name;
-      //this.toggleAccordion('make',make.name);
       this.items[index].models.forEach(element => {
         element.show = true;
         element.trims.forEach(element => {
@@ -148,7 +152,6 @@ searchByName(name) { //qx
       
     } else {
       make.models.filter((model,modelIndex) => {
-
         this.items[index].models[modelIndex].show = false;
 
         if (model.name.toLocaleLowerCase().startsWith(this.searchedText)) {
@@ -246,11 +249,35 @@ searchByName(name) { //qx
 
 
 accordionGroupChange = (ev: any) => {
-  let doc = document.getElementsByTagName('ion-accordion');
-
- 
-  console.log("DOC: ", doc);
-  const selectedValue = ev.detail.value;
-  console.log("EV: ", ev,"ITEM: ");
+  console.log("CLICKED: ", ev);
 }
+
+loadMore(){
+  let res  = this.carFilters.getMakeModelTrims();
+  console.log('getting', res);
+  this.items = this.items.concat(res)
+  console.log('concated', res);
+  this.detectionRef.markForCheck()
+}
+
+loadData(event) {
+  setTimeout(() => {
+    console.log('Done');
+    event.target.complete();
+  this.loadMore();
+  }, 500);
+}
+
+toggleInfiniteScroll() {
+  this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+}
+
+trackByItem(index: number, item: any) {
+  return item._id;
+}
+
+
+
+
+
 }

@@ -18,7 +18,7 @@ export class OriginComponent implements OnInit {
   }
 
   check(item,index){
-    this.carFilter.insurance[index].checked = !this.carFilter.origin[index].checked;
+    this.carFilter.origin[index].checked = !this.carFilter.origin[index].checked;
     if(this.carFilter.origin[index].checked){
     this.carFilter.filterObject[this.label].push(item.name);
     this.carFilter.getPost();

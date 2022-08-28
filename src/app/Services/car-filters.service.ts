@@ -12,9 +12,10 @@ export class CarFiltersService {
   pageNumber:number = 1;
   pageSize:number = 20;
 
+
   resultCount:number = 0;
 
-  paginationOfMakeModelTrim:number = 10;
+  paginationOfMakeModelTrim:number = 15;
   currentProcess:string = null;
   filterObject:any = {};
 
@@ -22,7 +23,7 @@ export class CarFiltersService {
 
   interiorColor:any = null;
   exteriorColor:any = null;
-  makeModelTrim:any = null;
+  makeModelTrim:any[] = [];
   bodies:any = null;
   plateType:any = null;
   warrentyDuration:any = null;
@@ -48,6 +49,13 @@ export class CarFiltersService {
   locationSource = new BehaviorSubject<any[]>([]);
   locations$ = this.locationSource.asObservable();
   
+
+  makeInitialPage = 0;
+  makePageSize = 10;
+
+
+  maxPages = this.makeModelTrim.length;
+
   constructor(private post:PostService) {
   
   }
@@ -80,8 +88,9 @@ export class CarFiltersService {
   }
 
   getMakeModelTrims(){
-    this.makeModelTrim.slice(0,this.paginationOfMakeModelTrim);
-    return this.makeModelTrim
+    
+   return  this.makeModelTrim;
+
   }
 
   setInteriorColor(interiorColor:any) {

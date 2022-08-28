@@ -61,7 +61,7 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
     console.log("POST DETAILS",item); 
     this.items = item.items;
     
-     this.heading.main_heading_name =  item.title || "No Name";
+     this.heading.main_heading_name =  `${item.title.make}  ${item.title.model}  ${item.title.trim}  ${item.title.year}`  || "No Name";
    
   }
 

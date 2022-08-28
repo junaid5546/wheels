@@ -34,11 +34,11 @@ const routes: Routes = [
       },
       {
         component:MakeModelComponent,       //2
-        path:'“Kmake”'
+        path:'Kmake'
       },
       {
         component:PriceComponent,           //3
-        path:'“price”'
+        path:'price'
       },
       {
         component:ConditionComponent,       //4
