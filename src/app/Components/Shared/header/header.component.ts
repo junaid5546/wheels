@@ -3,7 +3,7 @@ import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalControllerService } from '../../../Services/modal-controller.service';
 import { DeviceInfoService } from 'src/app/Services/device-info.service';
-
+import { UserDataService } from 'src/app/Services/user-data.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,7 +11,7 @@ import { DeviceInfoService } from 'src/app/Services/device-info.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private nav:NavController, private router:Router, private modalCtrl:ModalControllerService,private deviceInfo:DeviceInfoService) { }
+  constructor(private nav:NavController, private router:Router, private modalCtrl:ModalControllerService,private deviceInfo:DeviceInfoService, private userData:UserDataService) { }
   // ROUTE NAME HERE.
   @Input() forwardTo:string = null;
   // ROUTE IS FORWARD OR BACK.
@@ -48,14 +48,16 @@ export class HeaderComponent implements OnInit {
 
   translate=()=>{
     if(this.routeLink!='/tabs/posts'){
-    let language = localStorage.getItem('lang');
+    let language = this.userData.language;
     if(language=='ar'){
       this.deviceInfo.changeLanguage('en');
       document.documentElement.dir = "ltr";
       document.getElementsByTagName("body")[0].style.direction="ltr";
+      this.userData.language = 'en';
       console.log(language);
     }else{
       this.deviceInfo.changeLanguage('ar');
+      this.userData.language = 'ar';
       document.documentElement.dir = "rtl";
       document.getElementsByTagName("body")[0].style.direction="rtl";
       console.log(language);

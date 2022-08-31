@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarFiltersService } from '../../../Services/car-filters.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserDataService } from '../../../Services/user-data.service';
 @Component({
   selector: 'app-warranty-duration',
   templateUrl: './warranty-duration.component.html',
@@ -10,7 +11,7 @@ export class WarrantyDurationComponent implements OnInit {
   label:string = null;
   results:any;
   WarrantyDuration:any[] = null;
-  constructor(private activated:ActivatedRoute, private carFilter:CarFiltersService) { }
+  constructor(private activated:ActivatedRoute, private carFilter:CarFiltersService,public userData:UserDataService) { }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;

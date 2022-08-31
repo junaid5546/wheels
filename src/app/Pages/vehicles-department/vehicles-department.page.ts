@@ -4,6 +4,7 @@ import { PostService } from 'dm-api';
 import { CarFiltersService } from 'src/app/Services/car-filters.service';
 import { ModalControllerService } from 'src/app/Services/modal-controller.service';
 
+
 export interface Item {
   make: string;
   completed: boolean;
@@ -88,30 +89,34 @@ export class VehiclesDepartmentPage implements OnInit {
       //console.log("NEW :",NewMakeModelArray);
       let filters = feed.result.filters;
 
-      filters.unshift({name:"Body", path:'Kbody'},{name:"Make", path:'Kmake'},{name:"Price",path:'price'},);
+      filters.unshift({name: {en:"Body",ar:"الهيكل"}, path:'Kbody'},{name:{en:"Make",ar:"شركة التصنيع"}, path:'Kmake'},{name:{en:"Price",ar:"السعر"},path:'price'});
 
-      filters.push({name:"Location",path:"car-location"});
-      
-      this.filter.getFiltersList(filters);
-      this.filter.getLocations(feed.result.governorates);
+      filters.push({name:{en:"Location",ar:"الموقع"},path:"car-location"});
+      // adding key value for bage/counter;
+      filters = filters.map(x=>{
+        let obj = {...x,bage:null};
+        return obj
+      });
+
+      this.filter.setFiltersList(filters);
+      this.filter.setLocations(feed.result.governorates);
       this.filter.setMakeModelTrims(NewMakeModelArray);
       this.filter.setBodies(feed.result.bodies);
 
       feed.result.filters.forEach(filterElement => {   
-        this.modalService.modelData.items.forEach(modelDataElement => {
-        if(filterElement.name==modelDataElement.name){
+        this.modalService.modelData.items.forEach((modelDataElement,index) => {
+        if(filterElement.name.en ==modelDataElement.name && index != 0 && index != 21 && index != 23){
           modelDataElement.value=filterElement.types
         }
       });
      });
 
+     console.info("Model Initialized: ",this.modalService.modelData);
+     console.info("Models: ",feed.result.makes);
     })
     .catch(error=>{
       console.log("Could not get post feed", error);
     })
   }
 
-
-
- 
 }

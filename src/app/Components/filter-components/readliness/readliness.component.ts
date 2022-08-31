@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarFiltersService } from '../../../Services/car-filters.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserDataService } from '../../../Services/user-data.service';
 @Component({
   selector: 'app-readliness',
   templateUrl: './readliness.component.html',
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ReadlinessComponent implements OnInit {
   label:string = null;
   drivingReadiness:any = null;
-  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
+  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute,public userData:UserDataService) { }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;

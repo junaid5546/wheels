@@ -4,8 +4,7 @@ import { CarFiltersService  } from '../../../Services/car-filters.service';
 import { IonAccordionGroup } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
-
-
+import { UserDataService } from '../../../Services/user-data.service';
 export interface Task {
   name: string;
   completed: boolean;
@@ -36,21 +35,25 @@ export interface Item {
   selector: 'app-make-model',
   templateUrl: './make-model.component.html',
   styleUrls: ['./make-model.component.scss'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection:ChangeDetectionStrategy.Default
+
 })
 
 export class MakeModelComponent implements OnInit {
+
   label:string = null;
-  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
-  @ViewChild('parent', { static: true }) makeAccordian: IonAccordionGroup;
-  @ViewChild('child', { static: true }) modelAccordian: IonAccordionGroup;
+  selectAll:boolean = false;
   //When searching, the page should show the things that are being searched for
   //We shouldn’t select for the user. Because, we don’t know if he wants Ford Mustang GT or Ford GT or Mercedes GT.
   //So it’s better to show and expand all of the makes models trims based on that key search
   
   searchedText = '';
-  selectedMakeName:string=null;
-  selectedModelName:string=null;
+  selectedMakeName:string='';
+  selectedModelName:string='';
+  
+  firstResultPointer:any = null;
+  secResultPointer:any = null;
+
   currentItratot = 0;
   counter =0;
   makeCheckboxColor = "primary";
@@ -73,9 +76,10 @@ export class MakeModelComponent implements OnInit {
     items;
     start=1;
     count = 15;
-  constructor( private carFilters:CarFiltersService,private activated:ActivatedRoute, private detectionRef:ChangeDetectorRef) { }
+  constructor( private carFilters:CarFiltersService,private activated:ActivatedRoute, private detectionRef:ChangeDetectorRef,public userData:UserDataService) { }
 
   ngOnInit() {
+    console.log("MAKE MODEL TRIM  :", this.carFilters.getMakeModelTrims());
     this.items = this.carFilters.getMakeModelTrims();
     this.label = this.activated.snapshot.params.label;
     this.carFilters.filterObject[this.label] = [];
@@ -125,9 +129,9 @@ updateAllModelComplete(makeIndex,modelIndex,trim) {
 
 
 searchByName(name) { //qx
-  
   this.searchedText = name.detail.value;
   this.searchedText = this.searchedText.toLocaleLowerCase();
+  let howManyWords = this.searchedText.split(' ').length;
   console.log(this.searchedText);
   if(this.searchedText == '') {
     console.log("SEARCH CLEARED");
@@ -135,122 +139,124 @@ searchByName(name) { //qx
       element.show = true
     });
   }
-  let foundIndex = -1;
-   this.items.filter((make,index)=>{
-    this.items[index].show = false;
-    if (make.name.toLocaleLowerCase().startsWith(this.searchedText)) {
-      foundIndex = index;
-      this.items[index].show = true;
-      this.selectedMakeName = this.items[index].name;
-      this.items[index].models.forEach(element => {
-        element.show = true;
-        element.trims.forEach(element => {
-          element.show = true;
-        });
-      });
-      
-      
-    } else {
-      make.models.filter((model,modelIndex) => {
-        this.items[index].models[modelIndex].show = false;
 
-        if (model.name.toLocaleLowerCase().startsWith(this.searchedText)) {
-          console.log("IN MODEL IF");
-          foundIndex = index;
-          this.items[index].models[modelIndex].show = true;
-          this.selectedModelName = this.items[index].models[modelIndex].name;
-          //this.toggleAccordion('model',model.name);
-          this.items[index].show = true;
-        } else{
-          model.trims.filter((trim,trimIndex)=>{
-            this.items[index].models[modelIndex].trims[trimIndex].show = false;
-            if (trim.name.toLocaleLowerCase().startsWith(this.searchedText)) {
-              
-              console.log("IN trim IF",trim);
-              foundIndex =  index;
-              //this.toggleAccordion('make',make.name);
-              //this.toggleAccordion('model',model.name);
-              this.items[index].models[modelIndex].trims[trimIndex].show = true;
-              this.items[index].models[modelIndex].show = true;
-              this.items[index].show = true;
-            } 
-          })
-        }
-      })
-    }
-  });
-  console.log("RESULT: ", this.items[foundIndex]);
-}
+  switch (howManyWords) {
 
- a(){
-  let result = [].filter((make,index)=>{
+    case 1: // one word | Make | Model | Trim
+    console.log('Case: 1');
 
-    if(make.name === "a"){
-        console.log("MAKE:", make,",", index)
-    }
-    
-    else {
+    this.searchSpecificWord();
+    console.log("Case One Result : ",this.searchSpecificWord());
+    break;
 
-        make.model.filter((model,index)=>{
-            console.log("MODEL",model, ",",index);
-            
-            if(model.name === "searched"){
-                console.log("MODEL found:", model,',', index);    
-            } else{
-            
-                model.trim.filter((trim,index)=>{
-                console.log("TRIM:", model,',', index); 
-
-                if(trim.name === "searched"){
-                    console.log("TRIM found:", model,',', index); 
-                }
-            })
-                
-            }
-        })
-        
-    }
-    
-  });
- }
-
-
- toggleAccordion = (key,name) => {
-  console.log("NATIVE Make: ", this.makeAccordian);
-  console.log("NATIVE model: ", this.modelAccordian);
-  switch (key) {
-    case 'make':
-      const nativeElmake = this.makeAccordian;
-      if (nativeElmake.value === undefined) {
-        console.log("value undefined");
-        nativeElmake.value = name;
-    } else {
-      console.log("value =", nativeElmake.value);
-      nativeElmake.value === undefined;
-    }
-
-      break;
-
-    case 'model':
-      const nativeElmodel = this.modelAccordian;
-      if (nativeElmodel.value === undefined) {
-        nativeElmodel.value = name;
-    } else {
-      nativeElmodel.value === undefined;
-    }
-      break;
+    case 2: // two word | Make Model | Make Trim
+    console.log('Case: 2');
+      this.searchMultiple(this.searchedText);
+    break;
   
     default:
+      console.log("Default case");
       break;
   }
   
+}
 
-};
+  searchSpecificWord(){
+    let result = [];
+    this.items.filter((make,index)=>{
+      this.items[index].show = false;
+      if (make.name.en.toLocaleLowerCase().startsWith(this.searchedText)) {
+        result.push(make);
+        this.items[index].show = true;
+        this.selectedMakeName = `${this.items[index].name.en.toLocaleUpperCase()},${index}`;
+        this.items[index].models.forEach(element => {
+          element.show = true;
+          element.trims.forEach(element => {
+            element.show = true;
+          });
+        });
+      } else {
+        make.models.filter((model,modelIndex) => {
+          this.items[index].models[modelIndex].show = false;
+          if (model.name.en.toLocaleLowerCase().startsWith(this.searchedText)) {
+            this.selectedMakeName = `${this.items[index].name.en.toLocaleUpperCase()},${index}`;
+            this.items[index].models[modelIndex].show = true;
+            this.selectedModelName = this.items[index].models[modelIndex].name.en;
+            this.items[index].show = true;
+          } 
+        })
+      }
+    });
+    console.log("Result:");
+    return result
+  }
+
+  searchMultiple(word) {
+    let makeModel = word.split(" ");
+    let searchMake = this.lookUpMake(makeModel[0]);
+    console.log("Make: ", searchMake);
+    let searchModel = this.lookUpModels(searchMake,makeModel[1]);
+    console.log("Found Models",searchModel);
+  }
+
+  lookUpMake(makeName){
+   
+    let makes:any[] = [];
+     this.items.filter((make,index) => {
+      if(make.name.en.toLocaleLowerCase().startsWith(makeName)) {
+      let obj = {...make,Index:index};
+      makes.push(obj);
+      }
+    });
+    return makes;
+  }
+  
+  lookUpModels = (firstPointer,model_name) => {
+    
+    this.items.forEach(make=> {
+      make.models.forEach(model => {
+        model.show = false;
+      });
+      make.show = false
+    });
+
+        let tempArray = firstPointer;
+        let foundModels = [];
+  
+      tempArray.forEach((item,index) => {
+      item.models.filter((model,modelIndex)=>{
+          if(model.name.en.toLocaleLowerCase().startsWith(model_name)) {
+                this.items[item.Index].show = true;
+                this.items[item.Index].models[modelIndex].show = true;
+                this.items[item.Index].clicked = true;
+                this.selectedMakeName = `${this.items[item.Index].name.en.toLocaleUpperCase()},${item.Index}`;
+                console.log("Selected Name: ", this.selectedMakeName);
+                foundModels.push(item);
+          }
+        })
+      })
+        return foundModels;
+  }
+
+  searchMakeModelTrim(){}
+
 
 
 accordionGroupChange = (ev: any) => {
-  console.log("CLICKED: ", ev);
+  console.log('Accordian changed',ev.detail.value);
+  if(ev.detail.value.length != 0){
+    let char = null;
+    if(typeof(ev.detail.value) === 'object'){
+      char = ev.detail.value[ev.detail.value.length-1].split(",")[1];
+      let makeIndex = Number(char);
+      this.items[makeIndex].clicked = true;
+    } else if(typeof(ev.detail.value) === 'string'){
+        console.profile(ev);
+    }
+  }
 }
+
+selectAllMakes() {}
 
 loadMore(){
   let res  = this.carFilters.getMakeModelTrims();
@@ -261,23 +267,27 @@ loadMore(){
 }
 
 loadData(event) {
-  setTimeout(() => {
-    console.log('Done');
-    event.target.complete();
-  this.loadMore();
-  }, 500);
-}
-
-toggleInfiniteScroll() {
-  this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+ 
 }
 
 trackByItem(index: number, item: any) {
   return item._id;
 }
 
+trackByFn() {
+  
+}
 
 
 
+/*
+selectAllMakes(){
+  this.selectAll = !this.selectAll;
+  if(this.selectAll){
+    this.items.forEach(x=> x.completed = true);
+  } else {
+    this.items.forEach(x=> x.completed = false);
+  }
+}*/
 
 }

@@ -8,7 +8,8 @@
           </div>
           <ion-card [ngClass]="{selected_border : item.checked, default: item.checked==false}" class="item-body-inner">
             <img [src]="item.image"/>
-            <ion-label>{{item.name}}</ion-label>
+            <ion-label *ngIf="userData.language === 'en' ">{{item.name.en}}</ion-label>
+            <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar}}</ion-label>
           </ion-card>
         </ion-col>
       </ion-row>

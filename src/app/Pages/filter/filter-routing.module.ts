@@ -26,7 +26,7 @@ import { FilterPage } from './filter.page';
 const routes: Routes = [
   {
     path: '',
-    component: FilterPage,
+    component:FilterPage,
     children:[
       {
         component:BodyComponent,            //1
@@ -34,7 +34,7 @@ const routes: Routes = [
       },
       {
         component:MakeModelComponent,       //2
-        path:'Kmake'
+        path:''
       },
       {
         component:PriceComponent,           //3
@@ -111,11 +111,6 @@ const routes: Routes = [
       {
         component:WarrantyDurationComponent,      //19
         path:'car-warranty-duration'
-      },
-      {
-        path: '',
-        redirectTo: 'filter/car-body',
-        pathMatch: 'full'
       }
     ]
   }

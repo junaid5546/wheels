@@ -4,12 +4,19 @@
     margin-top: 16px;
     .inner-container{
         display: flex;
-        justify-content: space-around;
         height: 75%;
         .right{
+            ion-segment{
+                width: 150px;
+                height: 80px;
+                background-color: yellow;
+                -ms-transform: rotate(270deg); /* IE 9 */
+                transform: rotate(270deg);
+              }
             margin-right: 20px;
         }
         .left{
+            margin-left: 20px;
             width: 48%;
             display: flex;
             flex-direction: column;
@@ -47,3 +54,15 @@
         }
     }
 }
+
+
+// Range
+
+
+div.a {
+    width: 150px;
+    height: 80px;
+    background-color: yellow;
+    -ms-transform: rotate(270deg); /* IE 9 */
+    transform: rotate(270deg);
+  }

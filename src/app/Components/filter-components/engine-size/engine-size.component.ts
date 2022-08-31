@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CarFiltersService } from '../../../Services/car-filters.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserDataService } from '../../../Services/user-data.service';
 @Component({
   selector: 'app-engine-size',
   templateUrl: './engine-size.component.html',
@@ -9,8 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 export class EngineSizeComponent implements OnInit {
   label:string = null;
   engineSize:any = null;
-
-  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
+  selectAll:boolean = false;
+  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute,public userData:UserDataService) { }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
@@ -28,5 +29,9 @@ export class EngineSizeComponent implements OnInit {
       this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
       this.carFilter.getPost();
     }
+  }
+
+  selectAllItems(){
+    
   }
 }

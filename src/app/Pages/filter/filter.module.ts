@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import {MatSliderModule} from '@angular/material/slider'
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { IonicModule } from '@ionic/angular';
@@ -33,6 +33,7 @@ import { SaleTypeComponent } from 'src/app/Components/filter-components/sale-typ
 
 @NgModule({
   imports: [
+    MatSliderModule,
     ScrollingModule,
     CommonModule,
     NgxSliderModule,

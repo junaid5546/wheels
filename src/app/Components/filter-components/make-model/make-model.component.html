@@ -6,27 +6,32 @@
     <ion-toolbar>
       <ion-searchbar (ionChange)="searchByName($event)" placeholder="make model trim" showCancelButton="focus"></ion-searchbar>
     </ion-toolbar>
+    <ion-item lines="full" >
+      <ion-checkbox [checked]="selectAll" mode="md" slot="start" (ionChange)="selectAllMakes()"></ion-checkbox>
+            <ion-label *ngIf="userData.language === 'en' ">{{"Select All"}}</ion-label>
+            <ion-label *ngIf="userData.language === 'ar' ">{{"ستشمبسيب"}}</ion-label>
+    </ion-item>
+      <ion-accordion-group [value]="this.selectedMakeName" [animated]="false" (ionChange)="accordionGroupChange($event)" multiple="true">
     
-      <ion-accordion-group [animated]="false" (ionChange)="accordionGroupChange($event)"  #parent multiple="true" [value]="searchedText.toUpperCase()">
-    
-        <ng-container *ngFor="let item of items; let i=index">
+        <ng-container *ngFor="let item of items; let i=index;">
           
-        <ion-accordion [id]="i" [value]="item.name.toUpperCase() + i">
+        <ion-accordion [id]="i" [value]="item.name.en.toLocaleUpperCase()+','+i">
           <ion-item slot="header" *ngIf="item.show">
       <!----------------------------------------------MAKE ITEM STARTS---------------------------------------------------->
             <mat-checkbox class="example-margin make-class"
                               [checked]="item.completed"
                               [color]="makeCheckboxColor"
                               (change)="setAll($event.checked,i)">
-                              <ion-label>{{item.name}}</ion-label>
+                              <ion-label *ngIf="userData.language === 'en' ">{{item.name.en}}</ion-label>
+                              <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar}}</ion-label>
                 </mat-checkbox>
       <!----------------------------------------------MAKE ITEM ENDS---------------------------------------------------->
           </ion-item>
           <ion-list slot="content">
             
-            <ion-accordion-group  (ionChange)="accordionGroupChange($event)" #child  multiple="true" [value]="searchedText.toUpperCase()">
+            <ion-accordion-group *ngIf="item.clicked" (ionChange)="accordionGroupChange($event)" #child  multiple="true" [value]="searchedText.toUpperCase()">
               <ng-container *ngFor="let model of item.models; let modelIndex=index">
-            <ion-accordion [value]="model.name.toUpperCase()">
+            <ion-accordion [value]="model.name.en.toUpperCase() + i">
               <ion-item *ngIf="model.show" slot="header">
                 <ng-container >
       <!----------------------------------------------MODELS ITEM STARTS---------------------------------------------------->
@@ -37,7 +42,8 @@
                                   [indeterminate]="ModelsomeComplete(i,modelIndex,model)"
                                   (ngModelChange)="updateAllComplete(i)"
                                   (change)="setModelAllTrims($event.checked,i,modelIndex,model)">
-                                  <ion-label class="model-label">{{model.name}}</ion-label>
+                                  <ion-label *ngIf="userData.language === 'en' ">{{model.name.en}}</ion-label>
+                                  <ion-label *ngIf="userData.language === 'ar' ">{{model.name.ar}}</ion-label>
                     </mat-checkbox>
       <!----------------------------------------------MODELS ITEM ENDS---------------------------------------------------->
     </ng-container>
@@ -58,7 +64,8 @@
                         [checked]="trim.completed"
                         (change)="updateMake(i,modelIndex,trimIndex)"
                         (ngModelChange)="updateAllModelComplete(i,modelIndex,trimIndex)">
-            <ion-label class="trims-label">{{trim.name}}</ion-label>
+                        <ion-label *ngIf="userData.language === 'en' ">{{trim.name.en}}</ion-label>
+                        <ion-label *ngIf="userData.language === 'ar' ">{{trim.name.ar}}</ion-label>
           </mat-checkbox>
         </ion-item>
       </ng-container>             

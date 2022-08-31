@@ -12,7 +12,7 @@ import { DmApiService } from 'dm-api';
   providedIn: 'root'
 })
 export class UserDataService {
-
+  language:string = 'en';
   private userId:string = null;
   profileUrl = 'user/public-profile/';
 

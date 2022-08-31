@@ -7,7 +7,7 @@
             <ion-label>Max Price</ion-label>
           </div>
           <div class="input-container">
-            <ion-input #input type="number" [(ngModel)]="maxValue" (ionChange)="getInputValue($event,'maxValue')"></ion-input>
+            <ion-input #inputMax type="text" [value]="maxValue|number:'1.0':'en-US'" placeholder="Any" (ionChange)="getInputValue($event,'maxValue')"></ion-input>
             <ion-label>OMR</ion-label>
           </div>
         </div>
@@ -16,13 +16,14 @@
             <ion-label>Min Price</ion-label>
           </div>
           <div class="input-container">
-            <ion-input type="number" [(ngModel)]="minValue" (ionChange)="getInputValue($event,'minValue')"></ion-input>
+            <ion-input  #inputMin type="text" [value]="minValue|number:'1.0':'en-US'" placeholder="0" (ionChange)="getInputValue($event,'minValue')">  </ion-input>
             <ion-label>OMR</ion-label>
           </div>
         </div>
       </div>
-      <div class="right">
-        <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeEnd)="getChangeContextString($event)"></ngx-slider>
+      
+      <div  class="right">
+        <ngx-slider   #slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options" (userChangeStart)="startMoving()"  (userChangeEnd)="endMoving()"  (userChange)="getChangeContextString($event)" ></ngx-slider>
         <!-- <ngx-slider [(value)]="value"  [options]="options"></ngx-slider> -->
       </div>
     </div>

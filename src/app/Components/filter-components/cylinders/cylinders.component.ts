@@ -1,17 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CarFiltersService } from '../../../Services/car-filters.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserDataService } from '../../../Services/user-data.service';
 @Component({
   selector: 'app-cylinders',
   templateUrl: './cylinders.component.html',
   styleUrls: ['./cylinders.component.scss'],
 })
 export class CylindersComponent implements OnInit {
-  
+  selectAll:boolean = false;
    label:string = null;
    cylinders:any = null;
 
-  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
+  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute,public userData:UserDataService) { }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
@@ -30,6 +31,10 @@ export class CylindersComponent implements OnInit {
       this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
       this.carFilter.getPost();
     }
+  }
+
+  selectAllItems(){
+    
   }
 
 }

@@ -14,8 +14,8 @@
             <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
                 <div class="container" [ngClass]="{selected: item.selected}" >
                 <div class="name-of-item">
-                    <ion-label>{{item.name}}</ion-label>
-                    
+                    <ion-label *ngIf="userData.language ==='en'">{{item.name.en}}</ion-label>
+                    <ion-label *ngIf="userData.language ==='ar'">{{item.name.ar}}</ion-label>
                 </div>
                 <div class="icon-of-item">
                     <!-- no logo yet -->
@@ -44,7 +44,8 @@
                         </ion-img>  
                         </div>
                         <div class="item-name-container">
-                            <ion-label>{{item.name}}</ion-label>
+                            <ion-label *ngIf="userData.language ==='en'">{{item.name.en}}</ion-label>
+                            <ion-label *ngIf="userData.language ==='ar'">{{item.name.ar}}</ion-label>
                         </div>
                         <ion-ripple-effect></ion-ripple-effect>
                     </div>
@@ -60,7 +61,8 @@
                            <ion-card></ion-card>
                           </div>
                         <div class="item-name-container">
-                            <ion-label>{{item.name}}</ion-label>
+                            <ion-label *ngIf="userData.language ==='en'">{{item.name.en}}</ion-label>
+                            <ion-label *ngIf="userData.language ==='ar'">{{item.name.ar}}</ion-label>
                         </div>
                         <ion-ripple-effect></ion-ripple-effect>
                     </div>
@@ -79,7 +81,8 @@
                         <ion-checkbox mode="md" [checked]="item.selected" ></ion-checkbox>
                     </div>
                     <div class="name-of-item checkboxName">
-                        <ion-label>{{item.name}}</ion-label>
+                        <ion-label *ngIf="userData.language ==='en'">{{item.name.en}}</ion-label>
+                        <ion-label *ngIf="userData.language ==='ar'">{{item.name.ar}}</ion-label>
                     </div>
                
                 </div>

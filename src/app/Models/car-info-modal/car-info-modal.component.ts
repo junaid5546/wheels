@@ -55,11 +55,11 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
  @Input() goBack:string = null;
 
  // LEFT AND RIGHT ICON.
- icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:false, right_icon:'../../assets/icon/Language.svg'};
+ icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/Language.svg'};
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Images', has_sub_heading:false, sub_heading_name:''};
-  constructor(private filters:CarFiltersService ,private userData:UserDataService,private plansApi:PlansService,public modelCtrl: ModalControllerService, private amimationCtrl:AnimationController, private route:Router, private change:ChangeDetectorRef) {
+  constructor(private filters:CarFiltersService ,public userData:UserDataService,private plansApi:PlansService,public modelCtrl: ModalControllerService, private amimationCtrl:AnimationController, private route:Router, private change:ChangeDetectorRef) {
 
    }
 
@@ -294,7 +294,11 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
 filterItems(searchTerm) {
     console.log(searchTerm);
     return this.currentItem.filter(item => {
-        return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+      if(this.userData.language ==='en'){
+        return item.name.en.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+      } else {
+        return item.name.ar.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+      }
     });
 }
 }

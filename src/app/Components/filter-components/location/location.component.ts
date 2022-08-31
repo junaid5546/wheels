@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { CarFiltersService } from 'src/app/Services/car-filters.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserDataService } from '../../../Services/user-data.service';
 export interface Task {
   name: string;
   completed: boolean;
@@ -15,7 +16,7 @@ export interface Task {
 
 })
 export class LocationComponent implements OnInit {
-
+  selectAll:boolean = false;
   label:string = null;
   locations:any[]=[];
   makeCheckboxColor='primary';
@@ -32,7 +33,7 @@ export class LocationComponent implements OnInit {
       {name: 'Warn', completed: false, color: 'warn'},
     ],
   };
-  constructor(private carFilters:CarFiltersService,private activated:ActivatedRoute) { }
+  constructor(private carFilters:CarFiltersService,private activated:ActivatedRoute,public userData:UserDataService) { }
 
   ngOnInit() {
    this.label = this.activated.snapshot.params.label;
@@ -89,5 +90,9 @@ export class LocationComponent implements OnInit {
 
   someComplete(makeIndex): boolean {
     return this.locations[makeIndex].states.filter(t => (t.completed)).length > 0 && !this.locations[makeIndex].completed;
+  }
+
+  selectAllItems(){
+    
   }
 }

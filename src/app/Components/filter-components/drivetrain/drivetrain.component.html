@@ -1,8 +1,9 @@
 <ion-content>
   <ion-list lines="none">
-    <ion-item *ngFor="let item of drivtrain; let i=index">
+    <ion-item lines="full" *ngFor="let item of drivtrain; let i=index">
       <ion-checkbox [checked]="item.checked" mode="md" slot="start" (ionChange)="check(item,i)"></ion-checkbox>
-      <ion-label>{{item.name}}</ion-label>
+      <ion-label *ngIf="userData.language === 'en' ">{{item.name.en}}</ion-label>
+      <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar}}</ion-label>
     </ion-item>
     </ion-list>
 </ion-content>
