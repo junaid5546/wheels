@@ -8,7 +8,7 @@
 <ion-content >
 
     <div *ngIf="data" [ngClass]="{'markScroll': currentStep == 0 || currentStep==1 }" id="content">
-    <ion-list id="list" [ngClass]="{'try': currentStep == 0 || currentStep==1}"  *ngIf="currentStep != 5 && currentStep!=8 && currentStep != 25 && currentStep != 24 && currentStep !=23 && currentStep!=13">
+    <ion-list id="list" [ngClass]="{'try': currentStep == 0 || currentStep==1}"  *ngIf="currentState.value.key  != 'body_id' && currentState.value.key !='exterior_color_id' && currentState.value.key  != 'post_type' && currentState.value.key != 'additional_features' && currentState.value.key !='features_id_array' && currentState.value.key != 'interior_color_id'">
         
         <div #card_items  class="wraper">
             <ion-card  *ngFor="let item of currentItem;let i=index" class="h-v-centered" button (click)="selectItem(item,i)">
@@ -32,8 +32,8 @@
         </div>
     </ion-list>
 
-    <ion-list *ngIf="currentStep == 5 || currentStep==13 || currentStep==8" >
-        <ion-grid *ngIf="currentStep == 5">
+    <ion-list *ngIf="currentState.value.key == 'body_id' || currentState.value.key== 'exterior_color_id' || currentState.value.key== 'interior_color_id'" >
+        <ion-grid *ngIf="currentState.value.key == 'body_id'">
             <ion-row >
                 <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem ;let i=index">
                     <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
@@ -53,7 +53,7 @@
             </ion-row>
         </ion-grid>
 
-        <ion-grid *ngIf="currentStep==13 || currentStep==8">
+        <ion-grid *ngIf="currentState.value.key =='exterior_color_id' || currentState.value.key=='interior_color_id'">
             <ion-row >
                 <ion-col button (click)="selectItem(item,i)" size="4" *ngFor="let item of currentItem;let i=index">
                     <div id="main-item-container" class="main-item-container ion-activatable ripple-parent">
@@ -72,7 +72,7 @@
 
     </ion-list>
 
-    <ion-list *ngIf="currentStep ===23" >
+    <ion-list *ngIf="currentState.value.key ==='features_id_array'" >
         <div #card_items  class="wraper">
             <ion-card  *ngFor="let item of currentItem;let i=index" button class="" (click)="selectItem(item,i)">
                 <!-- [ngClass]="{selected: item.selected}" -->
@@ -92,7 +92,7 @@
 
     </ion-list>
 
-    <ion-list *ngIf="currentStep == 24"  >
+    <ion-list *ngIf="currentState.value.key == 'additional_features'"  >
       <div class="item-main-container">
       
           <div class="inner-container" [ngClass]="{'errorborder': errorField}">
@@ -204,7 +204,7 @@
       </div>
     </ion-list>
 
-    <ion-list *ngIf="currentStep == 25">
+    <ion-list *ngIf="currentState.value.key == 'post_type'">
         <app-special-plans></app-special-plans>
     </ion-list>
 
@@ -226,7 +226,7 @@
 
 <div class="select-images-button">
     <div #bottomButton class="wraper">
-     <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex()" *ngIf="nextButton === 24 || currentStep === 23 ">
+     <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex()" *ngIf="currentState.value.key === 'additional_features' || currentState.value.key === 'features_id_array' ">
         <div class="logo-and-label-container">
     
                 <div class="label-container change-size">
@@ -240,7 +240,7 @@
      </ion-button>
      <!-- ========== -->
 
-     <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex('updatepost')" *ngIf="currentStep === 25 && modelCtrl.publish!=0" >
+     <ion-button (click)="this.modelCtrl.incrementOfCurrentIndex('updatepost')" *ngIf="currentState.value.key === 'post_type' && modelCtrl.publish!=0" >
         <div class="logo-and-label-container">
     
                 <div class="label-container change-size">

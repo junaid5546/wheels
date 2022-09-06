@@ -13,6 +13,7 @@ import { WebView } from '@awesome-cordova-plugins/ionic-webview/ngx';
 import { Platform } from '@ionic/angular';
 import { PostService } from 'dm-api';
 import { UserDataService } from '../../Services/user-data.service';
+import { CarFiltersService } from '../../Services/car-filters.service';
 
 @Component({
   selector: 'app-take-car-images',
@@ -71,21 +72,24 @@ drop(event: CdkDragDrop<string[]>) {
     private changeDetector:ChangeDetectorRef,
     public platform: Platform,
     private post:PostService,
+    private filter:CarFiltersService,
     private userData:UserDataService,
     private deviceInfo:DeviceInfoService) {
      
      }
 
      ngOnInit(): void {
-       //this.presentModal();
+      //this.presentModal();
       // this.fetchPostFeed();
+      //this.filter.setMakeModelTrims([]);
+      this.modalService.modelData.items[0].value = this.filter.getMakeModelTrims();
        if( JSON.parse(localStorage.getItem('_post'))){
         this.nextButtonText = 'CONTINUE';
         console.log("POST: ", typeof(localStorage.getItem('_post')));
         let post = JSON.parse(localStorage.getItem('_post'));
-        this.savedPost = post;
+        //this.savedPost = post;
         console.log("HAS POST", localStorage.getItem("_post"));
-        this.carImages = post.postImages;
+        //this.carImages = post.postImages;
        }
 
        let IsModelInitialized =  this.modalService.startIndexing();

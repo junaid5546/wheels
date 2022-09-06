@@ -38,7 +38,7 @@ export class SpecialPlansComponent implements OnInit {
   getPlans(days) {
     this.filters.plansData.subscribe((plans)=>{
       console.log("PLANS FROM SERVICE ",plans);
-      this.plans=plans['result'][days];
+      this.plans=plans[days];
   
       });
   } 

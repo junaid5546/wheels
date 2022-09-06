@@ -103,10 +103,61 @@ export class VehiclesDepartmentPage implements OnInit {
       this.filter.setMakeModelTrims(NewMakeModelArray);
       this.filter.setBodies(feed.result.bodies);
 
-      feed.result.filters.forEach(filterElement => {   
+      feed.result.filters.forEach((filterElement,apiIndex) => {   
         this.modalService.modelData.items.forEach((modelDataElement,index) => {
-        if(filterElement.name.en ==modelDataElement.name && index != 0 && index != 21 && index != 23){
+        if(filterElement.name.en == modelDataElement.name && index != 0 && index != 21 && index != 23){
           modelDataElement.value=filterElement.types
+        if(index == 4 && apiIndex == 3){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  3  && apiIndex == 4){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  8   && apiIndex == 5){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  13   && apiIndex == 6){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  7  && apiIndex == 7){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  9   && apiIndex == 8){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  6  && apiIndex == 9){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  10  && apiIndex == 10){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  11  && apiIndex == 11){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  12  && apiIndex == 12){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  14  && apiIndex == 13){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  20  && apiIndex == 14){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  15  && apiIndex == 15){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  16  && apiIndex == 16){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  17  && apiIndex == 17){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  18  && apiIndex == 18){
+          modelDataElement.filterId = filterElement._id;
+        }
+        if(index ==  19  && apiIndex == 19){
+          modelDataElement.filterId = filterElement._id;
+        }
         }
       });
      });

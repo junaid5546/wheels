@@ -17,26 +17,29 @@ export interface Task {
   changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class YearComponent implements OnInit {
+
   label:string = null;
   modelYear:any[] = null;
   selectAll:boolean = false;
   constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute,public userData:UserDataService, private detectRef:ChangeDetectorRef ) { }
 
   ngOnInit() {
-  this.label = this.activated.snapshot.params.label;
-  this.modelYear =  this.carFilter.getModelYear();
-  this.carFilter.filterObject[this.label] = [];
+
+        this.label = this.activated.snapshot.params.label;
+        this.modelYear =  this.carFilter.getModelYear();
+        this.carFilter.filterObject[this.label] = [];
+
   }
 
   check(item,index){
-    console.log("check called");
-    this.carFilter.modelYear[index].checked = !this.carFilter.modelYear[index].checked;
-    if(this.carFilter.modelYear[index].checked){
-    this.carFilter.filterObject[this.label].push(item.name.en);
-    this.detectRef.markForCheck();
+          console.log("check called");
+          this.carFilter.modelYear[index].checked = !this.carFilter.modelYear[index].checked;
+          if(this.carFilter.modelYear[index].checked){
+          this.carFilter.filterObject[this.label].push(item.name.en);
+          this.detectRef.markForCheck();
     } else {
-      //this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
-      //this.carFilter.getPost();
+          //this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+          //this.carFilter.getPost();
     }
   }
 
