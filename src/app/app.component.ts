@@ -14,7 +14,7 @@ import { Capacitor } from '@capacitor/core';
 import { UserDataService } from './Services/user-data.service';
 import { TokenService } from 'dm-api';
 import { CarFiltersService} from './Services/car-filters.service';
-import { DatabaseService } from './Services/database.service'
+import { CamGalService } from './Services/cam-gal.service';
 export type platform_name = 'ios' | 'android' | 'web' ;
 
 @Component({
@@ -36,13 +36,13 @@ export class AppComponent  implements OnInit,OnDestroy  {
   theme: string = 'light'; // light, dark
   
   constructor( 
-      private db:DatabaseService,
       private platform: Platform,
       private deviceInfo:DeviceInfoService,
       private router:Router,
       private userData:UserDataService,
       private token:TokenService,
       private filters:CarFiltersService,
+      private camGal:CamGalService,
       public translate: TranslateService) {
 
       this.translate.setDefaultLang('ar');
@@ -59,6 +59,8 @@ export class AppComponent  implements OnInit,OnDestroy  {
 
 
   ngOnInit(): void {
+    
+    
     this.initializeApp();
   }
 

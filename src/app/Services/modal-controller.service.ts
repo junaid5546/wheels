@@ -20,7 +20,8 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ModalControllerService {
-  
+  // WHEN FILTER ITEMS USING FILTER ALL FALSE WHILL COME ITNO THIS.
+  poppedItem:any[] = [];
   // SAVING POST TO LOCAL
   _post = {
     hasPostCreated:false,
@@ -62,8 +63,8 @@ export class ModalControllerService {
   15- api-index* 17 - Driving Readiness : 62276e52de5b632b481db49b | model-index* 17 
   16- api-index* 18 - Sale Type : 62276e52de5b632b481db498 | model-index* 18
   17- api-index* 19 - Warrenty Duration : 62276e52de5b632b481db498 | model-index* 19 
-
   */
+
   modelData = {
     items: [
       { key: 'make_id',  name: 'Make', value: [], selected: { _id: '',models:[] }, filterId:null,show:true },   //0
@@ -168,16 +169,20 @@ export class ModalControllerService {
       console.log("MODELS TWO",this.modelData.items[0].selected.models)
       this.incrementOfCurrentIndex();
     } else if (this.modelData.current.index === 1) {
-
       this.modelData.items[2].value = this.modelData.items[1].selected.trims;
       this.incrementOfCurrentIndex();
-    
+    } else if(this.modelData.current.index === 2){
+      if(this.modelData.next.value.key === 'body_id'){
+        this.modelData.items[3].value = this.modelData.items[2].selected.bodies;
+      }
+      this.incrementOfCurrentIndex();
     } else if (this.modelData.current.value.key === 'condition_id') {     
       this.modelData.items[5].value = this.modelData.items[2].selected.bodies;
       this.incrementOfCurrentIndex();
     } else if(this.modelData.current.value.key === 'body_id'){
-      this.modelData.items.forEach(item=>{
-        selected.filtersId.forEach(filterId=>{
+      console.log("in body");
+      this.modelData.items.forEach( item =>{
+        selected.filtersId.forEach( filterId =>{
          if(item.filterId != null){
            if(item.filterId === filterId ){
              item.show  = true;
@@ -188,7 +193,8 @@ export class ModalControllerService {
         let newIndex = 0;
         this.modelData.items = this.modelData.items.filter(x=>x.show);
         this.modelData.items.forEach((filter,index)=>{
-          if(filter.key === 'body_id'){
+          if(filter.key === 'body_id') {
+            //this.modelData.items[index].value = this.modelData.items[2].selected.bodies;
             newIndex = index +1;
           }
           if(filter.key === 'engine_size'){
@@ -205,8 +211,7 @@ export class ModalControllerService {
     } else if(this.modelData.current.value.name === 'engine_size'){
        //this.modelData.items[7].value=this.modelData.items[5].selected.doorCount;
        this.incrementOfCurrentIndex();
-  }
-
+    }
     else if(this.modelData.current.value.key === 'features_id_array'){
       
         console.log("additional setting");
@@ -311,19 +316,19 @@ export class ModalControllerService {
   }
 
   incrementOfCurrentIndex(type?) {
-    console.log('INDEX INCREMENTED');
+
      // SCROLL INTO VIEW AFTER CHOICE DONE
      document.getElementById("content").scrollIntoView({block: "start", inline: "nearest"});
       // THIS CONDITION BECAUSE NOT ALL DIVS CONTAIN ION LIST WITH LIST ID
      ((document.getElementById("list"))!= null) ? (document.getElementById("list").scrollTo(0,0)) : '';
-    if (this.getCurrentItemIndex() < this.getItemsLenght() - 1) {
+    if (this.getCurrentItemIndex() < this.getItemsLenght() - 1 && this.modelData.current.value.key != 'post_type') {
       console.log('Next Object: ', this.modelData.next);
       console.log('Previous Object: ', this.modelData.pervious);
       console.log('Current Object: ', this.modelData.current); 
       console.log('this.modelData.current.index',this.modelData.current);
       this.activateIndexForDisplay();
     } else {
-      if( this.getCurrentItemIndex() === 25 && type==='updatepost') {
+      if( type==='updatepost') {
         this.updatePost();
       }
     }
@@ -358,9 +363,9 @@ export class ModalControllerService {
         obj["seller_notes"] = item.selected.seller_notes || '';
         obj["distance_kilometer"] = item.selected.distance_kilometer;
       } else if (item.key == 'engine_size'){
-        obj[item.key] = item.selected.name;
+        obj[item.key] = item.selected.name.en;
       } else if (item.key == 'door_count_id'){
-        obj[item.key] = item.selected.name;
+        obj[item.key] = item.selected.name.en;
       } else if (item.key == 'features_id_array'){
         obj[item.key] = item.selected.features_id_array;
       } else if(item.key == 'post_type') {
@@ -369,8 +374,6 @@ export class ModalControllerService {
         obj[item.key] = item.selected._id;
       }
     });
-    let post = JSON.parse( localStorage.getItem('_post') );
-    this._post.postId = post.postId;
     this.post.updatePost(obj,this._post.postId)
     .then((post:any)=>{
       if(post.code == 200) {
@@ -378,7 +381,7 @@ export class ModalControllerService {
         this.error.toast(post.message).then(()=>{
           console.log("POST UPDATE STATUS: ", post);
           this.savePostLocal();
-          this.router.navigate(['tabs/tab4'])
+          this.router.navigate(['tabs/posts'])
         })
       }
     })
