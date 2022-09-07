@@ -79,27 +79,12 @@ drop(event: CdkDragDrop<string[]>) {
      }
 
      ngOnInit(): void {
-      //this.presentModal();
-      // this.fetchPostFeed();
-      //this.filter.setMakeModelTrims([]);
-      this.modalService.modelData.items[0].value = this.filter.getMakeModelTrims();
-       if( JSON.parse(localStorage.getItem('_post'))){
-        this.nextButtonText = 'CONTINUE';
-        console.log("POST: ", typeof(localStorage.getItem('_post')));
-        let post = JSON.parse(localStorage.getItem('_post'));
-        //this.savedPost = post;
-        console.log("HAS POST", localStorage.getItem("_post"));
-        //this.carImages = post.postImages;
-       }
-
        let IsModelInitialized =  this.modalService.startIndexing();
        if(IsModelInitialized.status){
          this.modalService.updatecurrentObject();
        } else {
          return null;
        }
-       //console.log("Model Initialization: ", IsModelInitialized);
-         //this.checkModalCurrentState();
      }
  
       selectImages(){
@@ -258,48 +243,25 @@ drop(event: CdkDragDrop<string[]>) {
 
   // PICK IMAGES FROM GALLERY
  async takeImageFromGallery() {
- // IF THE LIMIT IS FINE 
+ // IF THE LIMIT IS LESS THAN 20 
    if(this.canTakeImages()){
-    this.checkImagesLength();
   let images = await this.camGal.getLibraryImages();
   this.carImages =  this.carImages.concat(images);
-  console.log("IMAGES: ", this.carImages)
     // DETECT CHANGE AND SHOW THE NEXT BUTTON
    this.changeDetector.markForCheck();
    this.toggleNext(true);
-    
    if(this.platform.is('hybrid')){
     let postCreate:any = await this.createPost();
-    console.log("POST CREATE RESP",postCreate);
-  
-    if(postCreate.code === 200){
-      console.log("POST ID: ", postCreate.result);
-   }
     this.camGal.uploadImages(this.carImages,'post-images',postCreate.result);
       } else {
-        let checkPost:any = await this.checkPost();
         let file = await this.camGal.readAsFile(this.carImages);
-        if(checkPost === null){ // NO POST IN DRAFT
-          console.log("NO POST IN DRAFT");
           let postCreate:any = await this.createPost();
           if(postCreate.code === 200){
             this.savePostLocal(postCreate.result,file);
             this.generatePostId(postCreate,file);
          }
-         
-        } else { // POST IS AVAILABLE IN DRAFT
-          if(checkPost.hasPostCreated){
-            console.log("POST IN DRAFT");
-            this.savePostLocal(checkPost.postId, this.carImages);
-            this.camGal.uploadMultipleImages(file,'post-images',checkPost.postId);
-          } else {
-            console.log('Post Check Result: ', checkPost);
-          }
-        }
-    
       }
     } else {
-      // LIMIT REACHED TO 20.
       console.log('limit reached');
       return;
     }
@@ -308,6 +270,11 @@ drop(event: CdkDragDrop<string[]>) {
 }
 
 // UPLOADING IMAGES TO GENERATED POST.
+/**
+ * @author Muhammad Junaid Gul
+ * @param post created post that received from server
+ * @param file image as file object
+ */
 async generatePostId(post,file){
   this.modalService._post.hasPostCreated = true;
   this.modalService.modelData.postId = post.result;
@@ -315,30 +282,19 @@ async generatePostId(post,file){
 }
 
 
-async checkPost(){
-  return new Promise((res,rej)=>{
-    let post = JSON.parse( localStorage.getItem('_post') );
-    res(post);
-  });
-
-}
-
-
 /**
+ * @author Muhammad Junaid Gul
  * CREATE NEW POST IN DB AND RETURNS ITS ID
  * @returns CREATED POST
  */
 
 async createPost(){
-
   return new Promise((res,rej)=>{
     this.post.createPost(this.userData.fetchUserId())
     .then((post:any)=>{
-      console.log("POST CREATION: ", post);
       res(post as any);
     })
     .catch(error=>{
-      console.log("POST CREATION ERROR: ", error);
       rej(error);
     })
   })
@@ -346,40 +302,15 @@ async createPost(){
 }
 
 //SAVING POST TO LOCAL STORAGE 
+/**
+ * @author Muhammad Junaid Gul
+ * @param post_id created post id
+ * @param images images as file object
+ */
   savePostLocal(post_id,images) {
-  console.log("CALLED SAVE POST LOCAL");
   this.modalService._post.hasPostCreated = true;
   this.modalService._post.postImages = images;
   this.modalService._post.postId = post_id;
-  let obj = JSON.stringify(this.modalService._post)
-
-  console.log("OBJ POST: ",obj);
-
-  localStorage.setItem('_post', JSON.stringify(this.modalService._post));
 }
-
-  // fetchPostFeed() {
-  //   this.post.getPostFeed()
-  //   .then((feed:any)=>{
-  //     console.log("Post Feed:", feed);
-  //     /*
-      
-  //     */
-  //     this.modalService.modelData.items[0].value = feed.result.makes;
-  //     this.modalService.modelData.items[21].value=feed.result.governorates;
-  //     this.modalService.modelData.items[23].value = feed.result.features;
-  //     feed.result.filters.forEach(filterElement => {
-     
-  //     this.modalService.modelData.items.forEach(modelDataElement => {
-  //       if(filterElement.name==modelDataElement.name){
-  //         modelDataElement.value=filterElement.types;
-  //       }
-  //     });
-  //    });
-  //   })
-  //   .catch(error=>{
-  //     console.log("Could not get post feed", error);
-  //   })
-  // }
 
 }
