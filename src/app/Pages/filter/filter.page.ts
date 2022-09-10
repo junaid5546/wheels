@@ -479,4 +479,8 @@ export class FilterPage implements OnInit, AfterViewInit {
       this.filterPost.setMakeModelTrims([]);
   }
 
+  navigate(){
+    this.router.navigate(['tabs/posts'])
+  }
+
 }
