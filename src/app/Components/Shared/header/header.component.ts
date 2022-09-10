@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalControllerService } from '../../../Services/modal-controller.service';
@@ -8,10 +8,11 @@ import { UserDataService } from 'src/app/Services/user-data.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private nav:NavController, private router:Router, private modalCtrl:ModalControllerService,private deviceInfo:DeviceInfoService, private userData:UserDataService) { }
+  constructor(private nav:NavController, private detector:ChangeDetectorRef, private router:Router, private modalCtrl:ModalControllerService,private deviceInfo:DeviceInfoService, private userData:UserDataService) { }
   // ROUTE NAME HERE.
   @Input() forwardTo:string = null;
   // ROUTE IS FORWARD OR BACK.
@@ -23,11 +24,13 @@ export class HeaderComponent implements OnInit {
   // HAS MODAL BEING PRESENTED
   @Input() isModal:boolean;
   @Input() filter:boolean;
+  rotateBack:boolean = false;
   routeLink:string;
 
   ngOnInit() {
     this.router.events.subscribe((val) => {
       this.routeLink=val['url'];
+
     }
     );
   }
@@ -49,18 +52,25 @@ export class HeaderComponent implements OnInit {
   translate=()=>{
     if(this.routeLink!='/tabs/posts'){
     let language = this.userData.language;
-    if(language=='ar'){
+    if(language == 'ar'){
       this.deviceInfo.changeLanguage('en');
-      document.documentElement.dir = "ltr";
+      document.documentElement.dir = "rtl";
+      this.icons.right_icon = 'assets/icon/Language.svg'
+      this.icons.left_icon = 'assets/icon/settings/back.svg';
       document.getElementsByTagName("body")[0].style.direction="ltr";
       this.userData.language = 'en';
-      console.log(language);
+      this.rotateBack = false;
+      console.log("EN:language");
     }else{
+      this.rotateBack = true;
+      console.log("AR:language");
       this.deviceInfo.changeLanguage('ar');
+      this.icons.right_icon = 'assets/icon/e.svg'
+      this.icons.left_icon = 'assets/icon/settings/back.svg';
       this.userData.language = 'ar';
       document.documentElement.dir = "rtl";
       document.getElementsByTagName("body")[0].style.direction="rtl";
-      console.log(language);
+      this.detector.detectChanges();
     }
     
   }else{

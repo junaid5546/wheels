@@ -204,7 +204,7 @@ export class FilterPage implements OnInit, AfterViewInit {
     has_left_icon: true,
     has_right_icon: true,
     left_icon: 'assets/icon/settings/back.svg',
-    right_icon: '/assets/icon/Language.svg',
+    right_icon: '../../../assets/icon/Language.svg'
   };
 
   constructor(
