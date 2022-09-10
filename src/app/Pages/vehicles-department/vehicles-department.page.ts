@@ -54,6 +54,22 @@ export class VehiclesDepartmentPage implements OnInit {
       this.modalService.modelData.items[0].value = feed.result.makes;
       this.modalService.modelData.items[21].value=feed.result.governorates;
       this.modalService.modelData.items[23].value = feed.result.features;
+      let filters = feed.result.filters;
+      
+    let NewMakeModelArray =   feed.result.makes.map(make=>{
+       let newModels = make.models.map(model=>{
+        let newTrims = model.trims.map(trim=>{
+          let trimObj = {...trim,completed:false,show:true};
+          return trimObj;
+        });
+          let newModel = {name:model.name,completed:false,_id:model._id,trims:newTrims,show:true};
+          return newModel;
+        });
+        let newMakeModelObject = {name:make.name, id:make._id, models:newModels, completed:false, show:true, clicked:false};
+        return newMakeModelObject;
+      });
+    
+      
       this.filter.setInteriorColor(feed.result.filters[3]);
       this.filter.setExteriorColor(feed.result.filters[2]);
       this.filter.setPlateType(feed.result.filters[13]);
@@ -72,25 +88,7 @@ export class VehiclesDepartmentPage implements OnInit {
       this.filter.setPlateType(feed.result.filters[13]);
       this.filter.setEngineSize(feed.result.filters[6]);
       this.filter.setDoors(feed.result.filters[4]);
-      
-    let NewMakeModelArray =   feed.result.makes.map(make=>{
-       let newModels = make.models.map(model=>{
-        let newTrims = model.trims.map(trim=>{
-          let trimObj = {...trim,completed:false,show:true};
-          return trimObj;
-        });
-          let newModel = {name:model.name,completed:false,_id:model._id,trims:newTrims,show:true};
-          return newModel;
-        });
-        let newMakeModelObject = {name:make.name, id:make._id, models:newModels, completed:false, show:true, clicked:false};
-        return newMakeModelObject;
-      });
-    
-      //console.log("NEW :",NewMakeModelArray);
-      let filters = feed.result.filters;
-
       filters.unshift({name: {en:"Body",ar:"الهيكل"}, path:'Kbody'},{name:{en:"Make",ar:"شركة التصنيع"}, path:'Kmake'},{name:{en:"Price",ar:"السعر"},path:'price'});
-
       filters.push({name:{en:"Location",ar:"الموقع"},path:"car-location"});
       // adding key value for bage/counter;
       filters = filters.map(x=>{

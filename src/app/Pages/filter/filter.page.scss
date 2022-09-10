@@ -85,7 +85,7 @@
 
 .bottom-button-container{
     height: 10%;
-    width: 100%;
+    margin-bottom: calc(10px + env(safe-area-inset-top));
     .bottom-button-inner{
     display: flex;
     flex-direction: row;

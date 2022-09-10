@@ -3,7 +3,7 @@
     <ion-item lines="full" >
       <ion-checkbox [checked]="selectAll" mode="md" slot="start" (ionChange)="selectAllItems()"></ion-checkbox>
             <ion-label *ngIf="userData.language === 'en' ">{{"Select All"}}</ion-label>
-            <ion-label *ngIf="userData.language === 'ar' ">{{"ستشمبسيب"}}</ion-label>
+            <ion-label *ngIf="userData.language === 'ar' "></ion-label>
     </ion-item>
     
     <ion-item lines="full" *ngFor="let item of engineSize; let i=index">

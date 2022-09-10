@@ -3,6 +3,7 @@ import { ThemePalette } from '@angular/material/core';
 import { CarFiltersService } from 'src/app/Services/car-filters.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService } from '../../../Services/user-data.service';
+import { map } from 'rxjs/operators';
 export interface Task {
   name: string;
   completed: boolean;
@@ -94,5 +95,17 @@ export class LocationComponent implements OnInit {
 
   selectAllItems(){
     
+  }
+
+  updateBadge(){
+    let res = this.locations.filter(x=>x.checked);
+    this.carFilters.filterSource.pipe(
+      map((val: any) => {
+      val[8].badge = res.length;
+      return val[8]
+     })
+    ).subscribe((res)=>{
+      console.log('Change:', res);
+    })
   }
 }

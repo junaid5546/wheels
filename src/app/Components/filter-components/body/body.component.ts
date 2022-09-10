@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { from } from 'rxjs'; 
 import { CarFiltersService } from '../../../Services/car-filters.service';
 import { UserDataService } from '../../../Services/user-data.service';
 @Component({

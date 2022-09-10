@@ -16,7 +16,7 @@ export class SpecialPlanItemComponent implements OnInit {
       let obj = {...x,selected:false};
       return obj
     });
-    console.log("plan", this.plans);
+    console.log("plans in items", this.plans);
   }
 
   // SELECT PLAN
