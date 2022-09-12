@@ -1,5 +1,4 @@
 <app-header [heading]="heading"
-[icons]="icons"
 goBack="false"
 forwardTo="tabs/vehicles-department/posts"
 ></app-header>
@@ -11,5 +10,6 @@ forwardTo="tabs/vehicles-department/posts"
   <ion-list *ngIf="items.length != 0">
   <app-inventory-item 
    [items]="items"></app-inventory-item>
+   
   </ion-list>
 </ion-content>

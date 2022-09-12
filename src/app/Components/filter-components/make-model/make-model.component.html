@@ -1,15 +1,12 @@
 
 <ion-content>
   <div class="make-model">
-
-   
     <ion-toolbar>
       <ion-searchbar (ionChange)="searchByName($event)" placeholder="make model trim" showCancelButton="focus"></ion-searchbar>
     </ion-toolbar>
     <ion-item lines="full" >
       <ion-checkbox [checked]="selectAll" mode="md" slot="start" (ionChange)="selectAllMakes()"></ion-checkbox>
-            <ion-label *ngIf="userData.language === 'en' ">{{"Select All"}}</ion-label>
-            <ion-label *ngIf="userData.language === 'ar' "></ion-label>
+            <ion-label>{{"Select All" | translate}}</ion-label>
     </ion-item>
       <ion-accordion-group [value]="this.selectedMakeName" [animated]="false" (ionChange)="accordionGroupChange($event)" multiple="true">
     

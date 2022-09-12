@@ -39,7 +39,6 @@ ion-accordion {
         padding-bottom: 5px;
      
         font-size:16px;
-        letter-spacing: var(--dm-letter-spacing) !important;
          
     }
   }
@@ -56,13 +55,11 @@ ion-accordion {
 
  .model-label{
     font-size: 14px;
-    letter-spacing: var(--dm-letter-spacing);
     font-weight: 400;
  }
 
  .trims-label{
      font-size: 13px;
-     letter-spacing: var(--dm-letter-spacing);
      font-weight: 300;
  }
 

@@ -88,14 +88,17 @@ export class VehiclesDepartmentPage implements OnInit {
       this.filter.setPlateType(feed.result.filters[13]);
       this.filter.setEngineSize(feed.result.filters[6]);
       this.filter.setDoors(feed.result.filters[4]);
-      filters.unshift({name: {en:"Body",ar:"الهيكل"}, path:'Kbody'},{name:{en:"Make",ar:"شركة التصنيع"}, path:'Kmake'},{name:{en:"Price",ar:"السعر"},path:'price'});
+      filters.unshift({name: {en:"Body",ar:"الشكل"}, path:'Kbody'},{name:{en:"Make",ar:"شركة التصنيع"}, path:'Kmake'},{name:{en:"Price",ar:"السعر"},path:'price'});
       filters.push({name:{en:"Location",ar:"الموقع"},path:"car-location"});
-      // adding key value for bage/counter;
-      filters = filters.map(x=>{
-        let obj = {...x,bage:null};
-        return obj
+      // ADDING KEY VALUE FOR BADGE/COUNTER;
+      // REMOVING EXTRA FILTER
+      filters = feed.result.filters.filter(x=>{
+        if(x.name.en != 'Warranty Kilometers' && x.name.en != 'Features' && x.name.en != 'Warranty Duration' &&  x.name.en != 'Distance Travelled') {
+          return x;
+        } 
       });
 
+      console.log("Filters", filters);
       this.filter.setFiltersList(filters);
       this.filter.setLocations(feed.result.governorates);
       this.filter.setMakeModelTrims(NewMakeModelArray);
@@ -161,7 +164,6 @@ export class VehiclesDepartmentPage implements OnInit {
      });
 
      console.info("Model Initialized: ",this.modalService.modelData);
-     console.info("Models: ",feed.result.makes);
     })
     .catch(error=>{
       console.log("Could not get post feed", error);

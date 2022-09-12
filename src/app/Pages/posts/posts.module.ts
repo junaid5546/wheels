@@ -10,7 +10,7 @@ import { FilterHeadingComponent } from './filter-heading/filter-heading.componen
 import { InventoryItemComponent } from './inventory-item/inventory-item.component';
 import { PostsPage } from './posts.page';
 import { AppSharedModule } from 'src/app/Components/Shared/shared.module';
-
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [
     CommonModule,
@@ -18,7 +18,8 @@ import { AppSharedModule } from 'src/app/Components/Shared/shared.module';
     SwiperModule,
     IonicModule,
     PostsPageRoutingModule,
-    AppSharedModule
+    AppSharedModule,
+    TranslateModule
   ],
   declarations: [PostsPage,InventoryItemComponent,FilterHeadingComponent]
 })

@@ -3,10 +3,11 @@ import { Gesture, GestureController, IonContent } from '@ionic/angular';
 import { Router,ActivatedRoute } from "@angular/router";
 import { NavController  } from '@ionic/angular';
 import { DeviceInfoService } from 'src/app/Services/device-info.service'; 
-import { SwiperComponent } from "swiper/angular";
+
 
 // import Swiper core and required modules
 import SwiperCore, { FreeMode, Scrollbar, Mousewheel } from "swiper";
+import { UserDataService } from 'src/app/Services/user-data.service';
 SwiperCore.use([FreeMode, Scrollbar, Mousewheel]);
 @Component({
   selector: 'app-post-details',
@@ -14,6 +15,7 @@ SwiperCore.use([FreeMode, Scrollbar, Mousewheel]);
   styleUrls: ['./post-details.page.scss'],
 })
 export class PostDetailsPage implements OnInit,AfterViewInit {
+  userNumber:string = null;
   features:any[] = [];
   sellerNotes:string = "N/A";  
   items:any[] = [];
@@ -30,7 +32,9 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
   // MAIN HEADING/SUBHEADING.
   @Input() heading = {has_main_heading:true, main_heading_name:'Toyota Avalon XLS 2021 New', has_sub_heading:false, sub_heading_name:''};
 
-  constructor(private gestureCtrl: GestureController,
+  constructor(
+              private userData:UserDataService,
+              private gestureCtrl: GestureController,
               private router:Router,
               private route: ActivatedRoute,
               public deviceInfo:DeviceInfoService,
@@ -102,5 +106,7 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
    share(){}
    notes(){}
 
+
+  
    
 }

@@ -14,15 +14,14 @@ export interface Task {
 @Component({
   selector: 'app-year',
   templateUrl: './year.component.html',
-  styleUrls: ['./year.component.scss'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  styleUrls: ['./year.component.scss']
 })
 export class YearComponent implements OnInit {
 
   label:string = null;
   modelYear:any[] = null;
   selectAll:boolean = false;
-  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute,public userData:UserDataService, private detectRef:ChangeDetectorRef ) { }
+  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute,public userData:UserDataService ) { }
 
   ngOnInit() {
 
@@ -36,8 +35,7 @@ export class YearComponent implements OnInit {
           console.log("check called");
           this.carFilter.modelYear[index].checked = !this.carFilter.modelYear[index].checked;
           if(this.carFilter.modelYear[index].checked){
-          this.carFilter.filterObject[this.label].push(item.name.en);
-          this.detectRef.markForCheck();
+          this.carFilter.filterObject[this.label].push(item.name.en)
           this.updateBadge()
     } else {
       let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);

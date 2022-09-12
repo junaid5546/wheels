@@ -1,5 +1,4 @@
 <app-header [heading]="heading"
-[icons]="icons"
 [filter]=true
 forwardTo="/tabs/tab1"
 ></app-header>
@@ -14,7 +13,9 @@ forwardTo="/tabs/tab1"
         <div class="inner-item-container">
           <ion-label *ngIf="userData.language === 'en' ">{{item.name.en}}</ion-label>
           <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar}}</ion-label>
-          <span>{{ item.badge == 0 ? '' : item.badge}}</span>
+        
+          <span class="badge" *ngIf="item.badge != null && item.badge !== 0">{{ item.badge == 0 ? '' : item.badge|digitTransform:this.userData.language|async}}</span>
+     
         </div>
       </div>
       </ion-list>
@@ -29,16 +30,16 @@ forwardTo="/tabs/tab1"
 
 <div class="bottom-button-container select-images-button">
   <div class="bottom-button-inner">
-    <div class="left-button-clear">
+    <div class="left-button-clear" (click)="clearAll()">
  
-      <ion-label>CLear All</ion-label>
+      <ion-label>{{"Clear All" | translate}}</ion-label>
  
     </div>
 
 <div class="right-button-apply-filters" (click)="navigate()">
   <div class="show-vehicle-button">
    
-    <ion-label>Show {{this.filterPost.resultCount}} Vehicle</ion-label>
+    <ion-label> {{ "Show" | translate }} {{this.filterPost.resultCount}} {{ "Vehicle" | translate }} </ion-label>
    
   </div>
    </div>

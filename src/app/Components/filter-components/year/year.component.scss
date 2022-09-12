@@ -9,8 +9,11 @@ ion-list{
         font-size: 16px;
         display: flex;
         align-items: center;
-        letter-spacing: 2px;
         color: #000000;
+        letter-spacing: 3px;
     }
   
+  }
+  .no-spacing{
+    letter-spacing: 0px !important;
   }

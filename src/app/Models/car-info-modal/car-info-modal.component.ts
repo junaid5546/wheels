@@ -20,6 +20,7 @@ import { CarFiltersService } from 'src/app/Services/car-filters.service';
   styleUrls: ['./car-info-modal.component.scss']
 })
 export class CarInfoModalComponent implements OnInit,AfterViewInit  {
+  
   @ViewChild(IonInput, { static: false }) inputElement: IonInput;
   data:boolean= false;
   inputCharacter:number = 0;
@@ -79,20 +80,22 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     this.ItemService =   this.modelCtrl.getCurrentObject()
     .subscribe((currentState:any)=>{
       // SET FILTER ACCORDING TO BODY SELECTION
+      console.log("%cCurrent Object Observable: %s", 'background: #0078D4');
+      console.log(currentState);
       
-      console.log("Current Object Observable: ", currentState)
       this.currentState = currentState;
       this.heading.main_heading_name =  currentState.value.name;
       this.currentItem = currentState.value.value.map(x=>{
         x = {...x,selected:false};
         return x
        });
-   
-       console.log("Current ITEM VALUE: ", this.currentItem);
+       if( currentState.value.value.length === 1){
+        console.log("%cPlease auto select this object: %s", 'background: conic-gradient(from 137.12deg at 4.17% 13.16%, #EFCA00 0deg, #FFD700 360deg)');
+        console.log(this.currentItem);
+        this.selectItem(this.currentItem[0],0);
+      }
        this.filteration='';
        this.stableData=this.currentItem;
-
-      
        if(currentState.index===3){
        this.currentItem.sort().reverse();
 

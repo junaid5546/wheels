@@ -4,7 +4,7 @@
       <div class="left">
         <div class="max-price-container">
           <div class="label-container">
-            <ion-label>Max Price</ion-label>
+            <ion-label>{{"Max Price" | translate}}</ion-label>
           </div>
           <div class="input-container">
             <ion-input #inputMax type="text" [value]="maxValue|number:'1.0':'en-US'" placeholder="Any" (ionChange)="getInputValue($event,'maxValue')"></ion-input>
@@ -13,7 +13,7 @@
         </div>
         <div class="min-price-container">
           <div class="label-container">
-            <ion-label>Min Price</ion-label>
+            <ion-label>{{'Min Price' | translate}}</ion-label>
           </div>
           <div class="input-container">
             <ion-input  #inputMin type="text" [value]="minValue|number:'1.0':'en-US'" placeholder="0" (ionChange)="getInputValue($event,'minValue')">  </ion-input>

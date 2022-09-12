@@ -11,6 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { SocialSharing } from '@awesome-cordova-plugins/social-sharing/ngx';
 import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { BehaviorSubject } from 'rxjs';
+import { UserDataService } from './user-data.service';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,7 +29,7 @@ private platform = null;
  
  private borderHeightPercentage = 12; // PERCENTAGE
   render:Renderer2;
-  constructor(private renderFactory:RendererFactory2, @Inject(DOCUMENT) private document:Document, private translate: TranslateService, private socialSharing: SocialSharing,private callNumber: CallNumber) {
+  constructor(private renderFactory:RendererFactory2, @Inject(DOCUMENT) private document:Document, private translate: TranslateService, private socialSharing: SocialSharing,private callNumber: CallNumber, private userData:UserDataService, private route:Router) {
     this.render = this.renderFactory.createRenderer(null,null);
    }
 
@@ -131,27 +133,38 @@ private platform = null;
   }
 
   // SMS TO THE USER.
-  shareSms(){
-    this.socialSharing.shareViaSMS('Hello World','21')
-    .then((res=>{
-      console.log(res);
-    }))
+  shareSms(userNumber:string){
+    this.userData.isSignedIn().then((status:boolean)=>{
+      if(status){
+        this.socialSharing.shareViaSMS('Hello World',userNumber)
+        .then((res=>{
+          console.log(res);
+        }))
+      } else {
+        this.route.navigate(['register'])
+      }
+    })
+    
   }
 
   // SHARING WHATSAPP POST
-  shareWhatsapp(){
-    this.socialSharing.shareViaWhatsApp('Hello')
-    .then((res=>{
-      console.log("Hello");
-    }))
+  shareWhatsapp(userNumber:string){
+    this.userData.isSignedIn().then((status:boolean)=>{
+      this.socialSharing.shareViaWhatsApp('Hello')
+      .then((res=>{
+        console.log("Hello");
+      }))
+    });
   }
 
 
   // CALL USER THROUGH DIALER.
-  callTheNumber(){
-    this.callNumber.callNumber('9702222222',true)
-    .then(res => console.log('Launched dialer!', res))
-    .catch(err => console.log('Error launching dialer', err));
+  callTheNumber(_number:string){
+    this.userData.isSignedIn().then((status:boolean)=>{
+      this.callNumber.callNumber(_number,true)
+      .then(res => console.log('Launched dialer!', res))
+      .catch(err => console.log('Error launching dialer', err));
+    });
   }
 
    setPlatform(_name) {
@@ -161,5 +174,7 @@ private platform = null;
   getPlatform() {
     return this.platform;
   }
-  
+
+
+ 
 }

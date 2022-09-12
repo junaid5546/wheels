@@ -102,7 +102,7 @@
     -->
     
         <ion-list class="bottom-buttons-list" >
-            <div class="whatsapp bottom-buttons-container" (click)="this.deviceInfo.shareWhatsapp()">
+            <div class="whatsapp bottom-buttons-container" (click)="this.deviceInfo.shareWhatsapp(userNumber)">
                 <div class="item-icon">
                     <ion-icon name="logo-whatsapp"></ion-icon>
                 </div>
@@ -110,13 +110,13 @@
                     <ion-label>WhatsApp</ion-label>
                 </div>
             </div>
-            <div class="message bottom-buttons-container" (click)="this.deviceInfo.shareSms()">
+            <div class="message bottom-buttons-container" (click)="this.deviceInfo.shareSms(userNumber)">
                 <div class="item-icon"><ion-icon name="chatbubble-outline"></ion-icon></div>
                 <div class="message-label">
                     <ion-label>Message</ion-label>
                 </div>
             </div>
-            <div class="call bottom-buttons-container" (click)="this.deviceInfo.callTheNumber()">
+            <div class="call bottom-buttons-container" (click)="this.deviceInfo.callTheNumber(userNumber)">
                 <div class="item-icon"><ion-icon name="call-outline"></ion-icon></div>
                 <div class="call-label">
                     <ion-label>Call</ion-label>

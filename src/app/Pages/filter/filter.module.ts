@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatSliderModule} from '@angular/material/slider'
+import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { IonicModule } from '@ionic/angular';
@@ -29,7 +29,9 @@ import { SeatsComponent } from 'src/app/Components/filter-components/seats/seats
 import { InsuranceComponent } from 'src/app/Components/filter-components/insurance/insurance.component';
 import { ReadlinessComponent } from 'src/app/Components/filter-components/readliness/readliness.component';
 import { SaleTypeComponent } from 'src/app/Components/filter-components/sale-type/sale-type.component';
- import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { TranslateModule } from '@ngx-translate/core';
+import { DigitTransformation } from 'src/app/Pipe/digit-transform.pipe';
 
 @NgModule({
   imports: [
@@ -42,10 +44,33 @@ import { SaleTypeComponent } from 'src/app/Components/filter-components/sale-typ
     AppSharedModule,
     MatCheckboxModule,
     FilterPageRoutingModule,
-    
+    TranslateModule,
   ],
 
-  declarations: [FilterPage,MakeModelComponent,PriceComponent,BodyComponent,ConditionComponent,YearComponent,ExteriorColorComponent,InteriorColorComponent,WarrantyDurationComponent,PlateComponent,FuelComponent,OriginComponent,EngineSizeComponent,CylindersComponent,DoorsComponent,TransmissionComponent,DrivetrainComponent,SeatsComponent,InsuranceComponent,ReadlinessComponent,SaleTypeComponent,LocationComponent]
-
+  declarations: [
+    DigitTransformation,
+    FilterPage,
+    MakeModelComponent,
+    PriceComponent,
+    BodyComponent,
+    ConditionComponent,
+    YearComponent,
+    ExteriorColorComponent,
+    InteriorColorComponent,
+    WarrantyDurationComponent,
+    PlateComponent,
+    FuelComponent,
+    OriginComponent,
+    EngineSizeComponent,
+    CylindersComponent,
+    DoorsComponent,
+    TransmissionComponent,
+    DrivetrainComponent,
+    SeatsComponent,
+    InsuranceComponent,
+    ReadlinessComponent,
+    SaleTypeComponent,
+    LocationComponent,
+  ],
 })
 export class FilterPageModule {}

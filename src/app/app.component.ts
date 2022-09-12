@@ -16,7 +16,7 @@ import { UserDataService } from './Services/user-data.service';
 import { TokenService } from 'dm-api';
 import { CarFiltersService } from './Services/car-filters.service';
 import { CamGalService } from './Services/cam-gal.service';
-import { modalLeaveAnimation } from './animation/animations';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 export type platform_name = 'ios' | 'android' | 'web';
 
 @Component({
@@ -42,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private token: TokenService,
     private filters: CarFiltersService,
     private camGal: CamGalService,
+    private iab: InAppBrowser,
     public translate: TranslateService
   ) {
     this.translate.setDefaultLang('ar');
@@ -49,7 +50,11 @@ export class AppComponent implements OnInit, OnDestroy {
     window.addEventListener('statusTap', function () {
       console.log('statusbar tapped');
     });
+    
   }
+
+
+  
 
   ngOnDestroy(): void {
     console.log('ngOnDestroy');
@@ -57,7 +62,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeApp();
-    this.router.navigate(['filter']);
+    this.userData.isSignedIn().then((status:any)=>{
+        console.log('Signed In: ', status);
+    })
   }
 
   initializeApp() {
