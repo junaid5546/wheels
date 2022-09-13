@@ -70,8 +70,8 @@ export class ModalControllerService {
       { key: 'make_id',  name: 'Make', value: [], selected: { _id: '',models:[] }, filterId:null,show:true },   //0
       { key: 'model_id', name: 'Model', value: [], selected: {trims:[],engineSize:[]},filterId:null,show:true },//1
       { key: 'trim_id',  name: 'Trims', value: [], selected: { body: [] },filterId:null,show:true },//2
-      { key: 'year_id',  name: 'Model Year', value: this.carFilters.modelYear, selected: {}, show:false, filterId:"62276e52de5b632b481db49e" },//3
-      { key: 'condition_id', name: 'Condition', value: this.carFilters.condition, selected: {}, show:false, filterId:"62276e52de5b632b481db497" },//4
+      { key: 'year_id',  name: 'Model Year', value: [], selected: {}, show:false, filterId:"62276e52de5b632b481db49e" },//3
+      { key: 'condition_id', name: 'Condition', value: [], selected: {}, show:false, filterId:"62276e52de5b632b481db497" },//4
       { key: 'body_id', name: 'Body', value: [], show:true, selected: {bodies:[],doorCount:[],error:'',maxPrice: null,minPrice:null,filtersId:[]}, filterId:null},//5
       { key: 'engine_size',name: 'Engine Size',value: [],selected: {name:null}, show:false, filterId:"630313b9046e23a7660e330a"},//6
       { key: 'door_count_id',name: 'Doors',value: [],selected: {name:null}, show:false, filterId:"6303119d046e23a7660e3309"},//7
@@ -254,11 +254,11 @@ export class ModalControllerService {
 
 // INITIALIZATION OF INDEXES
   initializeIndexes() {
-    this.modelData.current.index = 0;
-    this.modelData.current.value = this.modelData.items[0];
+    this.modelData.current.index = 24;
+    this.modelData.current.value = this.modelData.items[24];
 
-    this.modelData.next.index = 1;
-    this.modelData.next.value = this.modelData.items[1];
+    this.modelData.next.index = 25;
+    this.modelData.next.value = this.modelData.items[25];
 
     this.modelData.pervious.index = -1;
     this.modelData.pervious.value = this.modelData.items[-1];

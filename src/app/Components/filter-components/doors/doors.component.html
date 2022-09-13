@@ -1,9 +1,0 @@
-<ion-content>
-  <ion-list lines="none">
-    <ion-item lines="full" *ngFor="let item of doors; let i=index">
-      <ion-checkbox [checked]="item.checked" mode="md" slot="start" (ionChange)="check(item,i)"></ion-checkbox>
-      <ion-label *ngIf="userData.language === 'en' ">{{item.name.en | digitTransform:this.userData.language|async}}</ion-label>
-      <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar | digitTransform:this.userData.language|async}}</ion-label>
-    </ion-item>
-    </ion-list>
-</ion-content>

@@ -79,6 +79,7 @@ drop(event: CdkDragDrop<string[]>) {
      }
 
      ngOnInit(): void {
+      this.presentModal();
        let IsModelInitialized =  this.modalService.startIndexing();
        if(IsModelInitialized.status){
          this.modalService.updatecurrentObject();
@@ -149,7 +150,6 @@ drop(event: CdkDragDrop<string[]>) {
 
   // PRESENTING MODEL AFTER CREATING POST.
   presentModal(){
-    console.log("Starting Point: ", this.modalStartingPoint);
     this.modalService.presentModal(CarInfoModalComponent,this.modalStartingPoint);
   }
 
