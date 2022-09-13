@@ -1,0 +1,80 @@
+ion-list {
+  padding: 0;
+}
+
+ion-accordion {
+  margin: 0 auto;
+}
+
+///MAT
+.example-section {
+  margin: 12px 0;
+}
+
+.example-margin {
+  margin: 0 12px 0 0;
+}
+.make-class {
+  padding-left: 0 !important;
+}
+
+.model-class {
+  padding-left: 10px !important;
+}
+
+.trim-class {
+  padding-left: 25px !important;
+  width: 100% !important;
+}
+
+ul {
+  list-style-type: none;
+  margin-top: 4px;
+  li {
+    padding-bottom: 5px;
+
+    font-size: 16px;
+  }
+}
+.mat-checkbox {
+  //background: purple;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.model-label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.trims-label {
+  font-size: 13px;
+  font-weight: 300;
+}
+
+ion-toolbar {
+  position: sticky;
+  top: 0;
+}
+ion-searchbar {
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+  height: auto !important;
+  .searchbar-input {
+    font-size: 14px !important;
+    font-weight: 300 !important;
+  }
+}
+
+cdk-virtual-scroll-viewport {
+  height: 100%;
+  width: 100%;
+}
+
+.make-model {
+  height: 100%;
+  width: 100%;
+}

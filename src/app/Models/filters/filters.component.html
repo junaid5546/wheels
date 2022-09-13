@@ -1,10 +1,9 @@
-
- 
-    <ion-list>
-      <ion-item *ngFor="let item of this.data.sortBy;let i=index" [button]="true" [detail]="false" (click)="selectFilter(item.id)">
-        <ion-icon [name]="item.icon"></ion-icon>
-        <ion-label>{{item.name}}</ion-label>
-        <ion-icon *ngIf="i==4" name="caret-up-outline"></ion-icon>
-        <ion-icon *ngIf="i==5" name="caret-down-outline"></ion-icon>
-      </ion-item>
-    </ion-list>
+<ion-list>
+  <ion-item *ngFor="let item of this.data.sortBy;let i=index" [button]="true" [detail]="false"
+    (click)="selectFilter(item.id)">
+    <ion-icon [name]="item.icon"></ion-icon>
+    <ion-label>{{item.name}}</ion-label>
+    <ion-icon *ngIf="i==4" name="caret-up-outline"></ion-icon>
+    <ion-icon *ngIf="i==5" name="caret-down-outline"></ion-icon>
+  </ion-item>
+</ion-list>

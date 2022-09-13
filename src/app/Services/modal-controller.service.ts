@@ -5,12 +5,12 @@
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
 
-import { Injectable, ViewChild } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ModalController} from '@ionic/angular';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { ImagePreviewComponent } from '../Models/image-preview/image-preview.component';
 import { ToastController } from '@ionic/angular';
-import { PlansService, VehicleService, CountryDataService, PostService, Vehicle } from 'dm-api';
+import { VehicleService, CountryDataService, PostService } from 'dm-api';
 import { CarFiltersService } from '../Services/car-filters.service';
 import { UserDataService } from "./user-data.service";
 import { ErrorHandlerService } from '../Services/error-handler.service';
@@ -45,7 +45,6 @@ export class ModalControllerService {
   /** 
   @author JGS
   Dont remove these comments.
-
   1- api-index* 3 - Condition: 62276e52de5b632b481db497 | model-index* 4 
   2- api-index* 4 - Year: 62276e52de5b632b481db49e | model-index* 3 
   3- api-index* 5 - Exterior Color: 630b56c43486c25bc36d9afd | model-index* 8 
@@ -254,11 +253,11 @@ export class ModalControllerService {
 
 // INITIALIZATION OF INDEXES
   initializeIndexes() {
-    this.modelData.current.index = 24;
-    this.modelData.current.value = this.modelData.items[24];
+    this.modelData.current.index = 0;
+    this.modelData.current.value = this.modelData.items[0];
 
-    this.modelData.next.index = 25;
-    this.modelData.next.value = this.modelData.items[25];
+    this.modelData.next.index = 1;
+    this.modelData.next.value = this.modelData.items[1];
 
     this.modelData.pervious.index = -1;
     this.modelData.pervious.value = this.modelData.items[-1];
