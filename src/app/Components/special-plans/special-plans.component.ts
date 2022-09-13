@@ -39,7 +39,9 @@ export class SpecialPlansComponent implements OnInit {
     this.filters.plansData.subscribe((plans)=>{
       console.log("PLANS FROM SERVICE ",plans);
       this.plans = plans[days];
+      if(this.plans.length < 4){
       this.plans.push(plans['basic_days']);
+      }
       console.log("PLANS in component ",plans);
       });
   } 
