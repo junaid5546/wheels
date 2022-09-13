@@ -20,7 +20,8 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class ModalControllerService {
-  
+  // WHEN FILTER ITEMS USING FILTER ALL FALSE WHILL COME ITNO THIS.
+  poppedItem:any[] = [];
   // SAVING POST TO LOCAL
   _post = {
     hasPostCreated:false,
@@ -40,39 +41,70 @@ export class ModalControllerService {
   modalProps: any;
   private currentObject = new BehaviorSubject<any>(null);
 
+  
+  /** 
+  @author JGS
+  Dont remove these comments.
+
+  1- api-index* 3 - Condition: 62276e52de5b632b481db497 | model-index* 4 
+  2- api-index* 4 - Year: 62276e52de5b632b481db49e | model-index* 3 
+  3- api-index* 5 - Exterior Color: 630b56c43486c25bc36d9afd | model-index* 8 
+  4- api-index* 6 - Interior Color: 630b56803486c25bc36d9afc | model-index* 13 
+  5- api-index* 7 - Door: 6303119d046e23a7660e3309 | model-index* 7 
+  6- api-index* 8 - Cylinder Count: 62276e52de5b632b481db499 | model-index* 9 
+  7- api-index* 9 - Engine Size: 630313b9046e23a7660e330a | model-index* 6 
+  8- api-index* 10 - Fuel: 62276e52de5b632b481db492 | model-index* 10 
+  9- api-index* 11 -  Transmission: 62276e52de5b632b481db496 | model-index* 11 
+  10- api-index* 12 - DriveTrain: 62276e52de5b632b481db49a | model-index* 12 
+  11- api-index* 13 - Seats: 62276e52de5b632b481db495 | model-index* 14 
+  12- api-index* 14 - Origin: 62276e52de5b632b481db493 | model-index* 20 
+  13- api-index* 15 - Insurance: 62276e52de5b632b481db494 | model-index* 15 
+  14- api-index* 16 - Plate Type : 62276e52de5b632b481db49c | model-index* 16 
+  15- api-index* 17 - Driving Readiness : 62276e52de5b632b481db49b | model-index* 17 
+  16- api-index* 18 - Sale Type : 62276e52de5b632b481db498 | model-index* 18
+  17- api-index* 19 - Warrenty Duration : 62276e52de5b632b481db498 | model-index* 19 
+  */
+
   modelData = {
     items: [
-      { key: 'make_id',  name: 'Make', value: [], selected: { _id: '',models:[] } },   //0
-      { key: 'model_id', name: 'Model', value: [], selected: {trims:[],engineSize:[]} },//1
-      { key: 'trim_id',  name: 'Trims', value: [], selected: { body: [] } },//2
-      { key: 'year_id',  name: 'Model Year', value: [], selected: {} },//3
-      { key: 'condition_id', name: 'Condition', value: [], selected: {} },//4
-      { key: 'body_id', name: 'Body', value: [], selected: {bodies:[],doorCount:[],error:'',maxPrice: null,minPrice:null,filtersId:[]}},//5
-      { key: 'engine_size',name: 'Engine Size',value: [],selected: {name:null},},//5==>>6
-      
-      { key: 'door_count_id',name: 'Doors',value: [],selected: {name:null},},//7
-      { key: 'exterior_color_id', name: 'Exterior Color',cssHex:[], value: [], selected: {} },//8
-      { key: 'cylinder_count_id', name: 'Cylinders', value: [], selected: {} },//9
-      { key: 'fuel_type_id', name: 'Fuel', value: [], selected: {} },//10
-      { key: 'transmission_type_id', name: 'Transmission', value: [], selected: {} },//11
-      { key: 'drivetrain_id', name: 'Drivetrain', value: [], selected: {} },//12
-      { key: 'interior_color_id', name: 'Interior Color', value: [], selected: {} },//13
-      { key: 'seats_type_id', name: 'Seats', value: [], selected: {} },//14
-      { key: 'insurance_type_id', name: 'Insurance', value: [], selected: {} },//15
-      { key: 'plate_type_id', name: 'Plate', value: [], selected: {} },//16
-      { key: 'readiness_id', name: 'Driving Readiness', value: [], selected: {} },//17
-      { key: 'sale_type_id', name: 'Sale Type', value: [], selected: {} },//18
-      { key: 'warranty_duration_id', name: 'Warranty Duration', value: [], selected: {} },//19
+      { key: 'make_id',  name: 'Make', value: [], selected: { _id: '',models:[] }, filterId:null,show:true },   //0
+      { key: 'model_id', name: 'Model', value: [], selected: {trims:[],engineSize:[]},filterId:null,show:true },//1
+      { key: 'trim_id',  name: 'Trims', value: [], selected: { body: [] },filterId:null,show:true },//2
+      { key: 'year_id',  name: 'Model Year', value: this.carFilters.modelYear, selected: {}, show:false, filterId:"62276e52de5b632b481db49e" },//3
+      { key: 'condition_id', name: 'Condition', value: this.carFilters.condition, selected: {}, show:false, filterId:"62276e52de5b632b481db497" },//4
+      { key: 'body_id', name: 'Body', value: [], show:true, selected: {bodies:[],doorCount:[],error:'',maxPrice: null,minPrice:null,filtersId:[]}, filterId:null},//5
+      { key: 'engine_size',name: 'Engine Size',value: [],selected: {name:null}, show:false, filterId:"630313b9046e23a7660e330a"},//6
+      { key: 'door_count_id',name: 'Doors',value: [],selected: {name:null}, show:false, filterId:"6303119d046e23a7660e3309"},//7
+      { key: 'exterior_color_id', name: 'Exterior Color',cssHex:[], value: [], selected: {}, show:false, filterId:"630b56c43486c25bc36d9afd" },//8
+      { key: 'cylinder_count_id', name: 'Cylinders', value: [], selected: {}, show:false , filterId:"62276e52de5b632b481db499"},//9
+      { key: 'fuel_type_id', name: 'Fuel', value: [], selected: {}, show:false , filterId:"62276e52de5b632b481db492"},//10
+      { key: 'transmission_type_id', name: 'Transmission', value: [], selected: {}, show:false , filterId:"62276e52de5b632b481db496"},//11
+      { key: 'drivetrain_id', name: 'Drivetrain', value: [], selected: {}, show:false , filterId:"62276e52de5b632b481db49a"},//12
+      { key: 'interior_color_id', name: 'Interior Color', value: [], selected: {}, show:false , filterId:"630b56803486c25bc36d9afc"},//13
+      { key: 'seats_type_id', name: 'Seats', value: [], selected: {}, show:false , filterId:"62276e52de5b632b481db495"},//14
+      { key: 'insurance_type_id', name: 'Insurance', value: [], selected: {}, show:false , filterId:"62276e52de5b632b481db494"},//15
+      { key: 'plate_type_id', name: 'Plate', value: [], selected: {}, show:false, filterId:"62276e52de5b632b481db49c" },//16
+      { key: 'readiness_id', name: 'Driving Readiness', value: [], selected: {}, show:false, filterId:"62276e52de5b632b481db49b" },//17
+      { key: 'sale_type_id', name: 'Sale Type', value: [], selected: {}, show:false, filterId:"62276e52de5b632b481db498" },//18
+      { key: 'warranty_duration_id', name: 'Warranty Duration', value: [], selected: {}, show:false, filterId:"62276e52de5b632b481db498" },//19
        // { key: 19, name: 'Warranty Distance', value: [], selected: {} },
-      { key: 'origin_id', name: 'Origin', value: [], selected: {} },//20
-      { key: 'governorate_id', name: 'Governorate', value: [], selected: {} },//21
-      { key: 'state_id', name: 'State', value: [], selected: { states: null } },//22
-      { key: 'features_id_array', name: 'Features (Optional)', value: [], selected: {features_id_array:[]} },//23
-      { key: 'additional_features', name: 'Additional Details', value: [{},{}], selected: {price:0,distance_kilometer:0,seller_notes:null,distance_mile:0,primary_phone:null,business_phone:false,warranty_kilometer:null} },//24
+      { key: 'origin_id', name: 'Origin', value: [], selected: {},filterId:"62276e52de5b632b481db493" ,show:false},//20
+      { key: 'governorate_id', name: 'Governorate', show:true, value: [], selected: {},filterId:null },//21
+      { key: 'state_id', name: 'State', show:true,  value: [], selected: { states: null },filterId:null },//22
+      { key: 'features_id_array', show:false, name: 'Features (Optional)', value: [], selected: {features_id_array:[]}, filterId:"6316fa5f8c69a23fa29fff99" },//23
+      { key: 'additional_features', show:true, name: 'Additional Details', value: [{},{}], selected: {price:0,distance_kilometer:0,seller_notes:null,distance_mile:0,primary_phone:null,business_phone:false,warranty_kilometer:null}, filterId:null},//24
      // { key: 'level_id', name: 'Post Type', value: [{},{}], selected: {} },//25 
-     { key: 'post_type', name: 'Post Type', value: [{},{}], selected: {} },//25 
+     { key: 'post_type', name: 'Post Type', value: [{},{}], selected: {}, filterId:null,show:true },//25
       // {"id": "62275964de5b632b481db474","level_duration":21},
     ],
+  /*
+0: "630313b9046e23a7660e330a"
+1: "630b56c43486c25bc36d9afd"
+2: "62276e52de5b632b481db492"
+3: "62276e52de5b632b481db49b"
+4: "62276e52de5b632b481db498"
+5: "62276e52de5b632b481db493"
+  */
     current: { index: 0, value: null },
     next: { index: 0, value: null },
     pervious: { index: 0, value: null },
@@ -124,48 +156,68 @@ export class ModalControllerService {
   // SELECTS THE DATA AND GOES TO NEXT ITEM.
   selectItem(selected,i) {
     console.log("Selected Item: ", selected , ' Index:', i);
+    
     this.modelData.items[this.modelData.current.index].selected = selected;
+    if(this.modelData.current.value.name === 'Governorate'){
+      console.log("in Governate");
+      this.modelData.items[this.modelData.next.index].value = this.modelData.items[this.modelData.current.index].selected.states;
+    }
     if (this.modelData.current.index === 0) {
       // SET MODEL ACCORDING TO MAKE
       this.modelData.items[1].value = this.modelData.items[0].selected.models;
       console.log("MODELS",this.modelData.items[1].value)
       console.log("MODELS TWO",this.modelData.items[0].selected.models)
-
-    
       this.incrementOfCurrentIndex();
     } else if (this.modelData.current.index === 1) {
-
       this.modelData.items[2].value = this.modelData.items[1].selected.trims;
       this.incrementOfCurrentIndex();
-    
-    } else if (this.modelData.current.index === 4) {
-     
+    } else if(this.modelData.current.index === 2){
+      if(this.modelData.next.value.key === 'body_id'){
+        this.modelData.items[3].value = this.modelData.items[2].selected.bodies;
+      }
+      this.incrementOfCurrentIndex();
+    } else if (this.modelData.current.value.key === 'condition_id') {     
       this.modelData.items[5].value = this.modelData.items[2].selected.bodies;
-
-     
       this.incrementOfCurrentIndex();
-    }else if(this.modelData.current.index === 5){
-        
-        this.modelData.items[6].value=this.modelData.items[2].selected.engineSize;    
-        this.incrementOfCurrentIndex();
-    }else if(this.modelData.current.index === 6){
-      console.log(this.modelData.items[5]);
-       this.modelData.items[7].value=this.modelData.items[5].selected.doorCount;
-      
+    } else if(this.modelData.current.value.key === 'body_id'){
+      console.log("in body");
+      this.modelData.items.forEach( item =>{
+        selected.filtersId.forEach( filterId =>{
+         if(item.filterId != null){
+           if(item.filterId === filterId ){
+             item.show  = true;
+           }
+         }
+       })
+       });
+        let newIndex = 0;
+        this.modelData.items = this.modelData.items.filter(x=>x.show);
+        this.modelData.items.forEach((filter,index)=>{
+          if(filter.key === 'body_id') {
+            //this.modelData.items[index].value = this.modelData.items[2].selected.bodies;
+            newIndex = index +1;
+          }
+          if(filter.key === 'engine_size'){
+            this.modelData.items[index].value = this.modelData.items[2].selected.engineSize;
+          }
+          if(filter.key === 'door_count_id'){
+            this.modelData.items[index].value = this.modelData.items[3].selected.doorCount;
+          }
+        });
+        this.reInitializeIndexes(newIndex,newIndex+1,newIndex-1);
+        this.updatecurrentObject();
+        console.log("To show: ", this.modelData.items);
+      ;
+    } else if(this.modelData.current.value.name === 'engine_size'){
+       //this.modelData.items[7].value=this.modelData.items[5].selected.doorCount;
        this.incrementOfCurrentIndex();
-  }
-    else if (this.modelData.current.index === 21) {
-      this.modelData.items[22].value = this.modelData.items[21].selected.states;
-    
-      this.incrementOfCurrentIndex();
     }
-
-    else if(this.modelData.current.index===23){
+    else if(this.modelData.current.value.key === 'features_id_array'){
       
         console.log("additional setting");
 
        
-    }else if(this.modelData.current.index===25){
+    }else if(this.modelData.current.value.key === 'post_type'){
       console.log("SUBSCRIPTION DATA");
       this.publish=25;
     }
@@ -219,6 +271,25 @@ export class ModalControllerService {
     };
   }
 
+  reInitializeIndexes(currentIndex:number, nextIndex:number, previousIndex:number){
+    
+    this.modelData.current.index = currentIndex;
+    this.modelData.current.value = this.modelData.items[currentIndex];
+
+    this.modelData.next.index = nextIndex;
+    this.modelData.next.value = this.modelData.items[nextIndex];
+
+    this.modelData.pervious.index = previousIndex;
+    this.modelData.pervious.value = this.modelData.items[previousIndex];
+
+    return {
+      status: true,
+      current: this.modelData.current,
+      previous: this.modelData.pervious,
+      next: this.modelData.next,
+    };
+  }
+
   startIndexing() {
     let validate = this.validateItems();
     //console.log("Result from  validateItems", validate);
@@ -245,56 +316,34 @@ export class ModalControllerService {
   }
 
   incrementOfCurrentIndex(type?) {
-    console.log('INDEX INCREMENTED');
+
      // SCROLL INTO VIEW AFTER CHOICE DONE
      document.getElementById("content").scrollIntoView({block: "start", inline: "nearest"});
       // THIS CONDITION BECAUSE NOT ALL DIVS CONTAIN ION LIST WITH LIST ID
      ((document.getElementById("list"))!= null) ? (document.getElementById("list").scrollTo(0,0)) : '';
-    if (this.getCurrentItemIndex() < this.getItemsLenght() - 1) {
-      console.log(
-        'Current:',
-        this.getCurrentItemIndex(),
-        'Length: ',
-        this.getItemsLenght()
-      )
-      console.log("Object: ", this.modelData.items);
+    if (this.getCurrentItemIndex() < this.getItemsLenght() - 1 && this.modelData.current.value.key != 'post_type') {
       console.log('Next Object: ', this.modelData.next);
       console.log('Previous Object: ', this.modelData.pervious);
-      console.log('Current Object: ', this.modelData.current);
-      // CURRENT ONE GOES TO PREVIOUS
-      this.modelData.pervious.value = this.modelData.current.value;
-      this.modelData.pervious.index = this.modelData.current.index;
-      // NEXT ONE TAKE PLACE CURRENT ONE
-      this.modelData.current.value = this.modelData.next.value;
-      this.modelData.current.index = this.modelData.next.index;
-      // NEXT ONE INCREASES
-      this.modelData.next.index++;
-      this.modelData.next.value =
-        this.modelData.items[this.modelData.next.index];
-      //return {status:true, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
-      //this.presentModal(this.getCurrentState());
-
-      this.updatecurrentObject();
-     
-    }else {
-      console.log('ITEM LENGTH: ', this.getItemsLenght());
-      console.log('ITEM Index Length: ', this.getCurrentItemIndex());
-      
-      if( this.getCurrentItemIndex() === 25 && type==='updatepost') {
-      
+      console.log('Current Object: ', this.modelData.current); 
+      console.log('this.modelData.current.index',this.modelData.current);
+      this.activateIndexForDisplay();
+    } else {
+      if( type==='updatepost') {
         this.updatePost();
       }
-      
-      //return {status:false, current:this.modelData.current, previous:this.modelData.pervious, next:this.modelData.next };
     }
-    
-   
+  }
 
-    
-
-
-    
-  
+  activateIndexForDisplay(){
+        this.modelData.pervious.value = this.modelData.current.value;
+        this.modelData.pervious.index = this.modelData.current.index;
+        // NEXT ONE TAKE PLACE CURRENT ONE
+        this.modelData.current.value = this.modelData.next.value;
+        this.modelData.current.index = this.modelData.next.index;
+        // NEXT ONE INCREASES
+        this.modelData.next.index++;
+        this.modelData.next.value = this.modelData.items[this.modelData.next.index];
+        this.updatecurrentObject();
   }
 
   
@@ -314,9 +363,9 @@ export class ModalControllerService {
         obj["seller_notes"] = item.selected.seller_notes || '';
         obj["distance_kilometer"] = item.selected.distance_kilometer;
       } else if (item.key == 'engine_size'){
-        obj[item.key] = item.selected.name;
+        obj[item.key] = item.selected.name.en;
       } else if (item.key == 'door_count_id'){
-        obj[item.key] = item.selected.name;
+        obj[item.key] = item.selected.name.en;
       } else if (item.key == 'features_id_array'){
         obj[item.key] = item.selected.features_id_array;
       } else if(item.key == 'post_type') {
@@ -325,8 +374,6 @@ export class ModalControllerService {
         obj[item.key] = item.selected._id;
       }
     });
-    let post = JSON.parse( localStorage.getItem('_post') );
-    this._post.postId = post.postId;
     this.post.updatePost(obj,this._post.postId)
     .then((post:any)=>{
       if(post.code == 200) {
@@ -334,7 +381,7 @@ export class ModalControllerService {
         this.error.toast(post.message).then(()=>{
           console.log("POST UPDATE STATUS: ", post);
           this.savePostLocal();
-          this.router.navigate(['tabs/tab4'])
+          this.router.navigate(['tabs/posts'])
         })
       }
     })

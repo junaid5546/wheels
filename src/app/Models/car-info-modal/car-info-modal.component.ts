@@ -20,6 +20,7 @@ import { CarFiltersService } from 'src/app/Services/car-filters.service';
   styleUrls: ['./car-info-modal.component.scss']
 })
 export class CarInfoModalComponent implements OnInit,AfterViewInit  {
+  
   @ViewChild(IonInput, { static: false }) inputElement: IonInput;
   data:boolean= false;
   inputCharacter:number = 0;
@@ -55,11 +56,11 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
  @Input() goBack:string = null;
 
  // LEFT AND RIGHT ICON.
- icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:false, right_icon:'../../assets/icon/Language.svg'};
+ icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/Language.svg'};
 
  // MAIN HEADING/SUBHEADING.
  @Input() heading = {has_main_heading:true, main_heading_name:'Images', has_sub_heading:false, sub_heading_name:''};
-  constructor(private filters:CarFiltersService ,private userData:UserDataService,private plansApi:PlansService,public modelCtrl: ModalControllerService, private amimationCtrl:AnimationController, private route:Router, private change:ChangeDetectorRef) {
+  constructor(private filters:CarFiltersService ,public userData:UserDataService,private plansApi:PlansService,public modelCtrl: ModalControllerService, private amimationCtrl:AnimationController, private route:Router, private change:ChangeDetectorRef) {
 
    }
 
@@ -72,27 +73,29 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
   
 
    ngOnDestroy() {
-     
      this.ItemService.unsubscribe();
-     console.log("Unsubscribed");
    }
   
   ngOnInit() {
     this.ItemService =   this.modelCtrl.getCurrentObject()
     .subscribe((currentState:any)=>{
-      console.log("Current Object Observable: ", currentState)
+      // SET FILTER ACCORDING TO BODY SELECTION
+      console.log("%cCurrent Object Observable: %s", 'background: #0078D4');
+      console.log(currentState);
+      
       this.currentState = currentState;
       this.heading.main_heading_name =  currentState.value.name;
       this.currentItem = currentState.value.value.map(x=>{
         x = {...x,selected:false};
         return x
        });
-   
-       console.log("Current ITEM VALUE: ", this.currentItem);
+       if( currentState.value.value.length === 1){
+        console.log("%cPlease auto select this object: %s", 'background: conic-gradient(from 137.12deg at 4.17% 13.16%, #EFCA00 0deg, #FFD700 360deg)');
+        console.log(this.currentItem);
+        this.selectItem(this.currentItem[0],0);
+      }
        this.filteration='';
        this.stableData=this.currentItem;
-
-      
        if(currentState.index===3){
        this.currentItem.sort().reverse();
 
@@ -101,11 +104,9 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
         this.currentItem.sort((a, b) => (a.name > b.name ? 1 : -1));
        }
        //THIS FOR CALLING PALNS API BEFORE REACH PLANS PAGE
-       else if(currentState.index==24){
+       else if(currentState.value.key === 'additional_features'){
+        console.log("called plans");
         this.getPlans();
-
-       
-
         if(this.modelCtrl.modelData.items[4].selected._id=='a83d7d24-5e48-4bd1-83a9-05d51b6fe839'){
             // console.log("ITS USED CAR REMOVE WARRANTY DISTANCE");
              this.warrantyCheck=false;
@@ -116,12 +117,10 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
              this.warrantyCheck=true;
              this.modelCtrl.modelData.items[24].selected.distance_kilometer=0;
         }
-       }else if(currentState.index==25){
+       }else if(currentState.value.key ===  "post_type"){
         this.nextButton=0;
        }
        
-       
-    
        if(this.currentItem.length != 0){
         this.data = true;
        } else {
@@ -136,6 +135,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
   }
 
   // THIS FUNCTIONS TO CALL PLANS API 
+  
   getPlans() {
    // console.log("PLANS CALLED",);
     let id=this.userData.fetchUserId();
@@ -143,12 +143,10 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     //console.log(id);
     this.plansApi.getPlans(id,lang)
     .then((plans:any)=>{
-      console.log("THEN");
       if(plans.code === 200){
-        //console.log("PLANS",plans);
+        this.filters.setPlans(plans.result);
       } else {
         console.log("NULL");
-       
       }
     })
     .catch((error)=>{
@@ -159,13 +157,16 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
 
 
   selectItem(item,i) {
-    console.log("SELECTED INDEX:", item._id);
-  
+    console.log("SELECTED INDEX:", item._id, " Index: ", i, "Step: ", this.currentStep);
+    console.log("Total visible filters: ",    this.modelCtrl.modelData.items.filter(x=>x.show).length);
+    console.log("Total visible filters: ",    this.modelCtrl.modelData.items);
     item.selected=!item.selected;
-   
-    if(this.currentStep == 23){
-      console.log("plans");
-
+    if(this.currentStep == 5 ) {
+      console.log("BODY STEP: ", this.currentStep, this.currentState, "Filter List:",this.currentItem);
+      this.currentItem[i].selected = true;
+      this.modelCtrl.selectItem(item,i)
+    }else 
+    if(this.currentState.value.key === 'additional_features'){
       this.selectedFeatures = this.selectedFeatures.filter(x=>x != item._id);
       if(item.selected==true){
         this.selectedFeatures.push(item._id);
@@ -174,14 +175,9 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
       }
      
       this.modelCtrl.modelData.items[23].selected.features_id_array = this.selectedFeatures;
-      console.log("SELECTED ARRAY:", this.selectedFeatures);
-      console.log('check box value ',item.selected);
-
       //CHECK IF CAR IS USED OR NEW SO WE CAN HIDE WARRANTY FIELDS
-     
+    } 
 
-      
-    }
    else{
      // console.log("Selected Item: ", item , ' Index:', i);
       this.currentItem[i].selected = true;
@@ -208,17 +204,14 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
 
   addSellerNotes(e){
     console.log("Seller Notes: ", e.detail.value);
-    this.modelCtrl.modelData.items[24].selected.seller_notes = e.detail.value;
+    this.modelCtrl.modelData.items[this.currentState.index].selected.seller_notes = e.detail.value;
   }
   testfocus(){
     
     
     this.priceError=this.modelCtrl.modelData.items[5].selected.error;
-   
-
     if(+this.price>this.modelCtrl.modelData.items[5].selected.maxPrice){
       this.errorField=true;
-     
     }else if(+this.price<this.modelCtrl.modelData.items[5].selected.minPrice){
       this.errorField=true;
       
@@ -228,36 +221,20 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
   addDistanceTravelled(e){
     console.log("Distance Travelled: ", e.detail.value);
     console.log(this.price);
-   this.modelCtrl.modelData.items[24].selected.warranty_kilometer = e.detail.value;
+   this.modelCtrl.modelData.items[this.currentState.index].selected.warranty_kilometer = e.detail.value;
    this.showNextButtonInAdditional();
   }
   addWarrantyKilo(e){
-   
     console.log("Warranty Kilometer:", e.detail.value);
     console.log(this.price);
-    this.modelCtrl.modelData.items[24].selected.distance_kilometer = e.detail.value;
+    this.modelCtrl.modelData.items[this.currentState.index].selected.distance_kilometer = e.detail.value;
     this.showNextButtonInAdditional();
   }
   addPrice(e){
-   // console.log("Price: ",e.detail.value);
-    // this.priceError=this.modelCtrl.modelData.items[5].selected.error;
-   
-
-    // if(+e.detail.value>this.modelCtrl.modelData.items[5].selected.maxPrice){
-    //   this.errorField=true;
-     
-    // }else if(+e.detail.value<this.modelCtrl.modelData.items[5].selected.minPrice){
-    //   this.errorField=true;
-      
-    // }else{
       this.errorField=false;
-      this.modelCtrl.modelData.items[24].selected.price = e.detail.value;
-      console.log('PRICE ',this.modelCtrl.modelData.items[24].selected.price);
+      this.modelCtrl.modelData.items[this.currentState.index].selected.price = e.detail.value;
+      console.log('PRICE ',this.modelCtrl.modelData.items[this.currentState.index].selected.price);
       this.showNextButtonInAdditional();
-  //  }
-   
-   
-   
   }
 
 
@@ -266,11 +243,11 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
 
   showNextButtonInAdditional(){
     if(this.price!=null && this.warrentyKilometer!=null){
-      this.nextButton=24;
+      this.nextButton=this.currentState.index;
     }else if(this.price!=null && this.distanceTraveledKilometer!=null){
-      this.nextButton=24;
+      this.nextButton=this.currentState.index;
     }else if(this.warrentyKilometer!=null && this.distanceTraveledKilometer!=null){
-      this.nextButton=24;
+      this.nextButton=this.currentState.index;
     }else{
       this.nextButton=0;
     }
@@ -294,7 +271,11 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
 filterItems(searchTerm) {
     console.log(searchTerm);
     return this.currentItem.filter(item => {
-        return item.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+      if(this.userData.language ==='en'){
+        return item.name.en.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+      } else {
+        return item.name.ar.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+      }
     });
 }
 }

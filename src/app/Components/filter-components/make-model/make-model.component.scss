@@ -7,11 +7,7 @@ ion-accordion {
     margin: 0 auto;
   }
   
-  ion-accordion.accordion-expanding,
-  ion-accordion.accordion-expanded {
-    width: calc(100% - 32px);
-    margin: 16px auto;
-  }
+ 
 
 
   ///MAT
@@ -43,7 +39,6 @@ ion-accordion {
         padding-bottom: 5px;
      
         font-size:16px;
-        letter-spacing: var(--dm-letter-spacing) !important;
          
     }
   }
@@ -60,22 +55,13 @@ ion-accordion {
 
  .model-label{
     font-size: 14px;
-    letter-spacing: var(--dm-letter-spacing);
     font-weight: 400;
  }
 
  .trims-label{
      font-size: 13px;
-     letter-spacing: var(--dm-letter-spacing);
      font-weight: 300;
  }
-
- ion-accordion{
-     
- ion-item{
-    //--min-height: 30px !important;
- }
-}
 
  ion-toolbar{
     position: sticky;
@@ -90,3 +76,13 @@ ion-accordion {
     font-weight: 300 !important;
     }
  }
+
+ cdk-virtual-scroll-viewport {
+    height: 100%;
+    width: 100%;
+  }
+
+  .make-model{
+    height: 100%;
+    width: 100%;
+  }

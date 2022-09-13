@@ -1,9 +1,13 @@
 .item-body-inner{
-    position:relative;
+    position: relative;
     background: conic-gradient(from 127deg at 0% 0%, #E8E7E7 0deg, #F4F4F4 360deg);
     border-radius: 5px;
     margin: 0;
     height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 ion-card{
@@ -40,9 +44,19 @@ ion-card{
     display: flex;
     justify-content: center;
     align-items: center;
-
+    z-index: 100;
 }
 
 .selected_border{
     border:1px solid #00B5DD;
+}
+
+.default-color-card{
+
+    margin: 0;
+    height: 65%;
+    width: 65%;
+}
+ion-card{
+    background-repeat: no-repeat !important;
 }

@@ -29,7 +29,7 @@
     <!---bottom-->
     <div class="bottom">
       <div class="item-name">
-        <ion-label>{{item.title || ''}}</ion-label>
+        <ion-label>{{ item.title.make +' '+ item.title.model + ' ' + item.title.trim +' '+ item.title.year}}</ion-label>
       </div>
       
       <div class="chips">
@@ -56,7 +56,7 @@
           </div>
         </div>
 
-        <div class="chips no-border">
+        <div class="chips no-border" (click)="checkSignUpStatus()">
           <div class="chip" >
             <div class="icon-container  h-v-centered"> 
               <ion-icon src="assets/icon/posts/share.svg" ></ion-icon> </div>
@@ -65,7 +65,7 @@
             </div>
 
 
-            <div class="chip" >
+            <div class="chip" (click)="checkSignUpStatus()" >
               <div class="icon-container  h-v-centered"> 
                 <ion-icon src="assets/icon/posts/notify.svg"></ion-icon>
               </div>
@@ -73,7 +73,7 @@
               
             </div>
 
-            <div class="chip" >
+            <div class="chip" (click)="checkSignUpStatus()" >
               <div class="icon-container  h-v-centered"> 
                 <ion-icon src="assets/icon/posts/fav.svg"></ion-icon></div>
                 <div class="title-container"> 

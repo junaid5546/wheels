@@ -9,7 +9,7 @@ import { DeviceInfoService } from '../../Services/device-info.service';
 export class MainItemComponent implements OnInit {
   @Input() items:any[];
   @Input() name:string;
-  @Input() size:string;
+  @Input() size:number;
   
   href:String;
   mainItemHeightPercentage:number = 10;

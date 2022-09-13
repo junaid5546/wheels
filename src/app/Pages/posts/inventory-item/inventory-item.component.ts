@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserDataService } from 'src/app/Services/user-data.service';
 @Component({
   selector: 'app-inventory-item',
   templateUrl: './inventory-item.component.html',
@@ -12,7 +13,7 @@ export class InventoryItemComponent implements OnInit {
   @Input() items:any[] = [];
   @Input() title:any;
   
-  constructor(private router:Router) { }
+  constructor(private router:Router, private userData:UserDataService) { }
 
   ngOnInit() {
     console.log("ITEM :", this.items);
@@ -28,6 +29,17 @@ export class InventoryItemComponent implements OnInit {
 
   onSlideChange(e) {
     console.log('slide change',e);
+  }
+
+  checkSignUpStatus(){
+    this.userData.isSignedIn()
+    .then((status:any)=>{
+      if(status){
+      // DO ANYTHING
+      } else {
+       this.router.navigate(['register']);
+      }
+    })
   }
 
 }

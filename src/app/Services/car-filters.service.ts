@@ -1,31 +1,38 @@
 import { Injectable } from '@angular/core';
-import { filter, Observable, BehaviorSubject } from 'rxjs';
+import { PostService } from 'dm-api';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarFiltersService {
+  //these all the sort types: 1- price_low 2- price_hight 3- date_new 4- date_old 5- kilometer_low 6- kilometer_hight 7- year_new 8- year_old
+  sortType:string = "price_low";
+  status:string = "627925bfda535aadb15ef3d4";
+  pageNumber:number = 1;
+  pageSize:number = 20;
 
-  paginationOfMakeModelTrim:number = 10;
+
+  resultCount:number = 0;
+
+  paginationOfMakeModelTrim:number = 15;
   currentProcess:string = null;
-  filterObject:any = {
-  
-  };
+  filterObject:any = {};
+
   Filters:any;
 
   interiorColor:any = null;
   exteriorColor:any = null;
-  
-  makeModelTrim:any = null;
+  makeModelTrim:any[] = [];
   bodies:any = null;
   plateType:any = null;
   warrentyDuration:any = null;
-  modelYear:any = null;
+  modelYear:any = [{name:{en:2002,ar:2002}}];
   driveTrain:any = null;
   drivingReadiness:any=null;
   cylinders:any=null;
   saleType:any = null;
-  condition:any=null;
+  condition:any=[{name:{en:'New',ar:"New"}}];
   transmission:any=null;
   seats:any=null;
   insurance:any=null;
@@ -42,24 +49,44 @@ export class CarFiltersService {
   locationSource = new BehaviorSubject<any[]>([]);
   locations$ = this.locationSource.asObservable();
   
-  constructor() {
+
+  makeInitialPage = 0;
+  makePageSize = 10;
+  maxPages = this.makeModelTrim.length;
+
+  constructor(private post:PostService) {
   
   }
 
 
-  getFiltersList(Filters:any){
+  setFiltersList(Filters:any){
     this.filterSource.next(Filters);
   }
-  getLocations(Locations:any){
+
+  setLocations(Locations:any){
     let x=Locations.map(element=>{
       let obj = {...element,checked:false,show:true};
       return obj;
-    })
+    });
     this.locationSource.next(x);
   }
 
   setMakeModelTrims(makeModelTrim){
-    this.makeModelTrim = makeModelTrim;
+
+    let NewMakeModelArray =  makeModelTrim.map(make=>{
+      let newModels = make.models.map(model=>{
+       let newTrims = model.trims.map(trim=>{
+         let trimObj = {...trim,completed:false,show:true};
+         return trimObj;
+       });
+         let newModel = {name:model.name,completed:false,_id:model._id,trims:newTrims,show:true};
+         return newModel;
+       });
+       let newMakeModelObject = {name:make.name, id:make._id, models:newModels, completed:false, show:true, clicked:false};
+       return newMakeModelObject;
+     });
+     console.log("new make: ", NewMakeModelArray);
+    this.makeModelTrim = NewMakeModelArray;
   }
 
   setBodies(bodies:any){
@@ -74,8 +101,9 @@ export class CarFiltersService {
   }
 
   getMakeModelTrims(){
-    this.makeModelTrim.slice(0,this.paginationOfMakeModelTrim);
-    return this.makeModelTrim
+    console.log("MK MODEL: ", this.makeModelTrim);
+   return  this.makeModelTrim;
+
   }
 
   setInteriorColor(interiorColor:any) {
@@ -96,10 +124,15 @@ export class CarFiltersService {
   }
 
   setPlateType(plateType:any) {
-    this.plateType = plateType;
+    console.log("PLATE:", plateType);
+    this.plateType = plateType.types.map(x=>{
+      let obj = {...x,checked:false};
+      return obj;
+    });
   }
 
   getPlateType(){
+  
     return this.plateType;
   }
 
@@ -258,8 +291,7 @@ export class CarFiltersService {
   }
 
   // MOVE PLANS TO PLANS COMPONENT
-
-  getPlans(plans:[]){
+  setPlans(plans:[]){
     this.plansSource.next(plans);
   }
 
@@ -274,5 +306,25 @@ export class CarFiltersService {
     return this.doors;
   }
 
+  getPost(){
+    
+    console.log("FILTER OBJ ", this.filterObject);
+    this.post.getAllPosts(this.sortType,this.status,this.pageNumber,this.pageSize,'app',this.filterObject)
+    
+    .then((response:any)=>{
+      console.log("Count",response.result.count);
+      this.resultCount = response.result.count;
+    })
+  }
+
+// REMOVE ALL SELECTED FILTERS.
+
+clearFilter(){
+    this.data$.subscribe((filters:any)=>{
+        let pointedObjects = filters.filter(obj => obj.hasOwnProperty('badge'));
+        let addedObjects = pointedObjects.filter(obj=> obj.badge > 0 );
+        console.log("Added Objects: ", addedObjects);
+    })
+}
 
 }

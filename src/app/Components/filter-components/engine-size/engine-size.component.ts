@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CarFiltersService } from '../../../Services/car-filters.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserDataService } from '../../../Services/user-data.service';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-engine-size',
   templateUrl: './engine-size.component.html',
@@ -9,16 +11,42 @@ import { ActivatedRoute } from '@angular/router';
 export class EngineSizeComponent implements OnInit {
   label:string = null;
   engineSize:any = null;
-
-  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute) { }
+  selectAll:boolean = false;
+  constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute,public userData:UserDataService) { }
 
   ngOnInit() {
     this.label = this.activated.snapshot.params.label;
+    this.carFilter.filterObject[this.label] = [];
     this.engineSize = this.carFilter.getEngineSize();
   }
 
   check(item,index){
     this.carFilter.engineSize[index].checked = !this.carFilter.engineSize[index].checked;
-    this.carFilter.filterObject[this.label].push(item.name);
+    if( this.carFilter.engineSize[index].checked ){
+      this.carFilter.filterObject[this.label].push(item.name);
+      this.carFilter.getPost();
+      this.updateBadge()
+    }else{
+      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
+      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
+      this.carFilter.getPost();
+      this.updateBadge()
+    }
+  }
+
+  selectAllItems(){
+    
+  }
+
+  updateBadge(){
+    let res = this.engineSize.filter(x=>x.checked);
+    this.carFilter.filterSource.pipe(
+      map((val: any) => {
+      val[9].badge = res.length;
+      return val[9]
+     })
+    ).subscribe((res)=>{
+      console.log('Change:', res);
+    })
   }
 }

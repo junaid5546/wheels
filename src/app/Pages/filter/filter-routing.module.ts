@@ -26,19 +26,19 @@ import { FilterPage } from './filter.page';
 const routes: Routes = [
   {
     path: '',
-    component: FilterPage,
+    component:FilterPage,
     children:[
       {
         component:BodyComponent,            //1
-        path:'car-body'
+        path:'Kbody'
       },
       {
         component:MakeModelComponent,       //2
-        path:'car-make'
+        path:''
       },
       {
         component:PriceComponent,           //3
-        path:'car-price'
+        path:'price'
       },
       {
         component:ConditionComponent,       //4
@@ -111,11 +111,6 @@ const routes: Routes = [
       {
         component:WarrantyDurationComponent,      //19
         path:'car-warranty-duration'
-      },
-      {
-        path: '',
-        redirectTo: 'filter/car-body',
-        pathMatch: 'full'
       }
     ]
   }

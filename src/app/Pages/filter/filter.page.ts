@@ -1,21 +1,19 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   OnInit,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, filter } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-import { FiltersService } from 'dm-api';
 import { CarFiltersService } from 'src/app/Services/car-filters.service';
+import { UserDataService } from '../../Services/user-data.service';
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.page.html',
   styleUrls: ['./filter.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class FilterPage implements OnInit, AfterViewInit {
   private filtersList = new BehaviorSubject<any[]>([]);
@@ -193,7 +191,7 @@ export class FilterPage implements OnInit, AfterViewInit {
     },
   ];
   public filters: any[] = [];
-  selectedIndex = 0;
+  selectedIndex = 1;
 
   heading = {
     has_main_heading: true,
@@ -206,24 +204,31 @@ export class FilterPage implements OnInit, AfterViewInit {
     has_left_icon: true,
     has_right_icon: true,
     left_icon: 'assets/icon/settings/back.svg',
-    right_icon: 'assets/icon/posts/post-details/Phone/Vector.svg',
+    right_icon: '../../../assets/icon/Language.svg'
   };
 
   constructor(
+    public userData:UserDataService,
     private router: Router,
-    private filterServices: FiltersService,
-    private changeRef: ChangeDetectorRef,
-    private filterPost: CarFiltersService
+    public filterPost: CarFiltersService,
+    public changeRef:ChangeDetectorRef
   ) {
+
     this.filtersList.subscribe((res) => {
       this.applyFilters(res);
     });
+
   }
 
   ngAfterViewInit(): void {}
 
   ngOnInit() {
-    this.getFiltersList();
+    this.getFiltersList()
+    setTimeout(() => {
+      this.filters[1].selected = true;
+      this.changeRef.detectChanges();
+    }, 500);
+    
   }
 
   selectedItem(index, url, data) {
@@ -233,7 +238,11 @@ export class FilterPage implements OnInit, AfterViewInit {
     this.filters[index].selected = true;
     this.selectedIndex = index;
     this.filterPost.currentProcess = url;
-    this.router.navigate([`filter/${url}`,{label:this.filterPost.currentProcess}]);
+    if(index === 1){
+      this.router.navigate([`filter`]);
+    } else {
+      this.router.navigate([`filter/${url}`,{label:this.filterPost.currentProcess}]);
+    }
   }
 
   addFilter(name: string, value: string) {
@@ -247,16 +256,13 @@ export class FilterPage implements OnInit, AfterViewInit {
    */
   getFiltersList() {
     this.filterPost.data$.subscribe((data) => {
-      console.log(data);
+      console.log("GOT FILTER LIST",data);
       this.filters = data;
       data.map((element, index) => {
         let obj = { ...element, selected: false, show: false };
-
         return obj;
       });
     });
-
-    this.changeRef.markForCheck();
   }
 
   /**
@@ -265,23 +271,20 @@ export class FilterPage implements OnInit, AfterViewInit {
    */
   applyFilters(filterList: any[]) {}
 
-  recursiveFunction = function (liquidationArray,searched_number, startIndex, endIndex) {
-    // Base Condition
-    if (startIndex > endIndex) return false;
+  
 
-    // Find the middle index
-    let mid = Math.floor((startIndex + endIndex) / 2);
+  navigate(){
+    this.router.navigate(['tabs/posts'])
+  }
 
-    // Compare mid with given key x
-    if (liquidationArray[mid].commercail_number === searched_number) return mid;
+  // CLEAR ALL SELECTED FILTERS.
+  clearAll(){
 
-    // If element at mid is greater than x,
-    // search in the left half of mid
-    if (liquidationArray[mid].commercail_number > searched_number)
-      return this.recursiveFunction(liquidationArray, searched_number, startIndex, mid - 1);
-    // If element at mid is smaller than x,
-    // search in the right half of mid
-    else return this.recursiveFunction(liquidationArray, searched_number, mid + 1, endIndex);
-  };
+    // SUDO CODE
+    // 1- FILTERS SERVICE LOOP THROUGH ALL FILTER LIST FIRST AND POINT OUT THOSE WHICH HAS BADGE > 0.
+    // 2- FROM POINTED OUT ITEMS ITRATE THROUGH SUB ITEMS AND UNCHECK THEM.
+    // 3- CALL POST FILTER API FOR GETTING INVENTORY ITEMS.
+    this.filterPost.clearFilter();
+  }
 
 }

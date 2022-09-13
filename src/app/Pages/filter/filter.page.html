@@ -1,5 +1,4 @@
 <app-header [heading]="heading"
-[icons]="icons"
 [filter]=true
 forwardTo="/tabs/tab1"
 ></app-header>
@@ -10,11 +9,13 @@ forwardTo="/tabs/tab1"
   <div class="left-right-container">
     <div class="left">
       <ion-list class="left">
-        <!---[ngClass]="{'selected-filter-left-label': item.selected==true, 'filter-left-label':item.selected==false}"-->
-        <!----->
-        <div [ngClass]="{'selected-filter-left-label': item.selected==true}" (click)="selectedItem(i,item.path,item.types)" class="item-container" *ngFor="let item of filters; let i=index">
+        <div  [ngClass]="{'selected-filter-left-label': (item.selected==true && userData.language==='en'), 'ar': (item.selected==true && userData.language==='ar'), 'rtl':userData.language==='ar'}" (click)="selectedItem(i,item.path,item.types)" class="item-container" *ngFor="let item of filters; let i=index">
         <div class="inner-item-container">
-          <ion-label>{{item.name}}</ion-label>
+          <ion-label *ngIf="userData.language === 'en' ">{{item.name.en}}</ion-label>
+          <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar}}</ion-label>
+        
+          <span class="badge" *ngIf="item.badge != null && item.badge !== 0">{{ item.badge == 0 ? '' : item.badge|digitTransform:this.userData.language|async}}</span>
+     
         </div>
       </div>
       </ion-list>
@@ -29,16 +30,16 @@ forwardTo="/tabs/tab1"
 
 <div class="bottom-button-container select-images-button">
   <div class="bottom-button-inner">
-    <div class="left-button-clear">
+    <div class="left-button-clear" (click)="clearAll()">
  
-      <ion-label>CLear All</ion-label>
+      <ion-label>{{"Clear All" | translate}}</ion-label>
  
     </div>
 
-<div class="right-button-apply-filters">
+<div class="right-button-apply-filters" (click)="navigate()">
   <div class="show-vehicle-button">
    
-    <ion-label>Show 1,100 Vehicle</ion-label>
+    <ion-label> {{ "Show" | translate }} {{this.filterPost.resultCount}} {{ "Vehicle" | translate }} </ion-label>
    
   </div>
    </div>

@@ -4,6 +4,10 @@
     border-radius: 5px;
     margin: 0;
     height: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 ion-card{
@@ -40,9 +44,14 @@ ion-card{
     display: flex;
     justify-content: center;
     align-items: center;
-
+    z-index: 100;
 }
 
 .selected_border{
     border:1px solid #00B5DD;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+

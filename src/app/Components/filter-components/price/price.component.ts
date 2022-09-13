@@ -1,80 +1,68 @@
-import { Component, OnInit,AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit,AfterViewInit, ViewChild,EventEmitter, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ChangeContext, Options, PointerType } from '@angular-slider/ngx-slider';
 import { DeviceInfoService } from '../../../Services/device-info.service';
+import { CarFiltersService } from '../../../Services/car-filters.service';
 import { IonInput } from '@ionic/angular';
-import { filter } from '../../../Interface/car-filter';
+import { ActivatedRoute } from '@angular/router';
+import { UserDataService } from '../../../Services/user-data.service';
+
 @Component({
   selector: 'app-price',
   templateUrl: './price.component.html',
   styleUrls: ['./price.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
+
 export class PriceComponent implements OnInit,AfterViewInit {
 
- // maximum:number = 1000000;
- // minimum:number = 100;
-  //value: number = 100;
-  //highValue: number = 1000000;
-  // options: Options = {
-  //   floor: 0,
-  //   ceil: 1000000,
-  //   step: 500,
-  //   vertical: true,
-  //   noSwitching: true,
-  //   enforceStep: false,
-  //   enforceRange: false,
-  //   // translate: (value: number): string => {
-  //   //   if(value == 1000000){
-  //   //   return '1m';
-  //   //   } else {
-  //   //     return `${value}`;
-  //   //   }
-  //   // },
-  // };
-  // maxValue:any;
-  // minValue:any;
-  // minimum: number = 0;
-  // maximum: number = 1000000;
-  // options: Options = {
-  //   floor: 0,
-  //   ceil: 1000000,
-  //   step: 500,
-  //   noSwitching: true,
-  //   vertical: true,
-   
-  // };
-  minValue: number = 0;
-  maxValue: number = 1000000;
-  lastMin:number=0;
-  lastMax:number=1000000;
+manualRefresh: EventEmitter<void> = new EventEmitter<void>();
+
+  label:string = null;
+  minValue: number = 100;
+  maxValue: number = 100000;
+  lastMin:number=null;
+  lastMax:number=null;
   options: Options = {
     floor: 0,
-    ceil: 1000000,
+    ceil: 100000,
     noSwitching: true,
-    step: 500,
+    step: 1000,
     enforceStep: false,
     vertical: true,
      translate: (value: number): string => {
-    if(value == 1000000){
-    return '1m';
+    if(value == 100000) {
+    return '100,000';
      } else {
       return `${value}`;
-    }
-  },
+    }},
   };
   
-  @ViewChild(IonInput,{static:false}) input:IonInput;
-  constructor(private deviceInfo:DeviceInfoService) { }
+  @ViewChild(IonInput,{static:false}) inputMax:IonInput;
+  @ViewChild(IonInput,{static:false}) inputMin:IonInput;
+  @ViewChild('slider') slider: ElementRef;
+
+  constructor(private deviceInfo:DeviceInfoService,private activated:ActivatedRoute, private carFilter:CarFiltersService, private changeRef:ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
     this.makeInnerHeight();
     setTimeout(() => {
-      this.checkInput();
+    this.checkInput();
     },150);
-    
+  }
+
+   onMove = (detail,x) => {
+   console.log(detail); 
   }
 
   ngOnInit() {
-    
+    this.label = this.activated.snapshot.params.label;
+    this.carFilter.filterObject[this.label] = [];
+  }
+
+
+  private onStart(d) {
+    const now = Date.now();
+    console.log("Start: ", now, d);
   }
 
   makeInnerHeight(){
@@ -84,26 +72,43 @@ export class PriceComponent implements OnInit,AfterViewInit {
 
   focusOn(ev){
     console.log("Focus:",ev);
-   
+    this.manualRefresh.emit();
   }
 
   checkInput() {
-    this.input.setFocus().then(res=>{
+    this.inputMax.setFocus().then(res=>{
       console.log("Settting focus: ", res);
     })
   }
   getChangeContextString(changeContext: ChangeContext) {
-
+    this.lastMax=changeContext.highValue;
+    this.minValue= changeContext.value;
+   
+   console.log( typeof(changeContext.highValue));
     //“price”:{“min”:5000, “max”:8000},
     console.log(`{“min”:${changeContext.value}, “max”:${changeContext.highValue}}`);
+    this.changeRef.detectChanges();
   }
+
+  startMoving(){
+    console.log("Start moving");
+  }
+
+  endMoving(){
+    console.log("End Moving");
+  }
+
   getInputValue(e,type){
+    
     if(type=='minValue'){
         console.log("min",e.detail.value);
         this.lastMin=e.detail.value;
-    }else if(type=='maxValue'){
+        //this.minValue = Number(e.detail.value);
+    } else if(type=='maxValue') {
+      console.log(typeof(e.detail.value));
       console.log("max",e.detail.value);
       this.lastMax=e.detail.value;
+      //this.maxValue = Number(e.detail.value);
     }
   console.log(this.lastMax,this.lastMin)
   }
