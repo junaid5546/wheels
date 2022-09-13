@@ -8,7 +8,7 @@ import { SettingsComponent } from '../Components/settings/settings.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppSharedModule } from '../Components/Shared/shared.module';
 
-import { FiltersComponent } from '../Models/filters/filters.component';
+import { FilterComponent } from '../Components/ads/filter/filter.component';
 @NgModule({
   imports: [
     IonicModule,
@@ -19,6 +19,6 @@ import { FiltersComponent } from '../Models/filters/filters.component';
     TranslateModule,
     AppSharedModule,
   ],
-  declarations: [Tab1Page,SettingsComponent,FiltersComponent]
+  declarations: [Tab1Page,SettingsComponent,FilterComponent]
 })
 export class Tab1PageModule {}

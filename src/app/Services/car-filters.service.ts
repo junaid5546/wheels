@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PostService } from 'dm-api';
 import { BehaviorSubject } from 'rxjs';
-
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
@@ -324,6 +324,131 @@ clearFilter(){
         let pointedObjects = filters.filter(obj => obj.hasOwnProperty('badge'));
         let addedObjects = pointedObjects.filter(obj=> obj.badge > 0 );
         console.log("Added Objects: ", addedObjects);
+        this.filterSource.pipe(
+          map((val) => {
+          val.forEach(x=>x.badge = 0)
+          return val;
+         })
+        ).subscribe((res)=>{
+          console.log('Change:', res);
+        })
+        for (let index = 0; index < addedObjects.length; index++) {
+          switch (addedObjects[index].path) {
+            case 'Kbody':
+            console.log("BODIES: ", this.bodies);
+            this.bodies.forEach(element => {
+              element.checked = false;
+            });
+              break;
+              case 'Condition':
+                this.condition.forEach(element => {
+                  element.checked = false;
+                });
+                break;
+                case 'interior_color':
+                  this.interiorColor.forEach(element => {
+                    element.checked = false;
+                  });
+                  break;
+                  case 'Kdoor':
+                    this.doors.forEach(element => {
+                      element.checked = false;
+                    });
+                    break;
+                    case 'Kyear':
+                      this.modelYear.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+                    case 'exterior_color':
+                      this.exteriorColor.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+                    case 'interior_color':
+                      this.interiorColor.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+                    case 'cylinder_count':
+                      this.cylinders.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+                    case 'engine_size':
+                      this.engineSize.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+                    case 'fuel':
+                      this.fuel.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+                    case 'transmission':
+                      this.transmission.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+                    case 'car-drivetrain-type':
+                      this.driveTrain.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+                    case 'seats':
+                      this.seats.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+
+                    case 'origin':
+                      this.origin.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+
+                    case 'car-insurance':
+                      this.insurance.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+
+                    case 'plate_type':
+                      this.plateType.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+
+                    case 'driving_readiness':
+                      this.drivingReadiness.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+                    case 'sale_type':
+                      this.saleType.forEach(element => {
+                        element.checked = false;
+                      });
+                    break;
+
+                    case 'car-location':
+                      
+                    break;
+
+          }
+          
+        }
+
+       
     })
 }
 
