@@ -7,14 +7,13 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { SettingsComponent } from '../Components/settings/settings.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AppSharedModule } from '../Components/Shared/shared.module';
-
 import { FiltersComponent } from '../Models/filters/filters.component';
+
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    
     Tab1PageRoutingModule,
     TranslateModule,
     AppSharedModule,

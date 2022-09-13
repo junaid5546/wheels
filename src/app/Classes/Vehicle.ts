@@ -8,7 +8,6 @@ export class identity {
   _id!: string
   name!: _name
 }
-
 export class Make extends identity {
   private clicked?: boolean
   private completed?: boolean

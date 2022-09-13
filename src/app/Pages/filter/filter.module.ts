@@ -10,9 +10,7 @@ import { AppSharedModule } from '../../Components/Shared/shared.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { TranslateModule } from '@ngx-translate/core';
 import { DigitTransformation } from 'src/app/Pipe/digit-transform.pipe';
-import { FilterItemAccordianComponent } from 'src/app/Models/filters/filter-item-accordian/filter-item-accordian.component';
-import { FilterItemGridComponent } from 'src/app/Models/filters/filter-item-grid/filter-item-grid.component';
-import { FilterItemListComponent } from 'src/app/Models/filters/filter-item-list/filter-item-list.component';
+import * as Component from '../../Models/filters/index';
 @NgModule({
   imports: [
     MatSliderModule,
@@ -29,9 +27,9 @@ import { FilterItemListComponent } from 'src/app/Models/filters/filter-item-list
   declarations: [
     DigitTransformation,
     FilterPage,
-    FilterItemAccordianComponent,
-    FilterItemGridComponent,
-    FilterItemListComponent
+    Component.FilterItemAccordianComponent,
+    Component.FilterItemGridComponent,
+    Component.FilterItemListComponent
   ],
 })
 export class FilterPageModule {}

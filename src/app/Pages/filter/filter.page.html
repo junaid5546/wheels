@@ -6,7 +6,7 @@ forwardTo="/tabs/tab1"
 <ion-content scrollEvents="false" scrollY="false">
 
 
-  <div class="left-right-container">
+<div class="left-right-container">
     <div class="left">
       <ion-list class="left">
         <div  [ngClass]="{'selected-filter-left-label': (item.selected==true && userData.language==='en'), 'ar': (item.selected==true && userData.language==='ar'), 'rtl':userData.language==='ar'}" (click)="selectedItem(i,item.path,item.types)" class="item-container" *ngFor="let item of filters; let i=index">
