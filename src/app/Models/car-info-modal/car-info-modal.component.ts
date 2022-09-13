@@ -144,7 +144,7 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
     this.plansApi.getPlans(id,lang)
     .then((plans:any)=>{
       if(plans.code === 200){
-        //this.filters.setPlans(plans.result);
+        this.filters.setPlans(plans.result);
       } else {
         console.log("NULL");
       }

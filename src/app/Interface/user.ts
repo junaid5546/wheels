@@ -1,3 +1,4 @@
+// Copyright 2022 Google LLC
 /**
  * (Type docs)
  *
@@ -25,6 +26,9 @@ export class UserRegistration {
   }
   
 }
+      
+      
+  
 export class AuthToken {
   phone!:number;
   dob!:number

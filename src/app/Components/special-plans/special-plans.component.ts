@@ -14,7 +14,12 @@ export class SpecialPlansComponent implements OnInit {
   name:string = "Gold";
   color:string = 'gold';
 
-   plans = []; 
+   plans = [ 
+     {name:'Gold', color:'yellow', order:'First', duration:60, special_duration:7, price:2},
+     {name:'Silver', color:'silver', order:'First', duration:60, special_duration:7, price:1.5},
+     {name:'Bronze', color:'bronze', order:'First', duration:60, special_duration:7, price:1},
+     {name:'Regular', color:'white', order:'Last', duration:60, special_duration:7, price:0}
+   ] 
   constructor(private plansApi:PlansService,private filters:CarFiltersService) { }
 
   ngOnInit() {
@@ -34,9 +39,8 @@ export class SpecialPlansComponent implements OnInit {
     this.filters.plansData.subscribe((plans)=>{
       console.log("PLANS FROM SERVICE ",plans);
       this.plans = plans[days];
-      if(this.plans.length < 4){
-        this.plans.push(plans['basic_days']);
-      }
+      this.plans.push(plans['basic_days']);
+      console.log("PLANS in component ",plans);
       });
   } 
 

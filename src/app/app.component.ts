@@ -4,7 +4,8 @@
  *
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
-
+import { Filter} from './Interface/car-filter';
+import { Make, Model, Trim, Bodies, Engine, DoorCount } from './Classes/Vehicle'
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
@@ -143,7 +144,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   createFilters() {
     // CREATING ARRAY OF FILTERS
-    /*let apiResp = [
+    let apiResp = [
       {
         name: {en: 'Body', ar: 'الهيكل'},
 
@@ -2231,7 +2232,26 @@ export class AppComponent implements OnInit, OnDestroy {
           "addVehicleOrder": 28,
           "filterOrder": 0,
           "types": []
-      }];*/
-
+      }];
+    let make = new Make();
+    make._id = "123123";
+    make.name.en = 'Toyota';
+    make.name.ar = 'شنتسيبم';
+    // MAKE INITIATED;
+    let model:[Model];
+    model[0]._id = "123";
+    model[0].name.en = "Corolla";
+    model[0].name.ar = 'مشتسيب';
+    // MODEL INITIATED;
+    let trim:[Trim];
+    trim[0]._id = "1222";
+    trim[0].name.en = "Gli";
+    trim[0].name.ar = 'سيتبمسي';
+    let filterArray: Filter[] = [];
+    apiResp.forEach(x=> {
+      let obj = new Filter(x.name,0,x.path,x.addVehicleOrder,x.filterOrder,x._id,x.path);
+      filterArray.push(obj);
+    });
+    console.log('Filters: ', filterArray)
   }
 }
