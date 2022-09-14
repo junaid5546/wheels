@@ -6,6 +6,8 @@ import { AuthService } from 'dm-api';
 import { ModalControllerService } from '../../Services/modal-controller.service';
 import { Router } from '@angular/router';
 import { UserDataService } from '../../Services/user-data.service';
+import { ModalController } from '@ionic/angular';
+import { CountryCodePickerComponent } from '../../Components/Shared/country-code-picker/country-code-picker.component';
 // RxJS v6+
 import { timer } from 'rxjs';
 
@@ -33,7 +35,7 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
   seconds = 60;
   isOtpDisabled:boolean = false;
   buttonText:string = "Send OTP";
-
+  countryCode = {img:'../../../assets/country-code/oman.png',code:968};
   countDownDate = new Date("Jan 5, 2024 15:37:25").getTime();
   Dob  = {day:null, month:null, year:null};
 
@@ -41,7 +43,8 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
   constructor(private pickerController: PickerController,
               private router:Router,
               private auth:AuthService,
-              private popUp:ModalControllerService,
+              public modalController: ModalController,
+              public popUp:ModalControllerService,
               private userData:UserDataService) {
                
    }
@@ -62,7 +65,15 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
     console.log("Input ele",this.input);
     this.input.setFocus();
     //this.input.autofocus = true;
-
+    const labelElements = document
+    .querySelectorAll(
+      'ion-popover .popover-wrapper .popover-content .popover-viewport .sc-ion-select-popover ion-item ion-label');
+for (let index = 0; index < labelElements.length; index++){
+      const labelElement = labelElements[index];
+      console.log('elem',labelElement);
+        labelElement.innerHTML = '<ion-img src="assets/country-code/bahrain.png"/>';
+      
+}
   }
   // ONCE THEY SELECT COUNTRY CODE MAKE LIST OF INPUT __ __ __ __
   // FOCUS ON FIRST __
@@ -122,7 +133,13 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
         if(this.auth.getIsExist()){
           this.login();
         } else {
-          this.auth.registerNewUser(this.user);
+          console.log(this.user);
+          this.auth.registerNewUser(this.user)
+          .then((res:any)=>{
+            if(res.code === 200){
+              this.router.navigate([''])
+            }
+          })
         }
       })
       .catch(error=>{
@@ -139,18 +156,29 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
    
   }
 
-  selectCountryCode(code,first){
-    console.log(code);
-    this.user.primary_phone.areaCode = Number(code.detail.value.split('+')[1]);
-    console.log("User:", this.user);
-    console.log('Input', this.input);
-    first.setFocus();
+  async openCountryCodeModal(){
+    console.log("OPEN MODAL");
+    const modal = await this.modalController.create({
+      component: CountryCodePickerComponent,
+      cssClass: 'my-custom-class',
+      initialBreakpoint: 0.55,
+      breakpoints: [0, 0.5, 1],
+      swipeToClose: false
+    });
+    
+     await modal.present();
+     modal.onDidDismiss().then(data=>{
+      
+      if(data.data){
+      let numberSelected = data.data.item.dial_code.toString();
+      let countryCode =  Number(numberSelected.split('+')[1])
+      console.log("Selected Country Code: ", countryCode);
+      this.countryCode.code = countryCode;
+      this.user.primary_phone.countryCode = countryCode;
+      this.countryCode.img = data.data.item.icon;
+      }
+    })
   }
-
-  validate(ev) {
-    console.log('')
-  }
- 
 
   // DATE TIME PICKER
   async presentPicker() {
@@ -235,7 +263,7 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
 
 
    countdown() {
-    this.auth.signInwithPhoneNumber(`+${this.user.primary_phone.areaCode}${this.user.primary_phone.phoneNumber}`)
+    this.auth.signInwithPhoneNumber(`+${this.user.primary_phone.countryCode}${this.user.primary_phone.phoneNumber}`)
     .then((res)=>{
       if(res){
        //emit 0 after 1 second then complete, since no second argument is supplied
@@ -248,7 +276,7 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
 
   async checkIsexist(){
     
-   this.auth.isUserExist(this.user.primary_phone.areaCode, this.user.primary_phone.phoneNumber)
+   this.auth.isUserExist(this.countryCode.code, this.user.primary_phone.phoneNumber)
     .then((res)=>{
       if(res['code'] === 3) {
         // USER DOES NOT EXIST CREATE NEW USER 
@@ -270,14 +298,16 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
     let obj = {phone:this.user.primary_phone,dob:this.user.dob};
     this.auth.login(obj)
     .then((result:any)=>{
-      console.log("Login Result: ", result);
-      this.userData.setUserObj(result.result.user)
-      this.userData.setUserId(result.result.user._id)
-      let primaryPhone = String(result.result.user.primaryPhone.areaCode) +  String(result.result.user.primaryPhone.phoneNumber);
-      this.userData.setPrimaryPhone(primaryPhone);
-      this.userData.setBusinessPhone(result.result.user.phoneBusiness)
-      this.subscribeTimer.unsubscribe();
-      this.router.navigate([''])
+      if(result.code === 200){
+        console.log("Login Result: ", result);
+        this.userData.setUserObj(result.result.user)
+        this.userData.setUserId(result.result.user._id)
+        let primaryPhone = String(result.result.user.primaryPhone.countryCode) +  String(result.result.user.primaryPhone.phoneNumber);
+        this.userData.setPrimaryPhone(primaryPhone);
+        this.userData.setBusinessPhone(result.result.user.phoneBusiness)
+        this.subscribeTimer.unsubscribe();
+        this.router.navigate(['']);
+      }
     })
     .catch((error)=>{
       console.log("Login Error: ", error);

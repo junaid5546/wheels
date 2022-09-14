@@ -13,7 +13,7 @@ export class Tab4Page implements OnInit {
  heading = {has_main_heading:true, main_heading_name:'Account', has_sub_heading:false, sub_heading_name:''};
 
   accountList = [
-    {name:'Personal Information',available:true,route:'personal-information',icon:'../../assets/account/personal-info.svg'},
+    {name:'Personal Information',available:true,route:'tabs/tab4',icon:'../../assets/account/personal-info.svg'},
     {name:'Public Profile',available:true},
     {name:'Share Profile',available:true},
     {name:'Membership',available:false},

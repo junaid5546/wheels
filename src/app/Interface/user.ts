@@ -8,7 +8,7 @@ export class UserRegistration {
     
   first_name!:string;
   last_name!:string;
-  primary_phone = {areaCode:0,phoneNumber:0};
+  primary_phone = {countryCode:968,phoneNumber:0};
   dob!:number
 
   constructor() {

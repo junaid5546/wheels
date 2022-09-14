@@ -17,12 +17,10 @@
      </div>
 
       <div class="select-container">
-        <ion-icon name="contrast-outline"></ion-icon>
-      <ion-select interface="popover" [disabled]="isOtpDisabled" (ionChange)="selectCountryCode($event,first)">
-        <ion-select-option class="select-option" value="+968">+968</ion-select-option>
-        <ion-select-option class="select-option" value="+964">+964</ion-select-option>
-        <ion-select-option class="select-option" value="+965">+965</ion-select-option>
-      </ion-select>
+        <ion-img [src]="countryCode.img"></ion-img>
+        <div class="select-country-code" (click)="openCountryCodeModal()">
+          <ion-label>+{{countryCode.code}}</ion-label>
+        </div>
     </div>
     </ion-col>
     
@@ -63,7 +61,7 @@
       </ion-item>
 
       <ion-item  class="item-inner">
-          <ion-input [disabled]="isOtpDisabled" (ionChange)="validate($event)"  inputmode="numeric" clearOnEdit="true"  #eight (keyup)="gotoNextField(eight,eight, seven,$event,7)"  type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
+          <ion-input [disabled]="isOtpDisabled"   inputmode="numeric" clearOnEdit="true"  #eight (keyup)="gotoNextField(eight,eight, seven,$event,7)"  type="numeric" max="1" maxlength="1" minlength="1"></ion-input>
       </ion-item>
 
       </div>

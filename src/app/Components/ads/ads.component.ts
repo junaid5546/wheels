@@ -15,7 +15,7 @@ export class AdsComponent implements OnInit {
   status:string = 'active';
   data = {"car_bodies":[],"car_models":[]};
   ngOnInit() {
-    this.getPostedPosts('active',{});
+    //this.getPostedPosts('active',{});
   }
 
   // SEGMENT CHANGE OF CAR STATUS.

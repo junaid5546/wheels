@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: Tab3Page,
-    canActivate:[AuthenticationGurad_dm],
+    canActivate:[AuthenticationGurad_dm]
   }
 ];
 

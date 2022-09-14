@@ -33,6 +33,8 @@ import { SwiperModule } from 'swiper/angular';
                     COMPONENT.PostItemSkeletonComponent,
                     COMPONENT.TextInputComponent,
                     COMPONENT.MainItemComponent,
+                    COMPONENT.NumberPlateComponent,
+                    COMPONENT.CountryCodePickerComponent,
                     COMPONENT.AddSliderComponent]
                     ,
     entryComponents: [COMPONENT.HeaderComponent,
@@ -43,6 +45,8 @@ import { SwiperModule } from 'swiper/angular';
                       COMPONENT.PostItemSkeletonComponent,
                       COMPONENT.TextInputComponent,
                       COMPONENT.MainItemComponent,
+                      COMPONENT.NumberPlateComponent,
+                      COMPONENT.CountryCodePickerComponent,
                       COMPONENT.AddSliderComponent],
 
     exports: [COMPONENT.HeaderComponent,
@@ -53,6 +57,8 @@ import { SwiperModule } from 'swiper/angular';
               COMPONENT.PostItemSkeletonComponent,
               COMPONENT.TextInputComponent,
               COMPONENT.MainItemComponent,
+              COMPONENT.NumberPlateComponent,
+              COMPONENT.CountryCodePickerComponent,
               COMPONENT.AddSliderComponent]
 
   })

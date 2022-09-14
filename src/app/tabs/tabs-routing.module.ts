@@ -38,6 +38,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/vehicles-department/vehicles-department.module').then( m => m.VehiclesDepartmentPageModule)
       },
       {
+        path: 'vehicle-numbers',
+        loadChildren: () => import('../Modules/vehicle-numbers/vehicle-numbers.module').then( m => m.VehicleNumbersPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab2',
         pathMatch: 'full'
