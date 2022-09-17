@@ -23,7 +23,9 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
   // 1 MEANS DATE OF BIRTH IT MEANS THAT USER WILL LOGIN
   // 2 MEANS FIRST NAME AND LAST NAME 
   // 3 OTP ENTER 
-  
+  recaptchaVerifier:any = null;
+  widgidId:any = null;
+  recaptchaVerify:any;
   subscribeTimer = null;
   user:UserRegistration = new UserRegistration();
   timer = timer(1000,2000);
@@ -46,12 +48,8 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
               public modalController: ModalController,
               public popUp:ModalControllerService,
               private userData:UserDataService) {
-               
+                
    }
-
-
-
-
 
   ngOnInit() {
   }
@@ -64,16 +62,7 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     console.log("Input ele",this.input);
     this.input.setFocus();
-    //this.input.autofocus = true;
-    const labelElements = document
-    .querySelectorAll(
-      'ion-popover .popover-wrapper .popover-content .popover-viewport .sc-ion-select-popover ion-item ion-label');
-for (let index = 0; index < labelElements.length; index++){
-      const labelElement = labelElements[index];
-      console.log('elem',labelElement);
-        labelElement.innerHTML = '<ion-img src="assets/country-code/bahrain.png"/>';
-      
-}
+    this.auth.recaptcha();
   }
   // ONCE THEY SELECT COUNTRY CODE MAKE LIST OF INPUT __ __ __ __
   // FOCUS ON FIRST __
@@ -237,10 +226,6 @@ for (let index = 0; index < labelElements.length; index++){
   }
   }
 
-  sendOTP() {
-    this.auth.recaptcha();
-  }
-
   tick() {
     this.subscribeTimer = this.timer.subscribe(val => {
       console.log('In tick',val);
@@ -260,22 +245,21 @@ for (let index = 0; index < labelElements.length; index++){
     
   }
 
-
-
    countdown() {
-    this.auth.signInwithPhoneNumber(`+${this.user.primary_phone.countryCode}${this.user.primary_phone.phoneNumber}`)
+    let phoneNumber = `+${this.user.primary_phone.countryCode}${this.user.primary_phone.phoneNumber}`;
+    console.log("Phone Number: ", phoneNumber);
+    this.auth.signInwithPhoneNumber(phoneNumber)
     .then((res)=>{
       if(res){
        //emit 0 after 1 second then complete, since no second argument is supplied
        this.step = 3;
          this.tick();
       }
+    }).catch((error)=>{
+      console.log("Error while signinwithPhoneNumber:", error);
     })
   }
-
-
-  async checkIsexist(){
-    
+  async checkIsexist(){   
    this.auth.isUserExist(this.countryCode.code, this.user.primary_phone.phoneNumber)
     .then((res)=>{
       if(res['code'] === 3) {
@@ -313,14 +297,4 @@ for (let index = 0; index < labelElements.length; index++){
       console.log("Login Error: ", error);
     })
   }
-
- async ionViewDidEnter() {
-   this.auth.recaptcha();
- }
-
-  ionViewDidLoad() {
-    this.auth.recaptcha();
-  }
-
-  
 }

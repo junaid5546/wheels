@@ -45,7 +45,7 @@ export function setTranslateLoader(http: HttpClient) {
   }),
     BrowserAnimationsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-
+   
     OpenNativeSettings,
     WebView,
     CallNumber,

@@ -36,7 +36,7 @@ items:any[] = [
 
 {name:'Fashion',img:'assets/icon/main-items-icon/fashion.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'fashion'},
 
-{name:'Kid Toys',img:'assets/icon/main-items-icon/kid toys.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'kids-toys'},
+{name:'Kids',img:'assets/icon/main-items-icon/kid toys.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'kids-toys'},
 
 {name:'Animals',img:'assets/icon/main-items-icon/animals.svg', hasClock:true , clock:'assets/icon/main-items-icon/clock.svg',navigate:'animals'},
 
