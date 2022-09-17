@@ -2,15 +2,9 @@
  * (Type docs)
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
-
-import { identity } from '../Classes/Vehicle'
-import { _name } from '../Interface/Name'
-
-export class Filter {
-  // FILTER ID
-  private _id!: string
-  // NAME OF FILTER
-  private name!: _name
+import { identity } from '../Classes/Vehicle';
+import { _name,filterType_c } from '../Interface/Name';
+export class Filter extends identity {
   // BADGE/COUNTER OF FILTER
   private badge?: number
   // ADD-POST ORDER
@@ -20,7 +14,7 @@ export class Filter {
   // ROUTER PATH FOR COMPONENT
   private path!: string
   // LIST OF FILTER ITEMS
-  private types!: [identity]
+  private types:filterType_c[];
 
   /**
    * Instansiate the object of filter.
@@ -32,22 +26,26 @@ export class Filter {
    * @param types:[FilterItem] LIST OF ITEMS of filter.
    */
 
-  constructor (
-    name: _name,
-    addPostOrder: number,
-    filterOrder: number,
-    _id: string,
-    path: string
-  ) {
-    this._id = _id
-    this.path = path
-    this.name = name
-    this.badge = 0
-    this.addVehicleOrder = addPostOrder
-    this.filterOrder = filterOrder
+  constructor (obj:any) {
+    super();
+    this.initiateObject(obj);
+  }
+// INITIATING THE OBJECT.
+  private initiateObject(object:any){
+    this._id = object._id;
+    this.path = object.path;
+    this.name = object.name;
+    this.badge = 0;
+    this.addVehicleOrder = object.addVehicleOrder;
+    this.filterOrder = object.filterOrder;
+    this.types = [];
+    object.types.forEach(type=>{ 
+      let obj = new filterType_c(type);
+      this.types.push(obj);
+    });
   }
 
-  // IT RETURNS VIEW OF FILTER
+  // IT RETURNS VIEW OF FILTER.
   public renderView () {
     if (
       this.path != 'Kmake' &&
@@ -63,7 +61,7 @@ export class Filter {
       return 'grid'
     }
   }
-  // RETURNS THE COPY OF FILTER
+  // RETURNS THE COPY OF FILTER.
   public getFilterBluePrint () {
     let obj = {
       name: this.name,
@@ -75,6 +73,15 @@ export class Filter {
     }
     return obj
   }
+
+  /**
+   * 
+   * @returns LIST OF filterType_s
+   */
+  public getTypes(){
+    return this.types;
+  }
+
   // UPDATE COUNTER FOR THE FILTER THAT HOW MANY ITEMS ARE SELECTED FOR PARTICULAR FILTER AND RETURNS THE COUNT.
   public updateBadge (count: number) {
     this.badge = count

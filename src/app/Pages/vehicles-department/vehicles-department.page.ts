@@ -116,14 +116,8 @@ export class VehiclesDepartmentPage implements OnInit {
             x.name.en != 'Warranty Duration' &&
             x.name.en != 'Distance Travelled'
           ) {
-            let filterObject = new Filter(
-              x.name,
-              x.addPostOrder,
-              x.filterOrder,
-              x._id,
-              x.path
-            );
-            return filterObject;
+            
+            
           }
         });
         console.log('Filter Objects: ', filters);

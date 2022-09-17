@@ -5,8 +5,8 @@
 import { _name } from '../Interface/Name';
 
 export class identity {
-  _id!: string
-  name!: _name
+  protected _id!: string
+  protected name!: _name
 }
 export class Make extends identity {
   private clicked?: boolean
