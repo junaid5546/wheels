@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ModalControllerService } from '../../../Services/modal-controller.service';
 import { DeviceInfoService } from 'src/app/Services/device-info.service';
 import { UserDataService } from 'src/app/Services/user-data.service';
+import { DebugerService } from '../../../Services/debuger.service'
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,7 +12,7 @@ import { UserDataService } from 'src/app/Services/user-data.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private nav:NavController, private router:Router, private modalCtrl:ModalControllerService,private deviceInfo:DeviceInfoService, public userData:UserDataService) { }
+  constructor(private nav:NavController, private router:Router, private modalCtrl:ModalControllerService,private deviceInfo:DeviceInfoService, public userData:UserDataService, public debug:DebugerService) { }
   // ROUTE NAME HERE.
   @Input() caller:string = null;
   @Input() forwardTo:string = null;

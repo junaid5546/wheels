@@ -16,6 +16,8 @@ import { TokenService } from 'dm-api';
 import { CarFiltersService } from './Services/car-filters.service';
 import { CamGalService } from './Services/cam-gal.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { DebugerService } from './Services/debuger.service'
+import { Filter } from './Classes/Filter';
 export type platform_name = 'ios' | 'android' | 'web';
 
 @Component({
@@ -24,6 +26,7 @@ export type platform_name = 'ios' | 'android' | 'web';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
+  debugging:false;
   platform_name: platform_name;
   authUrl = 'register';
   apiRoute: any = {};
@@ -42,12 +45,13 @@ export class AppComponent implements OnInit, OnDestroy {
     private filters: CarFiltersService,
     private camGal: CamGalService,
     private iab: InAppBrowser,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public debug:DebugerService
   ) {
     this.translate.setDefaultLang('ar');
 
     window.addEventListener('statusTap', function () {
-      console.log('statusbar tapped');
+      this.debug.log('Statusbar','Tapped!','yellow',this.debugging);
     });
     
   }
@@ -56,43 +60,33 @@ export class AppComponent implements OnInit, OnDestroy {
   
 
   ngOnDestroy(): void {
-    console.log('ngOnDestroy');
+    this.debug.log('Statusbar','App.component.ts','green',this.debugging);
   }
 
   ngOnInit(): void {
+    this.debug.log('Hello world: ', 'ddd', 'pink',this.debugging)
     this.initializeApp();
     this.userData.isSignedIn().then((status:any)=>{
-        console.log('Signed In: ', status);
-    })
+        this.debug.log('Signed In? ',status,'red',this.debugging);
+    });
+    this.createFilters();
   }
 
   initializeApp() {
     if (Capacitor.getPlatform() === (this.platform_name = 'ios')) {
-      console.log('Platform:', 'IOS');
+      this.debug.log('Platform','IOS','green',this.debugging);
     } else if (Capacitor.getPlatform() === (this.platform_name = 'android')) {
-      console.log('Platform:', 'Android');
+      this.debug.log('Platform','IOS','green',this.debugging);
     } else if (Capacitor.getPlatform() == (this.platform_name = 'web')) {
-      console.log('Platform:', 'Web');
+      this.debug.log('Platform','IOS','green',this.debugging);
     }
-
-    //this.router.navigate(['register']);
-
-    /*this.auth.getAuthToken()
-    .then((token:string)=>{
-      console.log("TOKEN GOT", token);
-    })
-    .catch((error)=>{
-      console.log("TOKEN ERROR: ", error);
-    });*/
 
     // GETTING USER OBJECT FROM LOCAL STORAGE.
     this.userData.getUserObj().then((obj) => {
-      console.log('User OBJ :', JSON.parse(obj.value));
     });
 
     // GETTING USER ID FROM LOCAL STORAGE.
     this.userData.getUserId().then((id) => {
-      console.log('USER ID: ', id);
     });
 
     this.platform.ready().then((plt) => {
@@ -106,20 +100,6 @@ export class AppComponent implements OnInit, OnDestroy {
           this.deviceInfo.setDefaultLanguage(this.lang);
         }
       });
-
-      /**
-       * fetch('http://localhost:3000', {
-  
-            // HTTP request type
-            method: "POST",
-  
-            // Sending our blob with our request
-            body: blob
-        })
-        .then(response => alert('Blob Uploaded'))
-        .catch(err => alert(err));
-    }
-       */
 
       // CHECK DEFAULT THEME OF THE APP
       this.deviceInfo.getDefaultTheme().then((res: string) => {
@@ -143,11 +123,29 @@ export class AppComponent implements OnInit, OnDestroy {
 
   createFilters() {
     // CREATING ARRAY OF FILTERS
-    /*let apiResp = [
+    let apiResp:any[] = [
       {
         name: {en: 'Body', ar: 'الهيكل'},
-
-        path: "Kbody"
+        _id: "62276e52de5b632b481db497",
+        path: "Kbody",
+        addVehicleOrder: 0,
+        filterOrder: 0,
+        types: [
+            {
+                _id: "a83d7d24-5e48-4bd1-83a9-05d51b6fe839",
+                name: {
+                    en: "Used",
+                    ar: "مستخدمة"
+                }
+            },
+            {
+                _id: "c96de34f-2116-44ed-ada2-509bb993e36a",
+                name: {
+                    en: "New",
+                    ar: "جديدة"
+                }
+            }
+        ]
       },
       {
           "_id": "62276e52de5b632b481db497",
@@ -2231,7 +2229,15 @@ export class AppComponent implements OnInit, OnDestroy {
           "addVehicleOrder": 28,
           "filterOrder": 0,
           "types": []
-      }];*/
+      }];
 
+      this.debug.log('API testing',apiResp,'purple',this.debugging);
+      let filterObjArray:Filter[] = [];
+      apiResp.forEach(ele=>{
+        let obj = new Filter(ele.name,ele.addVehicleOrder,ele.filterOrder,ele._id,ele.path);
+        filterObjArray.push(obj);
+      })
+    this.debug.log('Filter Object: ', filterObjArray, 'orange', true)
+    this.debug.log('View for first element in array', filterObjArray[0].renderView(),'yellow',true)
   }
 }

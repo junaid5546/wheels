@@ -16,10 +16,6 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/filter/filter.module').then( m => m.FilterPageModule)
   },
   {
-    path: 'register',
-    loadChildren: () => import('./Auth/register/register.module').then( m => m.RegisterPageModule)
-  },
-  {
     path: 'personal-information',
     loadChildren: () => import('./Pages/personal-information/personal-information.module').then( m => m.PersonalInformationPageModule)
   },
