@@ -255,14 +255,14 @@ export class ModalControllerService {
 
 // INITIALIZATION OF INDEXES
   initializeIndexes() {
-    this.modelData.current.index = 24;
-    this.modelData.current.value = this.modelData.items[24];
+    this.modelData.current.index = 0;
+    this.modelData.current.value = this.modelData.items[0];
 
-    this.modelData.next.index = 25;
-    this.modelData.next.value = this.modelData.items[25];
+    this.modelData.next.index = 1;
+    this.modelData.next.value = this.modelData.items[1];
 
-    this.modelData.pervious.index = 23;
-    this.modelData.pervious.value = this.modelData.items[23];
+    this.modelData.pervious.index = -1;
+    this.modelData.pervious.value = this.modelData.items[-1];
 
     return {
       status: true,
