@@ -15,7 +15,7 @@ export class Filter extends identity {
   private path!: string
   // LIST OF FILTER ITEMS
   private types:filterType_c[];
-
+  private selected:filterType_c[];
   /**
    * Instansiate the object of filter.
    * @param name:object name of the filter.
@@ -45,6 +45,15 @@ export class Filter extends identity {
     });
   }
 
+  // IS FILTER ALREADY SELECTED.
+  isCherries(filter) {
+    return filter.id === 'cherries';
+  }
+  // ADD SELECTED FEATURE IN LIST
+  public addSelectedFilterInList(filterType:filterType_c) {
+    //this.selected.find(filter => filter. )
+
+  }
   // IT RETURNS VIEW OF FILTER.
   public renderView () {
     if (
@@ -73,7 +82,6 @@ export class Filter extends identity {
     }
     return obj
   }
-
   /**
    * 
    * @returns LIST OF filterType_s

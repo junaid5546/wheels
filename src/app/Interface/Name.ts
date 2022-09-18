@@ -1,3 +1,4 @@
+import { Filter } from "../Classes/Filter";
 import { identity } from "../Classes/Vehicle";
 
 
@@ -19,18 +20,18 @@ export class filterType_c extends identity {
         super();
         this.instanciateTypes(obj);
     }
-
+    // SELECTING THE CURRENT OBJECT
    public checkMarkType() {
         this.checked = true;
         return this;
     }
-
+   
+    // INSTANCIATING THE TYPE OBJECT
     private instanciateTypes(object:any) {
         this._id = object._id;
         this.checked = false;
         this.name = object.name;
         this.error = object.error;
-        console.log("TYPE INSTANCIATION: ", this);
     }
 }
 

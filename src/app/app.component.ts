@@ -129,10 +129,12 @@ export class AppComponent implements OnInit, OnDestroy {
       filterList.forEach(ele=>{
         let obj = new Filter(ele);
         filterObjArray.push(obj);
+        
       })
     this.debug.log('Filter Object: ', filterObjArray, 'orange', false)
-    filterObjArray[0].getTypes()[0].checkMarkType();
-    this.debug.log('Checked list: ', filterObjArray,'purple',true);
+    let result = filterObjArray[0].getTypes()[0].checkMarkType();
+    
+    this.debug.log('Checked Obj: ', result,'purple',true);
     //this.debug.log('CHECK MARKING',x,'yellow',true)
     //let filterType = new filterType_c();
   }
