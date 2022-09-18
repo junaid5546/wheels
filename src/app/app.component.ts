@@ -61,6 +61,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    let result = localStorage.getItem('cover');
+    console.log("Cover picture: ", result);
     this.initializeApp();
     this.userData.isSignedIn().then((status:any)=>{
         if(!status){

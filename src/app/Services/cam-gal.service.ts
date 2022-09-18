@@ -47,7 +47,7 @@ export class CamGalService {
   // CAMERA OPTIONS
   private cameraOptions: ImageOptions = {
     quality: 100,
-    resultType: CameraResultType.DataUrl,
+    resultType: CameraResultType.Uri,
     direction: CameraDirection.Rear,
     presentationStyle: 'popover',
     webUseInput: true,
@@ -102,9 +102,10 @@ export class CamGalService {
     let image = null;
     try {
       image = await Camera.getPhoto(this.cameraOptions).then((image) => {
-        let file = this.fileSystem.base64toFile(image, file_name);
-        console.log('FILE: ', file);
-        return file;
+        //let file = this.fileSystem.base64toFile(image, file_name);
+        
+      console.log('FILE: ', image);
+        return {base64:image};
       });
     } catch (e) {
       console.log(e.message);
