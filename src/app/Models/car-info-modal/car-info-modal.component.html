@@ -162,7 +162,18 @@
                 <div class="price-label">Phone Number</div>
             </div>
             <div class="phoneSelected">
+                
                 <div class="phoneOnly" *ngIf="!currentState.value.selected.business_phone">
+                    <ion-checkbox name="primary" [checked]="primaryPhoneNumber" (ionChange)="phoneNumberToggle($event,'primary')" mode="md"></ion-checkbox>
+                    <div class="input input-more-width" >
+                        <ion-label>+{{currentState.value.selected.primary_phone}}</ion-label>
+                    </div>
+                    <div class="label" *ngIf="!currentState.value.selected.business_phone">
+                        <ion-icon name="information-circle-outline"></ion-icon>
+                    </div>
+                </div>
+                <div class="phoneOnly" *ngIf="!currentState.value.selected.business_phone">
+                    <ion-checkbox (ionChange)="phoneNumberToggle($event,'business')" name="business" [checked]="businessPhoneNumber" mode="md"></ion-checkbox>
                     <div class="input input-more-width" >
                         <ion-label>+{{currentState.value.selected.primary_phone}}</ion-label>
                     </div>
@@ -174,14 +185,10 @@
                   <div style="display: flex;align-items: center;">
                     <ion-item lines="none" class="input input-more-width">
                         <ion-checkbox mode="md" checked="true"></ion-checkbox>
-                        <ion-label>+{{currentState.value.selected.primary_phone}}</ion-label>
+                        <ion-label>+{{currentState.value.selected.business_phone}}</ion-label>
                     </ion-item>
                     <ion-icon name="information-circle-outline"></ion-icon>
                   </div>
-                    <ion-item lines="none" class="input input-more-width" >
-                        <ion-checkbox mode="md"></ion-checkbox>
-                        <ion-label>+966 60784</ion-label>
-                    </ion-item>
                 </div>
             </div>
         </div>

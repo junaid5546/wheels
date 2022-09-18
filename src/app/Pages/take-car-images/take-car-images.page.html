@@ -1,7 +1,4 @@
-<app-header [heading]="heading"
-             [icons]="icons"
-            goBack="true"
-            ></app-header>
+<app-header [heading]="heading" goBack="true"></app-header>
 
 
 <ion-content fullscreen="true" >
@@ -15,7 +12,10 @@
         </div>
   
         <div class="label-container">
-      <ion-label>{{"Select Images"}}</ion-label>
+      <ion-label>{{"Select Images"|translate}} 
+        <span *ngIf="this.carImages.length === 0"> (5-20)</span>
+        <span *ngIf="this.carImages.length > 0" >({{carImages.length}})</span>
+       </ion-label>
   
     </div>
     </div>

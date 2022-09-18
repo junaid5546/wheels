@@ -5,7 +5,6 @@ import { PersonalInformationPage } from './personal-information.page';
 
 const routes: Routes = [
   {
-    canActivate:[AuthenticationGurad_dm],
     path: '',
     component: PersonalInformationPage
   }

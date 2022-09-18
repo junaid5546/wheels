@@ -8,9 +8,10 @@ import { TakeCarImagesPage } from './take-car-images.page';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CarInfoModalComponent } from '../../Models/car-info-modal/car-info-modal.component';
 import { SpecialPlansComponent } from '../../Components/special-plans/special-plans.component';
-
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     IonicModule,

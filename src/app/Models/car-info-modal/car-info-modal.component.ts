@@ -20,7 +20,10 @@ import { CarFiltersService } from 'src/app/Services/car-filters.service';
   styleUrls: ['./car-info-modal.component.scss']
 })
 export class CarInfoModalComponent implements OnInit,AfterViewInit  {
-  
+  // PRIMARY PHONE NUMBER BOOLER.
+  primaryPhoneNumber:boolean = true;;
+  // BUSINESS PHONE NUMBER BOOLER.
+  businessPhoneNumber:boolean = false;
   @ViewChild(IonInput, { static: false }) inputElement: IonInput;
   data:boolean= false;
   inputCharacter:number = 0;
@@ -278,4 +281,35 @@ filterItems(searchTerm) {
       }
     });
 }
+
+    phoneNumberToggle(event,caller){
+     console.log("Phone Number Toggle: ", event, ' Called: ', caller); 
+     switch (caller) {
+
+      case 'business':
+      if(event.detail.checked){
+        // check mark the business
+        this.businessPhoneNumber = true;
+        this.primaryPhoneNumber = false;
+      }  else {
+            this.businessPhoneNumber = false;
+            this.primaryPhoneNumber = true;
+      }
+        break;
+     
+        case 'primary':
+          if(event.detail.checked){
+            // check mark the business
+            this.businessPhoneNumber = false;
+            this.primaryPhoneNumber = true;
+          } else {
+            this.businessPhoneNumber = true;
+            this.primaryPhoneNumber = false;
+          }
+          break;
+      default:
+        break;
+     }
+    }
+
 }
