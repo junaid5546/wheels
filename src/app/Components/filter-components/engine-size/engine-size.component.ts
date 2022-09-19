@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CarFiltersService } from '../../../Services/car-filters.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserDataService } from '../../../Services/user-data.service';
@@ -7,11 +7,12 @@ import { map } from 'rxjs/operators';
   selector: 'app-engine-size',
   templateUrl: './engine-size.component.html',
   styleUrls: ['./engine-size.component.scss'],
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class EngineSizeComponent implements OnInit {
   label:string = null;
   engineSize:any = null;
-  selectAll:boolean = false;
+  selectAll:boolean = false; // -1 DEFAULT | 0 UNCHECKED | 1 CHECKED 
   constructor(private carFilter:CarFiltersService,private activated:ActivatedRoute,public userData:UserDataService) { }
 
   ngOnInit() {
@@ -21,21 +22,16 @@ export class EngineSizeComponent implements OnInit {
   }
 
   check(item,index){
-    this.carFilter.engineSize[index].checked = !this.carFilter.engineSize[index].checked;
-    if( this.carFilter.engineSize[index].checked ){
-      this.carFilter.filterObject[this.label].push(item.name);
-      this.carFilter.getPost();
-      this.updateBadge()
-    }else{
-      let alreadyInBox = this.carFilter.filterObject[this.label].findIndex((name) => name === item.name);
-      this.carFilter.filterObject[this.label].splice(alreadyInBox, 1);
-      this.carFilter.getPost();
-      this.updateBadge()
-    }
+    console.log("Checking", index, "selectAll", !this.selectAll);
   }
 
   selectAllItems(){
-    
+    this.selectAll = !this.selectAll;
+    this.carFilter.engineSize.forEach(element => element.checked = this.selectAll);
+  }
+
+  checkfasdf(){
+    console.log("Calling fake funciton");
   }
 
   updateBadge(){

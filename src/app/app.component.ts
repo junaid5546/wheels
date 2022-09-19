@@ -79,6 +79,8 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('Platform:', 'Web');
     }
 
+    
+
     // GETTING USER OBJECT FROM LOCAL STORAGE.
     this.userData.getUserObj().then((obj) => {
       console.log('User OBJ :', JSON.parse(obj.value));
