@@ -5,7 +5,7 @@ import { Filter } from 'src/app/Classes/Filter';
 
 export const filterList = [
   {
-    _id: '1xxasdfn123',
+    _id: 'sssssssssss',
     name: { en: 'Body', ar: 'الشكل' },
     path: 'Kbody',
     types: bodies,

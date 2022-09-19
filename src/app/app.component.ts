@@ -134,10 +134,9 @@ export class AppComponent implements OnInit, OnDestroy {
         filterObjArray.push(obj);
         
       })
-    this.debug.log('Filter Object: ', filterObjArray, 'orange', this.debugging)
-    //let result = filterObjArray[0].getTypes()[0].checkMarkType();
-    
-    this.debug.log('Filter List: ', filterObjArray,'purple',this.debugging);
+    this.debug.log('Filter Object: ', filterObjArray, 'orange', true)
+    let result = filterObjArray[0].getTypes()[0].checkMarkType();
+    this.debug.log('Filter List: ', result,'purple',true);
   
   }
 }
