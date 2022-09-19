@@ -1,14 +1,28 @@
 <ion-content>
-  <ion-list lines="none">
-    <ion-item lines="full" >
-      <ion-checkbox [checked]="selectAll" mode="md" slot="start" (ionChange)="selectAllItems()"></ion-checkbox>
-            <ion-label class="no-spacing">{{"Select All" | translate}}</ion-label>
-    </ion-item>
-    
-    <ion-item lines="full" *ngFor="let item of engineSize; let i=index">
-      <ion-checkbox [disabled]="selectAll" [checked]="item.checked" mode="md" slot="start" (ionChange)="selectAll === true ? checkfasdf() : check(item,i)"></ion-checkbox>
-      <ion-label *ngIf="userData.language === 'en' ">{{item.name.en | digitTransform:this.userData.language|async}}</ion-label>
-      <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar | digitTransform:this.userData.language|async}}</ion-label>
-    </ion-item>
+<section class="example-section">
+<ion-item>
+    <mat-checkbox class="example-margin"
+                  [checked]="allComplete"
+                  [color]="task.color"
+                  [indeterminate]="someComplete()"
+                  (change)="setAll($event.checked)">
+      {{task.name}}
+    </mat-checkbox>
+  </ion-item>
+
+
+    <ion-list>
+      <ion-item *ngFor="let subtask of task.subtasks">
+        <div class="checkbox">
+        <mat-checkbox [(ngModel)]="subtask.completed"
+                      [color]="color"
+                      (ngModelChange)="updateAllComplete()">
+                      <ion-label *ngIf="userData.language === 'en' ">{{subtask.name.en}}</ion-label>
+                      <ion-label *ngIf="userData.language === 'ar' ">{{subtask.name.ar}}</ion-label>         
+        </mat-checkbox>
+      </div>
+      </ion-item>
     </ion-list>
+
+</section>
 </ion-content>

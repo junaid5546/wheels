@@ -48,7 +48,7 @@ export class VehiclesDepartmentPage implements OnInit {
   }
 
   fetchPostFeed() {
-    /* this.post.getPostFeed('')
+     this.post.getPostFeed('')
     .then((feed:any)=>{
       console.log("Post Feed:", feed);
       this.modalService.modelData.items[0].value = feed.result.makes;
@@ -167,7 +167,7 @@ export class VehiclesDepartmentPage implements OnInit {
     })
     .catch(error=>{
       console.log("Could not get post feed", error);
-    })*/
+    })
   }
 
 }
