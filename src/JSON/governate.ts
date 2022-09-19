@@ -9,7 +9,7 @@ export const governates = [
       {
         _id: '5f5eaea2-3f57-4e00-9c5a-4afe439ae390',
         name: {
-          en: 'Wadi Almawal',
+          en: 'Wadi Almawal...',
           ar: 'وادي المعاول',
         },
       },
