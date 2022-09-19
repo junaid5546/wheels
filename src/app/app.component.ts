@@ -17,9 +17,9 @@ import { CarFiltersService } from './Services/car-filters.service';
 import { CamGalService } from './Services/cam-gal.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { DebugerService } from './Services/debuger.service'
+import { OfflineApiService } from './Services/offline-api.service';
 import { Filter } from './Classes/Filter';
 import { filterList } from '../JSON/filter-list';
-import { filterType_c } from './Interface/Name';
 export type platform_name = 'ios' | 'android' | 'web';
 
 @Component({
@@ -39,6 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
   theme: string = 'light'; // light, dark
 
   constructor(
+    private offline:OfflineApiService,
     private platform: Platform,
     private deviceInfo: DeviceInfoService,
     private router: Router,
@@ -66,7 +67,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.debug.log('Hello world: ', 'ddd', 'pink',this.debugging)
+    this.offline.currentNetworkStatus().then((connectionStatus)=>{
+      this.debug.log('Connection Status: ', connectionStatus,'green',true);
+    });
     this.initializeApp();
     this.userData.isSignedIn().then((status:any)=>{
         this.debug.log('Signed In? ',status,'red',this.debugging);
@@ -131,11 +134,10 @@ export class AppComponent implements OnInit, OnDestroy {
         filterObjArray.push(obj);
         
       })
-    this.debug.log('Filter Object: ', filterObjArray, 'orange', false)
-    let result = filterObjArray[0].getTypes()[0].checkMarkType();
+    this.debug.log('Filter Object: ', filterObjArray, 'orange', this.debugging)
+    //let result = filterObjArray[0].getTypes()[0].checkMarkType();
     
-    this.debug.log('Checked Obj: ', result,'purple',true);
-    //this.debug.log('CHECK MARKING',x,'yellow',true)
-    //let filterType = new filterType_c();
+    this.debug.log('Filter List: ', filterObjArray,'purple',this.debugging);
+  
   }
 }

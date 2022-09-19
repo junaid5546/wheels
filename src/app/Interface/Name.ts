@@ -1,7 +1,5 @@
 import { Filter } from "../Classes/Filter";
 import { identity } from "../Classes/Vehicle";
-
-
 /**
  * (Type docs)
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
@@ -32,6 +30,15 @@ export class filterType_c extends identity {
         this.checked = false;
         this.name = object.name;
         this.error = object.error;
+    }
+}
+
+export class FilterType_Exterior_Interior_color extends filterType_c {
+    protected cssHex?:string;
+
+    constructor(obj:any){
+        super(obj);
+        this.cssHex = obj.cssHex;
     }
 }
 

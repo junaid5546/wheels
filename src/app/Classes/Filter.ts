@@ -3,19 +3,19 @@
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
 import { identity } from '../Classes/Vehicle';
-import { _name,filterType_c } from '../Interface/Name';
+import { _name, filterType_c,FilterType_Exterior_Interior_color } from '../Interface/Name';
 export class Filter extends identity {
   // BADGE/COUNTER OF FILTER
-  private badge?: number
+  private badge?: number;
   // ADD-POST ORDER
-  private addVehicleOrder!: number
+  private addVehicleOrder!: number;
   // FILTER ORDER
-  private filterOrder!: number
+  private filterOrder!: number;
   // ROUTER PATH FOR COMPONENT
-  private path!: string
+  private path!: string;
   // LIST OF FILTER ITEMS
-  private types:filterType_c[];
-  private selected:filterType_c[];
+  private types: filterType_c[];
+  private selected: filterType_c[];
   /**
    * Instansiate the object of filter.
    * @param name:object name of the filter.
@@ -26,12 +26,12 @@ export class Filter extends identity {
    * @param types:[FilterItem] LIST OF ITEMS of filter.
    */
 
-  constructor (obj:any) {
+  constructor(obj: any) {
     super();
     this.initiateObject(obj);
   }
-// INITIATING THE OBJECT.
-  private initiateObject(object:any){
+  // INITIATING THE OBJECT.
+  private initiateObject(object: any) {
     this._id = object._id;
     this.path = object.path;
     this.name = object.name;
@@ -39,10 +39,18 @@ export class Filter extends identity {
     this.addVehicleOrder = object.addVehicleOrder;
     this.filterOrder = object.filterOrder;
     this.types = [];
-    object.types.forEach(type=>{ 
-      let obj = new filterType_c(type);
-      this.types.push(obj);
+    if(object.path === 'exterior_color' || object.path === 'interior_color')
+    {
+      object.types.forEach((type)=>{
+        let obj = new FilterType_Exterior_Interior_color(type);
+        this.types.push(obj);
+      });
+    } else {
+    object.types.forEach((type) => {
+        let obj = new filterType_c(type);
+        this.types.push(obj);
     });
+  }
   }
 
   // IS FILTER ALREADY SELECTED.
@@ -50,12 +58,11 @@ export class Filter extends identity {
     return filter.id === 'cherries';
   }
   // ADD SELECTED FEATURE IN LIST
-  public addSelectedFilterInList(filterType:filterType_c) {
+  public addSelectedFilterInList(filterType: filterType_c) {
     //this.selected.find(filter => filter. )
-
   }
   // IT RETURNS VIEW OF FILTER.
-  public renderView () {
+  public renderView() {
     if (
       this.path != 'Kmake' &&
       this.path != 'interior-color' &&
@@ -63,36 +70,36 @@ export class Filter extends identity {
       this.path != 'Kbody' &&
       this.path != 'car-location'
     ) {
-      return 'list'
+      return 'list';
     } else if (this.path === 'Kmake' || this.path === 'car-location') {
-      return 'accordion'
+      return 'accordion';
     } else {
-      return 'grid'
+      return 'grid';
     }
   }
   // RETURNS THE COPY OF FILTER.
-  public getFilterBluePrint () {
+  public getFilterBluePrint() {
     let obj = {
       name: this.name,
       id: this._id,
       badge: this.badge,
       addOrder: this.addVehicleOrder,
       filterOrder: this.filterOrder,
-      items: this.types
-    }
-    return obj
+      items: this.types,
+    };
+    return obj;
   }
   /**
-   * 
+   *
    * @returns LIST OF filterType_s
    */
-  public getTypes(){
+  public getTypes() {
     return this.types;
   }
 
   // UPDATE COUNTER FOR THE FILTER THAT HOW MANY ITEMS ARE SELECTED FOR PARTICULAR FILTER AND RETURNS THE COUNT.
-  public updateBadge (count: number) {
-    this.badge = count
-    return this.badge
+  public updateBadge(count: number) {
+    this.badge = count;
+    return this.badge;
   }
 }

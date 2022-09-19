@@ -7,7 +7,6 @@ export class DebugerService {
 
   constructor() { }
   log(name,whatToLog,color,debugging:boolean){
-    console.log(typeof(whatToLog));
     if(debugging){
     console.log(
       `%c${name}%c`,
