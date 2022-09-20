@@ -6,7 +6,7 @@
                   [color]="task.color"
                   [indeterminate]="someComplete()"
                   (change)="setAll($event.checked)">
-      {{task.name}}
+      <ion-label>{{task.name}}</ion-label> 
     </mat-checkbox>
   </ion-item>
 
@@ -15,7 +15,6 @@
       <ion-item *ngFor="let subtask of task.subtasks">
         <div class="checkbox">
         <mat-checkbox [(ngModel)]="subtask.completed"
-                      [color]="color"
                       (ngModelChange)="updateAllComplete()">
                       <ion-label *ngIf="userData.language === 'en' ">{{subtask.name.en}}</ion-label>
                       <ion-label *ngIf="userData.language === 'ar' ">{{subtask.name.ar}}</ion-label>         

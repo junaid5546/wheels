@@ -6,8 +6,10 @@ import { PersonalInformationPageRoutingModule } from './personal-information-rou
 import { PersonalInformationPage } from './personal-information.page';
 import { AppSharedModule } from 'src/app/Components/Shared/shared.module';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     IonicModule,

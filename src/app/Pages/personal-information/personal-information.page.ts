@@ -46,7 +46,7 @@ export class PersonalInformationPage implements OnInit {
       type:this.inputType = 'ion-text'
     },
     {
-      labelName:'Date of Birth',
+      labelName:'Date of birth',
       isOtpDisabled:true,
       iconName: this.dobIcon = 'name',
       value:'00/00/0000',
@@ -67,7 +67,7 @@ export class PersonalInformationPage implements OnInit {
       type:this.inputType = 'ion-text'
     },
     {
-      labelName:'Business Name English',
+      labelName:'Business Name',
       isOtpDisabled:true,
       iconName: this.dobIcon = 'business-outline',
       value:'Ahmed Alazri Dealership',
@@ -75,7 +75,7 @@ export class PersonalInformationPage implements OnInit {
     },
 
     {
-      labelName:'Business Name Arabic',
+      labelName:'Business Name',
       isOtpDisabled:true,
       iconName: this.dobIcon = 'business-outline',
       value:'اَحمد اَلعزى',
