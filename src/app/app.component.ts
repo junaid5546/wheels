@@ -4,8 +4,6 @@
  *
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
-import { Filter} from './Interface/car-filter';
-import { Make, Model, Trim, Bodies, Engine, DoorCount } from './Classes/Vehicle'
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
