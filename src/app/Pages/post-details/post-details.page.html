@@ -1,7 +1,5 @@
 
-  <app-header [heading]="heading"
-  [icons]="icons"
-  goBack="true"></app-header>
+  <app-header [heading]="heading" goBack="true"></app-header>
 
 <ion-content>  
     <app-item-detail-view></app-item-detail-view>
@@ -102,7 +100,7 @@
     -->
     
         <ion-list class="bottom-buttons-list" >
-            <div class="whatsapp bottom-buttons-container" (click)="this.deviceInfo.shareWhatsapp(userNumber)">
+            <div class="whatsapp bottom-buttons-container" (click)="this.deviceInfo.shareWhatsapp(postOwnerDetails,this.postId,this.postTitle,this.postPrice)">
                 <div class="item-icon">
                     <ion-icon name="logo-whatsapp"></ion-icon>
                 </div>

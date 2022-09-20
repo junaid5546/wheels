@@ -18,6 +18,10 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
   userNumber:string = null;
   features:any[] = [];
   sellerNotes:string = "N/A";  
+  postOwnerDetails = null;
+  postPrice:number = null;
+  postId:number = null;
+  postTitle:string = null;
   items:any[] = [];
   
   @ViewChild(IonContent,{read:ElementRef}) content: ElementRef;
@@ -64,9 +68,16 @@ export class PostDetailsPage implements OnInit,AfterViewInit {
     const item = JSON.parse(this.route.snapshot.params.item);
     console.log("POST DETAILS",item); 
     this.items = item.items;
-    
-     this.heading.main_heading_name =  `${item.title.make}  ${item.title.model}  ${item.title.trim}  ${item.title.year}`  || "No Name";
+    this.postPrice = item.price;
+    this.postId = item.postId;
    
+    this.heading.main_heading_name =  `${item.title.make}  ${item.title.model}  ${item.title.trim}  ${item.title.year}`  || "No Name";
+    this.postTitle = this.heading.main_heading_name;
+    this.userNumber = item.primaryPhone.trim();
+    console.log("User phone Number: ", this.userNumber);
+    this.postOwnerDetails = item.user;
+    // in case of make model trim;
+    let struc = ['select-all',{name:'Toyota',models:[{name:"Corolla",trims:["Gli","Xli",]}]}]
   }
 
   ngAfterViewInit(){

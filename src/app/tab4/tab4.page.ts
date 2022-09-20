@@ -21,7 +21,7 @@ export class Tab4Page implements OnInit {
     {name:'Wallet',available:false,icon:'../../assets/icon/accounts/wallet.svg'},
     {name:'Orders',available:false,icon:'../../assets/icon/accounts/orders.svg'},
     {name:'Bookings',available:false,icon:'../../assets/icon/accounts/bookings.svg'},
-    {name:'Following ',available:false,icon:'../../assets/icon/accounts/following.svg'},
+    {name:'Following',available:false,icon:'../../assets/icon/accounts/following.svg'},
     {name:'Followers',available:false,icon:'../../assets/icon/accounts/followers.svg'},
     {name:'Job Profile',available:false,icon:'../../assets/icon/accounts/job-profile.svg'},
     {name:'Settings',available:false,icon:'../../assets/icon/accounts/settings.svg'},

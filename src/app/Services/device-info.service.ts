@@ -13,6 +13,8 @@ import { CallNumber } from '@awesome-cordova-plugins/call-number/ngx';
 import { BehaviorSubject } from 'rxjs';
 import { UserDataService } from './user-data.service';
 import { Router } from '@angular/router';
+import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +31,9 @@ private platform = null;
  
  private borderHeightPercentage = 12; // PERCENTAGE
   render:Renderer2;
-  constructor(private renderFactory:RendererFactory2, @Inject(DOCUMENT) private document:Document, private translate: TranslateService, private socialSharing: SocialSharing,private callNumber: CallNumber, private userData:UserDataService, private route:Router) {
+  constructor(private renderFactory:RendererFactory2, @Inject(DOCUMENT) private document:Document, private translate: TranslateService, private socialSharing: SocialSharing,private callNumber: CallNumber,
+  private iab: InAppBrowser,
+  private userData:UserDataService, private route:Router) {
     this.render = this.renderFactory.createRenderer(null,null);
    }
 
@@ -148,12 +152,19 @@ private platform = null;
   }
 
   // SHARING WHATSAPP POST
-  shareWhatsapp(userNumber:string){
+  shareWhatsapp(userObj,postId:number,postName:string,postPrice:number){
+    
+    console.log("User Object: ", userObj);
     this.userData.isSignedIn().then((status:boolean)=>{
-      this.socialSharing.shareViaWhatsApp('Hello')
-      .then((res=>{
-        console.log("Hello");
-      }))
+      //let userPhone = userNumber;
+      
+      let whatsappMessage = `https://api.whatsapp.com/send?l=ar&phone=96897725965&text=
+      السلام عليكم ${userObj.firstName}. لدي استفسار بخصوص إعلانك ${postName} المعروض بسعر ${postPrice} ريال عُماني.
+      %0AHello ${userObj.firstName}. I have a question regarding your ad ${postName} listed for ${postPrice} OMR
+      %0Ahttps://digitalmall.app/v/vfs/188905
+      `;
+      const browser = this.iab.create(whatsappMessage);
+      browser.show();
     });
   }
 
@@ -161,9 +172,9 @@ private platform = null;
   // CALL USER THROUGH DIALER.
   callTheNumber(_number:string){
     this.userData.isSignedIn().then((status:boolean)=>{
-      this.callNumber.callNumber(_number,true)
-      .then(res => console.log('Launched dialer!', res))
-      .catch(err => console.log('Error launching dialer', err));
+      let tel = `tel:${_number}`;
+      const browser = this.iab.create(tel);
+      browser.show();
     });
   }
 
