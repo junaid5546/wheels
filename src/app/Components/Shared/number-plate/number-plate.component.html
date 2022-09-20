@@ -1,0 +1,50 @@
+<ion-card *ngFor="let item of item">
+  <ion-grid>
+    <!--1-number plate row-->
+        <ion-row [ngStyle]="{'background':item.color}" class="plate-number-row">
+          <ion-col size="4.5">
+            <div class="plate-main-number">
+              <ion-label>{{item.number}}</ion-label>
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div class="plate-middle-alphabet">
+              <div class="en">
+                
+                <div class="item">
+                  <ion-label>{{item.code_ar}}</ion-label>
+                </div>
+
+              </div>
+              <div class="ar">
+
+                <div class="item">
+                  <ion-label>{{item.code_en}}</ion-label>
+                </div>
+              </div>
+            </div>
+          </ion-col>
+          <ion-col size="4.5">
+            <div class="logo-dm">DM</div>
+            <div class="logo-gold">Gold</div>
+            <div class="plate-country-name plate-main-number">
+              <ion-label>عٌمان</ion-label>
+            </div>
+          </ion-col>
+        </ion-row>
+    <!--1-number plate row-->
+
+      <!--2-not done yet-->
+        <ion-row></ion-row>
+      <!--2-not done yet-->
+
+      <!--3-not done yet-->
+        <ion-row></ion-row>
+      <!--3-not done yet-->
+
+      <!--4-not done yet-->
+        <ion-row></ion-row>
+      <!--4-not done yet-->
+
+  </ion-grid>
+</ion-card>

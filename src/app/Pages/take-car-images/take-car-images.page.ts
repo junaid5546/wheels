@@ -79,7 +79,6 @@ drop(event: CdkDragDrop<string[]>) {
      }
 
      ngOnInit(): void {
-      this.presentModal();
        let IsModelInitialized =  this.modalService.startIndexing();
        if(IsModelInitialized.status){
          this.modalService.updatecurrentObject();
@@ -150,6 +149,7 @@ drop(event: CdkDragDrop<string[]>) {
 
   // PRESENTING MODEL AFTER CREATING POST.
   presentModal(){
+    console.log("Starting Point: ", this.modalStartingPoint);
     this.modalService.presentModal(CarInfoModalComponent,this.modalStartingPoint);
   }
 
@@ -196,10 +196,13 @@ drop(event: CdkDragDrop<string[]>) {
 
   // CHECKS THE IMAGE LENGTH AND ENABLE OR DISABLE THE NEXT BUTTON
   checkImagesLength(){
-    if(this.carImages.length > 0){
+    console.log("checking images length");
+    if(this.carImages.length >=5){
+      console.log(this.carImages.length);
       this.toggleNext(true);
       this.changeDetector.markForCheck();
-    } else if(this.carImages.length == 0) {
+    } else if(this.carImages.length < 5) {
+      console.log(this.carImages.length);
       this.toggleNext(false);
     }
   }
@@ -219,14 +222,12 @@ drop(event: CdkDragDrop<string[]>) {
     // IF HAVE IMAGES IN ARRAY.
     if (this.carImages.length > 0) {
       this.carImages.splice(index, 1);
+      this.checkImagesLength();
       if( this.savedPost != null )  {
         this.savedPost.postImages = this.carImages;
         localStorage.setItem('_post', JSON.stringify(this.savedPost));
       }
      // 2nd parameter means remove one item only.
-      
-      
-
     } else {
       // IF NO IMAGES IN ARRAY OR WE DELETED ALL OF THEM THEN HIDE NEXT BUTTON AS WELL.
       this.toggleNext(false);
@@ -247,9 +248,12 @@ drop(event: CdkDragDrop<string[]>) {
    if(this.canTakeImages()){
   let images = await this.camGal.getLibraryImages();
   this.carImages =  this.carImages.concat(images);
+  if(this.carImages.length > 20){
+    this.carImages = this.carImages.splice(0,20);
+  }
     // DETECT CHANGE AND SHOW THE NEXT BUTTON
+    this.checkImagesLength();
    this.changeDetector.markForCheck();
-   this.toggleNext(true);
    if(this.platform.is('hybrid')){
     let postCreate:any = await this.createPost();
     this.camGal.uploadImages(this.carImages,'post-images',postCreate.result);

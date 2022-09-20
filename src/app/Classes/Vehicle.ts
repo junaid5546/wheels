@@ -1,8 +1,8 @@
+// Copyright 2022 Google LLC
 /**
  * (Type docs)
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
-import { _name } from '../Interface/Name';
 
 export class identity {
   protected _id!: string
@@ -18,20 +18,39 @@ export class Make extends identity {
   } 
 }
 
- class Model extends Make  {
-    private trims: [Trim];
+export interface Engine {
+    _id:string;
+    name:_name;
 }
 
-class Trim extends Model {
-  private bodies: [Bodies]
-  private engineSize: [identity]
+export interface Bodies {
+    _id:string;
+    name:_name;
+    maxPrice: number;
+    minPrice: number;
+    image: string;
+    filtersId:[string];
+    doorCount:[DoorCount];
+    error:string;
 }
 
-class Bodies extends Trim {
-  maxPrice: number
-  minPrice: number
-  image: string
-  filtersId: [string]
-  doorCount: [identity]
-  error: string
+export interface Trim {
+    _id:string;
+    name:_name;
+    bodies: [Bodies]
+    engineSize: [Engine]
+}
+export class FilterItem {
+    _id!:string;
+    name!:_name;
+}
+
+export class Make extends FilterItem {
+    clicked?:boolean = false;
+    completed?:boolean = false;
+    models:[Model];
+
+    constructor(){
+        super();
+    }
 }

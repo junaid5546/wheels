@@ -6,4 +6,6 @@ export * from './skeleton-loader/post-item-skeleton/post-item-skeleton.component
 export * from './special-plan-item/special-plan-item.component';
 export * from '../Elements/text-input/text-input.component';
 export * from '../main-item/main-item.component';
-export * from '../add-slider/add-slider.component'
+export * from '../add-slider/add-slider.component';
+export * from './number-plate/number-plate.component';
+export * from './country-code-picker/country-code-picker.component';

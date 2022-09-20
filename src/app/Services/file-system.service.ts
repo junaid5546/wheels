@@ -7,14 +7,13 @@
 
 import { Injectable } from '@angular/core';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
-import { FirebaseService } from '../firebase.service';
 import * as watermark from 'watermarkjs';
 @Injectable({
   providedIn: 'root'
 })
 export class FileSystemService {
  
-  constructor(private firebase:FirebaseService) { }
+  constructor() { }
 
 
 /**

@@ -129,4 +129,12 @@ export class UserDataService {
       return false;
     }
   }
+
+  setPicture(whichPicture:string,webPath:string){
+    localStorage.setItem(whichPicture, JSON.stringify(webPath));
+  }
+
+  getPicture(whichPicture){
+    return JSON.parse(localStorage.getItem(whichPicture));
+  }
 }

@@ -7,8 +7,7 @@ import { UserDataService } from 'src/app/Services/user-data.service';
   styleUrls: ['./inventory-item.component.scss'],
 })
 export class InventoryItemComponent implements OnInit {
-  images:any[] = [{name:'https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2FyfGVufDB8fDB8fA%3D%3D&w=1000&q=80'},
-  {name:'https://images.unsplash.com/photo-1525609004556-c46c7d6cf023?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXw0ODkwNDc5fHxlbnwwfHx8fA%3D%3D&w=1000&q=80'}]
+
  
   @Input() items:any[] = [];
   @Input() title:any;

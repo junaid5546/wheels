@@ -13,19 +13,19 @@ export class Tab4Page implements OnInit {
  heading = {has_main_heading:true, main_heading_name:'Account', has_sub_heading:false, sub_heading_name:''};
 
   accountList = [
-    {name:'Personal Information',available:true,route:'personal-information',icon:'../../assets/account/personal-info.svg'},
-    {name:'Public Profile',available:true},
-    {name:'Share Profile',available:true},
-    {name:'Membership',available:false},
-    {name:'Statistics',available:false},
-    {name:'Wallet',available:false},
-    {name:'Orders',available:false},
-    {name:'Bookings',available:false},
-    {name:'Following ',available:false},
-    {name:'Followers',available:false},
-    {name:'Job Profile',available:false},
-    {name:'Settings',available:false},
-    {name:'Contact Us',available:true,route:'contact-us'}
+    {name:'Personal Information',available:true,route:'tabs/personal-information',icon:'../../assets/icon/accounts/personal-info.svg'},
+    {name:'Public Profile',route:'tabs/personal-information',available:true,icon:'../../assets/icon/accounts/profile.svg'},
+    {name:'Share Profile',available:true,icon:'../../assets/icon/accounts/share-profile.svg'},
+    {name:'Membership',available:false,icon:'../../assets/icon/accounts/subscription.svg'},
+    {name:'Statistics',available:false,icon:'../../assets/icon/accounts/statistic.svg'},
+    {name:'Wallet',available:false,icon:'../../assets/icon/accounts/wallet.svg'},
+    {name:'Orders',available:false,icon:'../../assets/icon/accounts/orders.svg'},
+    {name:'Bookings',available:false,icon:'../../assets/icon/accounts/bookings.svg'},
+    {name:'Following ',available:false,icon:'../../assets/icon/accounts/following.svg'},
+    {name:'Followers',available:false,icon:'../../assets/icon/accounts/followers.svg'},
+    {name:'Job Profile',available:false,icon:'../../assets/icon/accounts/job-profile.svg'},
+    {name:'Settings',available:false,icon:'../../assets/icon/accounts/settings.svg'},
+    {name:'Contact Us',available:true,route:'contact-us',icon:'../../assets/icon/accounts/contact-us.svg'}
   ]
   constructor() { }
 

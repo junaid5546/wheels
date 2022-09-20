@@ -10,8 +10,8 @@
           }"
           class="mySwiper"
         >
-          <ng-template swiperSlide *ngFor="let item of images" >
-            <ion-img  [src]="item.name"></ion-img>
+          <ng-template swiperSlide *ngFor="let item of item.mediaList" >
+            <ion-img  [src]="item.url"></ion-img>
           </ng-template>
         
         </swiper>

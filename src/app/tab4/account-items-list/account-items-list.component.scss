@@ -12,10 +12,14 @@
       .container{
           display: flex;
           align-items: center;
-          justify-content: space-between;
           height: 60px;
           background: conic-gradient(from 99.54deg at 0% 0%, #E8E7E7 0deg, #F4F4F4 360deg);
-          
+          ion-icon{
+            font-size: 2em;
+          }
+          .logo{
+            margin-left: 14px;
+          }
   .name-of-item{
       padding-left: 20px;
       ion-label{

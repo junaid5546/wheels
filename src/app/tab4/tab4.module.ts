@@ -9,9 +9,11 @@ import { Tab4PageRoutingModule } from './tab4-routing.module';
 import { Tab4Page } from './tab4.page';
 import { AccountItemsListComponent } from './account-items-list/account-items-list.component';
 import { AppSharedModule } from '../Components/Shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
+    TranslateModule,
     CommonModule,
     FormsModule,
     IonicModule,

@@ -15,7 +15,7 @@ export class DigitTransformation implements PipeTransform {
         console.log("number",value);
         if(language === 'ar'){
             let convert = value.toString();
-        return  convert.replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d])
+        return  value
         } else {
             return value
         }

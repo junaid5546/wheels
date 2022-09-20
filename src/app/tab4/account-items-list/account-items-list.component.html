@@ -3,13 +3,13 @@
   <ion-card (click)="navigate(item.route)"  *ngFor="let item of accountList;let i=index" class="h-v-centered" button >
       <div class="container" [ngClass]="{selected: item.selected}" >
       <div class="logo">
-      <!--  <ion-icon  [src]="item.icon"></ion-icon> -->
+       <ion-icon  [src]="item.icon"></ion-icon>
       </div>
       <div class="name-of-item">
-          <ion-label>{{item.name}}</ion-label>
+          <ion-label>{{item.name|translate}}</ion-label>
       </div>
-      <div class="icon-of-item" >
-        <ion-icon *ngIf="item.available==false" name="time-outline"></ion-icon>
+      <div class="icon-of-item">
+        <!---<ion-icon *ngIf="item.available==false" name="time-outline"></ion-icon> -->
       </div>
   </div>
   </ion-card>

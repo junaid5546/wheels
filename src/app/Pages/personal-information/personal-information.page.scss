@@ -91,46 +91,14 @@
 180deg
 , #656565, #0000001a);
     //background: url(../../../../assets/natalia-y-DIewyzpUbRc-unsplash.jpg);
-    .companyIcon{
-      padding: 5px;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 80px;
-      background: #C7C8CA;
-      width: 80px;
-      position: absolute;
-      left: 5%;
-      top: 60%;
-      border-radius: 15px;
-      /* border: crimson; */
-      border: 3px solid white;
-      .camera{
-        height: 25px;
-        background: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 25px;
-        border-radius: 100px;
-        position: absolute;
-        bottom: 0%;
-        right: -2px;
-        box-shadow: 0px 0px 3px 1px #b2b2b2;
-      }
-      .default-icon{
-          font-size: 3em;
-          color: #0091E2;
-      }
-    }
+    
     .cameraIcon{
       height: 30px;
       width: 30px;
       background: white;
       position: absolute;
-      right: 5%;
-      bottom: 10%;
+      right: 2%;
+      bottom: 5%;
       border-radius: 100px;
       display: flex;
       justify-content: center;
@@ -303,5 +271,42 @@
     align-items: center;
     border-radius: 100px;
     background: white;
-    opacity: .9;
+    opacity: .6;
+  }
+  .real-image{
+    object-fit: cover;
+  }
+
+  .companyIcon{
+    padding: 5px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+    border-radius: 15px;
+    /* border: crimson; */
+    border: 3px solid white;
+    .camera{
+      height: 25px;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+      border-radius: 100px;
+      position: absolute;
+      bottom: 0%;
+      right: -2px;
+      box-shadow: 0px 0px 3px 1px #b2b2b2;
+    }
+    .default-icon{
+        font-size: 3em;
+        color: #0091E2;
+    }
+  }
+  .real-cover{
+    object-fit: contain;
   }
