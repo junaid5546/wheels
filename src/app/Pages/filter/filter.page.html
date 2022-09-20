@@ -9,7 +9,7 @@ forwardTo="/tabs/tab1"
 <div class="left-right-container">
     <div class="left">
       <ion-list class="left">
-        <div  [ngClass]="{'selected-filter-left-label': (item.selected==true && userData.language==='en'), 'ar': (item.selected==true && userData.language==='ar'), 'rtl':userData.language==='ar'}" (click)="selectedItem(i,item.path,item.types)" class="item-container" *ngFor="let item of filters; let i=index">
+        <div  [ngClass]="{'selected-filter-left-label': (item.selected==true && userData.language==='en'), 'ar': (item.selected==true && userData.language==='ar'), 'rtl':userData.language==='ar'}" (click)="selectedItem(i,item)" class="item-container" *ngFor="let item of filters; let i=index">
         <div class="inner-item-container">
           <ion-label *ngIf="userData.language === 'en' ">{{item.name.en}}</ion-label>
           <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar}}</ion-label>

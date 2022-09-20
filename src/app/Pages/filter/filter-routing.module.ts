@@ -14,7 +14,7 @@ const routes: Routes = [
       },
       {
         component:Component.FilterItemAccordianComponent,
-        path:'accordian'
+        path:'accordion'
       },
       {
         component:Component.FilterItemGridComponent,

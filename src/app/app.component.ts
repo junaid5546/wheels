@@ -48,7 +48,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private camGal: CamGalService,
     private iab: InAppBrowser,
     public translate: TranslateService,
-    public debug:DebugerService
+    public debug:DebugerService,
+    private filterService:CarFiltersService
   ) {
     this.translate.setDefaultLang('ar');
 
@@ -129,13 +130,13 @@ export class AppComponent implements OnInit, OnDestroy {
     // CREATING ARRAY OF FILTERS
       let filterObjArray:Filter[] = [];
       filterList.forEach(ele=>{
+        if(ele.path != undefined){
         let obj = new Filter(ele);
         filterObjArray.push(obj);
-        
+        }
       })
     this.debug.log('Filter Object: ', filterObjArray, 'orange', true)
-    let result = filterObjArray[0].getTypes()[0].checkMarkType();
-    this.debug.log('Filter List: ', result,'purple',true);
-  
+    this.debug.log('Filter List: ', filterObjArray,'purple',true);
+    this.filterService.setFiltersList(filterObjArray);
   }
 }

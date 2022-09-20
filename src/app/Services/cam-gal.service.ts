@@ -30,7 +30,6 @@ import {
   GalleryPhoto,
   Photo
 } from '@capacitor/camera';
-import { Image } from '../Interface/image';
 import { FileSystemService } from './file-system.service';
 import { PermissionsService } from './permissions.service';
 import { MediaStorageService } from '../Services/media-storage.service';
@@ -75,13 +74,7 @@ export class CamGalService {
    */
   captureImage = async () => {
     const takeImage = await Camera.getPhoto(this.cameraOptions);
-    console.log('image:', takeImage);
-    const image: Image = new Image(
-      takeImage.path,
-      takeImage.format,
-      takeImage.webPath
-    );
-    return image;
+    return takeImage;
   };
 
   /**

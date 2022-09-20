@@ -3,7 +3,11 @@
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
 import { identity } from '../Classes/Vehicle';
-import { _name, filterType_c,FilterType_Exterior_Interior_color } from '../Interface/Name';
+import {
+  _name,
+  filterType_c,
+  FilterType_Exterior_Interior_color,
+} from '../Interface/Name';
 export class Filter extends identity {
   // BADGE/COUNTER OF FILTER
   private badge?: number;
@@ -15,7 +19,6 @@ export class Filter extends identity {
   private path!: string;
   // LIST OF FILTER ITEMS
   private types: filterType_c[];
-  private selected: filterType_c[];
   /**
    * Instansiate the object of filter.
    * @param name:object name of the filter.
@@ -39,18 +42,17 @@ export class Filter extends identity {
     this.addVehicleOrder = object.addVehicleOrder;
     this.filterOrder = object.filterOrder;
     this.types = [];
-    if(object.path === 'exterior_color' || object.path === 'interior_color')
-    {
-      object.types.forEach((type)=>{
+    if (object.path === 'exterior_color' || object.path === 'interior_color') {
+      object.types.forEach((type) => {
         let obj = new FilterType_Exterior_Interior_color(type);
         this.types.push(obj);
       });
     } else {
-    object.types.forEach((type) => {
+      object.types.forEach((type) => {
         let obj = new filterType_c(type);
         this.types.push(obj);
-    });
-  }
+      });
+    }
   }
 
   // IS FILTER ALREADY SELECTED.
@@ -77,6 +79,7 @@ export class Filter extends identity {
       return 'grid';
     }
   }
+
   // RETURNS THE COPY OF FILTER.
   public getFilterBluePrint() {
     let obj = {
@@ -89,8 +92,8 @@ export class Filter extends identity {
     };
     return obj;
   }
+
   /**
-   *
    * @returns LIST OF filterType_s
    */
   public getTypes() {

@@ -30,5 +30,4 @@ export class OfflineApiService {
     return status;
   }
 
-
 }
