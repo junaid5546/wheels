@@ -33,7 +33,7 @@ export class MainItemComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log('ngOnInit main item');
+    //console.log('ngOnInit main item');
     this.setMainItemHeight();
 
     this.href = this.router.url;
@@ -47,7 +47,7 @@ export class MainItemComponent implements OnInit {
   }
 
   private doSomething(input) {
-    console.log('Change occured:',input);
+   // console.log('Change occured:',input);
   }
 
   ngOnDestroy() {
@@ -63,11 +63,10 @@ export class MainItemComponent implements OnInit {
          e.style.height = this.mainItemDimensions.height;
        }
     }
-    console.log('Main Item: ', mainItem);
+    //console.log('Main Item: ', mainItem);
   }
 
   ngAfterViewInit(){
-    console.log('Called view init');
     this.setMainItemHeight();
   }
 
