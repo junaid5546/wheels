@@ -111,11 +111,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   flipView(){
     if(this.userData.language == 'en'){
-      document.documentElement.dir = "rtl";
-      document.getElementsByTagName("body")[0].style.direction="rtl";
-    } else {
       document.documentElement.dir = "ltr";
       document.getElementsByTagName("body")[0].style.direction="ltr";
+    } else {
+      document.documentElement.dir = "rtl";
+      document.getElementsByTagName("body")[0].style.direction="rtl";
   }
 
   }
