@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CarFiltersService } from 'src/app/Services/car-filters.service';
+import { DebugerService } from 'src/app/Services/debuger.service';
 import { UserDataService } from 'src/app/Services/user-data.service';
 
 @Component({
@@ -15,10 +16,10 @@ export class FilterItemGridComponent implements OnInit {
 
   check(){}
   
-  constructor( private carFilter:CarFiltersService, private activated:ActivatedRoute, public userData:UserDataService) { }
+  constructor( private carFilter:CarFiltersService, private activated:ActivatedRoute, public userData:UserDataService, private debug:DebugerService) { }
 
   ngOnInit() {
-    
+    this.debug.log('Watched filter : ',this.carFilter.getCurrentFilter(),'green' , true);
   }
 
 

@@ -9,12 +9,12 @@ forwardTo="/tabs/tab1"
 <div class="left-right-container">
     <div class="left">
       <ion-list class="left">
-        <div  [ngClass]="{'selected-filter-left-label': (item.selected==true && userData.language==='en'), 'ar': (item.selected==true && userData.language==='ar'), 'rtl':userData.language==='ar'}" (click)="selectedItem(i,item)" class="item-container" *ngFor="let item of filters; let i=index">
+        <div  [ngClass]="{'selected-filter-left-label': (item.getWatchStatus()), 'ar': (item.getWatchStatus() && userData.language==='ar'), 'rtl':userData.language==='ar'}" (click)="selectedItem(i,item)" class="item-container" *ngFor="let item of filters; let i=index">
         <div class="inner-item-container">
-          <ion-label *ngIf="userData.language === 'en' ">{{item.name.en}}</ion-label>
-          <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar}}</ion-label>
+          <ion-label *ngIf="userData.language === 'en' ">{{item.getFilterBluePrint().name.en}}</ion-label>
+          <ion-label *ngIf="userData.language === 'ar' ">{{item.getFilterBluePrint().name.ar}}</ion-label>
         
-          <span class="badge" *ngIf="item.badge != null && item.badge !== 0">{{ item.badge == 0 ? '' : item.badge|digitTransform:this.userData.language|async}}</span>
+          <span class="badge" *ngIf="item.getFilterBluePrint().badge  != null && item.getFilterBluePrint().badge  !== 0">{{ item.getFilterBluePrint().badge  == 0 ? '' : item.getFilterBluePrint().badge.toString() |digitTransform:this.userData.language|async}}</span>
      
         </div>
       </div>
@@ -39,7 +39,7 @@ forwardTo="/tabs/tab1"
 <div class="right-button-apply-filters" (click)="navigate()">
   <div class="show-vehicle-button">
    
-    <ion-label> {{ "Show" | translate }} {{this.filterPost.resultCount}} {{ "Vehicle" | translate }} </ion-label>
+    <ion-label> {{ "Show" | translate }}  {{ "Vehicle" | translate }} </ion-label>
    
   </div>
    </div>

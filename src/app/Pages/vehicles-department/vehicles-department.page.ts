@@ -42,6 +42,6 @@ export class VehiclesDepartmentPage implements OnInit {
     private post:PostService,private filter:CarFiltersService) { }
 
   ngOnInit() {
-   
+   this.filter.initiateFilters();
   }
 }

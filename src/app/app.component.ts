@@ -70,7 +70,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.userData.isSignedIn().then((status:any)=>{
         this.debug.log('Signed In? ',status,'red',this.debugging);
     });
-    this.createFilters();
   }
 
   initializeApp() {
@@ -119,16 +118,5 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   }
-  createFilters() {
-    // CREATING ARRAY OF FILTERS
-      let filterObjArray:Filter[] = [];
-      filterList.forEach(ele=>{
-        if(ele.path != undefined){
-        let obj = new Filter(ele);
-        filterObjArray.push(obj);
-        }
-      })
-    this.debug.log('Filter List: ', filterObjArray,'purple',true);
-    this.filterService.setFiltersList(filterObjArray);
-  }
+  
 }

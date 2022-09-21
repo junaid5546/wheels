@@ -19,6 +19,7 @@ export class Filter extends identity {
   private path!: string;
   // LIST OF FILTER ITEMS
   private types: filterType_c[];
+  private beingWatched:boolean;
   /**
    * Instansiate the object of filter.
    * @param name:object name of the filter.
@@ -41,6 +42,7 @@ export class Filter extends identity {
     this.badge = 0;
     this.addVehicleOrder = object.addVehicleOrder;
     this.filterOrder = object.filterOrder;
+    this.beingWatched = false;
     this.types = [];
     if (object.path === 'exterior_color' || object.path === 'interior_color') {
       object.types.forEach((type) => {
@@ -105,4 +107,21 @@ export class Filter extends identity {
     this.badge = count;
     return this.badge;
   }
+
+   youAreBeingWatched(){
+    this.beingWatched = true;
+    return true;
+  }
+
+  public youAreIdle(){
+    this.beingWatched = false;
+    return false;
+  }
+
+  public getWatchStatus(){
+    return this.beingWatched;
+  }
+
+
+
 }

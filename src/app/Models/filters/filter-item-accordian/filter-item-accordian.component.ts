@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router'
 import { CarFiltersService } from 'src/app/Services/car-filters.service'
 import { UserDataService } from 'src/app/Services/user-data.service'
 import { ThemePalette } from '@angular/material/core'
+import { DebugerService } from 'src/app/Services/debuger.service'
 
 export interface Task {
   name: string
@@ -76,14 +77,17 @@ export class FilterItemAccordianComponent implements OnInit {
     private carFilters: CarFiltersService,
     private activated: ActivatedRoute,
     private detectionRef: ChangeDetectorRef,
-    public userData: UserDataService
+    public userData: UserDataService,
+    public debug : DebugerService
   ) {}
 
   ngOnInit () {
     //console.log("MAKE MODEL TRIM  :", this.carFilters.getMakeModelTrims());
     //this.items = this.carFilters.getMakeModelTrims();
+    this.debug.log('Watched filter : ',this.carFilters.getCurrentFilter(),'green' , true);
+    ;
     this.label = this.activated.snapshot.params.label
-    this.carFilters.filterObject[this.label] = []
+    //this.carFilters.filterObject[this.label] = []
   }
 
   // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.
