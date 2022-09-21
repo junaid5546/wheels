@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.userData.isSignedIn().then((status:any)=>{
         if(!status){
             // NAVIGATE THE USER TO REGISTER VIEW.
-            //this.router.navigate(['register']);
+            this.router.navigate(['register']);
         }
     })
   }

@@ -5,15 +5,16 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: "AIzaSyBwkj9Jlk4oroOxJDhufpn-Qg15VlS8C7Q",
-    authDomain: "dmall-7b89f.firebaseapp.com",
-    projectId: "dmall-7b89f",
-    storageBucket: "dmall-7b89f.appspot.com",
-    messagingSenderId: "669414548208",
-    appId: "1:669414548208:web:a75d8566dc163819455835",
-    measurementId: "G-6PVD8HK31R"
+    apiKey: "AIzaSyCyvjL7fY8QpdpZbWLc3AQ3LQQxvcm8duo",
+    authDomain: "ovm-firebase-project.firebaseapp.com",
+    databaseURL: "https://ovm-firebase-project-default-rtdb.firebaseio.com",
+    projectId: "ovm-firebase-project",
+    storageBucket: "ovm-firebase-project.appspot.com",
+    messagingSenderId: "783661571828",
+    appId: "1:783661571828:web:11df536166f21f4eff48a1",
+    measurementId: "G-PG661B6MQZ"
   }
-};
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

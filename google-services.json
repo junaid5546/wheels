@@ -1,38 +1,72 @@
 {
   "project_info": {
-    "project_number": "669414548208",
-    "project_id": "dmall-7b89f",
-    "storage_bucket": "dmall-7b89f.appspot.com"
+    "project_number": "783661571828",
+    "firebase_url": "https://ovm-firebase-project-default-rtdb.firebaseio.com",
+    "project_id": "ovm-firebase-project",
+    "storage_bucket": "ovm-firebase-project.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:669414548208:android:606293e216c74062455835",
+        "mobilesdk_app_id": "1:783661571828:android:0f8494bab8896cffff48a1",
         "android_client_info": {
-          "package_name": "d.mall"
+          "package_name": "market.omanvehicles.ovm"
         }
       },
       "oauth_client": [
         {
-          "client_id": "669414548208-gq6a5j0c3puhod84tf4j8oc004ht20sq.apps.googleusercontent.com",
+          "client_id": "783661571828-128iq8t174v847tu2trpk6io1ljpvafe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "market.omanvehicles.ovm",
+            "certificate_hash": "5beb3daff240bffad0316ab1e339ed3bf368198b"
+          }
+        },
+        {
+          "client_id": "783661571828-5g4lhhmrun72ngcijslmaim7crslrmej.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "market.omanvehicles.ovm",
+            "certificate_hash": "025e8a1db2a2b21972e0a28d0ca7f62a6c69125e"
+          }
+        },
+        {
+          "client_id": "783661571828-vtbv0ekc63qdbspvsdrspm955p7sd4ar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "market.omanvehicles.ovm",
+            "certificate_hash": "dc9251e528cfb09a1194b4e332e700e0ffc46fe8"
+          }
+        },
+        {
+          "client_id": "783661571828-v5a9r3f4772js2obh7cj8hgq205fj7oo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyClmBzmg4BY9wtptfflz0SDxcASBnRwjeA"
+          "current_key": "AIzaSyAW-mp_Pa-_KeY6gisvCtkyaUvCDdzEZJc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "669414548208-gq6a5j0c3puhod84tf4j8oc004ht20sq.apps.googleusercontent.com",
+              "client_id": "783661571828-v5a9r3f4772js2obh7cj8hgq205fj7oo.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "783661571828-8n62tcvinkt9bans9v14bld8btjbcnc5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "market.omanvehicles.ovm",
+                "app_store_id": "1547222763"
+              }
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-9566375196073689~4832051901"
     }
   ],
   "configuration_version": "1"

@@ -62,7 +62,7 @@ export class RegisterPage implements OnInit,OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     console.log("Input ele",this.input);
     this.input.setFocus();
-    this.auth.recaptcha();
+    this.auth.recaptcha('recaptcha-container');
   }
   // ONCE THEY SELECT COUNTRY CODE MAKE LIST OF INPUT __ __ __ __
   // FOCUS ON FIRST __
