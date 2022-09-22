@@ -3,6 +3,7 @@ import { CarFiltersService } from 'src/app/Services/car-filters.service'
 import { UserDataService } from 'src/app/Services/user-data.service'
 import { ThemePalette } from '@angular/material/core'
 import { DebugerService } from 'src/app/Services/debuger.service'
+import { filterType_c } from 'src/app/Interface/Name'
 
 export interface Task {
   name: string
@@ -73,7 +74,7 @@ export class FilterItemAccordianComponent implements OnInit {
   start = 1
   count = 15
   constructor (
-    private carFilters: CarFiltersService,
+    private carFilter: CarFiltersService,
     public userData: UserDataService,
     public debug : DebugerService
   ) {}
@@ -81,15 +82,26 @@ export class FilterItemAccordianComponent implements OnInit {
   ngOnInit () {
     //console.log("MAKE MODEL TRIM  :", this.carFilters.getMakeModelTrims());
     //this.items = this.carFilters.getMakeModelTrims();
-    this.debug.log('app-filter-item-accordian Initialized : ',this.carFilters.getCurrentFilter(),'Green' , true);
+    this.carFilter.currentFilter$.subscribe((types)=>{
+      
+      this.debug.log('Types Accordian: ',types,'#5ac8fa' , true)})
+    this.debug.log('app-filter-item-accordian Initialized : ',this.carFilter.currentFilter$.asObservable(),'Green' , true);
   }
-
+  
+  check(filterType:filterType_c){
+    if(filterType.isChecked()){
+      filterType.uncheckType();
+    } else{
+      filterType.checkMarkType();
+    }
+  }
   ngOnChanges(changes: SimpleChanges): void {
     this.debug.log('Changes in app-filter-item-accordian', changes,'Red',true)
   }
 
   ngOnDestroy(): void {
     this.debug.log('app-filter-item-accordian', 'Destroyed!','yellow',true)
+    this.carFilter.currentFilter$.unsubscribe();
   }
 
   // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.

@@ -69,8 +69,8 @@ export class Filter extends identity {
   public renderView() {
     if (
       this.path != 'Kmake' &&
-      this.path != 'interior-color' &&
-      this.path != 'exterior-color' &&
+      this.path != 'interior_color' &&
+      this.path != 'exterior_color' &&
       this.path != 'Kbody' &&
       this.path != 'car-location'
     ) {

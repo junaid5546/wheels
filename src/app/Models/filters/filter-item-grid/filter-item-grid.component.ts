@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { filterType_c } from 'src/app/Interface/Name';
 import { CarFiltersService } from 'src/app/Services/car-filters.service';
 import { DebugerService } from 'src/app/Services/debuger.service';
@@ -12,24 +12,29 @@ import { UserDataService } from 'src/app/Services/user-data.service';
 export class FilterItemGridComponent implements OnInit {
 
   label:string = null;
-  filterTypesItem:filterType_c[] = [];
+  filterTypesItemGrid:filterType_c[] = [];
   
   constructor( private carFilter:CarFiltersService, public userData:UserDataService, private debug:DebugerService) { }
 
   ngOnInit() {
-    this.debug.log('app-filter-item-grid Initialized : ',this.carFilter.getCurrentFilter().getTypes(),'Green' , true);
-    this.filterTypesItem = this.carFilter.getCurrentFilter().getTypes();
+    this.carFilter.currentFilter$.subscribe((types)=>{
+      this.filterTypesItemGrid = types;
+      this.debug.log('Types Grid: ',types,'#ff9500' , true)})
+    this.debug.log('app-filter-item-grid Initialized : ',this.carFilter.currentFilter$.asObservable(),'Green' , true);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.debug.log('Changes in app-filter-item-grid', changes,'Red',true)
-  }
-
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.debug.log('app-filter-item-grid', 'Destroyed!','yellow',true)
+    this.carFilter.currentFilter$.unsubscribe();
   }
 
-  check(){}
+  check(filterType:filterType_c){
+    if(filterType.isChecked()){
+      filterType.uncheckType();
+    } else{
+      filterType.checkMarkType();
+    }
+  }
 
 
 }

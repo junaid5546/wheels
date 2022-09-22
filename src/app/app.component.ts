@@ -17,8 +17,6 @@ import { CamGalService } from './Services/cam-gal.service';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { DebugerService } from './Services/debuger.service'
 import { OfflineApiService } from './Services/offline-api.service';
-import { Filter } from './Classes/Filter';
-import { filterList } from '../JSON/filter-list';
 export type platform_name = 'ios' | 'android' | 'web';
 
 @Component({
@@ -63,9 +61,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.offline.currentNetworkStatus().then((connectionStatus)=>{
+    /*this.offline.currentNetworkStatus().then((connectionStatus)=>{
       this.debug.log('Connection Status: ', connectionStatus,'green',true);
-    });
+    });*/
     this.initializeApp();
     this.userData.isSignedIn().then((status:any)=>{
         this.debug.log('Signed In? ',status,'red',this.debugging);

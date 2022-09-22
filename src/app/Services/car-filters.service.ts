@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Filter } from '../Classes/Filter';
 import { filterList } from '../../JSON/filter-list';
 import { DebugerService } from './debuger.service';
+import { filterType_c } from '../Interface/Name';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,7 +12,7 @@ export class CarFiltersService {
  
   // FILTER LIST ARRAY HAVING OBJECT AS TYPE FILTER.
   private filterSourceArray:Filter[] = [];
-
+  currentFilter$ = new BehaviorSubject<filterType_c[]>(null);
   constructor(private debug:DebugerService) {
     this.initiateFilters();
   }
@@ -26,9 +28,12 @@ export class CarFiltersService {
     this.debug.log("Filters in Services: ", this.filterSourceArray,'green',true);
   }
 
-  getCurrentFilter(){
+  setCurrentFilter(){
+    
     let currentFilter = this.filterSourceArray.filter(filter=>filter.getWatchStatus())[0];
-    return currentFilter;
+    this.debug.log('GOT: ',currentFilter,'Brown',true);
+    this.currentFilter$.next(currentFilter.getTypes()) // [{},{},{}]
+    
   }
 
   getFiltersList(){

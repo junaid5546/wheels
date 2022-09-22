@@ -18,10 +18,13 @@ export class filterType_c extends identity {
         super();
         this.instanciateTypes(obj);
     }
-    // SELECTING THE CURRENT OBJECT
+    // SELECTING THE CURRENT OBJECT.
    public checkMarkType() {
         this.checked = true;
-        return this;
+    }
+    // DE-SELECTING THE CURRENT OBJECT.
+    public uncheckType(){
+        this.checked = false;
     }
     // RETURN THE VALUE OF CHECKED FLAG WHICH IS BOOLEAN.
     public isChecked(){

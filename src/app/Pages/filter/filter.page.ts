@@ -57,6 +57,7 @@ export class FilterPage implements OnInit {
     // UPDATING THE CURRENT SELECTED INDEX.
     this.selectedIndex = index;
     // RENDERING THE CURRENT FILTER.
+    this.filterService.setCurrentFilter();
     this.renderViewForSelectedFilter(item);
   }
 

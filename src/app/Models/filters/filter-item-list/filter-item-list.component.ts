@@ -10,26 +10,32 @@ import { UserDataService } from 'src/app/Services/user-data.service'
   styleUrls: ['./filter-item-list.component.scss']
 })
 export class FilterItemListComponent implements OnInit {
-  currentFilterTypes: filterType_c[] = [];
+  currentFilterTypesList: filterType_c[] = [];
 
   constructor (
     private carFilter: CarFiltersService,
     public userData: UserDataService,
     private debug:DebugerService
-  ) {}
+  ) {
+      this.carFilter.currentFilter$.subscribe((types)=>{
+      this.currentFilterTypesList = types;
+      this.debug.log('Types List: ',types,'#ae2c1c' , true)})
+  }
 
   ngOnInit () {
-    this.debug.log('app-filter-item-list Initialized : ',this.carFilter.getCurrentFilter().getTypes(),'Green' , true);
-    this.currentFilterTypes = this.carFilter.getCurrentFilter().getTypes();
+    this.debug.log('app-filter-item-list Initialized : ',this.carFilter.currentFilter$.asObservable(),'Green' , true);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.debug.log('Changes in app-filter-item-list', changes,'Red',true)
+  ngOnDestroy() {
+    this.debug.log('app-filter-item-list', 'Destroyed !','blue',true)
+    this.carFilter.currentFilter$.unsubscribe();
   }
 
-  ngOnDestroy(): void {
-    this.debug.log('app-filter-item-list', 'Destroyed!','yellow',true)
+  check(filterType:filterType_c){
+    if(filterType.isChecked()){
+      filterType.uncheckType();
+    } else{
+      filterType.checkMarkType();
+    }
   }
-
-  check (item, index) {}
 }
