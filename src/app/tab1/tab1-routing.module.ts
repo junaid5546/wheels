@@ -6,8 +6,7 @@ import { Tab1Page } from './tab1.page';
 const routes: Routes = [
   {
     path: '',
-    component: Tab1Page,
-    canActivate:[AuthenticationGurad_dm]
+    component: Tab1Page
   }
 ];
 

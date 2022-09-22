@@ -4,8 +4,7 @@
  *
  * @author Muhammad Junaid Gul <muhammad.gul.mi@outlook.com>
  */
-import { Filter} from './Interface/car-filter';
-import { Make, Model, Trim, Bodies, Engine, DoorCount } from './Classes/Vehicle'
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { DeviceInfoService } from './Services/device-info.service';
@@ -62,10 +61,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.initializeApp();
+    this.userData.getUserId().then((value)=>{
+      console.log("User Id: " , value);
+    })
     this.userData.isSignedIn().then((status:any)=>{
         if(!status){
             // NAVIGATE THE USER TO REGISTER VIEW.
-            this.router.navigate(['register']);
+            //this.router.navigate(['register']);
         }
     })
   }
@@ -78,19 +80,7 @@ export class AppComponent implements OnInit, OnDestroy {
     } else if (Capacitor.getPlatform() == (this.platform_name = 'web')) {
       console.log('Platform:', 'Web');
     }
-
-    
-
-    // GETTING USER OBJECT FROM LOCAL STORAGE.
-    this.userData.getUserObj().then((obj) => {
-      console.log('User OBJ :', JSON.parse(obj.value));
-    });
-
-    // GETTING USER ID FROM LOCAL STORAGE.
-    this.userData.getUserId().then((id) => {
-      console.log('USER ID: ', id);
-    });
-
+    this.userData.setUserId('');
     this.platform.ready().then((plt) => {
 
       if (localStorage.getItem('lang')) {

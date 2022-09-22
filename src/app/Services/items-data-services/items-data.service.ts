@@ -1,29 +1,23 @@
 import { Injectable } from '@angular/core';
-
+import { PostService } from 'dm-api';
 @Injectable({
   providedIn: 'root'
 })
 export class ItemsDataService {
-
+  itemSortBy:string = 'price-low';
   items:any[] = [];
   index:number = 0;
   page:number = 1;
 
-  constructor() { }
+  constructor(private post:PostService) { }
   
-  // PAGINATION IN THE API, 0 AND 1 IS DEFAULT VALUE
-  getCars = async (index, page) => {
-   let carsApiResponse:any = await this.getItemsAPI(index,page);
-   if(carsApiResponse.status == 200 && carsApiResponse.data.length != 0){
-    this.items.concat(carsApiResponse.data);
-   } else {
-     // THROW ERROR
-     // WHATER GET FROM SERVER
-     // SHOW IN A DIALOG BOX
-     // USING DIALOG SERVICE
-   }
+ 
+ 
+  async getPosts(pageNumber:number,pageSize:number){
+    console.log("GETTING POSTS");
+    //these all the sort types: 1- price_low 2- price_hight 3- date_new 4- date_old 5- kilometer_low 6- kilometer_hight 7- year_new 8- year_old
+    return await this.post.getAllPosts(this.itemSortBy,'627925bfda535aadb15ef3d4',pageNumber,pageSize,"app",{});
   }
-
 
   // GETTING ITEMS AND CONCATING WITH EXIXTING LIST OF ITEMS. 
   getItemsAPI(index,page){

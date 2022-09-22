@@ -51,7 +51,8 @@ export class UserDataService {
     let id = String(_id);
     await Storage.set({
       key: 'user_id', 
-      value: id,
+      // ADDING HARDCODED ID FOR NOW
+      value: "6322c2a66b6a19cd1b67ef51",
     });
    
   }

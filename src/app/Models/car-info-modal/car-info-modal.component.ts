@@ -141,10 +141,13 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
   
   getPlans() {
    // console.log("PLANS CALLED",);
-    let id=this.userData.fetchUserId();
+   let userId  = null;
+    this.userData.getUserId().then((id)=>{
+      userId = id.value
+    })
     let lang=localStorage.getItem('lang');
     //console.log(id);
-    this.plansApi.getPlans(id,lang)
+    this.plansApi.getPlans(userId,lang)
     .then((plans:any)=>{
       if(plans.code === 200){
         this.filters.setPlans(plans.result);

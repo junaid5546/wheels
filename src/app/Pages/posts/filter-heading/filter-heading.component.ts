@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {  ModalControllerService } from '../../../Services/modal-controller.service';
 import { FiltersComponent } from '../../../Models/filters/filters.component';
 import {sortingArray} from '../../../JSON/sorting';
+import { ItemsDataService } from '../../../Services/items-data-services/items-data.service';
 @Component({
   selector: 'app-filter-heading',
   templateUrl: './filter-heading.component.html',
@@ -16,7 +17,7 @@ export class FilterHeadingComponent implements OnInit {
   isOpen = false;
 
   items:any[] = sortingArray;
-  constructor(private route:Router,private modelCtrl:ModalControllerService,) { }
+  constructor(private route:Router,private modelCtrl:ModalControllerService,private itemSourceService:ItemsDataService) { }
 
   ngOnInit() {}
 
@@ -34,11 +35,18 @@ export class FilterHeadingComponent implements OnInit {
   }
 
   checkSorting(item,index){
+    //IN CASE OF KILOMETERAGE REPLACE THE SELECTED WORD WITH KM
+    if(item.id === 5 || item.id === 6){
+      this.selectedSortText = "KM"
+    } else {
+      this.selectedSortText = item.name.split(' ')[0];
+    }
     this.items.forEach(x=>x.selected = false);
     this.items[index].selected = true;
     console.log("ITEM ", item);
-    this.selectedSortText = item.name.split(' ')[0];
     this.pickIcon(item.id)
+    this.itemSourceService.itemSortBy = item.value;
+    this.itemSourceService.getPosts(0,30);
   }
 
   pickIcon(id:number){
