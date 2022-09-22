@@ -26,18 +26,37 @@
       </ion-button>
 
 
-      <ion-button class="buttons-default"  (click)="openSheetmodel()">
+      <ion-button (click)="presentPopover($event)" class="buttons-default">
         <div class="button-name-and-logo-container">
           <div class="button-logo h-v-centered">
             <ion-icon class="sub-heading-icon" name="chevron-down-outline"></ion-icon>
           </div>
           <div class="button-name h-v-centered">
-            <ion-label class="sub-heading">{{"Sorted by"|translate}}</ion-label>
+            <ion-label class="sub-heading"> {{"Sorted by "|translate}} {{this.selectedSortText}}
+              <ion-icon [src]="selectedSortIcon"></ion-icon>
+            </ion-label>
+            <ion-popover mode="md" #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
+              <ng-template>
+                  <ion-list>
+                    <ion-item *ngFor="let item of items;let i=index" (click)="checkSorting(item,i)">
+                      <ion-icon [color]="item.selected ? 'danger' : 'success'" [src]="item.icon"></ion-icon>
+                      <ion-label [ngClass]="{'selected-sort-name': item.selected,'default-sort-name':!item.selected}"> {{item.name}}</ion-label>
+                      <ion-icon class="tick-mark" *ngIf="item.selected" src="../../../../assets/icon/sorting icons/tikmark.svg"></ion-icon>
+                    </ion-item>
+                  </ion-list>
+              </ng-template>
+            </ion-popover>
           </div>
         </div>
       </ion-button>
 
     </ion-buttons>
   </ion-toolbar>
+
+  
+  
+    
+   
+
 </div>
 <!--top heading-->

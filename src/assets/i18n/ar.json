@@ -27,7 +27,7 @@
     "Search Filters" : "خيارات البحث",
     "Filter" : "الخيارات",
     "Save Search" : "حفظ البحث",
-    "Sorted by" : "ترتيب حسب",
+    "Sorted by " : "ترتيب حسب",
     "Clear All": "حذف الكل",
     "Share Ad":"شاركة الإعلان",
     "Search":"البحث",
@@ -84,6 +84,8 @@
     "First Name":"الاسم الأول",
     "Last Name":"القبيلة",
     "Account":"حسابي",
+    "Vehicles for Sale":"مركبات للبيع",
+    "Select Images":"اختيار الصور",
     "items": {
       "names": [
         {

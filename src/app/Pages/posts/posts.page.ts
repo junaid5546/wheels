@@ -34,7 +34,7 @@ export class PostsPage implements OnInit {
  icons:any = { has_left_icon:true, left_icon:'../../assets/icon/settings/back.svg', has_right_icon:true, right_icon:'../../assets/icon/notification.svg'};
 
  // MAIN HEADING/SUBHEADING.
- @Input() heading = {has_main_heading:true, main_heading_name:'Vehicles for Sale Inventory', has_sub_heading:false, sub_heading_name:''};
+ @Input() heading = {has_main_heading:true, main_heading_name:'Vehicles for Sale', has_sub_heading:false, sub_heading_name:''};
   constructor(private deviceInfo:DeviceInfoService,  private router:Router, private nav:NavController, private post:PostService, private filters:CarFiltersService) { }
 
   ngOnInit() {

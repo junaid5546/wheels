@@ -30,3 +30,40 @@
         border-right: 1px solid #0000001f;
     }
   }
+
+  ion-select{
+    padding: 0px !important;
+  }
+  select-icon{
+    width: 25px !important;
+  }
+
+  //    --offset-x: 12px;
+  //    --offset-y: 14px;
+  ion-popover{
+    --offset-x: 0px !important;
+    --offset-y: 12px !important;
+    :host {
+        --width: 289px !important;
+    }
+  }
+
+  .selected-sort{
+     filter: invert(100%) sepia(100%) saturate(100%) hue-rotate(100deg) brightness(100%) contrast(100%)
+  }
+  .sub-heading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .tick-mark{
+    font-size: 1em;
+  }
+
+  .selected-sort-name{
+    color: #0091E2;
+  }
+
+  .default-sort-name{
+   color: black;
+  }

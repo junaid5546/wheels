@@ -100,11 +100,11 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
        this.filteration='';
        this.stableData=this.currentItem;
        if(currentState.index===3){
-       this.currentItem.sort().reverse();
+      // this.currentItem.sort().reverse();
 
        }
        else if(currentState.index==1 || currentState.index==2 || currentState.index==0){
-        this.currentItem.sort((a, b) => (a.name > b.name ? 1 : -1));
+        //this.currentItem.sort((a, b) => (a.name > b.name ? 1 : -1));
        }
        //THIS FOR CALLING PALNS API BEFORE REACH PLANS PAGE
        else if(currentState.value.key === 'additional_features'){
@@ -197,13 +197,6 @@ export class CarInfoModalComponent implements OnInit,AfterViewInit  {
       this.modelCtrl.postFinished();
       this.route.navigate(['tabs/posts']);
   }
-
-  getMake(){}
-  getModel(_makeId:string){}
-  getTrims(_modelId:string){}
-  getYears(){}
-  getBodyType(){}
-  getColors(){}
 
   addSellerNotes(e){
     console.log("Seller Notes: ", e.detail.value);

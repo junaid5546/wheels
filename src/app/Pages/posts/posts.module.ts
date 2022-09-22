@@ -11,8 +11,10 @@ import { InventoryItemComponent } from './inventory-item/inventory-item.componen
 import { PostsPage } from './posts.page';
 import { AppSharedModule } from 'src/app/Components/Shared/shared.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { FiltersComponent } from 'src/app/Models/filters/filters.component';
 @NgModule({
   imports: [
+
     CommonModule,
     FormsModule,
     SwiperModule,
@@ -21,6 +23,6 @@ import { TranslateModule } from '@ngx-translate/core';
     AppSharedModule,
     TranslateModule
   ],
-  declarations: [PostsPage,InventoryItemComponent,FilterHeadingComponent]
+  declarations: [PostsPage,InventoryItemComponent,FilterHeadingComponent,FiltersComponent]
 })
 export class PostsPageModule {}

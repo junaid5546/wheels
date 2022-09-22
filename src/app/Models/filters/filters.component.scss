@@ -2,7 +2,14 @@ ion-list{
     padding-top: 20px;
     ion-item{
         ion-icon{
-            padding-right: 20px;
+            padding-right: 5px;
         }
     }
+}
+.default{
+    color: black;
+}
+
+.selected-sort-item {
+    color: #007AFF;
 }

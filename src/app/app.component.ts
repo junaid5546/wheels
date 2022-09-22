@@ -92,28 +92,19 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.platform.ready().then((plt) => {
+
+      if (localStorage.getItem('lang')) {
+        this.userData.language = localStorage.getItem('lang');
+        this.translate.use(this.userData.language);
+        this.flipView();
+      } else {
+        localStorage.setItem('lang', 'en');
+        this.flipView();
+      }
+
+
       // SETTING DEVICE HEIGHT AND WIDTH
       this.deviceInfo.setDeviceHeight(this.platform.height());
-
-      // CHECK DEFAULT LANGUAGE OF THE APP.
-      this.deviceInfo.getDefaultLanguage().then((res) => {
-        if (res == null) {
-          // SET DEFAULT LANGUAGE OF THE APP IF ITS NOT SET.
-          this.deviceInfo.setDefaultLanguage(this.lang);
-        }
-      });
-
-      // CHECK DEFAULT THEME OF THE APP
-      this.deviceInfo.getDefaultTheme().then((res: string) => {
-        if (res == null) {
-          this.deviceInfo.setDefaultTheme(this.theme);
-        } else {
-          this.deviceInfo.applyTheme(res);
-        }
-      });
-
-      // getDefaultTheme();
-      // getDefaultFontsize();
       if (localStorage.getItem('lang')) {
         this.lang = localStorage.getItem('lang');
         this.translate.use(this.lang);
@@ -121,6 +112,17 @@ export class AppComponent implements OnInit, OnDestroy {
         localStorage.setItem('lang', 'ar');
       }
     });
+  }
+
+  flipView(){
+    if(this.userData.language == 'en'){
+      document.documentElement.dir = "ltr";
+      document.getElementsByTagName("body")[0].style.direction="ltr";
+    } else {
+      document.documentElement.dir = "rtl";
+      document.getElementsByTagName("body")[0].style.direction="rtl";
+  }
+
   }
 
   

@@ -8,6 +8,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalControllerService } from '../../Services/modal-controller.service';
 import { NavParams } from '@ionic/angular';
+import { ItemDetailViewComponent } from 'src/app/Components/item-detail-view/item-detail-view.component';
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
@@ -19,16 +20,11 @@ export class FiltersComponent implements OnInit {
   constructor(public data:ModalControllerService, private filterModal:ModalControllerService, private nav:NavParams) { }
   
   ngOnInit() {
-  
-    this.dataArray = this.nav.get("dataArray");
     console.log("ARRAY DATA: ", this.dataArray);
   }
 
-  selectFilter(filterId){
-    console.log("ARRAY IS: ", this.dataArray);
-    console.log("Apply this filter:", filterId);
-    let modifiedArray = this.filterModal.applyFilter(this.dataArray,filterId);
-    console.log(modifiedArray);
+  selectFilter(sortItem){
+    let modifiedArray = this.filterModal.applyFilter(this.dataArray,sortItem.id);
     this.filterModal.dismissModal();
   }
 
