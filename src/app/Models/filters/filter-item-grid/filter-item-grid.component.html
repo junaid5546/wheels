@@ -2,17 +2,24 @@
   <div class="item-body">
     <ion-grid>
       <ion-row>
-        <ion-col (click)="check()" size="6" *ngFor="let item of bodies; let i = index;">
-          <div class="check-mark" *ngIf="item.checked">
+        <ion-col (click)="check()" size="6" *ngFor="let item of filterTypesItem; let i = index">
+          <div class="check-mark" *ngIf="item.isChecked()">
             <ion-icon class="checkmark-sharp" name="checkmark-sharp"></ion-icon>
           </div>
-          <ion-card [ngClass]="{selected_border : item.checked, default: item.checked==false}" class="item-body-inner">
-            <img [src]="item.image"/>
-            <ion-label *ngIf="userData.language === 'en' ">{{item.name.en}}</ion-label>
-            <ion-label *ngIf="userData.language === 'ar' ">{{item.name.ar}}</ion-label>
+          <ion-card [ngClass]="{
+              selected_border: item.isChecked(),
+              default: item.isChecked() == false
+            }" class="item-body-inner">
+            <img [src]="" />
+            <ion-label *ngIf="userData.language === 'en'">{{
+              item.getName().en
+              }}</ion-label>
+            <ion-label *ngIf="userData.language === 'ar'">{{
+              item.getName().ar
+              }}</ion-label>
           </ion-card>
         </ion-col>
       </ion-row>
     </ion-grid>
   </div>
-  </ion-content>
+</ion-content>

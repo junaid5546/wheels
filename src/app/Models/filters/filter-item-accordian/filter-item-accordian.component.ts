@@ -1,5 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { ChangeDetectorRef, Component, OnInit, SimpleChanges } from '@angular/core'
 import { CarFiltersService } from 'src/app/Services/car-filters.service'
 import { UserDataService } from 'src/app/Services/user-data.service'
 import { ThemePalette } from '@angular/material/core'
@@ -75,8 +74,6 @@ export class FilterItemAccordianComponent implements OnInit {
   count = 15
   constructor (
     private carFilters: CarFiltersService,
-    private activated: ActivatedRoute,
-    private detectionRef: ChangeDetectorRef,
     public userData: UserDataService,
     public debug : DebugerService
   ) {}
@@ -84,10 +81,15 @@ export class FilterItemAccordianComponent implements OnInit {
   ngOnInit () {
     //console.log("MAKE MODEL TRIM  :", this.carFilters.getMakeModelTrims());
     //this.items = this.carFilters.getMakeModelTrims();
-    this.debug.log('Watched filter : ',this.carFilters.getCurrentFilter(),'green' , true);
-    ;
-    this.label = this.activated.snapshot.params.label
-    //this.carFilters.filterObject[this.label] = []
+    this.debug.log('app-filter-item-accordian Initialized : ',this.carFilters.getCurrentFilter(),'Green' , true);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.debug.log('Changes in app-filter-item-accordian', changes,'Red',true)
+  }
+
+  ngOnDestroy(): void {
+    this.debug.log('app-filter-item-accordian', 'Destroyed!','yellow',true)
   }
 
   // THIS FUNCTION CALLS WHEN CHANGE OCCUR IN CHECKBOXES AND EITHER CHECKBOX SHOULD BE INTERMEDIATE OR SELECTED.

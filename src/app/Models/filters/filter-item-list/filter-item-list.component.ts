@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { Component, OnInit, SimpleChanges } from '@angular/core'
+import { filterType_c } from 'src/app/Interface/Name'
 import { CarFiltersService } from 'src/app/Services/car-filters.service'
 import { DebugerService } from 'src/app/Services/debuger.service'
 import { UserDataService } from 'src/app/Services/user-data.service'
@@ -10,22 +10,25 @@ import { UserDataService } from 'src/app/Services/user-data.service'
   styleUrls: ['./filter-item-list.component.scss']
 })
 export class FilterItemListComponent implements OnInit {
-  label: string = null
-  condition: any[] = null
+  currentFilterTypes: filterType_c[] = [];
 
   constructor (
     private carFilter: CarFiltersService,
-    private activated: ActivatedRoute,
     public userData: UserDataService,
     private debug:DebugerService
   ) {}
 
   ngOnInit () {
-    this.label = this.activated.snapshot.params.label;
-    this.debug.log('Watched filter : ',this.carFilter.getCurrentFilter(),'green' , true);
-    //this.carFilter.filterObject[this.label] = []
-    //this.condition = this.carFilter.getCondition();
-    //console.log('Changes: ', this.carFilter.filterObject)
+    this.debug.log('app-filter-item-list Initialized : ',this.carFilter.getCurrentFilter().getTypes(),'Green' , true);
+    this.currentFilterTypes = this.carFilter.getCurrentFilter().getTypes();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.debug.log('Changes in app-filter-item-list', changes,'Red',true)
+  }
+
+  ngOnDestroy(): void {
+    this.debug.log('app-filter-item-list', 'Destroyed!','yellow',true)
   }
 
   check (item, index) {}

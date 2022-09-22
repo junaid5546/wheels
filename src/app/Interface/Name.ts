@@ -23,6 +23,14 @@ export class filterType_c extends identity {
         this.checked = true;
         return this;
     }
+    // RETURN THE VALUE OF CHECKED FLAG WHICH IS BOOLEAN.
+    public isChecked(){
+        return this.checked;
+    }
+
+    public getName(){
+        return this.name;
+    }
    
     // INSTANCIATING THE TYPE OBJECT
     private instanciateTypes(object:any) {

@@ -43,12 +43,13 @@ export class FilterPage implements OnInit {
     this.filters = this.filterService.getFiltersList();
     // MAKING THE MAKES SELECTED.
     this.filters[this.selectedIndex].youAreBeingWatched();
+    this.renderViewForSelectedFilter(this.filters[this.selectedIndex]);
     // MAKING THE VIEW TO DETECT CHANGES.
     this.changeRef.detectChanges();
   }
 
   selectedItem(index, item: Filter) {
-    this.debug.log('Clicked Object Item: ', this.filters, 'pink', true);
+    this.debug.log('Clicked Object Item: ', item, '#ff2d55', true);
     // THE FIRST INDEX WHICH IS PRE-SELECTED MAKING IT DE-SELECT.
     this.filters[this.selectedIndex].youAreIdle();
     // THE NEW ONE WHICH IS CLICKED IS BEING SELECTED.
